@@ -23,8 +23,7 @@ class MainActivityViewModel @Inject constructor(
     fun getUsers(pageNo: Int) = viewModelScope.launch {
         val rs = mainRepository.getUsers(pageNo)
         if (rs is Resource.Success) {
-            viewState.welcomeMsg = "Data Received"
-            delay(2000)
+            viewState.welcomeMsg = "Data Received and click me to close"
             onEvent(Event.OnDataReceived)
         }
     }

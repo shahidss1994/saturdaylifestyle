@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import com.shock.saturdaylifestyle.R
 import com.shock.saturdaylifestyle.databinding.ActivityMainBinding
 import com.shock.saturdaylifestyle.ui.common.BaseActivity
+import com.shock.saturdaylifestyle.ui.common.observeInLifecycle
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.onEach
 
@@ -32,17 +33,17 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         mViewModel.getUsers(1)
     }
 
-    override fun listenChannel(){
+    override fun listenChannel() {
         mViewModel.eventFlow.onEach {
-            when(it){
-                MainActivityViewModel.Event.OnDataReceived -> {
+            when (it) {
+                is MainActivityViewModel.Event.OnDataReceived -> {
                     Toast.makeText(this@MainActivity, "Api Call Success", Toast.LENGTH_SHORT).show()
                 }
-                MainActivityViewModel.Event.OnBackPressed -> {
+                is MainActivityViewModel.Event.OnBackPressed -> {
                     finish()
                 }
             }
-        }
+        }.observeInLifecycle(this@MainActivity)
     }
 
     override fun getLayoutId() = R.layout.activity_main
