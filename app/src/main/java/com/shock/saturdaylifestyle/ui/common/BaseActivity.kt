@@ -14,10 +14,13 @@ abstract class BaseActivity<out T : ViewDataBinding> : AppCompatActivity() {
     @LayoutRes
     abstract fun getLayoutId(): Int
 
+    abstract fun listenChannel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, getLayoutId())
         binding.executePendingBindings()
+        listenChannel()
     }
 
 }

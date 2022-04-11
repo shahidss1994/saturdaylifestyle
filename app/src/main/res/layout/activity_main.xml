@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
+    <data>
+
+        <variable
+            name="viewState"
+            type="com.shock.saturdaylifestyle.ui.main.MainViewState" />
+
+        <variable
+            name="viewModel"
+            type="com.shock.saturdaylifestyle.ui.main.MainActivityViewModel" />
+
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -12,7 +24,8 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hello World!"
+            android:onClick="@{()->viewModel.onBackPressed()}"
+            android:text="@{viewState.welcomeMsg}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

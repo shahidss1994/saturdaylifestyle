@@ -5,6 +5,7 @@ import com.shock.saturdaylifestyle.network.Resource
 import com.shock.saturdaylifestyle.viewModel.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -14,12 +15,16 @@ class MainActivityViewModel @Inject constructor(
     private val mainRepository: MainRepository
 ) : BaseViewModel(mainRepository) {
 
+    val viewState = MainViewState()
+
     private val eventChannel = Channel<Event>(Channel.BUFFERED)
     val eventFlow = eventChannel.receiveAsFlow()
 
     fun getUsers(pageNo: Int) = viewModelScope.launch {
         val rs = mainRepository.getUsers(pageNo)
         if (rs is Resource.Success) {
+            viewState.welcomeMsg = "Data Received"
+            delay(2000)
             onEvent(Event.OnDataReceived)
         }
     }
