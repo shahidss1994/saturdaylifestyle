@@ -19,7 +19,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(){
     override fun getLayoutId(): Int = R.layout.activity_splash
 
     override fun listenChannel() {
-        TODO("Not yet implemented")
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
