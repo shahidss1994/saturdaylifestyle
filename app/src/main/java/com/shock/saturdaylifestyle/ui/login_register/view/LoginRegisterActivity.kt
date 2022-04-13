@@ -31,8 +31,8 @@ class LoginRegisterActivity : BaseActivity<SignInActivityDataBinding>(),
     var countryAdapter : CountryAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        binding = binding()
         super.onCreate(savedInstanceState)
+        binding = binding()
         initCountryList()
 
     }
@@ -299,7 +299,7 @@ class LoginRegisterActivity : BaseActivity<SignInActivityDataBinding>(),
     }
 
     override fun listenChannel() {
-        TODO("Not yet implemented")
+
     }
 
 
