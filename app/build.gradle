@@ -105,4 +105,10 @@ dependencies {
      */
     implementation 'com.google.code.gson:gson:2.8.9'
 
+    //todo dot indicator
+    implementation 'com.tbuonomo:dotsindicator:4.2'
+
+    // loader
+    implementation 'com.github.justzak:dilatingdotsprogressbar:1.0.1'
+
 }

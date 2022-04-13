@@ -1,3 +1,44 @@
-<resources>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">SaturdayLifestyle</string>
+
+    <string name="oops_no_internet_connection">Oops! No Internet Connection</string>
+    <string name="something_is_not_right_here">Something is not right here</string>
+    <string name="please_enter_your_name">Please enter username.</string>
+    <string name="please_enter_your_email_address">Please enter your email-address.</string>
+    <string name="please_enter_valid_email_address">Please enter valid email-address.</string>
+    <string name="please_enter_your_password">Please enter your password.</string>
+    <string name="please_enter_your_phone_no">Please enter your phone no.</string>
+    <string name="please_enter_valid_phone_no">Please enter valid phone no.</string>
+
+    <string name="combine_two_strings" translatable="false">%1$s | %2$s</string>
+    <string name="we_will_send_otp_to_your_whatsapp">We will send OTP to your whatsapp</string>
+    <string name="create_account">Create account</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="example_email">Example@email.com</string>
+    <string name="dob_hint">dd-mmm-yyyy</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="email">Email</string>
+    <string name="birthday">Birthday</string>
+    <string name="gender">Gender</string>
+
+    <string name="please_enter_first_name"> Please Enter First Name</string>
+    <string name="please_enter_last_name"> Please Enter Last Name</string>
+    <string name="enter_email">Please enter email</string>
+    <string name="enter_valid_email">Please enter valid email</string>
+    <string name="select_dob">Please select DOB</string>
+    <string name="select_gender">Please select gender</string>
+    <string name="text_continue">Continue</string>
+    <string name="citizens_receive_exclusive_offers_first_dibs_on_new_collections_and_other_member_benefits">Citizens receive exclusive offers, first dibs on new collections, and other member benefits</string>
+    <string name="save_and_continue">Save and Continue</string>
+    <string name="please_select_your_birthday">Please select your birthday</string>
+    <string name="login_create_your_account">login/create your account</string>
+    <string name="skip_text">SKIP</string>
+
+    <string name="duration_format" translatable="false"><xliff:g id="hours">%1$s</xliff:g> <xliff:g id="minutes">%2$s</xliff:g></string>
+    <string name="durationformatshort" translatable="false"><xliff:g id="format">%2$d:%3$02d</xliff:g></string>
+    <string name="durationformatlong" translatable="false"><xliff:g id="format">%1$d:%2$02d:%3$02d</xliff:g></string>
+
 </resources>
