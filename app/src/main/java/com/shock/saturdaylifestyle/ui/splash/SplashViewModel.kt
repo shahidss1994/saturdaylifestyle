@@ -1,7 +1,7 @@
 package com.shock.saturdaylifestyle.ui.splash
 
 import com.shock.saturdaylifestyle.ui.main.MainRepository
-import com.shock.saturdaylifestyle.viewModel.BaseViewModel
+import com.shock.saturdaylifestyle.ui.common.BaseViewModel
 import javax.inject.Inject
 
 class SplashViewModel @Inject constructor(

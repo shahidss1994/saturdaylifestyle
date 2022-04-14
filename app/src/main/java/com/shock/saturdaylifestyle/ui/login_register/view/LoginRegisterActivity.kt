@@ -34,7 +34,6 @@ class LoginRegisterActivity : BaseActivity<SignInActivityDataBinding>(),
         super.onCreate(savedInstanceState)
         binding = binding()
         initCountryList()
-
     }
 
     private fun initCountryList() {
@@ -276,8 +275,7 @@ class LoginRegisterActivity : BaseActivity<SignInActivityDataBinding>(),
     }
 
 
-    fun performCountrySearch(s: String)
-    {
+    fun performCountrySearch(s: String) {
 
          var countriesListResult: ArrayList<CountryDM> = ArrayList()
 

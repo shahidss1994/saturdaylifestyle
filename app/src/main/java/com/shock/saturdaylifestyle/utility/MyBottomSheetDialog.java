@@ -73,8 +73,6 @@ public class MyBottomSheetDialog extends AppCompatDialog {
     @Override
     public void setOnDismissListener(@Nullable OnDismissListener listener) {
         super.setOnDismissListener(listener);
-
-
     }
 
     @Override
