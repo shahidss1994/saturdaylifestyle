@@ -9,6 +9,7 @@ import android.text.TextWatcher
 import android.util.Patterns
 import android.view.View
 import android.widget.DatePicker
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 
 import com.saturdays.login_register.callbacks.RegisterForm1ActivityViewCallBacks
@@ -27,11 +28,20 @@ class RegisterForm1Activity : BaseActivity<RegisterForm1ActivityDataBinding>(),
 
     private lateinit var binding : RegisterForm1ActivityDataBinding
 
+    private lateinit var tv_dob : TextView
+
     var isGenderSelected= false
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = binding()
+        tv_dob = findViewById(R.id.tv_dob)
+        tv_dob.setOnClickListener {
+            pickerClick()
+        }
+
+        initTextChangeListeners()
     }
 
 
@@ -246,7 +256,7 @@ class RegisterForm1Activity : BaseActivity<RegisterForm1ActivityDataBinding>(),
         val dateFormat = SimpleDateFormat("dd-MMM-yyyy")
         var date= dateFormat.format(selectedDate)
 
-        binding.tvDob.text = date.toString()
+        tv_dob.text = date.toString()
 
     }
 
@@ -255,7 +265,6 @@ class RegisterForm1Activity : BaseActivity<RegisterForm1ActivityDataBinding>(),
     }
 
     override fun listenChannel() {
-        TODO("Not yet implemented")
     }
 
 

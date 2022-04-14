@@ -6,31 +6,37 @@ import android.os.Bundle
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
-import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
+import android.widget.Button
+import androidx.activity.viewModels
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.shock.saturdaylifestyle.ui.login_register.view.LoginRegisterActivity
 import com.saturdays.on_boarding.adapter.OnboardingPagerAdapter
 import com.saturdays.on_boarding.model.ViewPagerDM
-import com.saturdays.on_boarding.viewmodel.OnboardingVM
 import com.shock.saturdaylifestyle.R
 import com.shock.saturdaylifestyle.databinding.OnboardingScreenLayoutBinding
+import com.shock.saturdaylifestyle.ui.common.BaseActivity
 import com.shock.saturdaylifestyle.utility.CommonUtilities
 
 
-class OnboardingActivity : AppCompatActivity() {
+class OnboardingActivity : BaseActivity<OnboardingScreenLayoutBinding>(), OnBoardingCallbacks {
     var binding: OnboardingScreenLayoutBinding? = null
-    var vm: OnboardingVM? = null
     var whichScreen: String? = null
     var pos: Int? = 0
     var pager_itemList = ArrayList<ViewPagerDM>()
+    private lateinit var btn_login_create_account : Button
+
+    private val mViewModel: OnBoardingViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
         supportActionBar?.hide()
 
 
-
+        btn_login_create_account = findViewById(R.id.btn_login_create_account)
+        btn_login_create_account.setOnClickListener {
+            onLoginBtnClick()
+        }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             val w: Window = window
@@ -39,7 +45,7 @@ class OnboardingActivity : AppCompatActivity() {
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
             )
         }
-        binding = DataBindingUtil.setContentView(this, R.layout.onboarding_screen_layout)
+        binding = binding()
 
 
         /**
@@ -134,6 +140,14 @@ class OnboardingActivity : AppCompatActivity() {
 
     }
 
+    override fun getLayoutId(): Int = R.layout.onboarding_screen_layout
+
+    override fun listenChannel() {
+    }
+
+    override fun onLoginBtnClick() {
+        startActivity(Intent(this, LoginRegisterActivity::class.java))
+    }
 
 
 }

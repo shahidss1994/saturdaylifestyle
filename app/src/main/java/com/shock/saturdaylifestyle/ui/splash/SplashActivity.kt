@@ -7,13 +7,13 @@ import com.shock.saturdaylifestyle.ui.login_register.view.LoginRegisterActivity
 import com.shock.saturdaylifestyle.ui.on_boarding.view.OnboardingActivity
 import com.shock.saturdaylifestyle.R
 import com.shock.saturdaylifestyle.constants.Constants
-import com.shock.saturdaylifestyle.databinding.ActivitySplashBinding
+import com.shock.saturdaylifestyle.databinding.SplashActivityDataBinding
 import com.shock.saturdaylifestyle.ui.common.BaseActivity
 import com.shock.saturdaylifestyle.utility.CommonUtilities
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SplashActivity : BaseActivity<ActivitySplashBinding>(){
+class SplashActivity : BaseActivity<SplashActivityDataBinding>(){
 
 
     override fun getLayoutId(): Int = R.layout.activity_splash

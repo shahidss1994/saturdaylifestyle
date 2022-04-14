@@ -8,6 +8,7 @@ import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.saturdays.login_register.adapters.CountryAdapter
@@ -23,18 +24,27 @@ import com.shock.saturdaylifestyle.utility.MyBottomSheetDialog
 class LoginRegisterActivity : BaseActivity<SignInActivityDataBinding>(),
     LoginRegisterActivityViewCallBacks {
 
-
     private lateinit var binding : SignInActivityDataBinding
     private val TAG = LoginRegisterActivity::class.java.simpleName
     private var countriesList: ArrayList<CountryDM> = ArrayList()
 
     var countryAdapter : CountryAdapter? = null
 
+    private lateinit var tv_phone_code : TextView
+    private lateinit var btn_contibute : TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        binding = binding()
         super.onCreate(savedInstanceState)
         initCountryList()
-
+        binding = binding()
+        btn_contibute = findViewById(R.id.btn_contibute)
+        tv_phone_code = findViewById(R.id.tv_phone_code)
+        tv_phone_code.setOnClickListener {
+            pickerClick()
+        }
+        btn_contibute.setOnClickListener {
+            continueClick()
+        }
     }
 
     private fun initCountryList() {
@@ -69,22 +79,6 @@ class LoginRegisterActivity : BaseActivity<SignInActivityDataBinding>(),
 
         showBottomSheetWhatsapp()
 
-
-        /*if (binding.edPhoneNo.text.toString().isEmpty()) {
-            binding.edPhoneNo.error = getString(R.string.please_enter_your_phone_no)
-
-        }
-        else if (binding.edPhoneNo.text.toString().length>=10) {
-            binding.edPhoneNo.error = getString(R.string.please_enter_valid_phone_no)
-
-        }
-        else {
-
-            showBottomSheetWhatsapp()
-
-        }*/
-
-
     }
 
     override fun pickerClick() {
@@ -96,18 +90,12 @@ class LoginRegisterActivity : BaseActivity<SignInActivityDataBinding>(),
         binding.tvPhoneCode.text = code
     }
 
-
     private fun showBottomSheetWhatsapp() {
-
 
         var bottomSheetDialog = MyBottomSheetDialog(this, false)
 
-
-
         @SuppressLint("InflateParams") val view: View =
             layoutInflater.inflate(R.layout.dialog_send_otp_via_whatsapp, null)
-
-
 
         (view.findViewById(R.id.btn_continue) as View).setOnClickListener {
 
@@ -119,9 +107,7 @@ class LoginRegisterActivity : BaseActivity<SignInActivityDataBinding>(),
                 isFinish = false,
                 isForward = true
             )
-
         }
-
 
         (view.findViewById(R.id.iv_back) as View).setOnClickListener {
 
@@ -179,7 +165,7 @@ class LoginRegisterActivity : BaseActivity<SignInActivityDataBinding>(),
 
 
 
-    fun dialogCountryPicker(activity: Activity) {
+    private fun dialogCountryPicker(activity: Activity) {
 
 
         var dialogGet = CommonUtilities.customDialog(
@@ -204,9 +190,6 @@ class LoginRegisterActivity : BaseActivity<SignInActivityDataBinding>(),
 
         dialogGet.show()
         dialogGet.setCancelable(true)
-
-
-
 
 
     }
@@ -299,7 +282,6 @@ class LoginRegisterActivity : BaseActivity<SignInActivityDataBinding>(),
     }
 
     override fun listenChannel() {
-        TODO("Not yet implemented")
     }
 
 
