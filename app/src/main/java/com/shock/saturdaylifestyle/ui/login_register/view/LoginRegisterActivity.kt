@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -32,13 +33,19 @@ class LoginRegisterActivity : BaseActivity<SignInActivityDataBinding>(),
 
     private lateinit var tv_phone_code : TextView
     private lateinit var btn_contibute : TextView
+    private lateinit var ed_phone_no : EditText
 
+    companion object{
+        var country_code : String = ""
+        var phone_number : String = ""
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initCountryList()
         binding = binding()
         btn_contibute = findViewById(R.id.btn_contibute)
         tv_phone_code = findViewById(R.id.tv_phone_code)
+        ed_phone_no = findViewById(R.id.ed_phone_no)
         tv_phone_code.setOnClickListener {
             pickerClick()
         }
@@ -91,6 +98,10 @@ class LoginRegisterActivity : BaseActivity<SignInActivityDataBinding>(),
     }
 
     private fun showBottomSheetWhatsapp() {
+        country_code = binding.tvPhoneCode.text.toString()
+        phone_number = ed_phone_no.text.toString()
+
+        Log.d("*** LoginRegister >>>", ""+ phone_number)
 
         var bottomSheetDialog = MyBottomSheetDialog(this, false)
 
@@ -120,8 +131,6 @@ class LoginRegisterActivity : BaseActivity<SignInActivityDataBinding>(),
             bottomSheetDialog.dismiss()
             showBottomSheetOtherMethod()
         }
-
-
 
         bottomSheetDialog.setContentView(view)
         bottomSheetDialog.show()

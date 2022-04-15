@@ -9,13 +9,17 @@ import android.text.TextWatcher
 import android.util.Patterns
 import android.view.View
 import android.widget.DatePicker
+import android.widget.RadioGroup
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 
 import com.saturdays.login_register.callbacks.RegisterForm1ActivityViewCallBacks
 import com.shock.saturdaylifestyle.R
 import com.shock.saturdaylifestyle.databinding.RegisterForm1ActivityDataBinding
 import com.shock.saturdaylifestyle.ui.common.BaseActivity
+import com.shock.saturdaylifestyle.ui.login_register.viewmodel.LoginRegisterViewModel
+import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -29,6 +33,10 @@ class RegisterForm1Activity : BaseActivity<RegisterForm1ActivityDataBinding>(),
     private lateinit var binding : RegisterForm1ActivityDataBinding
 
     private lateinit var tv_dob : TextView
+    private lateinit var rg_gender : RadioGroup
+
+    private var genderType : Int = -1
+    private val mViewModel: LoginRegisterViewModel by viewModels()
 
     var isGenderSelected= false
 
@@ -36,6 +44,7 @@ class RegisterForm1Activity : BaseActivity<RegisterForm1ActivityDataBinding>(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = binding()
+        rg_gender = findViewById(R.id.rg_gender)
         tv_dob = findViewById(R.id.tv_dob)
         tv_dob.setOnClickListener {
             pickerClick()
@@ -151,7 +160,22 @@ class RegisterForm1Activity : BaseActivity<RegisterForm1ActivityDataBinding>(),
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
 
+        rg_gender.setOnCheckedChangeListener { radioGroup, id ->
 
+            when(id){
+
+                R.id.rbFemale ->{
+
+                    genderType = 0
+                }
+
+                R.id.rbMale ->{
+                    genderType = 1
+                }
+
+
+            }
+        }
     }
 
     private fun initFieldsObserver() {
@@ -182,8 +206,6 @@ class RegisterForm1Activity : BaseActivity<RegisterForm1ActivityDataBinding>(),
             binding.clDob.background = resources.getDrawable(R.drawable.bg_edittext)
             binding.tvAlertDob.visibility= View.INVISIBLE
         }
-
-
 
 
         if (binding.edFirstName.text.toString().isNotEmpty() &&
@@ -230,6 +252,9 @@ class RegisterForm1Activity : BaseActivity<RegisterForm1ActivityDataBinding>(),
 
         } else{
 
+            mViewModel.register(binding.edFirstName.text.toString() + " " + binding.edLastName.text.toString(),
+                LoginRegisterActivity.phone_number, LoginRegisterActivity.country_code, genderType, ""
+            )
         }
 
 

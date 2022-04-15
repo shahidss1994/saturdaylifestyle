@@ -2,7 +2,6 @@ package com.shock.saturdaylifestyle.ui.login_register.viewmodel
 
 import androidx.lifecycle.viewModelScope
 import com.shock.saturdaylifestyle.network.Resource
-import com.shock.saturdaylifestyle.ui.main.MainActivityViewModel
 import com.shock.saturdaylifestyle.ui.main.MainRepository
 import com.shock.saturdaylifestyle.ui.main.MainViewState
 import com.shock.saturdaylifestyle.viewModel.BaseViewModel
@@ -30,9 +29,9 @@ class LoginRegisterViewModel @Inject constructor(
         }
     }
 
-    fun register(){
+    fun register(name: String, phoneNumber: String, countryCode: String, genderType: Int, referral: String) {
         viewModelScope.launch {
-            val rs = mainRepository.registerUser(1)
+            val rs = mainRepository.registerUser(name, phoneNumber, countryCode, genderType, referral)
             if (rs is Resource.Success) {
                 viewState.welcomeMsg = "Data Received and click me to close"
                 onEvent(Event.OnDataReceived)

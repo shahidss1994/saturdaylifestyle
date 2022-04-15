@@ -10,7 +10,13 @@ class MainRepository @Inject constructor(
 
     suspend fun getUsers(page: Int) = safeApiCall { api.getUsers(page) }
 
-    suspend fun registerUser(page: Int) = safeApiCall { api.registerUser(page) }
+    suspend fun registerUser(
+        name: String,
+        phoneNumber: String,
+        countryCode: String,
+        genderType: Int,
+        referral: String
+    ) = safeApiCall { api.registerUser(name, phoneNumber, countryCode, genderType, referral) }
 
     suspend fun loginUser(page: Int) = safeApiCall { api.loginUser(page) }
 
