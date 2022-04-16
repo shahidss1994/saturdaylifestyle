@@ -268,6 +268,7 @@ class RegisterForm1Activity : BaseActivity<RegisterForm1ActivityDataBinding>(),
             mViewModel.register(binding.edFirstName.text.toString() + " " + binding.edLastName.text.toString(),
                 LoginRegisterActivity.phone_number, LoginRegisterActivity.country_code, genderType, ""
             )
+
         }
 
 

@@ -10,8 +10,19 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.auth.api.Auth
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.auth.api.signin.GoogleSignInResult
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.auth.AuthCredential
+import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
 import com.saturdays.login_register.adapters.CountryAdapter
 import com.saturdays.login_register.callbacks.LoginRegisterActivityViewCallBacks
 import com.saturdays.login_register.models.CountryDM
@@ -32,6 +43,16 @@ class LoginRegisterActivity : BaseActivity<SignInActivityDataBinding>(),
 
     var countryAdapter : CountryAdapter? = null
 
+
+
+    /**
+     *  below code for google signin
+     */
+    private var mfirebaseAuth: FirebaseAuth? = null
+    private var mGoogleSignInClient: GoogleSignInClient? = null
+    private var RC_SIGN_IN_GOOGLE_SIGNIN = 200
+
+
     private lateinit var tv_phone_code : TextView
     private lateinit var btn_contibute : TextView
     private lateinit var ed_phone_no : EditText
@@ -40,6 +61,8 @@ class LoginRegisterActivity : BaseActivity<SignInActivityDataBinding>(),
         var country_code : String = ""
         var phone_number : String = ""
     }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initCountryList()
@@ -52,6 +75,9 @@ class LoginRegisterActivity : BaseActivity<SignInActivityDataBinding>(),
         }
         btn_contibute.setOnClickListener {
             continueClick()
+        }
+        binding.rlGoogle.setOnClickListener {
+            initGoogleIntegration()
         }
     }
 
@@ -171,6 +197,19 @@ class LoginRegisterActivity : BaseActivity<SignInActivityDataBinding>(),
         }
 
 
+        (view.findViewById(R.id.rl_otp) as View).setOnClickListener {
+
+            bottomSheetDialog.dismiss()
+
+            CommonUtilities.fireActivityIntent(
+                this,
+                Intent(this, OTPActivity::class.java),
+                isFinish = false,
+                isForward = true
+            )
+
+        }
+
         (view.findViewById(R.id.rl_misscall) as View).setOnClickListener {
 
             bottomSheetDialog.dismiss()
@@ -209,8 +248,6 @@ class LoginRegisterActivity : BaseActivity<SignInActivityDataBinding>(),
 
         dialogGet.show()
         dialogGet.setCancelable(true)
-
-
 
 
 
@@ -306,6 +343,81 @@ class LoginRegisterActivity : BaseActivity<SignInActivityDataBinding>(),
     override fun listenChannel() {
 
     }
+
+
+
+
+    /**
+     *  below code for google signin
+     */
+    private fun initGoogleIntegration() {
+        mfirebaseAuth = FirebaseAuth.getInstance()
+
+        // Configure Google Sign In
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(com.firebase.ui.auth.R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+        val intent = mGoogleSignInClient!!.signInIntent
+        startActivityForResult(intent, RC_SIGN_IN_GOOGLE_SIGNIN)
+
+
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == RC_SIGN_IN_GOOGLE_SIGNIN) {
+            val result = data?.let { Auth.GoogleSignInApi.getSignInResultFromIntent(it) }
+            handleGoogleSignInResult(result!!)
+        }
+    }
+
+
+    private fun handleGoogleSignInResult(result: GoogleSignInResult) {
+        if (result.isSuccess) {
+            val account = result.signInAccount
+            val credential = GoogleAuthProvider.getCredential(account!!.idToken, null)
+            firebaseAuthWithGoogle(credential)
+        } else {
+            // Google Sign In failed, update UI appropriately
+            Toast.makeText(this, "Google Login Unsuccessful" + result.status.statusCode, Toast.LENGTH_LONG).show();
+        }
+    }
+
+
+    private fun firebaseAuthWithGoogle(credential: AuthCredential) {
+        mfirebaseAuth?.signInWithCredential(credential)?.addOnCompleteListener(
+            this,
+            OnCompleteListener<AuthResult?> { task ->
+                Log.d("TAG", "signInWithCredential:onComplete:" + task.isSuccessful)
+                if (task.isSuccessful) {
+                  //  Toast.makeText(this, "google signin successful", Toast.LENGTH_LONG).show();
+                  //  mGoogleSignInClient!!.signOut()
+
+
+
+                    CommonUtilities.fireActivityIntent(
+                        this,
+                        Intent(this, RegisterForm1Activity::class.java),
+                        isFinish = false,
+                        isForward = true
+                    )
+
+
+
+                } else {
+                    Log.w("TAG", "signInWithCredential" + task.exception!!.message)
+                    task.exception!!.printStackTrace()
+                    Toast.makeText(this, " Google Authentication failed.", Toast.LENGTH_SHORT).show()
+                }
+            })
+    }
+
+
 
 
 }

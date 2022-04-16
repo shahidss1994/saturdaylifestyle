@@ -37,6 +37,12 @@
             android:screenOrientation="portrait" />
 
         <activity
+            android:name=".ui.login_register.view.OTPActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name=".ui.on_boarding.view.OnboardingActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustPan"

@@ -20,6 +20,7 @@ abstract class BaseActivity<out T : ViewDataBinding> : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, getLayoutId())
         binding.executePendingBindings()
+        supportActionBar?.hide()
         listenChannel()
     }
 

@@ -37,7 +37,7 @@ class RemoteDataSource @Inject constructor() {
                 if (BuildConfig.DEBUG) {
                     val logging = HttpLoggingInterceptor()
                     logging.setLevel(HttpLoggingInterceptor.Level.BODY)
-                   // client.addInterceptor(logging) //Commented as it was filling log with too much data
+                    client.addInterceptor(logging) //Commented as it was filling log with too much data
                     client.addInterceptor(
                         ChuckerInterceptor.Builder(context)
                             .collector(ChuckerCollector(context))

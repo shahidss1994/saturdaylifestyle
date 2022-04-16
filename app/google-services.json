@@ -1,0 +1,101 @@
+{
+  "project_info": {
+    "project_number": "720208881755",
+    "firebase_url": "https://saturdays-42423.firebaseio.com",
+    "project_id": "saturdays-42423",
+    "storage_bucket": "saturdays-42423.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:720208881755:android:a72fc05da21e604d5eb77e",
+        "android_client_info": {
+          "package_name": "com.saturdays"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "720208881755-ik910od71r2nhdrgqjbq3q04nc461h56.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.saturdays",
+            "certificate_hash": "5e148589afd916383a65587df2a47bd190b2ef83"
+          }
+        },
+        {
+          "client_id": "720208881755-dm889ua4qf6hnvsgvc8n0a3ae1h1tvdp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWipMNKa-4q-FRuxwcKzmDOAIESv9qDUM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "720208881755-21rj3uda9jb4fu1upalto2dnui4iif7h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "720208881755-61i95pjq24s41ekdvjmcaocs37ilsqug.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.saturdays",
+                "app_store_id": "1542745559"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:720208881755:android:412161bd811099b75eb77e",
+        "android_client_info": {
+          "package_name": "com.shock.saturdaylifestyle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "720208881755-3pt2jvceb0gsiperunca32n54l2v8mnq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shock.saturdaylifestyle",
+            "certificate_hash": "5e148589afd916383a65587df2a47bd190b2ef83"
+          }
+        },
+        {
+          "client_id": "720208881755-dm889ua4qf6hnvsgvc8n0a3ae1h1tvdp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWipMNKa-4q-FRuxwcKzmDOAIESv9qDUM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "720208881755-21rj3uda9jb4fu1upalto2dnui4iif7h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "720208881755-61i95pjq24s41ekdvjmcaocs37ilsqug.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.saturdays",
+                "app_store_id": "1542745559"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
