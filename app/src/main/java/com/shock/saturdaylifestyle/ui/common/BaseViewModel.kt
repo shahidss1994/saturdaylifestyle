@@ -1,4 +1,4 @@
-package com.shock.saturdaylifestyle.viewModel
+package com.shock.saturdaylifestyle.ui.common
 
 import androidx.lifecycle.ViewModel
 import com.shock.saturdaylifestyle.network.BaseRepository

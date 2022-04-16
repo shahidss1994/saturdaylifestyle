@@ -1,6 +1,5 @@
 package com.shock.saturdaylifestyle.ui.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -11,24 +10,18 @@ import com.shock.saturdaylifestyle.ui.common.observeInLifecycle
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.onEach
 
-/**
- *
- * Sample free api
- * GET -> https://reqres.in/api/users?page=1
- *
- */
-
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     private val mViewModel: MainActivityViewModel by viewModels()
+
+    override fun getLayoutId() = R.layout.activity_main
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding().apply {
             viewModel = mViewModel
             viewState = mViewModel.viewState
-            mViewModel.viewState.welcomeMsg = "Api will call soon"
         }
         mViewModel.getUsers(1)
     }
@@ -45,6 +38,4 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             }
         }.observeInLifecycle(this@MainActivity)
     }
-
-    override fun getLayoutId() = R.layout.activity_main
 }

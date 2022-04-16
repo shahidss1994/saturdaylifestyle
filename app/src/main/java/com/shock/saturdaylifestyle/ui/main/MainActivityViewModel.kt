@@ -2,10 +2,9 @@ package com.shock.saturdaylifestyle.ui.main
 
 import androidx.lifecycle.viewModelScope
 import com.shock.saturdaylifestyle.network.Resource
-import com.shock.saturdaylifestyle.viewModel.BaseViewModel
+import com.shock.saturdaylifestyle.ui.common.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject

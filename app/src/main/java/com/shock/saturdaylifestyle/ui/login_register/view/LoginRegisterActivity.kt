@@ -25,6 +25,7 @@ import com.shock.saturdaylifestyle.utility.MyBottomSheetDialog
 class LoginRegisterActivity : BaseActivity<SignInActivityDataBinding>(),
     LoginRegisterActivityViewCallBacks {
 
+
     private lateinit var binding : SignInActivityDataBinding
     private val TAG = LoginRegisterActivity::class.java.simpleName
     private var countriesList: ArrayList<CountryDM> = ArrayList()
@@ -97,6 +98,7 @@ class LoginRegisterActivity : BaseActivity<SignInActivityDataBinding>(),
         binding.tvPhoneCode.text = code
     }
 
+
     private fun showBottomSheetWhatsapp() {
         country_code = binding.tvPhoneCode.text.toString()
         phone_number = ed_phone_no.text.toString()
@@ -105,8 +107,12 @@ class LoginRegisterActivity : BaseActivity<SignInActivityDataBinding>(),
 
         var bottomSheetDialog = MyBottomSheetDialog(this, false)
 
+
+
         @SuppressLint("InflateParams") val view: View =
             layoutInflater.inflate(R.layout.dialog_send_otp_via_whatsapp, null)
+
+
 
         (view.findViewById(R.id.btn_continue) as View).setOnClickListener {
 
@@ -118,7 +124,9 @@ class LoginRegisterActivity : BaseActivity<SignInActivityDataBinding>(),
                 isFinish = false,
                 isForward = true
             )
+
         }
+
 
         (view.findViewById(R.id.iv_back) as View).setOnClickListener {
 
@@ -131,6 +139,8 @@ class LoginRegisterActivity : BaseActivity<SignInActivityDataBinding>(),
             bottomSheetDialog.dismiss()
             showBottomSheetOtherMethod()
         }
+
+
 
         bottomSheetDialog.setContentView(view)
         bottomSheetDialog.show()
@@ -199,6 +209,9 @@ class LoginRegisterActivity : BaseActivity<SignInActivityDataBinding>(),
 
         dialogGet.show()
         dialogGet.setCancelable(true)
+
+
+
 
 
     }
@@ -291,6 +304,7 @@ class LoginRegisterActivity : BaseActivity<SignInActivityDataBinding>(),
     }
 
     override fun listenChannel() {
+
     }
 
 
