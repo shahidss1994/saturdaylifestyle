@@ -5,11 +5,13 @@ import com.shock.saturdaylifestyle.network.Resource
 import com.shock.saturdaylifestyle.ui.main.MainRepository
 import com.shock.saturdaylifestyle.ui.main.MainViewState
 import com.shock.saturdaylifestyle.viewModel.BaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class LoginRegisterViewModel @Inject constructor(
     private val mainRepository: MainRepository
 ) : BaseViewModel(mainRepository) {

@@ -45,9 +45,13 @@
 
     <style name="datepicker" parent="Theme.AppCompat.Light.Dialog">
         <item name="colorPrimary">@color/indigo</item>
+
+    </style>
+
+    <style name="date_picker_theme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorPrimary">@color/indigo</item>
         <item name="colorPrimaryDark">@color/indigo</item>
         <item name="colorAccent">@color/indigo</item>
     </style>
-
 
 </resources>

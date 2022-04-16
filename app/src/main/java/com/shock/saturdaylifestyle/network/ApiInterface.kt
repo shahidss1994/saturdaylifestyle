@@ -1,5 +1,7 @@
 package com.shock.saturdaylifestyle.network
 
+import com.shock.saturdaylifestyle.ui.login_register.entity.RegisterEntity
+import kotlinx.coroutines.flow.Flow
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
@@ -20,7 +22,7 @@ interface ApiInterface : BaseApi {
         @Field("country_code") countryCode: String,
         @Field("gender") genderType: Int,
         @Field("referral_code") referral: String
-    ): Any
+    ): Flow<RegisterEntity>
 
 
     @POST("user/login")

@@ -8,6 +8,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Patterns
 import android.view.View
+import android.widget.Button
 import android.widget.DatePicker
 import android.widget.RadioGroup
 import android.widget.TextView
@@ -19,11 +20,13 @@ import com.shock.saturdaylifestyle.R
 import com.shock.saturdaylifestyle.databinding.RegisterForm1ActivityDataBinding
 import com.shock.saturdaylifestyle.ui.common.BaseActivity
 import com.shock.saturdaylifestyle.ui.login_register.viewmodel.LoginRegisterViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
 
 
+@AndroidEntryPoint
 class RegisterForm1Activity : BaseActivity<RegisterForm1ActivityDataBinding>(),
     RegisterForm1ActivityViewCallBacks , DatePickerDialog.OnDateSetListener {
 
@@ -36,7 +39,10 @@ class RegisterForm1Activity : BaseActivity<RegisterForm1ActivityDataBinding>(),
     private lateinit var rg_gender : RadioGroup
 
     private var genderType : Int = -1
+
     private val mViewModel: LoginRegisterViewModel by viewModels()
+
+    private lateinit var btn_continue : Button
 
     var isGenderSelected= false
 
@@ -44,11 +50,18 @@ class RegisterForm1Activity : BaseActivity<RegisterForm1ActivityDataBinding>(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = binding()
+        btn_continue = findViewById(R.id.btn_continue)
         rg_gender = findViewById(R.id.rg_gender)
         tv_dob = findViewById(R.id.tv_dob)
         tv_dob.setOnClickListener {
             pickerClick()
         }
+
+        btn_continue.setOnClickListener {
+
+            continueClick()
+        }
+
 
         initTextChangeListeners()
     }
@@ -269,6 +282,8 @@ class RegisterForm1Activity : BaseActivity<RegisterForm1ActivityDataBinding>(),
     var datePickerDialog = DatePickerDialog(this, R.style.datepicker, this, mYear, mMonth, mDay)
     datePickerDialog.datePicker.maxDate = calendar.timeInMillis
     datePickerDialog.show()
+
+
 
     }
 

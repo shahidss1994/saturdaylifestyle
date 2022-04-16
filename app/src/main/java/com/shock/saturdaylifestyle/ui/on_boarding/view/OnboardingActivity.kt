@@ -16,8 +16,9 @@ import com.shock.saturdaylifestyle.R
 import com.shock.saturdaylifestyle.databinding.OnboardingScreenLayoutBinding
 import com.shock.saturdaylifestyle.ui.common.BaseActivity
 import com.shock.saturdaylifestyle.utility.CommonUtilities
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class OnboardingActivity : BaseActivity<OnboardingScreenLayoutBinding>(), OnBoardingCallbacks {
     var binding: OnboardingScreenLayoutBinding? = null
     var whichScreen: String? = null
