@@ -1,7 +1,6 @@
 package com.shock.saturdaylifestyle.ui.main
 
-/*
-import androidx.lifecycle.viewModelScope
+/*import androidx.lifecycle.viewModelScope
 import com.shock.saturdaylifestyle.network.Resource
 import com.shock.saturdaylifestyle.ui.common.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

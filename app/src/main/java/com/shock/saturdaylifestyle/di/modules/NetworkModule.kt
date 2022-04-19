@@ -3,7 +3,7 @@ package com.shock.saturdaylifestyle.di.modules
 import android.content.Context
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.shock.saturdaylifestyle.helper_utilities.Constants
+import com.shock.saturdaylifestyle.constants.Constants
 import com.shock.saturdaylifestyle.network.*
 import dagger.Module
 import dagger.Provides

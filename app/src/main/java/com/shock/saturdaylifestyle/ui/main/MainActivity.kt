@@ -13,21 +13,21 @@ import kotlinx.coroutines.flow.onEach
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
-    private val mViewModel: MainActivityViewModel by viewModels()
+  //  private val mViewModel: MainActivityViewModel by viewModels()
 
     override fun getLayoutId() = R.layout.activity_main
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding().apply {
+      /*  binding().apply {
             viewModel = mViewModel
             viewState = mViewModel.viewState
         }
-        mViewModel.getUsers(1)
+        mViewModel.getUsers(1)*/
     }
 
     override fun listenChannel() {
-        mViewModel.eventFlow.onEach {
+ /*       mViewModel.eventFlow.onEach {
             when (it) {
                 is MainActivityViewModel.Event.OnDataReceived -> {
                     Toast.makeText(this@MainActivity, "Api Call Success", Toast.LENGTH_SHORT).show()
@@ -36,6 +36,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                     finish()
                 }
             }
-        }.observeInLifecycle(this@MainActivity)
+        }.observeInLifecycle(this@MainActivity)*/
     }
 }

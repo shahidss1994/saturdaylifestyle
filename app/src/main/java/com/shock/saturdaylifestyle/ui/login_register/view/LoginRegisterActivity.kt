@@ -3,6 +3,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.provider.SyncStateContract
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -11,8 +12,10 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.chuckerteam.chucker.BuildConfig
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -29,6 +32,7 @@ import com.shock.saturdaylifestyle.ui.login_register.models.CountryDM
 import com.shock.saturdaylifestyle.R
 import com.shock.saturdaylifestyle.databinding.SignInActivityDataBinding
 import com.shock.saturdaylifestyle.ui.common.BaseActivity
+import com.shock.saturdaylifestyle.ui.login_register.viewmodel.LoginRegisterViewModel
 import com.shock.saturdaylifestyle.utility.CommonUtilities
 import com.shock.saturdaylifestyle.utility.MyBottomSheetDialog
 
@@ -36,6 +40,8 @@ import com.shock.saturdaylifestyle.utility.MyBottomSheetDialog
 class LoginRegisterActivity : BaseActivity<SignInActivityDataBinding>(),
     LoginRegisterActivityViewCallBacks {
 
+
+    private val mViewModel: LoginRegisterViewModel by viewModels()
 
     private lateinit var binding : SignInActivityDataBinding
     private val TAG = LoginRegisterActivity::class.java.simpleName
@@ -144,12 +150,14 @@ class LoginRegisterActivity : BaseActivity<SignInActivityDataBinding>(),
 
             bottomSheetDialog.dismiss()
 
-            CommonUtilities.fireActivityIntent(
+         //   mViewModel.sendOTP(SyncStateContract.Constants)
+
+           /* CommonUtilities.fireActivityIntent(
                 this,
                 Intent(this, RegisterForm1Activity::class.java),
                 isFinish = false,
                 isForward = true
-            )
+            )*/
 
         }
 

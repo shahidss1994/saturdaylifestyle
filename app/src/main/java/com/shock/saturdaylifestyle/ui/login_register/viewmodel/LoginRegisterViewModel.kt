@@ -1,33 +1,64 @@
 package com.shock.saturdaylifestyle.ui.login_register.viewmodel
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.shock.saturdaylifestyle.network.LoginRegisterData
+import androidx.lifecycle.viewModelScope
 import com.shock.saturdaylifestyle.errorProvider.ErrorProvider
+import com.shock.saturdaylifestyle.network.LoginRegisterData
+import com.shock.saturdaylifestyle.network.Result
+import com.shock.saturdaylifestyle.ui.login_register.models.ResponseSendOTP
 import dagger.hilt.android.lifecycle.HiltViewModel
-
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginRegisterViewModel  @Inject constructor(val data: LoginRegisterData,
-                                          private val errorProvider: ErrorProvider
-) : ViewModel() {
-
-  /*  private val _getReferralLink = MutableLiveData<Result<ResponseReferralLinkDM>>()
-    val getReferralLink: LiveData<Result<ResponseReferralLinkDM>>
-        get() = _getReferralLink
+class LoginRegisterViewModel @Inject constructor(
+    private val repository: LoginRegisterData,
+    private val errorProvider: ErrorProvider,
+) : ViewModel()  {
 
 
-    fun sen(token:String){
+
+    private var _sendOTP = MutableLiveData<Result<ResponseSendOTP>>()
+    val sendOTP: LiveData<Result<ResponseSendOTP>>
+        get() = _sendOTP
+
+    fun sendOTP(key: String, phoneNumber: String,
+                countryCode: String) {
         viewModelScope.launch {
+
             try {
-                _getReferralLink.postValue(Result.loading())
-                val response= data.getReferralLink(token)
-                _getReferralLink.postValue(Result.success(response))
+                _sendOTP.postValue(com.shock.saturdaylifestyle.network.Result.loading())
+                val response = repository.SendOtpProcess(key,"application/x-www-form-urlencoded",phoneNumber,countryCode)
+                _sendOTP.postValue(com.shock.saturdaylifestyle.network.Result.success(response))
+            } catch (exception: Exception) {
+                _sendOTP.postValue(com.shock.saturdaylifestyle.network.Result.error(errorProvider.getErrorMessage(exception)))
             }
-            catch (e: Exception) {
-                _getReferralLink.postValue(Result.error(e.message.toString()))
-            }
+
         }
-    }*/
+    }
+
+
+
+
+    private var _verifyOTP = MutableLiveData<com.shock.saturdaylifestyle.network.Result<ResponseSendOTP>>()
+    val verifyOTP: LiveData<com.shock.saturdaylifestyle.network.Result<ResponseSendOTP>>
+        get() = _verifyOTP
+
+    fun verifyOTP(key: String, otp: String){
+        viewModelScope.launch {
+
+            try {
+                _verifyOTP.postValue(com.shock.saturdaylifestyle.network.Result.loading())
+                val response = repository.VerifyOtpProcess(key,"application/x-www-form-urlencoded",otp)
+                _verifyOTP.postValue(com.shock.saturdaylifestyle.network.Result.success(response))
+            } catch (exception: Exception) {
+                _verifyOTP.postValue(com.shock.saturdaylifestyle.network.Result.error(errorProvider.getErrorMessage(exception)))
+            }
+
+        }
+    }
+
 
 }

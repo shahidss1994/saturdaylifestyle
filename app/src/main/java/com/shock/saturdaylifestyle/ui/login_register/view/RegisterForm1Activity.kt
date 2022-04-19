@@ -21,7 +21,6 @@ import com.shock.saturdaylifestyle.databinding.RegisterForm1ActivityDataBinding
 import com.shock.saturdaylifestyle.ui.common.BaseActivity
 import com.shock.saturdaylifestyle.ui.login_register.viewmodel.LoginRegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -265,9 +264,9 @@ class RegisterForm1Activity : BaseActivity<RegisterForm1ActivityDataBinding>(),
 
         } else{
 
-            mViewModel.register(binding.edFirstName.text.toString() + " " + binding.edLastName.text.toString(),
+           /* mViewModel.register(binding.edFirstName.text.toString() + " " + binding.edLastName.text.toString(),
                 LoginRegisterActivity.phone_number, LoginRegisterActivity.country_code, genderType, ""
-            )
+            )*/
 
         }
 
