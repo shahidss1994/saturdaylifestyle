@@ -1,5 +1,6 @@
 package com.shock.saturdaylifestyle.ui.main
 
+/*
 import androidx.lifecycle.viewModelScope
 import com.shock.saturdaylifestyle.network.Resource
 import com.shock.saturdaylifestyle.ui.common.BaseViewModel
@@ -40,4 +41,4 @@ class MainActivityViewModel @Inject constructor(
         object OnDataReceived : Event()
     }
 
-}
+}*/

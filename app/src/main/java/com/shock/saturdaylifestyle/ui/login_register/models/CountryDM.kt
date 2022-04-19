@@ -1,4 +1,4 @@
-package com.saturdays.login_register.models
+package com.shock.saturdaylifestyle.ui.login_register.models
 
 data class CountryDM(
     var id: Int? = null,
@@ -6,3 +6,4 @@ data class CountryDM(
     var countryName: String? = "",
     var isSelected: Boolean? = false
 )
+

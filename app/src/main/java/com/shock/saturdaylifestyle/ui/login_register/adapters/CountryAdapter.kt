@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.saturdays.login_register.models.CountryDM
+import com.shock.saturdaylifestyle.ui.login_register.models.CountryDM
 import com.shock.saturdaylifestyle.ui.login_register.view.LoginRegisterActivity
 import com.shock.saturdaylifestyle.databinding.ItemCountryBinding
 

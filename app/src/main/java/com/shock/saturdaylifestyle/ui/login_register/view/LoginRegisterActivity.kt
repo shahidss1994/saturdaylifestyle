@@ -25,7 +25,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.saturdays.login_register.adapters.CountryAdapter
 import com.saturdays.login_register.callbacks.LoginRegisterActivityViewCallBacks
-import com.saturdays.login_register.models.CountryDM
+import com.shock.saturdaylifestyle.ui.login_register.models.CountryDM
 import com.shock.saturdaylifestyle.R
 import com.shock.saturdaylifestyle.databinding.SignInActivityDataBinding
 import com.shock.saturdaylifestyle.ui.common.BaseActivity

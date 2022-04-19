@@ -1,57 +1,33 @@
 package com.shock.saturdaylifestyle.ui.login_register.viewmodel
 
-import androidx.lifecycle.viewModelScope
-import com.shock.saturdaylifestyle.network.Resource
-import com.shock.saturdaylifestyle.ui.main.MainRepository
-import com.shock.saturdaylifestyle.ui.main.MainViewState
-import com.shock.saturdaylifestyle.ui.common.BaseViewModel
+import androidx.lifecycle.ViewModel
+import com.shock.saturdaylifestyle.network.LoginRegisterData
+import com.shock.saturdaylifestyle.errorProvider.ErrorProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.launch
+
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginRegisterViewModel @Inject constructor(
-    private val mainRepository: MainRepository
-) : BaseViewModel(mainRepository) {
+class LoginRegisterViewModel  @Inject constructor(val data: LoginRegisterData,
+                                          private val errorProvider: ErrorProvider
+) : ViewModel() {
 
-    val viewState = MainViewState()
+  /*  private val _getReferralLink = MutableLiveData<Result<ResponseReferralLinkDM>>()
+    val getReferralLink: LiveData<Result<ResponseReferralLinkDM>>
+        get() = _getReferralLink
 
-    private val eventChannel = Channel<Event>(Channel.BUFFERED)
-    val eventFlow = eventChannel.receiveAsFlow()
 
-    fun login() {
+    fun sen(token:String){
         viewModelScope.launch {
-            val rs = mainRepository.loginUser(1)
-            if (rs is Resource.Success) {
-                viewState.welcomeMsg = "Data Received and click me to close"
-                onEvent(Event.OnDataReceived)
+            try {
+                _getReferralLink.postValue(Result.loading())
+                val response= data.getReferralLink(token)
+                _getReferralLink.postValue(Result.success(response))
+            }
+            catch (e: Exception) {
+                _getReferralLink.postValue(Result.error(e.message.toString()))
             }
         }
-    }
+    }*/
 
-    fun register(name: String, phoneNumber: String, countryCode: String, genderType: Int, referral: String) {
-        viewModelScope.launch {
-            val rs = mainRepository.registerUser(name, phoneNumber, countryCode, genderType, referral)
-            if (rs is Resource.Success) {
-                viewState.welcomeMsg = "Data Received and click me to close"
-                onEvent(Event.OnDataReceived)
-            }
-        }
-    }
-
-
-        override fun onBackPressed() {
-            onEvent(Event.OnBackPressed)
-        }
-
-        private fun onEvent(event: Event) {
-            viewModelScope.launch { eventChannel.send(event) }
-        }
-
-        sealed class Event {
-            object OnBackPressed : Event()
-            object OnDataReceived : Event()
-        }
 }

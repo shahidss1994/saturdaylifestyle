@@ -1,5 +1,6 @@
 package com.shock.saturdaylifestyle.ui.main
 
+/*
 import com.shock.saturdaylifestyle.network.ApiInterface
 import com.shock.saturdaylifestyle.network.BaseRepository
 import javax.inject.Inject
@@ -24,4 +25,4 @@ class MainRepository @Inject constructor(
 
     suspend fun verifyOTP(page: Int) = safeApiCall { api.verifyOTP(page) }
 
-}
+}*/
