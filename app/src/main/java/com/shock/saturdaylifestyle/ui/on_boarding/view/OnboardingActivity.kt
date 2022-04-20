@@ -12,11 +12,11 @@ import com.shock.saturdaylifestyle.ui.login_register.view.LoginRegisterActivity
 import com.saturdays.on_boarding.adapter.OnboardingPagerAdapter
 import com.saturdays.on_boarding.model.ViewPagerDM
 import com.shock.saturdaylifestyle.R
+import com.shock.saturdaylifestyle.constants.Constants
 import com.shock.saturdaylifestyle.databinding.OoboardingActivityDataBinding
-import com.shock.saturdaylifestyle.databinding.SignInActivityDataBinding
 import com.shock.saturdaylifestyle.di.DaggerProvider
 import com.shock.saturdaylifestyle.ui.base.activity.BaseDataBindingActivity
-import com.shock.saturdaylifestyle.ui.login_register.viewmodel.LoginRegisterViewModel
+import com.shock.saturdaylifestyle.ui.main.view.HomeActivity
 import com.shock.saturdaylifestyle.utility.CommonUtilities
 //import dagger.hilt.android.AndroidEntryPoint
 
@@ -44,6 +44,16 @@ class OnboardingActivity : BaseDataBindingActivity<OoboardingActivityDataBinding
         btn_login_create_account = findViewById(R.id.btn_login_create_account)
         btn_login_create_account.setOnClickListener {
             onLoginBtnClick()
+        }
+        binding.tvSkip.setOnClickListener {
+
+            CommonUtilities.putBoolean(this@OnboardingActivity,Constants.IS_GUEST,true)
+            CommonUtilities.fireActivityIntent(
+                this@OnboardingActivity,
+                Intent(this@OnboardingActivity, HomeActivity::class.java),
+                isFinish = true,
+                isForward = true
+            )
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {

@@ -90,7 +90,7 @@ class LoginRegisterActivity : BaseDataBindingActivity<SignInActivityDataBinding>
 
         initCountryList()
 
-        btn_contibute = findViewById(R.id.btn_contibute)
+        btn_contibute = findViewById(R.id.btn_continue)
         tv_phone_code = findViewById(R.id.tv_phone_code)
         ed_phone_no = findViewById(R.id.ed_phone_no)
         tv_phone_code.setOnClickListener {
