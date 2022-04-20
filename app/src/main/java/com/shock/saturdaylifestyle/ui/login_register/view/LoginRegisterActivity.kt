@@ -1,12 +1,14 @@
 package com.shock.saturdaylifestyle.ui.login_register.view
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.ClipData
 import android.content.Intent
 import android.os.Bundle
 import android.provider.SyncStateContract
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -14,6 +16,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.chuckerteam.chucker.BuildConfig
@@ -34,21 +37,26 @@ import com.shock.saturdaylifestyle.ui.login_register.models.CountryDM
 import com.shock.saturdaylifestyle.R
 import com.shock.saturdaylifestyle.constants.Constants
 import com.shock.saturdaylifestyle.databinding.SignInActivityDataBinding
+import com.shock.saturdaylifestyle.di.DaggerProvider
+import com.shock.saturdaylifestyle.di.modules.ViewModules.ViewModelFactory
 import com.shock.saturdaylifestyle.network.Status
-import com.shock.saturdaylifestyle.ui.common.BaseActivity
+import com.shock.saturdaylifestyle.ui.base.activity.BaseActivity
+import com.shock.saturdaylifestyle.ui.base.activity.BaseDataBindingActivity
 import com.shock.saturdaylifestyle.ui.login_register.viewmodel.LoginRegisterViewModel
 import com.shock.saturdaylifestyle.utility.CommonUtilities
 import com.shock.saturdaylifestyle.utility.MyBottomSheetDialog
-import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-@AndroidEntryPoint
-class LoginRegisterActivity : BaseActivity<SignInActivityDataBinding>(),
+class LoginRegisterActivity : BaseDataBindingActivity<SignInActivityDataBinding>(R.layout.activity_login_register),
     LoginRegisterActivityViewCallBacks {
 
 
-    private val mViewModel: LoginRegisterViewModel by viewModels()
+//    private val mViewModel: LoginRegisterViewModel by viewModels()
 
-    private lateinit var binding : SignInActivityDataBinding
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+    lateinit var vm: LoginRegisterViewModel
+
     private val TAG = LoginRegisterActivity::class.java.simpleName
     private var countriesList: ArrayList<CountryDM> = ArrayList()
 
@@ -74,10 +82,13 @@ class LoginRegisterActivity : BaseActivity<SignInActivityDataBinding>(),
     }
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onDataBindingCreated() {
+        binding.callback = this
+        binding.lifecycleOwner = this
+        supportActionBar!!.hide()
+
         initCountryList()
-        binding = binding()
+
         btn_contibute = findViewById(R.id.btn_contibute)
         tv_phone_code = findViewById(R.id.tv_phone_code)
         ed_phone_no = findViewById(R.id.ed_phone_no)
@@ -93,6 +104,10 @@ class LoginRegisterActivity : BaseActivity<SignInActivityDataBinding>(),
 
         setObservers()
 
+    }
+    override fun injectDaggerComponent() {
+        DaggerProvider.getAppComponent()?.inject(this)
+        vm = ViewModelProvider(this, viewModelFactory).get(LoginRegisterViewModel::class.java)
     }
 
     private fun initCountryList() {
@@ -158,7 +173,7 @@ class LoginRegisterActivity : BaseActivity<SignInActivityDataBinding>(),
 
             bottomSheetDialog.dismiss()
 
-            mViewModel.sendOTP(Constants.API_KEY,binding.edPhoneNo.text.toString().trim(), country_code)
+            vm.sendOTP(Constants.API_KEY,binding.edPhoneNo.text.toString().trim(), country_code)
             CommonUtilities.showLoader(this)
 
 
@@ -215,7 +230,7 @@ class LoginRegisterActivity : BaseActivity<SignInActivityDataBinding>(),
 
             CommonUtilities.fireActivityIntent(
                 this,
-                Intent(this, OTPActivity::class.java),
+                Intent(this, OTPActivity::class.java).putExtra("number", country_code+" "+ed_phone_no.text.toString().trim()),
                 isFinish = false,
                 isForward = true
             )
@@ -348,13 +363,7 @@ class LoginRegisterActivity : BaseActivity<SignInActivityDataBinding>(),
 
     }
 
-    override fun getLayoutId(): Int {
-        return R.layout.activity_login_register
-    }
 
-    override fun listenChannel() {
-
-    }
 
 
 
@@ -431,7 +440,7 @@ class LoginRegisterActivity : BaseActivity<SignInActivityDataBinding>(),
 
 
     private fun setObservers() {
-        mViewModel.sendOTP.observe(this, Observer {
+        vm.sendOTP.observe(this, Observer {
             when (it.status) {
                 Status.LOADING -> {
                     //  CommonUtilities.showLoader(this)
@@ -440,13 +449,16 @@ class LoginRegisterActivity : BaseActivity<SignInActivityDataBinding>(),
                     CommonUtilities.hideLoader()
                     val data = it.data!!.data
 
+                    CommonUtilities.showToast(this,it.data.message?.en.toString())
+
                     if (it.data.status == true)
                     {
 
 
+
                         CommonUtilities.fireActivityIntent(
                             this,
-                            Intent(this, OTPActivity::class.java),
+                            Intent(this, OTPActivity::class.java).putExtra("number", country_code+" "+ed_phone_no.text.toString().trim()),
                             isFinish = true,
                             isForward = true
                         )

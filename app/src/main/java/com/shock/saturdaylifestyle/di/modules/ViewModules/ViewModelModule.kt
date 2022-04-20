@@ -5,6 +5,7 @@ import com.shock.saturdaylifestyle.ui.login_register.viewmodel.LoginRegisterView
 import com.shock.saturdaylifestyle.util.ViewModelKey
 
 
+
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -17,7 +18,7 @@ abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(LoginRegisterViewModel::class)
-    abstract fun bindLoginRegisterViewModel(LoginRegisterViewModel: LoginRegisterViewModel): ViewModel
+    abstract fun bindLoginRegisterViewModel(loginRegisterViewModel: LoginRegisterViewModel): ViewModel
 
 
 

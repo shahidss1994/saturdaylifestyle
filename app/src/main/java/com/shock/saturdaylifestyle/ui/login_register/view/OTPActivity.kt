@@ -8,45 +8,56 @@ import android.text.TextWatcher
 import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.shock.saturdaylifestyle.ui.login_register.callbacks.OTPActivityViewCallBacks
 import com.shock.saturdaylifestyle.R
 import com.shock.saturdaylifestyle.constants.Constants
 import com.shock.saturdaylifestyle.databinding.OTPActivityDataBinding
+import com.shock.saturdaylifestyle.di.DaggerProvider
+import com.shock.saturdaylifestyle.di.modules.ViewModules.ViewModelFactory
 import com.shock.saturdaylifestyle.network.Status
-import com.shock.saturdaylifestyle.ui.common.BaseActivity
-import com.shock.saturdaylifestyle.ui.common.bind
+import com.shock.saturdaylifestyle.ui.base.activity.BaseDataBindingActivity
 import com.shock.saturdaylifestyle.ui.login_register.viewmodel.LoginRegisterViewModel
 import com.shock.saturdaylifestyle.utility.CommonUtilities
-import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-@AndroidEntryPoint
-class OTPActivity : BaseActivity<OTPActivityDataBinding>(),
+class OTPActivity : BaseDataBindingActivity<OTPActivityDataBinding>(R.layout.activity_otp),
     OTPActivityViewCallBacks {
 
-    private val mViewModel: LoginRegisterViewModel by viewModels()
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+    lateinit var vm: LoginRegisterViewModel
 
-
-    private lateinit var binding : OTPActivityDataBinding
     private val TAG = OTPActivity::class.java.simpleName
 
     var otp =""
     var actualOtp ="12345"
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = binding()
+    override fun onDataBindingCreated() {
+        binding.callback = this
+        binding.lifecycleOwner = this
+        supportActionBar!!.hide()
         initOtpViewListener()
-
-
         initTimer()
-
-        binding.tvTryAgain.setOnClickListener {
-            initTimer()
-        }
 
         setObservers()
 
+        getIntents()
+
+    }
+
+    private fun getIntents() {
+        if (intent.extras!=null)
+        {
+            var phone_no = intent.getStringExtra("number")
+            binding.tvPhoneno.text = phone_no
+        }
+    }
+
+    override fun injectDaggerComponent() {
+        DaggerProvider.getAppComponent()?.inject(this)
+        vm = ViewModelProvider(this, viewModelFactory).get(LoginRegisterViewModel::class.java)
+        //   setupObserver()
     }
 
     private fun initTimer() {
@@ -89,11 +100,11 @@ class OTPActivity : BaseActivity<OTPActivityDataBinding>(),
 
         otp = binding.pvPin.text.toString()
 
-        if (otp.length==5)
+        if (otp.length==6)
         {
 
 
-            mViewModel.verifyOTP(Constants.API_KEY,binding.pvPin.text.toString().trim())
+            vm.verifyOTP(Constants.API_KEY,binding.pvPin.text.toString().trim())
             CommonUtilities.showLoader(this)
 
 
@@ -122,16 +133,9 @@ class OTPActivity : BaseActivity<OTPActivityDataBinding>(),
     }
 
 
-    override fun getLayoutId(): Int {
-        return R.layout.activity_otp
-    }
-
-    override fun listenChannel() {
-
-    }
 
     private fun setObservers() {
-        mViewModel.sendOTP.observe(this, Observer {
+        vm.verifyOTP.observe(this, Observer {
             when (it.status) {
                 Status.LOADING -> {
                     //  CommonUtilities.showLoader(this)
@@ -143,8 +147,7 @@ class OTPActivity : BaseActivity<OTPActivityDataBinding>(),
                     if (it.data.status == true)
                     {
 
-
-
+                        CommonUtilities.showToast(this,it.data.message?.en.toString())
 
 
                     }

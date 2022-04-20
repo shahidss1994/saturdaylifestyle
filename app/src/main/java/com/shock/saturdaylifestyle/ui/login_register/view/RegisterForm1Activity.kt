@@ -14,41 +14,50 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
+import androidx.lifecycle.ViewModelProvider
 
 import com.saturdays.login_register.callbacks.RegisterForm1ActivityViewCallBacks
 import com.shock.saturdaylifestyle.R
 import com.shock.saturdaylifestyle.databinding.RegisterForm1ActivityDataBinding
-import com.shock.saturdaylifestyle.ui.common.BaseActivity
+import com.shock.saturdaylifestyle.di.DaggerProvider
+import com.shock.saturdaylifestyle.di.modules.ViewModules.ViewModelFactory
+import com.shock.saturdaylifestyle.ui.base.activity.BaseDataBindingActivity
+import com.shock.saturdaylifestyle.ui.login_register.callbacks.OTPActivityViewCallBacks
 import com.shock.saturdaylifestyle.ui.login_register.viewmodel.LoginRegisterViewModel
-import dagger.hilt.android.AndroidEntryPoint
+//import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-@AndroidEntryPoint
-class RegisterForm1Activity : BaseActivity<RegisterForm1ActivityDataBinding>(),
-    RegisterForm1ActivityViewCallBacks , DatePickerDialog.OnDateSetListener {
+//@AndroidEntryPoint
+class RegisterForm1Activity : BaseDataBindingActivity<RegisterForm1ActivityDataBinding>(R.layout.activity_register_form1),
+    RegisterForm1ActivityViewCallBacks ,DatePickerDialog.OnDateSetListener{
 
+
+    @javax.inject.Inject
+    lateinit var viewModelFactory: ViewModelFactory
+    lateinit var vm: LoginRegisterViewModel
 
     private val TAG = RegisterForm1Activity::class.java.simpleName
 
-    private lateinit var binding : RegisterForm1ActivityDataBinding
 
     private lateinit var tv_dob : TextView
     private lateinit var rg_gender : RadioGroup
 
     private var genderType : Int = -1
 
-    private val mViewModel: LoginRegisterViewModel by viewModels()
-
     private lateinit var btn_continue : Button
 
     var isGenderSelected= false
 
-    @RequiresApi(Build.VERSION_CODES.M)
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = binding()
+
+
+    override fun onDataBindingCreated() {
+        binding.callback = this
+        binding.lifecycleOwner = this
+        supportActionBar!!.hide()
+
+
         btn_continue = findViewById(R.id.btn_continue)
         rg_gender = findViewById(R.id.rg_gender)
         tv_dob = findViewById(R.id.tv_dob)
@@ -57,13 +66,18 @@ class RegisterForm1Activity : BaseActivity<RegisterForm1ActivityDataBinding>(),
         }
 
         btn_continue.setOnClickListener {
-
             continueClick()
         }
 
-
         initTextChangeListeners()
+
     }
+    override fun injectDaggerComponent() {
+        DaggerProvider.getAppComponent()?.inject(this)
+        vm = ViewModelProvider(this, viewModelFactory).get(LoginRegisterViewModel::class.java)
+        //   setupObserver()
+    }
+
 
 
     private fun initTextChangeListeners() {
@@ -300,12 +314,7 @@ class RegisterForm1Activity : BaseActivity<RegisterForm1ActivityDataBinding>(),
 
     }
 
-    override fun getLayoutId(): Int {
-        return R.layout.activity_register_form1
-    }
 
-    override fun listenChannel() {
-    }
 
 
 }

@@ -5,12 +5,10 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import com.shock.saturdaylifestyle.R
 import com.shock.saturdaylifestyle.databinding.ActivityMainBinding
-import com.shock.saturdaylifestyle.ui.common.BaseActivity
-import com.shock.saturdaylifestyle.ui.common.observeInLifecycle
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.onEach
 
-@AndroidEntryPoint
+//@AndroidEntryPoint
+/*
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
   //  private val mViewModel: MainActivityViewModel by viewModels()
@@ -19,15 +17,18 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-      /*  binding().apply {
+      */
+/*  binding().apply {
             viewModel = mViewModel
             viewState = mViewModel.viewState
         }
-        mViewModel.getUsers(1)*/
+        mViewModel.getUsers(1)*//*
+
     }
 
     override fun listenChannel() {
- /*       mViewModel.eventFlow.onEach {
+ */
+/*       mViewModel.eventFlow.onEach {
             when (it) {
                 is MainActivityViewModel.Event.OnDataReceived -> {
                     Toast.makeText(this@MainActivity, "Api Call Success", Toast.LENGTH_SHORT).show()
@@ -36,6 +37,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                     finish()
                 }
             }
-        }.observeInLifecycle(this@MainActivity)*/
+        }.observeInLifecycle(this@MainActivity)*//*
+
     }
-}
+}*/

@@ -12,10 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SaturdayLifestyle">
-        <activity
+ <!--       <activity
             android:name=".ui.main.MainActivity"
             android:exported="false">
-        </activity>
+        </activity>-->
 
         <activity
             android:name=".ui.splash.SplashActivity"

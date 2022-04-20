@@ -7,29 +7,36 @@ import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.widget.Button
-import androidx.activity.viewModels
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.shock.saturdaylifestyle.ui.login_register.view.LoginRegisterActivity
 import com.saturdays.on_boarding.adapter.OnboardingPagerAdapter
 import com.saturdays.on_boarding.model.ViewPagerDM
 import com.shock.saturdaylifestyle.R
-import com.shock.saturdaylifestyle.databinding.OnboardingScreenLayoutBinding
-import com.shock.saturdaylifestyle.ui.common.BaseActivity
+import com.shock.saturdaylifestyle.databinding.OoboardingActivityDataBinding
+import com.shock.saturdaylifestyle.databinding.SignInActivityDataBinding
+import com.shock.saturdaylifestyle.di.DaggerProvider
+import com.shock.saturdaylifestyle.ui.base.activity.BaseDataBindingActivity
+import com.shock.saturdaylifestyle.ui.login_register.viewmodel.LoginRegisterViewModel
 import com.shock.saturdaylifestyle.utility.CommonUtilities
-import dagger.hilt.android.AndroidEntryPoint
+//import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
-class OnboardingActivity : BaseActivity<OnboardingScreenLayoutBinding>(), OnBoardingCallbacks {
-    var binding: OnboardingScreenLayoutBinding? = null
+//@AndroidEntryPoint
+class OnboardingActivity : BaseDataBindingActivity<OoboardingActivityDataBinding>(R.layout.onboarding_screen_layout),
+    OnBoardingCallbacks {
     var whichScreen: String? = null
     var pos: Int? = 0
     var pager_itemList = ArrayList<ViewPagerDM>()
     private lateinit var btn_login_create_account : Button
 
-    private val mViewModel: OnBoardingViewModel by viewModels()
+   // private val mViewModel: OnBoardingViewModel by viewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+
+
+
+
+    override fun onDataBindingCreated() {
+        binding.callback = this
+        binding.lifecycleOwner = this
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
         supportActionBar?.hide()
 
@@ -46,7 +53,6 @@ class OnboardingActivity : BaseActivity<OnboardingScreenLayoutBinding>(), OnBoar
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
             )
         }
-        binding = binding()
 
 
         /**
@@ -83,7 +89,7 @@ class OnboardingActivity : BaseActivity<OnboardingScreenLayoutBinding>(), OnBoar
                 "Enjoy our exclusive promos as well as our\nloyalty program to save some more!"
             )
         )
-     pager_itemList.add(
+        pager_itemList.add(
             ViewPagerDM(
                 R.mipmap.iv_onboarding5,
                 "OFFLINE STORES",
@@ -113,7 +119,7 @@ class OnboardingActivity : BaseActivity<OnboardingScreenLayoutBinding>(), OnBoar
                 binding?.btnLoginCreateAccount!!.setOnClickListener {
 
                     CommonUtilities.fireActivityIntent(
-                       this@OnboardingActivity,
+                        this@OnboardingActivity,
                         Intent(this@OnboardingActivity, LoginRegisterActivity::class.java),
                         isFinish = true,
                         isForward = true
@@ -140,11 +146,17 @@ class OnboardingActivity : BaseActivity<OnboardingScreenLayoutBinding>(), OnBoar
 
 
     }
-
-    override fun getLayoutId(): Int = R.layout.onboarding_screen_layout
-
-    override fun listenChannel() {
+    override fun injectDaggerComponent() {
+        DaggerProvider.getAppComponent()?.inject(this)
     }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+
+    }
+
+
 
     override fun onLoginBtnClick() {
         startActivity(Intent(this, LoginRegisterActivity::class.java))

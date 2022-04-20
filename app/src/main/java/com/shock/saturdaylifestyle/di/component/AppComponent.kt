@@ -9,6 +9,7 @@ import com.shock.saturdaylifestyle.di.modules.ViewModules.ViewModelModule
 import com.shock.saturdaylifestyle.di.modules.ApplicationModule
 import com.shock.saturdaylifestyle.di.modules.NetworkModule
 import com.shock.saturdaylifestyle.di.modules.ViewModules.ViewModelFactoryModule
+import com.shock.saturdaylifestyle.ui.on_boarding.view.OnboardingActivity
 import dagger.Component
 import javax.inject.Singleton
 
@@ -26,15 +27,10 @@ interface AppComponent {
 
     fun inject(myApplication: SaturdayLifestyleApplication)
     fun inject(splashActivity: SplashActivity)
-    fun inject(splashActivity: LoginRegisterActivity)
-    fun inject(splashActivity: RegisterForm1Activity)
-    fun inject(splashActivity: OTPActivity)
+    fun inject(loginRegisterActivity: LoginRegisterActivity)
+    fun inject(registerForm1Activity: RegisterForm1Activity)
+    fun inject(oTPActivity: OTPActivity)
+    fun inject(onboardingActivity: OnboardingActivity)
 
 
 }
-
-
-/*
-top - max coin - 700
-max-700
-* max - according to */

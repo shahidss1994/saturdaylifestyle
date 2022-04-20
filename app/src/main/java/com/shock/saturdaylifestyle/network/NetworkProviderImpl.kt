@@ -23,9 +23,9 @@ class NetworkProviderImpl @Inject constructor(
     private var baseUrlRetrofit: Retrofit? = null
     private val context: Context? = null
 
-    private fun <T> buildApi(apiInterfaceClass: Class<T>, baseUrl: String): T {
+    private fun <T> buildApi(ApiCallsClass: Class<T>, baseUrl: String): T {
         return buildRetrofitApi(baseUrl)
-            .create(apiInterfaceClass)
+            .create(ApiCallsClass)
     }
 
     private fun getOkHttpClient(): OkHttpClient {

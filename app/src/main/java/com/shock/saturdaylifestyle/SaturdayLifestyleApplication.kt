@@ -3,9 +3,9 @@ package com.shock.saturdaylifestyle
 import android.app.Application
 import com.shock.saturdaylifestyle.di.DaggerProvider
 import com.shock.saturdaylifestyle.di.component.AppComponent
-import dagger.hilt.android.HiltAndroidApp
+//import dagger.hilt.android.HiltAndroidApp
 
-@HiltAndroidApp
+//@HiltAndroidApp
 class SaturdayLifestyleApplication : Application() {
 
 

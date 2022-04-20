@@ -1,32 +1,32 @@
 package com.shock.saturdaylifestyle.ui.splash
 
 import android.content.Intent
-import android.os.Bundle
 import android.os.Handler
 import com.shock.saturdaylifestyle.ui.login_register.view.LoginRegisterActivity
 import com.shock.saturdaylifestyle.ui.on_boarding.view.OnboardingActivity
 import com.shock.saturdaylifestyle.R
 import com.shock.saturdaylifestyle.constants.Constants
+import com.shock.saturdaylifestyle.databinding.RegisterForm1ActivityDataBinding
 import com.shock.saturdaylifestyle.databinding.SplashActivityDataBinding
-import com.shock.saturdaylifestyle.ui.common.BaseActivity
+import com.shock.saturdaylifestyle.di.DaggerProvider
+import com.shock.saturdaylifestyle.ui.base.activity.BaseDataBindingActivity
 import com.shock.saturdaylifestyle.utility.CommonUtilities
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
-class SplashActivity : BaseActivity<SplashActivityDataBinding>(){
+class SplashActivity : BaseDataBindingActivity<SplashActivityDataBinding>(R.layout.activity_splash)
+    {
 
 
-    override fun getLayoutId(): Int = R.layout.activity_splash
+        override fun onDataBindingCreated() {
+          //  binding.callback = this
+            binding.lifecycleOwner = this
+            supportActionBar!!.hide()
+            splashHandler()
 
-    override fun listenChannel() {
+        }
+        override fun injectDaggerComponent() {
+            DaggerProvider.getAppComponent()?.inject(this)
+        }
 
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        splashHandler()
-    }
 
     private fun splashHandler() {
         Handler().postDelayed({

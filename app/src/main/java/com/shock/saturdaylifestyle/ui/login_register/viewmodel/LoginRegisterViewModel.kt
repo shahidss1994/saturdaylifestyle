@@ -8,11 +8,11 @@ import com.shock.saturdaylifestyle.errorProvider.ErrorProvider
 import com.shock.saturdaylifestyle.network.LoginRegisterData
 import com.shock.saturdaylifestyle.network.Result
 import com.shock.saturdaylifestyle.ui.login_register.models.ResponseSendOTP
-import dagger.hilt.android.lifecycle.HiltViewModel
+//import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@HiltViewModel
+//@HiltViewModel
 class LoginRegisterViewModel @Inject constructor(
     private val repository: LoginRegisterData,
     private val errorProvider: ErrorProvider,

@@ -9,10 +9,10 @@ import javax.inject.Provider
 
 
 @Module
-class ViewModelFactoryModule {
+    class ViewModelFactoryModule {
 
-    @Provides
-    fun viewModelFactory(providerMap: Map<Class<out ViewModel>, Provider<ViewModel>>): ViewModelProvider.Factory {
-        return ViewModelFactory(providerMap)
+        @Provides
+        fun viewModelFactory(providerMap: Map<Class<out ViewModel>, Provider<ViewModel>>): ViewModelProvider.Factory {
+            return ViewModelFactory(providerMap)
+        }
     }
-}

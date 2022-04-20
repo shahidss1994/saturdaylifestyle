@@ -2,9 +2,8 @@ package com.shock.saturdaylifestyle.di
 
 import com.shock.saturdaylifestyle.SaturdayLifestyleApplication
 import com.shock.saturdaylifestyle.di.component.AppComponent
-//import com.shock.saturdaylifestyle.di.component.DaggerAppComponent
 import com.shock.saturdaylifestyle.di.modules.ApplicationModule
-
+import com.shock.saturdaylifestyle.di.component.DaggerAppComponent
 
 
 class DaggerProvider {
