@@ -1,6 +1,6 @@
 package com.shock.saturdaylifestyle.ui.on_boarding.view
 
-import androidx.lifecycle.viewModelScope
+/*import androidx.lifecycle.viewModelScope
 import com.shock.saturdaylifestyle.network.Resource
 import com.shock.saturdaylifestyle.ui.main.MainActivityViewModel
 import com.shock.saturdaylifestyle.ui.main.MainRepository
@@ -9,8 +9,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import javax.inject.Inject
+import javax.inject.Inject*/
 
+/*
 @HiltViewModel
 class OnBoardingViewModel @Inject constructor(
     private val mainRepository: MainRepository
@@ -30,4 +31,4 @@ class OnBoardingViewModel @Inject constructor(
     override fun onBackPressed() {
         TODO("Not yet implemented")
     }
-}
+}*/

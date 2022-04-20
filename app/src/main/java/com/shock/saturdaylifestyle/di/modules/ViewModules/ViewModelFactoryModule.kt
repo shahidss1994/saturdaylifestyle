@@ -1,4 +1,4 @@
-package com.tribU.di.modules.ViewModules
+package com.shock.saturdaylifestyle.di.modules.ViewModules
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -9,10 +9,10 @@ import javax.inject.Provider
 
 
 @Module
-    class ViewModelFactoryModule {
+class ViewModelFactoryModule {
 
-        @Provides
-        fun viewModelFactory(providerMap: Map<Class<out ViewModel>, Provider<ViewModel>>): ViewModelProvider.Factory {
-            return ViewModelFactory(providerMap)
-        }
+    @Provides
+    fun viewModelFactory(providerMap: Map<Class<out ViewModel>, Provider<ViewModel>>): ViewModelProvider.Factory {
+        return ViewModelFactory(providerMap)
     }
+}

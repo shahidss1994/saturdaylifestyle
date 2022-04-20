@@ -13,6 +13,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.chuckerteam.chucker.BuildConfig
@@ -26,17 +27,21 @@ import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.gson.Gson
 import com.saturdays.login_register.adapters.CountryAdapter
 import com.saturdays.login_register.callbacks.LoginRegisterActivityViewCallBacks
 import com.shock.saturdaylifestyle.ui.login_register.models.CountryDM
 import com.shock.saturdaylifestyle.R
+import com.shock.saturdaylifestyle.constants.Constants
 import com.shock.saturdaylifestyle.databinding.SignInActivityDataBinding
+import com.shock.saturdaylifestyle.network.Status
 import com.shock.saturdaylifestyle.ui.common.BaseActivity
 import com.shock.saturdaylifestyle.ui.login_register.viewmodel.LoginRegisterViewModel
 import com.shock.saturdaylifestyle.utility.CommonUtilities
 import com.shock.saturdaylifestyle.utility.MyBottomSheetDialog
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class LoginRegisterActivity : BaseActivity<SignInActivityDataBinding>(),
     LoginRegisterActivityViewCallBacks {
 
@@ -85,6 +90,9 @@ class LoginRegisterActivity : BaseActivity<SignInActivityDataBinding>(),
         binding.rlGoogle.setOnClickListener {
             initGoogleIntegration()
         }
+
+        setObservers()
+
     }
 
     private fun initCountryList() {
@@ -150,14 +158,10 @@ class LoginRegisterActivity : BaseActivity<SignInActivityDataBinding>(),
 
             bottomSheetDialog.dismiss()
 
-         //   mViewModel.sendOTP(SyncStateContract.Constants)
+            mViewModel.sendOTP(Constants.API_KEY,binding.edPhoneNo.text.toString().trim(), country_code)
+            CommonUtilities.showLoader(this)
 
-           /* CommonUtilities.fireActivityIntent(
-                this,
-                Intent(this, RegisterForm1Activity::class.java),
-                isFinish = false,
-                isForward = true
-            )*/
+
 
         }
 
@@ -423,6 +427,39 @@ class LoginRegisterActivity : BaseActivity<SignInActivityDataBinding>(),
                     Toast.makeText(this, " Google Authentication failed.", Toast.LENGTH_SHORT).show()
                 }
             })
+    }
+
+
+    private fun setObservers() {
+        mViewModel.sendOTP.observe(this, Observer {
+            when (it.status) {
+                Status.LOADING -> {
+                    //  CommonUtilities.showLoader(this)
+                }
+                Status.SUCCESS -> {
+                    CommonUtilities.hideLoader()
+                    val data = it.data!!.data
+
+                    if (it.data.status == true)
+                    {
+
+
+                        CommonUtilities.fireActivityIntent(
+                            this,
+                            Intent(this, OTPActivity::class.java),
+                            isFinish = true,
+                            isForward = true
+                        )
+
+
+                    }
+                }
+                Status.ERROR -> {
+                    CommonUtilities.hideLoader()
+                    CommonUtilities.showToast(this, it.message)
+                }
+            }
+        });
     }
 
 

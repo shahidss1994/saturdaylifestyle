@@ -1,5 +1,6 @@
 package com.shock.saturdaylifestyle.ui.splash
 
+/*
 import com.shock.saturdaylifestyle.ui.main.MainRepository
 import com.shock.saturdaylifestyle.ui.common.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -12,4 +13,4 @@ class SplashViewModel @Inject constructor(
 
     override fun onBackPressed() {
     }
-}
+}*/
