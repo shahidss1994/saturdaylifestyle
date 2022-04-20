@@ -128,7 +128,7 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:gravity="center"
-                    android:text="+62"
+                    android:text="+91"
                     android:onClick="@{()->callback.pickerClick()}"
                     android:drawablePadding="@dimen/_5sdp"
                     android:drawableEnd="@drawable/ic_bottom_arrow"

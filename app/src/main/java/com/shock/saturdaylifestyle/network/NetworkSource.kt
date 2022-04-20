@@ -16,6 +16,30 @@ class LoginRegisterData @Inject constructor(private val api: ApiCalls) {
         data
     }
 
+    suspend fun LoginProcess( contentType: String,
+                              mobile: String,
+                              otp: String,
+                              country_code: String,
+                              device_token: String,
+                              device_type: String
+    ) = withContext(Dispatchers.IO) {
+        val data = api.loginUser(contentType,mobile,otp,country_code, device_token, device_type)
+        data
+    }
+
+    suspend fun RegisterProcess(contentType: String,
+                              name: String,
+                              mobile: String,
+                              country_code: String,
+                              genderType: Int,
+                              email: String
+    ) = withContext(Dispatchers.IO) {
+        val data = api.registerUser(contentType,name,mobile,country_code, genderType, email)
+        data
+    }
+
+
+
 }
 
 

@@ -1,9 +1,11 @@
 package com.shock.saturdaylifestyle.ui.login_register.view
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.provider.SyncStateContract
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Patterns
@@ -14,16 +16,21 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 
 import com.saturdays.login_register.callbacks.RegisterForm1ActivityViewCallBacks
 import com.shock.saturdaylifestyle.R
+import com.shock.saturdaylifestyle.constants.Constants
 import com.shock.saturdaylifestyle.databinding.RegisterForm1ActivityDataBinding
 import com.shock.saturdaylifestyle.di.DaggerProvider
 import com.shock.saturdaylifestyle.di.modules.ViewModules.ViewModelFactory
+import com.shock.saturdaylifestyle.network.Status
 import com.shock.saturdaylifestyle.ui.base.activity.BaseDataBindingActivity
 import com.shock.saturdaylifestyle.ui.login_register.callbacks.OTPActivityViewCallBacks
 import com.shock.saturdaylifestyle.ui.login_register.viewmodel.LoginRegisterViewModel
+import com.shock.saturdaylifestyle.ui.main.view.HomeActivity
+import com.shock.saturdaylifestyle.utility.CommonUtilities
 //import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
@@ -44,11 +51,12 @@ class RegisterForm1Activity : BaseDataBindingActivity<RegisterForm1ActivityDataB
     private lateinit var tv_dob : TextView
     private lateinit var rg_gender : RadioGroup
 
-    private var genderType : Int = -1
+    private var genderType : Int = 1
 
     private lateinit var btn_continue : Button
 
     var isGenderSelected= false
+
 
 
 
@@ -70,12 +78,12 @@ class RegisterForm1Activity : BaseDataBindingActivity<RegisterForm1ActivityDataB
         }
 
         initTextChangeListeners()
+        setObservers()
 
     }
     override fun injectDaggerComponent() {
         DaggerProvider.getAppComponent()?.inject(this)
         vm = ViewModelProvider(this, viewModelFactory).get(LoginRegisterViewModel::class.java)
-        //   setupObserver()
     }
 
 
@@ -191,7 +199,6 @@ class RegisterForm1Activity : BaseDataBindingActivity<RegisterForm1ActivityDataB
             when(id){
 
                 R.id.rbFemale ->{
-
                     genderType = 0
                 }
 
@@ -278,9 +285,11 @@ class RegisterForm1Activity : BaseDataBindingActivity<RegisterForm1ActivityDataB
 
         } else{
 
-           /* mViewModel.register(binding.edFirstName.text.toString() + " " + binding.edLastName.text.toString(),
-                LoginRegisterActivity.phone_number, LoginRegisterActivity.country_code, genderType, ""
-            )*/
+            vm.registerUser(binding.edFirstName.text.toString() + " " + binding.edLastName.text.toString(),
+                LoginRegisterActivity.phone_number, LoginRegisterActivity.country_code, genderType, binding.edEmail.text.toString()
+            )
+            CommonUtilities.showLoader(this)
+
 
         }
 
@@ -314,6 +323,56 @@ class RegisterForm1Activity : BaseDataBindingActivity<RegisterForm1ActivityDataB
 
     }
 
+
+    private fun setObservers() {
+        vm.registerUser.observe(this, Observer {
+            when (it.status) {
+                Status.LOADING -> {
+                    //  CommonUtilities.showLoader(this)
+                }
+                Status.SUCCESS -> {
+
+                    CommonUtilities.hideLoader()
+
+
+                    if (it.data?.status == true) {
+
+                         var data = it.data
+                         CommonUtilities.putString(this, Constants.TOKEN,data.data?.token.toString())
+                         CommonUtilities.putString(this, Constants.NAME,data.data?.name.toString())
+                         CommonUtilities.putBoolean(this, Constants.IS_LOGIN,true)
+                         CommonUtilities.putBoolean(this, Constants.IS_GUEST,false)
+
+                        CommonUtilities.showToast(this,data.message.toString())
+                        //goto home activity
+                             CommonUtilities.fireActivityIntent(
+                            this,
+                            Intent(this, HomeActivity::class.java),
+                            isFinish = true,
+                            isForward = true
+                        )
+
+
+
+                    } else {
+                        CommonUtilities.showToast(this, it.message)
+
+                    }
+
+
+                }
+                Status.ERROR -> {
+                    CommonUtilities.hideLoader()
+                    CommonUtilities.showToast(this, it.message)
+
+
+
+                }
+            }
+        });
+
+
+    }
 
 
 

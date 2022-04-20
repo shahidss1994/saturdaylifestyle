@@ -9,6 +9,7 @@ import com.shock.saturdaylifestyle.di.modules.ViewModules.ViewModelModule
 import com.shock.saturdaylifestyle.di.modules.ApplicationModule
 import com.shock.saturdaylifestyle.di.modules.NetworkModule
 import com.shock.saturdaylifestyle.di.modules.ViewModules.ViewModelFactoryModule
+import com.shock.saturdaylifestyle.ui.main.view.HomeActivity
 import com.shock.saturdaylifestyle.ui.on_boarding.view.OnboardingActivity
 import dagger.Component
 import javax.inject.Singleton
@@ -31,6 +32,6 @@ interface AppComponent {
     fun inject(registerForm1Activity: RegisterForm1Activity)
     fun inject(oTPActivity: OTPActivity)
     fun inject(onboardingActivity: OnboardingActivity)
-
+    fun inject(homeActivity: HomeActivity)
 
 }

@@ -18,6 +18,7 @@ import com.shock.saturdaylifestyle.di.modules.ViewModules.ViewModelFactory
 import com.shock.saturdaylifestyle.network.Status
 import com.shock.saturdaylifestyle.ui.base.activity.BaseDataBindingActivity
 import com.shock.saturdaylifestyle.ui.login_register.viewmodel.LoginRegisterViewModel
+import com.shock.saturdaylifestyle.ui.main.view.HomeActivity
 import com.shock.saturdaylifestyle.utility.CommonUtilities
 import javax.inject.Inject
 
@@ -31,7 +32,10 @@ class OTPActivity : BaseDataBindingActivity<OTPActivityDataBinding>(R.layout.act
     private val TAG = OTPActivity::class.java.simpleName
 
     var otp =""
+    var country_code =""
+    var phone_wihout_code =""
     var actualOtp ="12345"
+    var isUserExist = false
 
     override fun onDataBindingCreated() {
         binding.callback = this
@@ -39,18 +43,18 @@ class OTPActivity : BaseDataBindingActivity<OTPActivityDataBinding>(R.layout.act
         supportActionBar!!.hide()
         initOtpViewListener()
         initTimer()
-
         setObservers()
-
         getIntents()
-
     }
 
     private fun getIntents() {
         if (intent.extras!=null)
         {
             var phone_no = intent.getStringExtra("number")
-            binding.tvPhoneno.text = phone_no
+             country_code = intent.getStringExtra("country_code").toString()
+             phone_wihout_code = intent.getStringExtra("phone_wihout_code").toString()
+             isUserExist = intent.getBooleanExtra("isUserExist",false)
+             binding.tvPhoneno.text = "($phone_no)"
         }
     }
 
@@ -97,38 +101,17 @@ class OTPActivity : BaseDataBindingActivity<OTPActivityDataBinding>(R.layout.act
 
     fun validateOTP()
     {
-
         otp = binding.pvPin.text.toString()
 
         if (otp.length==6)
         {
-
-
             vm.verifyOTP(Constants.API_KEY,binding.pvPin.text.toString().trim())
             CommonUtilities.showLoader(this)
-
-
-
-            if (otp == actualOtp)
-            {
-                //CommonUtilities.showToast(this,"success")
-                binding.pvPin.setTextColor(Color.parseColor("#3A6A67"))
-
-            }else
-            {
-                binding.pvPin.setTextColor(Color.parseColor("#2A2F32"))
-                binding.tvWrongNumber.visibility=View.VISIBLE
-                binding.pvPin.setItemBackground(resources.getDrawable(R.drawable.bg_pin_error));
-
-            }
-
         }else
         {
             binding.pvPin.setTextColor(Color.parseColor("#2A2F32"))
             binding.tvWrongNumber.visibility=View.INVISIBLE
             binding.pvPin.setItemBackground(resources.getDrawable(R.drawable.bg_pin_default));
-
-
         }
     }
 
@@ -141,27 +124,90 @@ class OTPActivity : BaseDataBindingActivity<OTPActivityDataBinding>(R.layout.act
                     //  CommonUtilities.showLoader(this)
                 }
                 Status.SUCCESS -> {
-                    CommonUtilities.hideLoader()
-                    val data = it.data!!.data
 
-                    if (it.data.status == true)
-                    {
+                    if (it.data?.status == true) {
 
-                        CommonUtilities.showToast(this,it.data.message?.en.toString())
+                        if (isUserExist) {
 
+
+                            var deviceToken = CommonUtilities.getDeviceToken(this).toString()
+                            //hit login api
+                            vm.loginUser(phone_wihout_code, actualOtp, country_code, deviceToken)
+                            CommonUtilities.showLoader(this)
+
+
+                        } else {
+                            //    CommonUtilities.hideLoader()
+                            CommonUtilities.fireActivityIntent(
+                                this,
+                                Intent(this, RegisterForm1Activity::class.java),
+                                isFinish = false,
+                                isForward = true
+                            )
+
+                        }
+
+
+                    } else {
+                       // CommonUtilities.hideLoader()
+
+                        binding.pvPin.setTextColor(Color.parseColor("#2A2F32"))
+                        binding.tvWrongNumber.visibility = View.INVISIBLE
+                        binding.pvPin.setItemBackground(resources.getDrawable(R.drawable.bg_pin_default));
 
                     }
+
+
                 }
                 Status.ERROR -> {
                     CommonUtilities.hideLoader()
                     CommonUtilities.showToast(this, it.message)
+
+                    binding.pvPin.setTextColor(Color.parseColor("#2A2F32"))
+                    binding.tvWrongNumber.visibility=View.INVISIBLE
+                    binding.pvPin.setItemBackground(resources.getDrawable(R.drawable.bg_pin_default));
+
                 }
             }
-        });
+        })
+        vm.loginUser.observe(this, Observer {
+            when (it.status) {
+                Status.LOADING -> {
+                    //  CommonUtilities.showLoader(this)
+                }
+                Status.SUCCESS -> {
+                    CommonUtilities.hideLoader()
+
+                    if (it.data?.status == true) {
+                        var data = it.data
+
+                        CommonUtilities.showToast(this,data.message.toString())
+
+                        // goto home activity
+
+                        CommonUtilities.fireActivityIntent(
+                            this,
+                            Intent(this, HomeActivity::class.java),
+                            isFinish = true,
+                            isForward = true
+                        )
+
+
+                    }else
+                    {
+                        CommonUtilities.showToast(this, it.message)
+
+                    }
+
+                }
+                Status.ERROR -> {
+                    CommonUtilities.hideLoader()
+                    CommonUtilities.showToast(this, it.message)
+
+                }
+            }
+        })
     }
-
-
-
 
 
 }

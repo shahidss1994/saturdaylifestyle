@@ -26,7 +26,7 @@ data class Message(
 data class Data(
 
 	@field:SerializedName("isUserExist")
-	val isUserExist: Boolean? = null,
+	val isUserExist: Boolean? = false,
 
 	@field:SerializedName("token")
 	val token: String? = null

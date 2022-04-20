@@ -7,6 +7,7 @@ object Constants {
     const val API_KEY = "GCMUDiuY5a7WvyUNt9n3QztToSHzK7Uj"
     val TOKEN = "token"
     val IS_LOGIN = "is_login"
+    val IS_GUEST = "is_guest"
     val DEVICE_TOKEN = "device_token"
     val IS_FIRST_TIME = "is_first_time"
     val NAME = "name"

@@ -55,7 +55,7 @@ class CountryAdapter(
 
         var data = list[position]
 
-        holder.binding.tvCode.text = data.code
+        holder.binding.tvCode.text = "+"+data.code
         holder.binding.tvCountryName.text = data.countryName
 
         if (data.isSelected!!) {
