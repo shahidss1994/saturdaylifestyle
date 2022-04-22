@@ -1,5 +1,6 @@
 package com.saturdays.on_boarding.adapter
 
+/*
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.viewpager.widget.PagerAdapter
-import com.saturdays.on_boarding.model.ViewPagerDM
+import com.shock.saturdaylifestyle.ui.on_boarding.model.ViewPagerDM
 import com.shock.saturdaylifestyle.R
 
 
@@ -44,4 +45,4 @@ class OnboardingPagerAdapter(context: Context, pagerList:ArrayList<ViewPagerDM>)
     override fun getItemPosition(`object`:Any):Int {
         return super.getItemPosition(`object`)
     }
-}
+}*/

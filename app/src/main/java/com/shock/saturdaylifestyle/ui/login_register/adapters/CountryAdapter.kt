@@ -1,6 +1,6 @@
-package com.saturdays.login_register.adapters
+package com.shock.saturdaylifestyle.ui.login_register.adapters
 
-import android.app.Dialog
+/*import android.app.Dialog
 import android.content.Context
 import android.os.Handler
 import android.view.LayoutInflater
@@ -85,4 +85,4 @@ class CountryAdapter(
     override fun onClick(p0: View?) {}
 
 
-}
+}*/

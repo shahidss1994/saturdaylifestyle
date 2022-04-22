@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="viewState"
+            type="com.shock.saturdaylifestyle.ui.loginRegister.viewState.LoginRegisterViewState" />
+
+        <variable
+            name="viewModel"
+            type="com.shock.saturdaylifestyle.ui.loginRegister.viewModel.LoginRegisterViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:items="@{viewState.introViewPagerItemViewStateList}"
+            app:layout_constraintBottom_toTopOf="@+id/dots_indicator"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+            android:id="@+id/dots_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_32sdp"
+            app:dotsColor="@color/grey_light"
+            app:dotsCornerRadius="8dp"
+            app:dotsSize="7dp"
+            app:dotsSpacing="4dp"
+            app:dotsStrokeColor="@color/grey_light"
+            app:dotsStrokeWidth="5dp"
+            app:dotsWidthFactor="2.5"
+            app:layout_constraintBottom_toTopOf="@+id/btn_login_create_account"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:selectedDotColor="@color/soft_blue" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:src="@drawable/ic_saturdays_banner"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_skip"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_32sdp"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:background="@drawable/bg_button1"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:gravity="center"
+            android:text="@string/skip_text"
+            android:textColor="@color/indigo"
+            android:textSize="14sp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_login_create_account"
+            android:layout_width="match_parent"
+            android:layout_height="51dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_59sdp"
+            android:background="@drawable/bg_button2"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:gravity="center"
+            android:text="@string/login_create_your_account"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

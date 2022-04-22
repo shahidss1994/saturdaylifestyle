@@ -1,25 +1,21 @@
 package com.shock.saturdaylifestyle.ui.login_register.view
+
+/*
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.ClipData
 import android.content.Intent
-import android.os.Bundle
-import android.provider.SyncStateContract
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.chuckerteam.chucker.BuildConfig
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -30,17 +26,14 @@ import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-import com.google.gson.Gson
 import com.saturdays.login_register.adapters.CountryAdapter
-import com.saturdays.login_register.callbacks.LoginRegisterActivityViewCallBacks
+import com.shock.saturdaylifestyle.ui.login_register.callbacks.LoginRegisterActivityViewCallBacks
 import com.shock.saturdaylifestyle.ui.login_register.models.CountryDM
 import com.shock.saturdaylifestyle.R
 import com.shock.saturdaylifestyle.constants.Constants
 import com.shock.saturdaylifestyle.databinding.SignInActivityDataBinding
 import com.shock.saturdaylifestyle.di.DaggerProvider
 import com.shock.saturdaylifestyle.di.modules.ViewModules.ViewModelFactory
-import com.shock.saturdaylifestyle.network.Status
-import com.shock.saturdaylifestyle.ui.base.activity.BaseActivity
 import com.shock.saturdaylifestyle.ui.base.activity.BaseDataBindingActivity
 import com.shock.saturdaylifestyle.ui.login_register.viewmodel.LoginRegisterViewModel
 import com.shock.saturdaylifestyle.utility.CommonUtilities
@@ -64,9 +57,11 @@ class LoginRegisterActivity : BaseDataBindingActivity<SignInActivityDataBinding>
 
 
 
-    /**
+    */
+/**
      *  below code for google signin
-     */
+     *//*
+
     private var mfirebaseAuth: FirebaseAuth? = null
     private var mGoogleSignInClient: GoogleSignInClient? = null
     private var RC_SIGN_IN_GOOGLE_SIGNIN = 200
@@ -282,7 +277,8 @@ class LoginRegisterActivity : BaseDataBindingActivity<SignInActivityDataBinding>
 
     private fun initCountrySearchListener(edSearch: EditText) {
 
-   /*     edSearch?.setOnEditorActionListener(object : TextView.OnEditorActionListener {
+   */
+/*     edSearch?.setOnEditorActionListener(object : TextView.OnEditorActionListener {
             override fun onEditorAction(
                 v: TextView?,
                 actionId: Int,
@@ -303,7 +299,8 @@ class LoginRegisterActivity : BaseDataBindingActivity<SignInActivityDataBinding>
                 }
                 return false
             }
-        })*/
+        })*//*
+
 
 
         edSearch.addTextChangedListener(object : TextWatcher {
@@ -368,9 +365,11 @@ class LoginRegisterActivity : BaseDataBindingActivity<SignInActivityDataBinding>
 
 
 
-    /**
+    */
+/**
      *  below code for google signin
-     */
+     *//*
+
     private fun initGoogleIntegration() {
         mfirebaseAuth = FirebaseAuth.getInstance()
 
@@ -477,4 +476,4 @@ class LoginRegisterActivity : BaseDataBindingActivity<SignInActivityDataBinding>
 
 
 
-}
+}*/

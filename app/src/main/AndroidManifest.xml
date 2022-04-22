@@ -12,13 +12,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SaturdayLifestyle">
- <!--       <activity
-            android:name=".ui.main.MainActivity"
+        <activity
+            android:name=".ui.main.activity.MainActivity"
             android:exported="false">
-        </activity>-->
+        </activity>
 
         <activity
-            android:name=".ui.splash.SplashActivity"
+            android:name=".ui.loginRegister.activity.LoginRegisterActivity"
+            android:exported="false">
+        </activity>
+
+        <activity
+            android:name=".ui.splash.activity.SplashActivity"
             android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"
             android:exported="true">
@@ -30,7 +35,7 @@
 
         </activity>
 
-        <activity
+        <!-- <activity
             android:name=".ui.login_register.view.RegisterForm1Activity"
             android:exported="false"
             android:windowSoftInputMode="adjustPan"
@@ -52,7 +57,7 @@
             android:name=".ui.login_register.view.LoginRegisterActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" />-->
 
     </application>
 

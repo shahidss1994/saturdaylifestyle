@@ -1,5 +1,6 @@
 package com.shock.saturdaylifestyle.ui.on_boarding.view
 
+/*
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -10,13 +11,11 @@ import android.widget.Button
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.shock.saturdaylifestyle.ui.login_register.view.LoginRegisterActivity
 import com.saturdays.on_boarding.adapter.OnboardingPagerAdapter
-import com.saturdays.on_boarding.model.ViewPagerDM
+import com.shock.saturdaylifestyle.ui.on_boarding.model.ViewPagerDM
 import com.shock.saturdaylifestyle.R
 import com.shock.saturdaylifestyle.databinding.OoboardingActivityDataBinding
-import com.shock.saturdaylifestyle.databinding.SignInActivityDataBinding
 import com.shock.saturdaylifestyle.di.DaggerProvider
 import com.shock.saturdaylifestyle.ui.base.activity.BaseDataBindingActivity
-import com.shock.saturdaylifestyle.ui.login_register.viewmodel.LoginRegisterViewModel
 import com.shock.saturdaylifestyle.utility.CommonUtilities
 //import dagger.hilt.android.AndroidEntryPoint
 
@@ -55,11 +54,13 @@ class OnboardingActivity : BaseDataBindingActivity<OoboardingActivityDataBinding
         }
 
 
-        /**
+        */
+/**
          *
          *   going to onboarding screen from splash
          *
-         * */
+         * *//*
+
         pager_itemList.clear()
         pager_itemList.add(
             ViewPagerDM(
@@ -163,4 +164,4 @@ class OnboardingActivity : BaseDataBindingActivity<OoboardingActivityDataBinding
     }
 
 
-}
+}*/

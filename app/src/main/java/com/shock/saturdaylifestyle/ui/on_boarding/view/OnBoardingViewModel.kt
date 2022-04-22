@@ -2,8 +2,8 @@ package com.shock.saturdaylifestyle.ui.on_boarding.view
 
 /*import androidx.lifecycle.viewModelScope
 import com.shock.saturdaylifestyle.network.Resource
-import com.shock.saturdaylifestyle.ui.main.MainActivityViewModel
-import com.shock.saturdaylifestyle.ui.main.MainRepository
+import com.shock.saturdaylifestyle.ui.main.viewModel.MainActivityViewModel
+import com.shock.saturdaylifestyle.ui.main.network.MainRepository
 import com.shock.saturdaylifestyle.ui.common.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel

@@ -1,6 +1,6 @@
 package com.shock.saturdaylifestyle.ui.login_register.models
 
-import com.google.gson.annotations.SerializedName
+/*import com.google.gson.annotations.SerializedName
 
 data class ResponseSendOTP(
 
@@ -30,4 +30,4 @@ data class Data(
 
 	@field:SerializedName("token")
 	val token: String? = null
-)
+)*/

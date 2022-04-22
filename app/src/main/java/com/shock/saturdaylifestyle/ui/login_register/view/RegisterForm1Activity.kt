@@ -1,4 +1,6 @@
 package com.shock.saturdaylifestyle.ui.login_register.view
+
+/*
 import android.app.DatePickerDialog
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -278,9 +280,11 @@ class RegisterForm1Activity : BaseDataBindingActivity<RegisterForm1ActivityDataB
 
         } else{
 
-           /* mViewModel.register(binding.edFirstName.text.toString() + " " + binding.edLastName.text.toString(),
+           */
+/* mViewModel.register(binding.edFirstName.text.toString() + " " + binding.edLastName.text.toString(),
                 LoginRegisterActivity.phone_number, LoginRegisterActivity.country_code, genderType, ""
-            )*/
+            )*//*
+
 
         }
 
@@ -317,4 +321,4 @@ class RegisterForm1Activity : BaseDataBindingActivity<RegisterForm1ActivityDataB
 
 
 
-}
+}*/

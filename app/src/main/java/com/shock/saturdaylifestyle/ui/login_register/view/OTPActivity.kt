@@ -1,4 +1,6 @@
 package com.shock.saturdaylifestyle.ui.login_register.view
+
+/*
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -15,7 +17,6 @@ import com.shock.saturdaylifestyle.constants.Constants
 import com.shock.saturdaylifestyle.databinding.OTPActivityDataBinding
 import com.shock.saturdaylifestyle.di.DaggerProvider
 import com.shock.saturdaylifestyle.di.modules.ViewModules.ViewModelFactory
-import com.shock.saturdaylifestyle.network.Status
 import com.shock.saturdaylifestyle.ui.base.activity.BaseDataBindingActivity
 import com.shock.saturdaylifestyle.ui.login_register.viewmodel.LoginRegisterViewModel
 import com.shock.saturdaylifestyle.utility.CommonUtilities
@@ -164,4 +165,4 @@ class OTPActivity : BaseDataBindingActivity<OTPActivityDataBinding>(R.layout.act
 
 
 
-}
+}*/
