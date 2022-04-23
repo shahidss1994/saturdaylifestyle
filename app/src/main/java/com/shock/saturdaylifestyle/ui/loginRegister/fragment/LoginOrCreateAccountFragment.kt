@@ -1,11 +1,8 @@
 package com.shock.saturdaylifestyle.ui.loginRegister.fragment
 
-import android.app.Dialog
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.shock.saturdaylifestyle.R
 import com.shock.saturdaylifestyle.databinding.FragmentLoginOrCreateAccountBinding
 import com.shock.saturdaylifestyle.ui.base.fragment.BottomSheetBaseFragment
@@ -20,19 +17,6 @@ class LoginOrCreateAccountFragment: BottomSheetBaseFragment<FragmentLoginOrCreat
     }
 
     private val mViewModel: LoginRegisterViewModel by activityViewModels()
-
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return (super.onCreateDialog(savedInstanceState) as BottomSheetDialog).apply {
-            setOnShowListener {
-                behavior.state = BottomSheetBehavior.STATE_EXPANDED
-            }
-        }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setStyle(STYLE_NORMAL, R.style.CustomBottomSheetDialog)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
