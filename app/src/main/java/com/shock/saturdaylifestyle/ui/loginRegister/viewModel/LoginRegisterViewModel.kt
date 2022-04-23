@@ -1,18 +1,26 @@
 package com.shock.saturdaylifestyle.ui.loginRegister.viewModel
 
+import androidx.lifecycle.viewModelScope
 import com.shock.saturdaylifestyle.R
+import com.shock.saturdaylifestyle.constants.Constants
 import com.shock.saturdaylifestyle.ui.base.viewModel.BaseViewModel
 import com.shock.saturdaylifestyle.ui.base.viewModel.DrawableViewModel
 import com.shock.saturdaylifestyle.ui.loginRegister.viewState.IntroViewPagerItemViewState
 import com.shock.saturdaylifestyle.ui.loginRegister.viewState.LoginRegisterViewState
 import com.shock.saturdaylifestyle.ui.main.network.MainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginRegisterViewModel @Inject constructor(
     private val mainRepository: MainRepository
 ) : BaseViewModel(mainRepository) {
+
+    private val eventChannel = Channel<Event>(Channel.BUFFERED)
+    val eventFlow = eventChannel.receiveAsFlow()
 
     val viewState = LoginRegisterViewState()
 
@@ -60,8 +68,21 @@ class LoginRegisterViewModel @Inject constructor(
         viewState.introViewPagerItemViewStateList = arrayList
     }
 
+    fun onLoginCreateAccountClicked(){
+        onEvent(Event.NavigateTo(Constants.NavigateTo.LOGIN_OR_CREATE_ACCOUNT))
+    }
+
     override fun onBackPressed() {
 
+    }
+
+    private fun onEvent(event: Event){
+        viewModelScope.launch { eventChannel.send(event) }
+    }
+
+    sealed class Event{
+        object OnBackPressed : Event()
+        data class NavigateTo(val navigateTo :String) : Event()
     }
 
 }

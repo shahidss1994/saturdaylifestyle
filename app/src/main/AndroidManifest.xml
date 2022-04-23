@@ -19,6 +19,7 @@
 
         <activity
             android:name=".ui.loginRegister.activity.LoginRegisterActivity"
+            android:windowSoftInputMode="adjustPan"
             android:exported="false">
         </activity>
 

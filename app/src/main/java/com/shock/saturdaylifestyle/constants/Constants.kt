@@ -14,4 +14,8 @@ object Constants {
     val OTP = "otp"
     val FROM_WHICH_SCREEN = "from_which_screen"
 
+    object NavigateTo {
+        const val LOGIN_OR_CREATE_ACCOUNT = "login_or_create_account"
+    }
+
 }

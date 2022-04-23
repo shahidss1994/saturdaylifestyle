@@ -88,6 +88,7 @@
             android:background="@drawable/bg_button2"
             android:fontFamily="@font/montserrat_semi_bold"
             android:gravity="center"
+            android:onClick="@{()->viewModel.onLoginCreateAccountClicked()}"
             android:text="@string/login_create_your_account"
             android:textAllCaps="true"
             android:textColor="@color/white"

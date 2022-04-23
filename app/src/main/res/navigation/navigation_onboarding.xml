@@ -9,6 +9,18 @@
         android:id="@+id/loginOnboardingIntroFragment"
         android:name="com.shock.saturdaylifestyle.ui.loginRegister.fragment.LoginOnboardingIntroFragment"
         android:label="LoginOnboardingIntroFragment"
-        tools:layout="@layout/fragment_login_onboarding_intro" />
+        tools:layout="@layout/fragment_login_onboarding_intro">
+
+        <action
+            android:id="@+id/action_login_onboarding_intro_to_login_or_create_account"
+            app:destination="@+id/loginOrCreateAccountFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginOrCreateAccountFragment"
+        android:name="com.shock.saturdaylifestyle.ui.loginRegister.fragment.LoginOrCreateAccountFragment"
+        android:label="LoginOrCreateAccountFragment"
+        tools:layout="@layout/fragment_login_or_create_account" />
 
 </navigation>
