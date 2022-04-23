@@ -68,21 +68,29 @@ class LoginRegisterViewModel @Inject constructor(
         viewState.introViewPagerItemViewStateList = arrayList
     }
 
-    fun onLoginCreateAccountClicked(){
+    fun onLoginCreateAccountClicked() {
         onEvent(Event.NavigateTo(Constants.NavigateTo.LOGIN_OR_CREATE_ACCOUNT))
+    }
+
+    fun onContinueClicked() {
+        viewState.loginOrCreateAccountVisibility = false
     }
 
     override fun onBackPressed() {
 
     }
 
-    private fun onEvent(event: Event){
+    fun onChooseVerificationBackClicked(){
+        viewState.loginOrCreateAccountVisibility = true
+    }
+
+    private fun onEvent(event: Event) {
         viewModelScope.launch { eventChannel.send(event) }
     }
 
-    sealed class Event{
+    sealed class Event {
         object OnBackPressed : Event()
-        data class NavigateTo(val navigateTo :String) : Event()
+        data class NavigateTo(val navigateTo: String) : Event()
     }
 
 }
