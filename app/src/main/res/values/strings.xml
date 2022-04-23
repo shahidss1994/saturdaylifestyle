@@ -42,7 +42,6 @@
     <string name="durationformatlong" translatable="false"><xliff:g id="format">%1$d:%2$02d:%3$02d</xliff:g></string>
 
 
-
     <string name="confirm_your_number">Confirm your number</string>
     <string name="insert_the_5_digit_code_text">Insert the-5-digit code SATURDAYS\njust sent to your Whatsapp</string>
     <string name="didn_t_get_the_5_digit_code">Didn\'t get the 5-digit code?</string>

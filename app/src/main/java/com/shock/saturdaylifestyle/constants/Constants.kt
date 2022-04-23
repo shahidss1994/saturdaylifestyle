@@ -16,6 +16,7 @@ object Constants {
 
     object NavigateTo {
         const val LOGIN_OR_CREATE_ACCOUNT = "login_or_create_account"
+        const val WHATSAPP_VERIFY_YOUR_NUMBER = "whatsapp_verify_your_number"
     }
 
 }

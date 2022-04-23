@@ -7,6 +7,7 @@ import com.shock.saturdaylifestyle.constants.Constants
 import com.shock.saturdaylifestyle.databinding.ActivityLoginRegisterBinding
 import com.shock.saturdaylifestyle.ui.base.activity.BaseActivity
 import com.shock.saturdaylifestyle.ui.base.others.observeInLifecycle
+import com.shock.saturdaylifestyle.ui.loginRegister.fragment.LoginOnboardingIntroFragmentDirections
 import com.shock.saturdaylifestyle.ui.loginRegister.fragment.LoginOrCreateAccountFragment
 import com.shock.saturdaylifestyle.ui.loginRegister.viewModel.LoginRegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,6 +21,8 @@ class LoginRegisterActivity :
 
     override fun listenChannel() {
 
+        val fragment = LoginOrCreateAccountFragment()
+
         val navController = findNavController(R.id.navHostFragment)
 
         mViewModel.eventFlow.onEach {
@@ -27,11 +30,16 @@ class LoginRegisterActivity :
                 is LoginRegisterViewModel.Event.NavigateTo -> {
                     when (it.navigateTo) {
                         Constants.NavigateTo.LOGIN_OR_CREATE_ACCOUNT -> {
-                            val fragment = LoginOrCreateAccountFragment()
                             fragment.show(supportFragmentManager,LoginOrCreateAccountFragment.TAG)
-                            //navController.navigate(LoginOnboardingIntroFragmentDirections.actionLoginOnboardingIntroToLoginOrCreateAccount())
+                        }
+                        Constants.NavigateTo.WHATSAPP_VERIFY_YOUR_NUMBER -> {
+                            fragment.dismiss()
+                            navController.navigate(LoginOnboardingIntroFragmentDirections.actionLoginOnboardingIntroWhatsappVerifyYourNumberFragment())
                         }
                     }
+                }
+                is LoginRegisterViewModel.Event.OnBackPressed -> {
+                    onBackPressed()
                 }
             }
         }.observeInLifecycle(this@LoginRegisterActivity)

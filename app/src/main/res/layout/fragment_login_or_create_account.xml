@@ -262,6 +262,7 @@
                     android:layout_height="@dimen/_37sdp"
                     android:layout_marginTop="@dimen/_20sdp"
                     android:background="@drawable/bg_button1"
+                    android:onClick="@{()->viewModel.onSendOTPViaWhatsappClicked()}"
                     android:paddingStart="@dimen/_25sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

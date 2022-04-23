@@ -29,7 +29,7 @@ class MainActivityViewModel @Inject constructor(
         }
     }
 
-    override fun onBackPressed() {
+    fun onBackPressed() {
         onEvent(Event.OnBackPressed)
     }
 

@@ -7,6 +7,4 @@ abstract class BaseViewModel(
     private val repository: BaseRepository? = null
 ) : ViewModel() {
 
-    abstract fun onBackPressed()
-
 }

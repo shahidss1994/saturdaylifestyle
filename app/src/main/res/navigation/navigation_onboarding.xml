@@ -12,15 +12,15 @@
         tools:layout="@layout/fragment_login_onboarding_intro">
 
         <action
-            android:id="@+id/action_login_onboarding_intro_to_login_or_create_account"
-            app:destination="@+id/loginOrCreateAccountFragment" />
+            android:id="@+id/action_login_onboarding_intro_whatsapp_verify_your_number_fragment"
+            app:destination="@+id/whatsappVerifyYourNumberFragment" />
 
     </fragment>
 
     <fragment
-        android:id="@+id/loginOrCreateAccountFragment"
-        android:name="com.shock.saturdaylifestyle.ui.loginRegister.fragment.LoginOrCreateAccountFragment"
-        android:label="LoginOrCreateAccountFragment"
-        tools:layout="@layout/fragment_login_or_create_account" />
+        android:id="@+id/whatsappVerifyYourNumberFragment"
+        android:name="com.shock.saturdaylifestyle.ui.loginRegister.fragment.WhatsappVerifyYourNumberFragment"
+        android:label="WhatsappVerifyYourNumberFragment"
+        tools:layout="@layout/fragment_whatsapp_verify_your_number" />
 
 </navigation>

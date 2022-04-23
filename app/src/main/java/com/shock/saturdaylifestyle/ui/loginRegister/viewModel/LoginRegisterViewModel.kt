@@ -76,11 +76,15 @@ class LoginRegisterViewModel @Inject constructor(
         viewState.loginOrCreateAccountVisibility = false
     }
 
-    override fun onBackPressed() {
-
+    fun onSendOTPViaWhatsappClicked(){
+        onEvent(Event.NavigateTo(Constants.NavigateTo.WHATSAPP_VERIFY_YOUR_NUMBER))
     }
 
-    fun onChooseVerificationBackClicked(){
+    fun onBackPressed() {
+        onEvent(Event.OnBackPressed)
+    }
+
+    fun onChooseVerificationBackClicked() {
         viewState.loginOrCreateAccountVisibility = true
     }
 
