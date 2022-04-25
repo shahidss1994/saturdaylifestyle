@@ -1,6 +1,7 @@
 package com.shock.saturdaylifestyle.ui.loginRegister.fragment
 
 import android.os.Bundle
+import @android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import com.shock.saturdaylifestyle.R

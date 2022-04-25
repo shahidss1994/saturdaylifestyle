@@ -10,11 +10,10 @@ import com.shock.saturdaylifestyle.ui.loginRegister.viewModel.LoginRegisterViewM
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class WhatsappVerifyYourNumberFragment: BaseFragment<FragmentWhatsappVerifyYourNumberBinding>(R.layout.fragment_whatsapp_verify_your_number) {
-
+class MissedCallVerifyYourNumberFragment: BaseFragment<FragmentWhatsappVerifyYourNumberBinding>(R.layout.fragment_misscall_verify_your_number) {
 
     companion object {
-        const val TAG = "WhatsappVerifyYourNumberFragment"
+        const val TAG = "MissedCallVerifyYourNumberFragment"
     }
 
     private val mViewModel: LoginRegisterViewModel by activityViewModels()
