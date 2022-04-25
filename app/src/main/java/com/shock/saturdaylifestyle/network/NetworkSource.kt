@@ -6,10 +6,22 @@ import javax.inject.Inject
 
 class LoginRegisterData @Inject constructor(private val api: ApiCalls) {
 
-    suspend fun SendOtpProcess(key: String, contentType: String, phoneNumber: String, countryCode: String) = withContext(Dispatchers.IO) {
+    suspend fun SendOtpWhatsappProcess(key: String, contentType: String, phoneNumber: String, countryCode: String) = withContext(Dispatchers.IO) {
         val data = api.sendOTP(key,contentType,countryCode,phoneNumber)
         data
     }
+
+    suspend fun SendOtpProcess(key: String, contentType: String, phoneNumber: String, countryCode: String) = withContext(Dispatchers.IO) {
+        val data = api.sendOTPWhatsapp(key,contentType,countryCode,phoneNumber,"MSG")
+        data
+    }
+
+
+    suspend fun SendOtpMissCallProcess(key: String, contentType: String, phoneNumber: String, countryCode: String) = withContext(Dispatchers.IO) {
+        val data = api.sendOTPMissCall(key,contentType,countryCode,phoneNumber,"CITCALL")
+        data
+    }
+
 
     suspend fun VerifyOtpProcess(key: String, contentType: String, otp: String) = withContext(Dispatchers.IO) {
         val data = api.verifyOTP(key,contentType,otp)

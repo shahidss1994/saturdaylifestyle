@@ -44,13 +44,28 @@
 
 
     <string name="confirm_your_number">Confirm your number</string>
-    <string name="insert_the_5_digit_code_text">Insert the-5-digit code SATURDAYS\njust sent to your Whatsapp</string>
+    <string name="verify_your_number">Verify your number</string>
+    <string name="insert_the_5_digit_code_text">Insert the-5-digit code SATURDAYS\njust sent to your number</string>
     <string name="didn_t_get_the_5_digit_code">Didn\'t get the 5-digit code?</string>
     <string name="try_again_in_30">Try again in 30</string>
     <string name="privacy_policy_text_underlined"><u>privacy policy</u></string>
     <string name="wrong_number_please_input_the_correct_code">Wrong number, please input the correct code</string>
     <string name="log_in_with_google">Log in with google</string>
-
+    <string name="log_in_with_gmail">Log in with gmail</string>
+    <string name="didn_t_get_the_verification_link">Didn\'t get the verification link?</string>
+    <string name="please_check_your_whatsapp_message_nand_click_the_link_that_we_sent_to_nconfirm_your_number">Please check your WhatsApp message\nand click the link that we sent to\nconfirm your number</string>
+    <string name="still_didn_t_get_the_otp">Still didn\'t get the OTP?</string>
+    <string name="resend_otp_via_whatsapp">Resend OTP via WhatsApp</string>
+    <string name="or_try_another_method">Or try another method</string>
+    <string name="skip_for_now">skip for now</string>
+    <string name="you_will_get_missed_call">You will get missed call</string>
+    <string name="the_last_4_digits_of_missed_call_number_is_nyour_otp_code">The last 4 digits of missed call number is\nyour OTP code</string>
+    <string name="didn_t_get_the_missed_call">Didn\'t get the missed call?</string>
+    <string name="starting_at_rp600_000_including_prescription">Starting at <b>Rp600.000</b>, including prescription</string>
+    <string name="only_the_good_stuff">Only the Good Stuff</string>
+    <string name="originality">Originality</string>
+    <string name="our_designers_create_custom_pattern_variations_for_that_saturdays_style_we_do_it_all_in_house_from_sketch_to_prototype_testing_to_final_design">Our designers create custom pattern variations for that SATURDAYS style. We do it all in-house – from sketch to prototype testing to final design.</string>
+    <string name="we_use_only_the_best_materials_for_our_frames_which_include_customized_single_sheet_cellulose_acetate_five_barrel_hinges_and_aculon_coated_screws_for_durability">We use only the best materials for our frames, which include customized single-sheet cellulose acetate, five-barrel hinges and aculon-coated screws for durability.</string>
 
 
 </resources>

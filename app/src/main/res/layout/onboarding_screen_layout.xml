@@ -85,7 +85,7 @@
             android:layout_marginStart="@dimen/_15sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_15sdp"
-            android:layout_marginBottom="@dimen/_30sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
             android:onClick="@{()->callback.onLoginBtnClick()}"
             android:background="@drawable/bg_button2"
             android:fontFamily="@font/montserrat_semi_bold"
@@ -94,9 +94,17 @@
             android:textAllCaps="true"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/view"
             android:textColor="@color/white"
             android:textSize="14sp" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_30sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

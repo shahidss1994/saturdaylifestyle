@@ -1,28 +1,440 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+
+        <RelativeLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/_15sdp"
+            android:paddingTop="@dimen/_20sdp"
+            android:paddingBottom="@dimen/_8sdp"
+            android:paddingEnd="@dimen/_15sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_app_icon"
+                android:layout_width="@dimen/_110sdp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_home_saturdays_banner" />
+
+            <ImageView
+                android:id="@+id/iv_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_search_app_bar" />
+
+            <ImageView
+                android:id="@+id/iv_wishlist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_toStartOf="@id/iv_search"
+                android:src="@drawable/ic_wishlist_app_bar" />
+
+            <ImageView
+                android:id="@+id/iv_whatsapp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_toStartOf="@id/iv_wishlist"
+                android:src="@drawable/ic_whatsapp_app_bar" />
+
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_marquee_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#F5F5F5"
+            android:textColor="@color/text_color_primary_black"
+            android:textSize="@dimen/_10ssp"
+            android:text="       Try Risk Free for 30 Days                 Free Shipping and Returns"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:scrollHorizontally="true"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:fontFamily="@font/montserrat_medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/app_bar"/>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_270sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_marquee_text">
+
+
+
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/view_pager"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+
+
+            <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+                android:id="@+id/dots_indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_33sdp"
+                android:elevation="1dp"
+                app:dotsColor="@color/indicator_grey"
+                app:dotsCornerRadius="8dp"
+                app:dotsElevation="1dp"
+                app:dotsSize="5dp"
+                app:dotsSpacing="2dp"
+                app:dotsStrokeColor="@color/indicator_grey"
+                app:dotsStrokeWidth="5dp"
+                app:dotsWidthFactor="2.5"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:selectedDotColor="@color/white" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_home_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F5F5F5"
+        android:layout_marginTop="@dimen/_255sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_marquee_text">
+
+
+
+        <TextView
+            android:id="@+id/tv_home_category_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#F5F5F5"
+            android:textColor="@color/text_color_primary_black"
+            android:textSize="@dimen/_12ssp"
+            android:gravity="center"
+            android:text="@string/starting_at_rp600_000_including_prescription"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:singleLine="true"
+            android:fontFamily="@font/montserrat_medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <LinearLayout
+            android:id="@+id/home_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_10sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/_20sdp"
+            android:paddingBottom="@dimen/_20sdp"
+            android:weightSum="3"
+            app:layout_constraintTop_toBottomOf="@+id/tv_home_category_title">
+
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_margin="@dimen/_5sdp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:padding="@dimen/_3sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/ic_home_eyeglasses"
+                        app:civ_border_color="@color/green"
+                        app:civ_border_width="1dp" />
+
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:fontFamily="@font/oswaldmedium"
+                    android:textSize="15sp"
+                    android:textColor="@color/text_color_primary_black"
+                    android:text="EYEGLASSES"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_margin="@dimen/_5sdp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:padding="@dimen/_3sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/ic_home_sunglasses"
+                        app:civ_border_color="@color/green"
+                        app:civ_border_width="1dp" />
+
+
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:fontFamily="@font/oswaldmedium"
+                    android:textSize="15sp"
+                    android:textAllCaps="true"
+                    android:textColor="@color/text_color_primary_black"
+                    android:text="SUNGLASSES"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_margin="@dimen/_5sdp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:padding="@dimen/_3sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/ic_home_homtryon"
+                        app:civ_border_color="@color/green"
+                        app:civ_border_width="1dp" />
+
+
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:fontFamily="@font/oswaldmedium"
+                    android:textSize="15sp"
+                    android:textAllCaps="true"
+                    android:textColor="@color/text_color_primary_black"
+                    android:text="Home Try-On"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+        <TextView
+            android:id="@+id/tv_details_make_us_different"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/oswaldmedium"
+            android:textSize="28sp"
+            android:textAllCaps="true"
+            android:layout_marginTop="@dimen/_35sdp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:textColor="@color/text_color_primary_black"
+            app:layout_constraintTop_toBottomOf="@+id/home_category"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="details make us\ndifferent"/>
+
+        <HorizontalScrollView
+            android:id="@+id/cl_originality"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_30sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:scrollbars="none"
+            android:paddingTop="@dimen/_35sdp"
+            android:paddingBottom="@dimen/_50sdp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_details_make_us_different">
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:paddingStart="@dimen/_10sdp"
+               android:paddingEnd="@dimen/_10sdp"
+               android:orientation="horizontal">
+
+
+
+
+               <LinearLayout
+                   android:layout_width="300dp"
+                   android:layout_margin="@dimen/_5sdp"
+                   android:layout_height="wrap_content"
+                   android:orientation="vertical">
+
+
+                   <RelativeLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:padding="1dp"
+                       android:background="@drawable/bg_rect_border_green">
+                   <ImageView
+                       android:layout_width="match_parent"
+                       android:layout_height="148dp"
+                       android:scaleType="centerCrop"
+                       android:src="@mipmap/iv_originality" />
+
+                   </RelativeLayout>
+
+
+                   <TextView
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:gravity="start"
+                       android:layout_marginStart="@dimen/_5sdp"
+                       android:layout_marginEnd="@dimen/_5sdp"
+                       android:layout_marginTop="@dimen/_10sdp"
+                       android:fontFamily="@font/montserrat_semi_bold"
+                       android:textSize="16sp"
+                       android:textColor="@color/text_color_primary_black"
+                       android:text="@string/originality"/>
+
+                   <TextView
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:gravity="start"
+                       android:layout_marginStart="@dimen/_5sdp"
+                       android:layout_marginTop="@dimen/_10sdp"
+                       android:fontFamily="@font/montserrat_light"
+                       android:textSize="12sp"
+                       android:textColor="@color/text_color_primary_black"
+                       android:text="@string/our_designers_create_custom_pattern_variations_for_that_saturdays_style_we_do_it_all_in_house_from_sketch_to_prototype_testing_to_final_design"/>
+
+               </LinearLayout>
+
+
+
+               <LinearLayout
+                   android:layout_width="300dp"
+                   android:paddingStart="@dimen/_10sdp"
+                   android:paddingEnd="@dimen/_5sdp"
+                   android:layout_marginTop="@dimen/_5sdp"
+                   android:layout_marginBottom="@dimen/_5sdp"
+                   android:layout_height="wrap_content"
+                   android:orientation="vertical">
+
+
+
+
+                   <RelativeLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:padding="1dp"
+                       android:background="@drawable/bg_rect_border_green">
+                   <ImageView
+                       android:layout_width="match_parent"
+                       android:layout_height="148dp"
+                       android:scaleType="centerCrop"
+                       android:src="@mipmap/iv_only_good_stuff" />
+                   </RelativeLayout>
+
+
+                   <TextView
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:gravity="start"
+                       android:layout_marginStart="@dimen/_5sdp"
+                       android:layout_marginEnd="@dimen/_5sdp"
+                       android:layout_marginTop="@dimen/_10sdp"
+                       android:fontFamily="@font/montserrat_semi_bold"
+                       android:textSize="16sp"
+                       android:textColor="@color/text_color_primary_black"
+                       android:text="@string/only_the_good_stuff"/>
+
+                   <TextView
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:gravity="start"
+                       android:layout_marginStart="@dimen/_5sdp"
+                       android:layout_marginTop="@dimen/_10sdp"
+                       android:fontFamily="@font/montserrat_light"
+                       android:textSize="12sp"
+                       android:textColor="@color/text_color_primary_black"
+                       android:text="@string/we_use_only_the_best_materials_for_our_frames_which_include_customized_single_sheet_cellulose_acetate_five_barrel_hinges_and_aculon_coated_screws_for_durability"/>
+
+               </LinearLayout>
+
+
+
+
+           </LinearLayout>
+
+
+
+
+        </HorizontalScrollView>
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
     <data class="HomeActivityDataBinding">
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Home Activity"
-            android:textColor="@color/text_color_primary_black"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

@@ -3,6 +3,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ClipData
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.provider.SyncStateContract
@@ -104,6 +105,7 @@ class LoginRegisterActivity : BaseDataBindingActivity<SignInActivityDataBinding>
         }
 
         setObservers()
+        initTextChangeistener()
 
     }
     override fun injectDaggerComponent() {
@@ -359,8 +361,11 @@ class LoginRegisterActivity : BaseDataBindingActivity<SignInActivityDataBinding>
     }
 
     override fun continueClick() {
+        country_code = binding.tvPhoneCode.text.toString()
+        phone_number = ed_phone_no.text.toString()
 
-        showBottomSheetWhatsapp()
+     //   showBottomSheetWhatsapp()
+        showBottomSheetOtherMethod()
 
     }
 
@@ -383,10 +388,11 @@ class LoginRegisterActivity : BaseDataBindingActivity<SignInActivityDataBinding>
         var bottomSheetDialog = MyBottomSheetDialog(this, false)
 
 
-
         @SuppressLint("InflateParams") val view: View =
             layoutInflater.inflate(R.layout.dialog_send_otp_via_whatsapp, null)
 
+
+        (view.findViewById(R.id.tv_message) as TextView).text = "You will receive OTP at $country_code$phone_number"
 
 
         (view.findViewById(R.id.btn_continue) as View).setOnClickListener {
@@ -430,10 +436,13 @@ class LoginRegisterActivity : BaseDataBindingActivity<SignInActivityDataBinding>
             layoutInflater.inflate(R.layout.dialog_choose_verification_method, null)
 
 
+        (view.findViewById(R.id.tv_message) as TextView).text = "Choose one of these method to send verification code (OTP) to $country_code $phone_number"
+
+
         (view.findViewById(R.id.iv_back) as View).setOnClickListener {
 
             bottomSheetDialog.dismiss()
-            showBottomSheetWhatsapp()
+         //   showBottomSheetWhatsapp()
         }
 
 
@@ -441,6 +450,23 @@ class LoginRegisterActivity : BaseDataBindingActivity<SignInActivityDataBinding>
         (view.findViewById(R.id.rl_whatsapp) as View).setOnClickListener {
 
             bottomSheetDialog.dismiss()
+
+            vm.sendOTPWhatsapp(Constants.API_KEY, phone_number, country_code)
+            CommonUtilities.showLoader(this)
+
+
+     /*       CommonUtilities.fireActivityIntent(
+                this,
+                Intent(this, OTPActivity::class.java)
+                    .putExtra("otpType", 2)
+                    .putExtra("number", country_code+ed_phone_no.text.toString().trim())
+                    .putExtra("country_code", country_code)
+                    .putExtra("phone_wihout_code", phone_number)
+                    .putExtra("isUserExist", false),
+                isFinish = false,
+                isForward = true
+            )*/
+
         }
 
 
@@ -457,11 +483,15 @@ class LoginRegisterActivity : BaseDataBindingActivity<SignInActivityDataBinding>
                 isForward = true
             )*/
 
+            vm.sendOTP(Constants.API_KEY, phone_number, country_code)
+            CommonUtilities.showLoader(this)
+
         }
 
         (view.findViewById(R.id.rl_misscall) as View).setOnClickListener {
 
             bottomSheetDialog.dismiss()
+            showBottomSheetMissCall()
         }
 
 
@@ -469,6 +499,68 @@ class LoginRegisterActivity : BaseDataBindingActivity<SignInActivityDataBinding>
         bottomSheetDialog.setContentView(view)
         bottomSheetDialog.show()
     }
+
+
+
+
+    private fun showBottomSheetMissCall() {
+
+
+        var bottomSheetDialog = MyBottomSheetDialog(this, false)
+
+
+        @SuppressLint("InflateParams") val view: View =
+            layoutInflater.inflate(R.layout.dialog_send_otp_via_misscall, null)
+
+
+        (view.findViewById(R.id.iv_back) as View).setOnClickListener {
+
+            bottomSheetDialog.dismiss()
+
+        }
+
+
+
+        (view.findViewById(R.id.btn_continue) as View).setOnClickListener {
+
+            bottomSheetDialog.dismiss()
+
+            vm.sendOTPMissCall(Constants.API_KEY, phone_number, country_code)
+            CommonUtilities.showLoader(this)
+
+/*
+            CommonUtilities.fireActivityIntent(
+                this,
+                Intent(this, OTPActivity::class.java)
+                    .putExtra("otpType", 3)
+                    .putExtra("number", country_code+ed_phone_no.text.toString().trim())
+                    .putExtra("country_code", country_code)
+                    .putExtra("phone_wihout_code", phone_number)
+                    .putExtra("isUserExist", false),
+                isFinish = false,
+                isForward = true
+            )
+*/
+
+
+        }
+
+
+        (view.findViewById(R.id.tv_other_method) as View).setOnClickListener {
+
+            bottomSheetDialog.dismiss()
+            showBottomSheetOtherMethod()
+
+
+        }
+
+
+
+        bottomSheetDialog.setContentView(view)
+        bottomSheetDialog.show()
+    }
+
+
 
 
 
@@ -666,12 +758,11 @@ class LoginRegisterActivity : BaseDataBindingActivity<SignInActivityDataBinding>
                     if (it.data.status == true)
                     {
 
-
-
                         CommonUtilities.fireActivityIntent(
                             this,
                             Intent(this, OTPActivity::class.java)
-                                .putExtra("number", country_code+" "+ed_phone_no.text.toString().trim())
+                                .putExtra("otpType", 1)
+                                .putExtra("number", country_code+ed_phone_no.text.toString().trim())
                                 .putExtra("country_code", country_code)
                                 .putExtra("phone_wihout_code", phone_number)
                                 .putExtra("isUserExist", data?.isUserExist),
@@ -685,11 +776,121 @@ class LoginRegisterActivity : BaseDataBindingActivity<SignInActivityDataBinding>
                 Status.ERROR -> {
                     CommonUtilities.hideLoader()
                     CommonUtilities.showToast(this, it.message)
+
                 }
             }
         });
+
+        vm.sendOTPWhatsapp.observe(this, Observer {
+            when (it.status) {
+                Status.LOADING -> {
+                    //  CommonUtilities.showLoader(this)
+                }
+                Status.SUCCESS -> {
+                    CommonUtilities.hideLoader()
+                    val data = it.data!!.data
+
+                    CommonUtilities.showToast(this,it.data.message?.en.toString())
+
+                    if (it.data.status == true)
+                    {
+
+                               CommonUtilities.fireActivityIntent(
+                                   this,
+                                   Intent(this, OTPActivity::class.java)
+                                       .putExtra("otpType", 2)
+                                       .putExtra("number", country_code+ed_phone_no.text.toString().trim())
+                                       .putExtra("country_code", country_code)
+                                       .putExtra("phone_wihout_code", phone_number)
+                                       .putExtra("isUserExist", false),
+                                   isFinish = false,
+                                   isForward = true
+                               )
+
+
+                    }
+                }
+                Status.ERROR -> {
+                    CommonUtilities.hideLoader()
+                    CommonUtilities.showToast(this, it.message)
+
+                }
+            }
+        });
+
+        vm.sendOTPMissCall.observe(this, Observer {
+            when (it.status) {
+                Status.LOADING -> {
+                    //  CommonUtilities.showLoader(this)
+                }
+                Status.SUCCESS -> {
+                    CommonUtilities.hideLoader()
+                    val data = it.data!!.data
+
+                    CommonUtilities.showToast(this,it.data.message?.en.toString())
+
+                    if (it.data.status == true)
+                    {
+
+                        CommonUtilities.fireActivityIntent(
+                            this,
+                            Intent(this, OTPActivity::class.java)
+                                .putExtra("otpType", 3)
+                                .putExtra("number", country_code+ed_phone_no.text.toString().trim())
+                                .putExtra("country_code", country_code)
+                                .putExtra("phone_wihout_code", phone_number)
+                                .putExtra("isUserExist", false),
+                            isFinish = false,
+                            isForward = true
+                        )
+
+
+                    }
+                }
+                Status.ERROR -> {
+                    CommonUtilities.hideLoader()
+                    CommonUtilities.showToast(this, it.message)
+
+                }
+            }
+        });
+
+
     }
 
+
+    private fun initTextChangeistener() {
+
+
+        binding.edPhoneNo.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                if(s!=null)
+                {
+
+
+                    if (binding.edPhoneNo.text.toString().length >= 8)
+                    {
+                        binding.tvMessageSuccess.visibility= View.VISIBLE
+                        binding.tvMessage.visibility= View.INVISIBLE
+                        binding.btnContinue.isEnabled = true
+                        binding.btnContinue.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#133B64"));
+                        binding.btnContinue.setTextColor(Color.parseColor("#FFFFFF"))
+                    }else
+                    {
+                        binding.tvMessageSuccess.visibility= View.INVISIBLE
+                        binding.tvMessage.visibility= View.VISIBLE
+                        binding.btnContinue.isEnabled = false
+                        binding.btnContinue.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#D8D8D8"))
+                        binding.btnContinue.setTextColor(Color.parseColor("#979797"))
+                    }
+
+                }
+
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
+    }
 
 
 

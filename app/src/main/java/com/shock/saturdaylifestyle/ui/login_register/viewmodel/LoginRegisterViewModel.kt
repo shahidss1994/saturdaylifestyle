@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.shock.saturdaylifestyle.errorProvider.ErrorProvider
 import com.shock.saturdaylifestyle.network.LoginRegisterData
 import com.shock.saturdaylifestyle.network.Result
-import com.shock.saturdaylifestyle.ui.login_register.models.ResponseRegisterUser
+import com.shock.saturdaylifestyle.ui.login_register.models.ResponseLoginRegisterUser
 import com.shock.saturdaylifestyle.ui.login_register.models.ResponseSendOTP
 import com.shock.saturdaylifestyle.ui.login_register.models.ResponseVerifyOTP
 //import dagger.hilt.android.lifecycle.HiltViewModel
@@ -43,6 +43,48 @@ class LoginRegisterViewModel @Inject constructor(
 
 
 
+    private var _sendOTPWhatsapp = MutableLiveData<Result<ResponseSendOTP>>()
+    val sendOTPWhatsapp: LiveData<Result<ResponseSendOTP>>
+        get() = _sendOTPWhatsapp
+
+    fun sendOTPWhatsapp(key: String, phoneNumber: String,
+                countryCode: String) {
+        viewModelScope.launch {
+
+            try {
+                _sendOTPWhatsapp.postValue(com.shock.saturdaylifestyle.network.Result.loading())
+                val response = repository.SendOtpWhatsappProcess(key,"application/x-www-form-urlencoded",phoneNumber,countryCode)
+                _sendOTPWhatsapp.postValue(com.shock.saturdaylifestyle.network.Result.success(response))
+            } catch (exception: Exception) {
+                _sendOTPWhatsapp.postValue(com.shock.saturdaylifestyle.network.Result.error(errorProvider.getErrorMessage(exception)))
+            }
+
+        }
+    }
+
+
+    private var _sendOTPMissCall = MutableLiveData<Result<ResponseSendOTP>>()
+    val sendOTPMissCall: LiveData<Result<ResponseSendOTP>>
+        get() = _sendOTPMissCall
+
+    fun sendOTPMissCall(key: String, phoneNumber: String,
+                        countryCode: String) {
+        viewModelScope.launch {
+
+            try {
+                _sendOTPMissCall.postValue(com.shock.saturdaylifestyle.network.Result.loading())
+                val response = repository.SendOtpMissCallProcess(key,"application/x-www-form-urlencoded",phoneNumber,countryCode)
+                _sendOTPMissCall.postValue(com.shock.saturdaylifestyle.network.Result.success(response))
+            } catch (exception: Exception) {
+                _sendOTPWhatsapp.postValue(com.shock.saturdaylifestyle.network.Result.error(errorProvider.getErrorMessage(exception)))
+            }
+
+        }
+    }
+
+
+
+
 
     private var _verifyOTP = MutableLiveData<Result<ResponseVerifyOTP>>()
     val verifyOTP: LiveData<Result<ResponseVerifyOTP>>
@@ -61,8 +103,8 @@ class LoginRegisterViewModel @Inject constructor(
         }
     }
 
-    private var _loginUser = MutableLiveData<Result<ResponseVerifyOTP>>()
-    val loginUser: LiveData<Result<ResponseVerifyOTP>>
+    private var _loginUser = MutableLiveData<Result<ResponseLoginRegisterUser>>()
+    val loginUser: LiveData<Result<ResponseLoginRegisterUser>>
         get() = _loginUser
 
     fun loginUser(
@@ -83,8 +125,8 @@ class LoginRegisterViewModel @Inject constructor(
     }
 
 
-    private var _registerUser = MutableLiveData<Result<ResponseRegisterUser>>()
-    val registerUser: LiveData<Result<ResponseRegisterUser>>
+    private var _registerUser = MutableLiveData<Result<ResponseLoginRegisterUser>>()
+    val registerUser: LiveData<Result<ResponseLoginRegisterUser>>
         get() = _registerUser
 
     fun registerUser(

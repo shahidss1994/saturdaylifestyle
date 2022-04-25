@@ -2,10 +2,10 @@ package com.shock.saturdaylifestyle.ui.login_register.models
 
 import com.google.gson.annotations.SerializedName
 
-data class ResponseRegisterUser(
+data class ResponseLoginRegisterUser(
 
 	@field:SerializedName("data")
-	val data: RegisterData? = null,
+	val data: UserData? = null,
 
 	@field:SerializedName("message")
 	val message: String? = null,
@@ -14,7 +14,7 @@ data class ResponseRegisterUser(
 	val status: Boolean? = null
 )
 
-data class RegisterData(
+data class UserData(
 
 	@field:SerializedName("gender")
 	val gender: Int? = null,

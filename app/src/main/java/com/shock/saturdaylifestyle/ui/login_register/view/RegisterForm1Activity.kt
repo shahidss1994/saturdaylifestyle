@@ -5,6 +5,7 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.provider.SyncStateContract
 import android.text.Editable
 import android.text.TextWatcher
@@ -30,6 +31,7 @@ import com.shock.saturdaylifestyle.ui.base.activity.BaseDataBindingActivity
 import com.shock.saturdaylifestyle.ui.login_register.callbacks.OTPActivityViewCallBacks
 import com.shock.saturdaylifestyle.ui.login_register.viewmodel.LoginRegisterViewModel
 import com.shock.saturdaylifestyle.ui.main.view.HomeActivity
+import com.shock.saturdaylifestyle.ui.on_boarding.view.OnboardingActivity
 import com.shock.saturdaylifestyle.utility.CommonUtilities
 //import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
@@ -56,8 +58,6 @@ class RegisterForm1Activity : BaseDataBindingActivity<RegisterForm1ActivityDataB
     private lateinit var btn_continue : Button
 
     var isGenderSelected= false
-
-
 
 
     override fun onDataBindingCreated() {
@@ -302,9 +302,11 @@ class RegisterForm1Activity : BaseDataBindingActivity<RegisterForm1ActivityDataB
     val mYear = calendar.get(Calendar.YEAR)
     val mMonth = calendar.get(Calendar.MONTH)
     val mDay = calendar.get(Calendar.DAY_OF_MONTH)
-    var datePickerDialog = DatePickerDialog(this, R.style.datepicker, this, mYear, mMonth, mDay)
+    var datePickerDialog = DatePickerDialog(this, R.style.date_picker_theme, this, mYear, mMonth, mDay)
     datePickerDialog.datePicker.maxDate = calendar.timeInMillis
     datePickerDialog.show()
+    datePickerDialog.getButton(DatePickerDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK)
+    datePickerDialog.getButton(DatePickerDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK)
 
 
 
@@ -332,7 +334,7 @@ class RegisterForm1Activity : BaseDataBindingActivity<RegisterForm1ActivityDataB
                 }
                 Status.SUCCESS -> {
 
-                    CommonUtilities.hideLoader()
+                  //  CommonUtilities.hideLoader()
 
 
                     if (it.data?.status == true) {
@@ -343,14 +345,20 @@ class RegisterForm1Activity : BaseDataBindingActivity<RegisterForm1ActivityDataB
                          CommonUtilities.putBoolean(this, Constants.IS_LOGIN,true)
                          CommonUtilities.putBoolean(this, Constants.IS_GUEST,false)
 
-                        CommonUtilities.showToast(this,data.message.toString())
-                        //goto home activity
-                             CommonUtilities.fireActivityIntent(
-                            this,
-                            Intent(this, HomeActivity::class.java),
-                            isFinish = true,
-                            isForward = true
-                        )
+
+                        Handler().postDelayed({
+
+                            //goto home activity
+                            CommonUtilities.fireActivityIntent(
+                                this,
+                                Intent(this, HomeActivity::class.java),
+                                isFinish = true,
+                                isForward = true
+                            )
+
+                        }, 500)
+
+
 
 
 
@@ -370,8 +378,6 @@ class RegisterForm1Activity : BaseDataBindingActivity<RegisterForm1ActivityDataB
                 }
             }
         });
-
-
     }
 
 

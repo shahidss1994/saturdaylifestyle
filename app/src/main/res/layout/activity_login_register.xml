@@ -147,6 +147,7 @@
                     android:textColor="@color/black"
                     android:textColorHint="@color/grey_light"
                     android:maxLength="12"
+                    android:imeOptions="actionDone"
                     android:fontFamily="@font/montserrat_regular"
                     app:layout_constraintStart_toEndOf="@id/tv_phone_code"
                     app:layout_constraintEnd_toEndOf="parent"

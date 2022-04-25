@@ -52,6 +52,7 @@
         <item name="colorPrimary">@color/indigo</item>
         <item name="colorPrimaryDark">@color/indigo</item>
         <item name="colorAccent">@color/indigo</item>
+        <item name="android:textColor">@color/text_color_primary_black</item>
     </style>
 
 </resources>

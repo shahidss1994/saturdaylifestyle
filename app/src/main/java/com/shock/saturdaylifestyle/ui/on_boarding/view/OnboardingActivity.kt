@@ -45,16 +45,6 @@ class OnboardingActivity : BaseDataBindingActivity<OoboardingActivityDataBinding
         btn_login_create_account.setOnClickListener {
             onLoginBtnClick()
         }
-        binding.tvSkip.setOnClickListener {
-
-            CommonUtilities.putBoolean(this@OnboardingActivity,Constants.IS_GUEST,true)
-            CommonUtilities.fireActivityIntent(
-                this@OnboardingActivity,
-                Intent(this@OnboardingActivity, HomeActivity::class.java),
-                isFinish = true,
-                isForward = true
-            )
-        }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             val w: Window = window
@@ -142,11 +132,13 @@ class OnboardingActivity : BaseDataBindingActivity<OoboardingActivityDataBinding
         })
 
 
-        binding?.tvSkip!!.setOnClickListener {
+        binding.tvSkip.setOnClickListener {
+
+            CommonUtilities.putBoolean(this@OnboardingActivity,Constants.IS_GUEST,true)
 
             CommonUtilities.fireActivityIntent(
                 this@OnboardingActivity,
-                Intent(this@OnboardingActivity, LoginRegisterActivity::class.java),
+                Intent(this@OnboardingActivity, HomeActivity::class.java),
                 isFinish = true,
                 isForward = true
             )

@@ -19,8 +19,15 @@ class ErrorProviderImpl(val context: Context) : ErrorProvider {
                     errorJsonString = context.getString(R.string.oops_no_internet_connection)
                 }
                 error is HttpException -> {
-                    errorJsonString =
-                        JSONObject(error.response()?.errorBody()?.string()).getString("message")
+
+                    try {
+                        errorJsonString = JSONObject(error.response()?.errorBody()?.string()).getJSONObject("message").get("en").toString()
+
+                    }catch (ex: Exception) {
+                        errorJsonString = JSONObject(error.response()?.errorBody()?.string()).getString("message")
+
+                    }
+
                 }
             }
         } catch (ex: Exception) {

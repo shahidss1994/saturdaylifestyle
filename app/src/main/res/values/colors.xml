@@ -7,7 +7,7 @@
     <color name="teal_700">#2A2F32</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="blur">#AD2A2929</color>
+    <color name="blur">#AD252424</color>
 
     <color name="indigo">#133B64</color>
     <color name="fui_transparent">#00000000</color>
@@ -15,6 +15,7 @@
 
     <color name="text_light">#9A000000</color>
     <color name="grey_light">#D8D8D8</color>
+    <color name="indicator_grey">#81D8D8D8</color>
 
     <color name="app_color">#FF000000</color>
     <color name="app_color_dark">#FF000000</color>
@@ -26,6 +27,7 @@
     <color name="dark_blue">#2A2F32</color>
     <color name="soft_blue">#5582BC</color>
     <color name="success_green">#3A6A67</color>
+    <color name="green">#28B06D</color>
     <color name="warning_orange">#E58B00</color>
     <color name="alert_red">#B5564C</color>
     <color name="baby_pink">#EBDBE3</color>

@@ -12,7 +12,7 @@
         android:id="@+id/progress_loader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:color="@color/black"
+        android:color="@color/white"
         android:radius="@dimen/_4sdp"
         app:dd_animationDuration="500"
         app:dd_horizontalSpacing="@dimen/_3sdp"

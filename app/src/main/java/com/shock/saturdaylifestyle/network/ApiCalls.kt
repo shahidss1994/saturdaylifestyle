@@ -1,7 +1,6 @@
 package com.shock.saturdaylifestyle.network
 
-import com.shock.saturdaylifestyle.ui.login_register.entity.RegisterEntity
-import com.shock.saturdaylifestyle.ui.login_register.models.ResponseRegisterUser
+import com.shock.saturdaylifestyle.ui.login_register.models.ResponseLoginRegisterUser
 import com.shock.saturdaylifestyle.ui.login_register.models.ResponseSendOTP
 import com.shock.saturdaylifestyle.ui.login_register.models.ResponseVerifyOTP
 import kotlinx.coroutines.flow.Flow
@@ -24,7 +23,7 @@ interface ApiCalls {
         @Field("gender") genderType: Int,
         @Field("email") email: String
      //   @Field("referral_code") referral: String
-    ): ResponseRegisterUser
+    ): ResponseLoginRegisterUser
 
     @FormUrlEncoded
     @POST("user/login")
@@ -35,7 +34,7 @@ interface ApiCalls {
         @Field("country_code") country_code: String,
         @Field("device_token") device_token: String,
         @Field("device_type") device_type: String
-    ): ResponseVerifyOTP
+    ): ResponseLoginRegisterUser
 
     @FormUrlEncoded
     @POST("user/otp/send")
@@ -43,6 +42,28 @@ interface ApiCalls {
                         @Header("Content-Type") type: String,
                         @Field("country_code") countryCode: String,
                         @Field("number") number: String): ResponseSendOTP
+
+
+    @FormUrlEncoded
+    @POST("user/otp/send")
+    suspend fun sendOTPWhatsapp(@Header("x-api-key") key: String,
+                        @Header("Content-Type") contentType: String,
+                        @Field("country_code") countryCode: String,
+                        @Field("number") number: String,
+                        @Field("type") type: String): ResponseSendOTP
+
+
+
+    @FormUrlEncoded
+    @POST("user/otp/send")
+    suspend fun sendOTPMissCall(@Header("x-api-key") key: String,
+                                @Header("Content-Type") contentType: String,
+                                @Field("country_code") countryCode: String,
+                                @Field("number") number: String,
+                                @Field("type") type: String): ResponseSendOTP
+
+
+
 
     @FormUrlEncoded
     @POST("user/otp/verify")
