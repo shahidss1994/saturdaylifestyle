@@ -20,4 +20,8 @@ object Constants {
         const val CONFIRM_YOUR_NUMBER = "confirm_your_number"
     }
 
+    object TextWatcherType{
+        const val PHONE_NO = "phone_no"
+    }
+
 }

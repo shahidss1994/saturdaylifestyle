@@ -100,6 +100,7 @@
                     android:layout_marginBottom="@dimen/_17sdp"
                     android:background="@drawable/bg_button2"
                     android:fontFamily="@font/montserrat_semi_bold"
+                    app:drawableViewState="@{viewState.continueBtnDrawableViewState}"
                     android:gravity="center"
                     android:onClick="@{()->viewModel.onContinueClicked()}"
                     android:text="@string/text_continue"
@@ -110,6 +111,20 @@
                     app:layout_constraintBottom_toTopOf="@+id/tv_or"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/phoneNoErrorMsg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="@string/phone_number_must_contain_min_8_digits"
+                    android:textSize="@dimen/_8ssp"
+                    android:visibility="@{viewState.showPhoneNoMessage ? View.VISIBLE : View.GONE}"
+                    app:colorViewState="@{viewState.phoneNoMessageColorViewState}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutPhoneNumber" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layoutPhoneNumber"
@@ -145,6 +160,7 @@
 
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/ed_phone_no"
+                        textChangedListener="@{viewModel.textWatcher}"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginStart="@dimen/_10sdp"
@@ -162,7 +178,6 @@
                         app:layout_constraintHorizontal_weight="5"
                         app:layout_constraintStart_toEndOf="@id/tv_phone_code"
                         app:layout_constraintTop_toTopOf="parent" />
-
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

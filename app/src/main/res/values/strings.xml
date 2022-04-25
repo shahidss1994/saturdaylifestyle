@@ -50,5 +50,7 @@
     <string name="wrong_number_please_input_the_correct_code">Wrong number, please input the correct code</string>
     <string name="log_in_with_google">Log in with google</string>
 
+    <string name="phone_number_must_contain_min_8_digits">Phone number must contain min. 8 digits</string>
+
 
 </resources>

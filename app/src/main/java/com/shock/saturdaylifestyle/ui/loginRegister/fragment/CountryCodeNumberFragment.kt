@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import com.shock.saturdaylifestyle.R
-import com.shock.saturdaylifestyle.databinding.DialogCountryPickerBinding
+import com.shock.saturdaylifestyle.databinding.FragmentDialogCountryPickerBinding
 import com.shock.saturdaylifestyle.ui.base.fragment.DialogBaseFragment
 import com.shock.saturdaylifestyle.ui.loginRegister.adapter.CountryCodeNumberAdapter
 import com.shock.saturdaylifestyle.ui.loginRegister.viewModel.LoginRegisterViewModel
@@ -12,7 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class CountryCodeNumberFragment :
-    DialogBaseFragment<DialogCountryPickerBinding>(R.layout.dialog_country_picker) {
+    DialogBaseFragment<FragmentDialogCountryPickerBinding>(R.layout.fragment_dialog_country_picker) {
 
     companion object {
         const val TAG = "CountryCodeFragment"

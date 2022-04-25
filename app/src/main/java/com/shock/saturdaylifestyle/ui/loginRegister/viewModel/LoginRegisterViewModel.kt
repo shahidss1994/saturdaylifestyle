@@ -1,10 +1,13 @@
 package com.shock.saturdaylifestyle.ui.loginRegister.viewModel
 
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.lifecycle.viewModelScope
 import com.shock.saturdaylifestyle.R
 import com.shock.saturdaylifestyle.constants.Constants
 import com.shock.saturdaylifestyle.ui.base.viewModel.BaseViewModel
-import com.shock.saturdaylifestyle.ui.base.viewModel.DrawableViewModel
+import com.shock.saturdaylifestyle.ui.base.viewState.ColorViewState
+import com.shock.saturdaylifestyle.ui.base.viewState.DrawableViewState
 import com.shock.saturdaylifestyle.ui.loginRegister.viewState.CountryCodeNumberViewState
 import com.shock.saturdaylifestyle.ui.loginRegister.viewState.IntroViewPagerItemViewState
 import com.shock.saturdaylifestyle.ui.loginRegister.viewState.LoginRegisterViewState
@@ -22,8 +25,10 @@ class LoginRegisterViewModel @Inject constructor(
 
     private val eventChannel = Channel<Event>(Channel.BUFFERED)
     val eventFlow = eventChannel.receiveAsFlow()
+    val textWatcher = LoginRegisterTextWatcher(Constants.TextWatcherType.PHONE_NO)
 
     val viewState = LoginRegisterViewState()
+    var phoneNo = ""
 
     init {
         setViewPagerListData()
@@ -35,7 +40,9 @@ class LoginRegisterViewModel @Inject constructor(
     }
 
     fun onContinueClicked() {
-        viewState.loginOrCreateAccountVisibility = false
+        if(phoneNo.length >= 8) {
+            viewState.loginOrCreateAccountVisibility = false
+        }
     }
 
     fun onSendOTPViaWhatsappClicked() {
@@ -80,7 +87,7 @@ class LoginRegisterViewModel @Inject constructor(
             1,
             "ANYWHERE IN THE WORLD!",
             "Enjoy free shipping all across the globe\nonly for you!",
-            DrawableViewModel(R.mipmap.iv_onboarding1)
+            DrawableViewState(R.mipmap.iv_onboarding1)
         )
         arrayList.add(introViewPagerItemViewState1)
 
@@ -88,7 +95,7 @@ class LoginRegisterViewModel @Inject constructor(
             2,
             "PRICE INCLUDES\nPRESCRIPTION LENSES",
             "Starting from Rp1.295k, we promise there\nwon’t be any hidden cost! Unless you want\nto upgrade your lenses!",
-            DrawableViewModel(R.mipmap.iv_onboarding2)
+            DrawableViewState(R.mipmap.iv_onboarding2)
         )
         arrayList.add(introViewPagerItemViewState2)
 
@@ -96,7 +103,7 @@ class LoginRegisterViewModel @Inject constructor(
             3,
             "HOME TRY ON",
             "Try our entire collection (100+ frames) and\neye exam all for FREE in the comfort of\nyour home!",
-            DrawableViewModel(R.mipmap.iv_onboarding2)
+            DrawableViewState(R.mipmap.iv_onboarding2)
         )
         arrayList.add(introViewPagerItemViewState3)
 
@@ -104,7 +111,7 @@ class LoginRegisterViewModel @Inject constructor(
             4,
             "SAVE MORE BUCKS!",
             "Enjoy our exclusive promos as well as our\nloyalty program to save some more!",
-            DrawableViewModel(R.mipmap.iv_onboarding2)
+            DrawableViewState(R.mipmap.iv_onboarding2)
         )
         arrayList.add(introViewPagerItemViewState4)
 
@@ -112,7 +119,7 @@ class LoginRegisterViewModel @Inject constructor(
             5,
             "OFFLINE STORES",
             "Still not sure about how it looks on you?\nTry it on at our offline stores! We are\navailable all across Indonesia.",
-            DrawableViewModel(R.mipmap.iv_onboarding5)
+            DrawableViewState(R.mipmap.iv_onboarding5)
         )
         arrayList.add(introViewPagerItemViewState5)
         viewState.introViewPagerItemViewStateList = arrayList
@@ -128,6 +135,34 @@ class LoginRegisterViewModel @Inject constructor(
         arrayList.add(CountryCodeNumberViewState(6, "+62", "Indonesia"))
 
         viewState.countryCodeNumberViewStateList = arrayList
+    }
+
+    inner class LoginRegisterTextWatcher(private val textWatcherType: String) : TextWatcher {
+
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            s?.toString()?.let {
+                if (textWatcherType == Constants.TextWatcherType.PHONE_NO) {
+                    phoneNo = it
+                    if(it.isNotEmpty()){
+                        if(it.length < 8){
+                            viewState.phoneNoMessageColorViewState = ColorViewState(R.color.warning_orange)
+                            viewState.continueBtnDrawableViewState = DrawableViewState(R.drawable.bg_button3)
+                        } else {
+                            viewState.phoneNoMessageColorViewState = ColorViewState(R.color.success_green)
+                            viewState.continueBtnDrawableViewState = DrawableViewState(R.drawable.bg_button2)
+                        }
+                        viewState.showPhoneNoMessage = true
+                    } else {
+                        viewState.showPhoneNoMessage = false
+                        viewState.continueBtnDrawableViewState = DrawableViewState(R.drawable.bg_button3)
+                    }
+                }
+            }
+        }
+
+        override fun afterTextChanged(s: Editable?) {}
     }
 
 }
