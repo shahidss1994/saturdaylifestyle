@@ -5,6 +5,7 @@ import com.shock.saturdaylifestyle.R
 import com.shock.saturdaylifestyle.constants.Constants
 import com.shock.saturdaylifestyle.ui.base.viewModel.BaseViewModel
 import com.shock.saturdaylifestyle.ui.base.viewModel.DrawableViewModel
+import com.shock.saturdaylifestyle.ui.loginRegister.viewState.CountryCodeNumberViewState
 import com.shock.saturdaylifestyle.ui.loginRegister.viewState.IntroViewPagerItemViewState
 import com.shock.saturdaylifestyle.ui.loginRegister.viewState.LoginRegisterViewState
 import com.shock.saturdaylifestyle.ui.main.network.MainRepository
@@ -25,6 +26,55 @@ class LoginRegisterViewModel @Inject constructor(
     val viewState = LoginRegisterViewState()
 
     init {
+        setViewPagerListData()
+        setCountryCodeNumberList()
+    }
+
+    fun onLoginCreateAccountClicked() {
+        onEvent(Event.NavigateTo(Constants.NavigateTo.LOGIN_OR_CREATE_ACCOUNT))
+    }
+
+    fun onContinueClicked() {
+        viewState.loginOrCreateAccountVisibility = false
+    }
+
+    fun onSendOTPViaWhatsappClicked() {
+        onEvent(Event.NavigateTo(Constants.NavigateTo.WHATSAPP_VERIFY_YOUR_NUMBER))
+    }
+
+    fun onSendOTPViaSMSClicked() {
+        onEvent(Event.NavigateTo(Constants.NavigateTo.CONFIRM_YOUR_NUMBER))
+    }
+
+    fun onBackPressed() {
+        onEvent(Event.OnBackPressed)
+    }
+
+    fun showCountryCodePicker() {
+        onEvent(Event.PickerDialog)
+    }
+
+    fun onChooseVerificationBackClicked() {
+        viewState.loginOrCreateAccountVisibility = true
+    }
+
+    fun checkSelectedCountry(countryCodeNumberViewState: CountryCodeNumberViewState) {
+        viewState.countryCodeNumberViewState = countryCodeNumberViewState
+        onEvent(Event.PickerDialogClose)
+    }
+
+    private fun onEvent(event: Event) {
+        viewModelScope.launch { eventChannel.send(event) }
+    }
+
+    sealed class Event {
+        object OnBackPressed : Event()
+        object PickerDialog : Event()
+        object PickerDialogClose : Event()
+        data class NavigateTo(val navigateTo: String) : Event()
+    }
+
+    private fun setViewPagerListData() {
         val arrayList = arrayListOf<IntroViewPagerItemViewState>()
         val introViewPagerItemViewState1 = IntroViewPagerItemViewState(
             1,
@@ -68,33 +118,16 @@ class LoginRegisterViewModel @Inject constructor(
         viewState.introViewPagerItemViewStateList = arrayList
     }
 
-    fun onLoginCreateAccountClicked() {
-        onEvent(Event.NavigateTo(Constants.NavigateTo.LOGIN_OR_CREATE_ACCOUNT))
-    }
+    private fun setCountryCodeNumberList() {
+        val arrayList = arrayListOf<CountryCodeNumberViewState>()
+        arrayList.add(CountryCodeNumberViewState(1, "+91", "India"))
+        arrayList.add(CountryCodeNumberViewState(2, "+92", "Pakistan"))
+        arrayList.add(CountryCodeNumberViewState(3, "+1", "United States"))
+        arrayList.add(CountryCodeNumberViewState(4, "+11", "United Kingdom"))
+        arrayList.add(CountryCodeNumberViewState(5, "+42", "Australia"))
+        arrayList.add(CountryCodeNumberViewState(6, "+62", "Indonesia"))
 
-    fun onContinueClicked() {
-        viewState.loginOrCreateAccountVisibility = false
-    }
-
-    fun onSendOTPViaWhatsappClicked(){
-        onEvent(Event.NavigateTo(Constants.NavigateTo.WHATSAPP_VERIFY_YOUR_NUMBER))
-    }
-
-    fun onBackPressed() {
-        onEvent(Event.OnBackPressed)
-    }
-
-    fun onChooseVerificationBackClicked() {
-        viewState.loginOrCreateAccountVisibility = true
-    }
-
-    private fun onEvent(event: Event) {
-        viewModelScope.launch { eventChannel.send(event) }
-    }
-
-    sealed class Event {
-        object OnBackPressed : Event()
-        data class NavigateTo(val navigateTo: String) : Event()
+        viewState.countryCodeNumberViewStateList = arrayList
     }
 
 }

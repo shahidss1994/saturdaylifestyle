@@ -3,51 +3,74 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <RelativeLayout
+    <data>
+
+        <variable
+            name="viewState"
+            type="com.shock.saturdaylifestyle.ui.loginRegister.viewState.LoginRegisterViewState" />
+
+        <variable
+            name="viewModel"
+            type="com.shock.saturdaylifestyle.ui.loginRegister.viewModel.LoginRegisterViewModel" />
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/dialog_bg">
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:cardUseCompatPadding="true">
 
-
-        <EditText
-            android:id="@+id/ed_search"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_38sdp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="@dimen/_15sdp"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:layout_marginRight="@dimen/_15sdp"
-            android:background="@drawable/bg_edittext"
-            android:drawableStart="@drawable/ic_search_country"
-            android:drawablePadding="@dimen/_10sdp"
-            android:drawableTint="@color/black"
-            android:fontFamily="@font/montserrat_regular"
-            android:gravity="center|start"
-            android:hint="Search Country"
-            android:imeOptions="actionDone"
-            android:maxLines="1"
-            android:padding="@dimen/_8sdp"
-            android:singleLine="true"
-            android:textColor="@color/text_color_primary_black"
-            android:textColorHint="@color/text_color_hint"
-            android:textSize="13sp"
-            android:visibility="visible" />
+            android:layout_height="wrap_content">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvCountry"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/ed_search"
-            android:layout_marginTop="@dimen/_5sdp"
-            tools:itemCount="25"
-            tools:listitem="@layout/item_country" />
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/ed_search"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_38sdp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginRight="@dimen/_15sdp"
+                android:background="@drawable/bg_edittext"
+                android:drawableStart="@drawable/ic_search_country"
+                android:drawablePadding="@dimen/_10sdp"
+                android:drawableTint="@color/black"
+                android:fontFamily="@font/montserrat_regular"
+                android:gravity="center|start"
+                android:hint="Search Country"
+                android:imeOptions="actionDone"
+                android:maxLines="1"
+                android:padding="@dimen/_8sdp"
+                android:singleLine="true"
+                android:textColor="@color/text_color_primary_black"
+                android:textColorHint="@color/text_color_hint"
+                android:textSize="13sp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvCountry"
+                items="@{viewState.countryCodeNumberViewStateList}"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_270sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ed_search"
+                tools:itemCount="25"
+                tools:listitem="@layout/item_country" />
 
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </RelativeLayout>
-
+    </com.google.android.material.card.MaterialCardView>
 
 </layout>
