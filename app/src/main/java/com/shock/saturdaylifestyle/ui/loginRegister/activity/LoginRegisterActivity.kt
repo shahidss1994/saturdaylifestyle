@@ -7,6 +7,7 @@ import com.shock.saturdaylifestyle.constants.Constants
 import com.shock.saturdaylifestyle.databinding.ActivityLoginRegisterBinding
 import com.shock.saturdaylifestyle.ui.base.activity.BaseActivity
 import com.shock.saturdaylifestyle.ui.base.others.observeInLifecycle
+import com.shock.saturdaylifestyle.ui.loginRegister.fragment.CountryCodeNumberFragment
 import com.shock.saturdaylifestyle.ui.loginRegister.fragment.LoginOnboardingIntroFragmentDirections
 import com.shock.saturdaylifestyle.ui.loginRegister.fragment.LoginOrCreateAccountFragment
 import com.shock.saturdaylifestyle.ui.loginRegister.viewModel.LoginRegisterViewModel
@@ -21,7 +22,8 @@ class LoginRegisterActivity :
 
     override fun listenChannel() {
 
-        val fragment = LoginOrCreateAccountFragment()
+        val loginOrCreateFragment = LoginOrCreateAccountFragment()
+        val countryCodeFragment = CountryCodeNumberFragment()
 
         val navController = findNavController(R.id.navHostFragment)
 
@@ -30,13 +32,26 @@ class LoginRegisterActivity :
                 is LoginRegisterViewModel.Event.NavigateTo -> {
                     when (it.navigateTo) {
                         Constants.NavigateTo.LOGIN_OR_CREATE_ACCOUNT -> {
-                            fragment.show(supportFragmentManager,LoginOrCreateAccountFragment.TAG)
+                            loginOrCreateFragment.show(
+                                supportFragmentManager,
+                                LoginOrCreateAccountFragment.TAG
+                            )
                         }
                         Constants.NavigateTo.WHATSAPP_VERIFY_YOUR_NUMBER -> {
-                            fragment.dismiss()
+                            loginOrCreateFragment.dismiss()
                             navController.navigate(LoginOnboardingIntroFragmentDirections.actionLoginOnboardingIntroWhatsappVerifyYourNumberFragment())
                         }
+                        Constants.NavigateTo.CONFIRM_YOUR_NUMBER -> {
+                            loginOrCreateFragment.dismiss()
+                            navController.navigate(LoginOnboardingIntroFragmentDirections.actionLoginOnboardingIntroConfirmYourNumberFragment())
+                        }
                     }
+                }
+                is LoginRegisterViewModel.Event.PickerDialog -> {
+                    countryCodeFragment.show(supportFragmentManager, CountryCodeNumberFragment.TAG)
+                }
+                is LoginRegisterViewModel.Event.PickerDialogClose -> {
+                    countryCodeFragment.dismiss()
                 }
                 is LoginRegisterViewModel.Event.OnBackPressed -> {
                     onBackPressed()
