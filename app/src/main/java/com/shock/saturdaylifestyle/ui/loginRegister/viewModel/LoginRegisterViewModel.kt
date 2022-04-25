@@ -28,7 +28,6 @@ class LoginRegisterViewModel @Inject constructor(
     val textWatcher = LoginRegisterTextWatcher(Constants.TextWatcherType.PHONE_NO)
 
     val viewState = LoginRegisterViewState()
-    var phoneNo = ""
 
     init {
         setViewPagerListData()
@@ -40,7 +39,7 @@ class LoginRegisterViewModel @Inject constructor(
     }
 
     fun onContinueClicked() {
-        if(phoneNo.length >= 8) {
+        if (viewState.phoneNo.length >= 8) {
             viewState.loginOrCreateAccountVisibility = false
         }
     }
@@ -144,19 +143,24 @@ class LoginRegisterViewModel @Inject constructor(
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             s?.toString()?.let {
                 if (textWatcherType == Constants.TextWatcherType.PHONE_NO) {
-                    phoneNo = it
-                    if(it.isNotEmpty()){
-                        if(it.length < 8){
-                            viewState.phoneNoMessageColorViewState = ColorViewState(R.color.warning_orange)
-                            viewState.continueBtnDrawableViewState = DrawableViewState(R.drawable.bg_button3)
+                    viewState.phoneNo = it
+                    if (it.isNotEmpty()) {
+                        if (it.length < 8) {
+                            viewState.phoneNoMessageColorViewState =
+                                ColorViewState(R.color.warning_orange)
+                            viewState.continueBtnDrawableViewState =
+                                DrawableViewState(R.drawable.bg_button3)
                         } else {
-                            viewState.phoneNoMessageColorViewState = ColorViewState(R.color.success_green)
-                            viewState.continueBtnDrawableViewState = DrawableViewState(R.drawable.bg_button2)
+                            viewState.phoneNoMessageColorViewState =
+                                ColorViewState(R.color.success_green)
+                            viewState.continueBtnDrawableViewState =
+                                DrawableViewState(R.drawable.bg_button2)
                         }
                         viewState.showPhoneNoMessage = true
                     } else {
                         viewState.showPhoneNoMessage = false
-                        viewState.continueBtnDrawableViewState = DrawableViewState(R.drawable.bg_button3)
+                        viewState.continueBtnDrawableViewState =
+                            DrawableViewState(R.drawable.bg_button3)
                     }
                 }
             }

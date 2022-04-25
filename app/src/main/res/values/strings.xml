@@ -51,6 +51,7 @@
     <string name="log_in_with_google">Log in with google</string>
 
     <string name="phone_number_must_contain_min_8_digits">Phone number must contain min. 8 digits</string>
+    <string name="choose_one_of_these_method_to_send_verification_code_to_number">Choose one of these method to send verification code (OTP) to %s</string>
 
 
 </resources>

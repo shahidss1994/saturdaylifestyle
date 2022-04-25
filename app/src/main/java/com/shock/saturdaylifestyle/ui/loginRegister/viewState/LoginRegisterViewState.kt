@@ -15,7 +15,8 @@ class LoginRegisterViewState(
     initCountryCodeNumberViewState:CountryCodeNumberViewState = CountryCodeNumberViewState(6, "+62", "Indonesia"),
     initPhoneNoMessageColorViewState: ColorViewState? = null,
     initShowPhoneNoMessage: Boolean = false,
-    initContinueBtnDrawableViewState: DrawableViewState = DrawableViewState(R.drawable.bg_button3)
+    initContinueBtnDrawableViewState: DrawableViewState = DrawableViewState(R.drawable.bg_button3),
+    initPhoneNo: String = "",
 ) :
     BaseObservable() {
 
@@ -59,6 +60,12 @@ class LoginRegisterViewState(
     var continueBtnDrawableViewState by bind(
         BR.continueBtnDrawableViewState,
         initContinueBtnDrawableViewState
+    )
+
+    @get:Bindable
+    var phoneNo by bind(
+        BR.phoneNo,
+        initPhoneNo
     )
 
 }
