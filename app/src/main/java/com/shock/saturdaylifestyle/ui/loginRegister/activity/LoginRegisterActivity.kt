@@ -7,9 +7,7 @@ import com.shock.saturdaylifestyle.constants.Constants
 import com.shock.saturdaylifestyle.databinding.ActivityLoginRegisterBinding
 import com.shock.saturdaylifestyle.ui.base.activity.BaseActivity
 import com.shock.saturdaylifestyle.ui.base.others.observeInLifecycle
-import com.shock.saturdaylifestyle.ui.loginRegister.fragment.CountryCodeNumberFragment
-import com.shock.saturdaylifestyle.ui.loginRegister.fragment.LoginOnboardingIntroFragmentDirections
-import com.shock.saturdaylifestyle.ui.loginRegister.fragment.LoginOrCreateAccountFragment
+import com.shock.saturdaylifestyle.ui.loginRegister.fragment.*
 import com.shock.saturdaylifestyle.ui.loginRegister.viewModel.LoginRegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.onEach
@@ -37,9 +35,15 @@ class LoginRegisterActivity :
                                 LoginOrCreateAccountFragment.TAG
                             )
                         }
+
                         Constants.NavigateTo.WHATSAPP_VERIFY_YOUR_NUMBER -> {
                             loginOrCreateFragment.dismiss()
                             navController.navigate(LoginOnboardingIntroFragmentDirections.actionLoginOnboardingIntroWhatsappVerifyYourNumberFragment())
+                        }
+                        Constants.NavigateTo.MISSED_CALL_VERIFY_YOUR_NUMBER -> {
+                            loginOrCreateFragment.dismiss()
+                            navController.navigate(LoginOnboardingIntroFragmentDirections.actionLoginOnboardingIntroMissedCallVerifyYourNumberFragment())
+
                         }
                         Constants.NavigateTo.CONFIRM_YOUR_NUMBER -> {
                             loginOrCreateFragment.dismiss()

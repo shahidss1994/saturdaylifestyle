@@ -15,9 +15,18 @@
             android:id="@+id/action_login_onboarding_intro_whatsapp_verify_your_number_fragment"
             app:destination="@+id/whatsappVerifyYourNumberFragment" />
 
+
+
         <action
             android:id="@+id/action_login_onboarding_intro_confirm_your_number_fragment"
             app:destination="@+id/confirmYourNumberFragment" />
+
+
+
+        <action
+            android:id="@+id/action_login_onboarding_intro_missed_call_verify_your_number_fragment"
+            app:destination="@+id/missedCallVerifyYourNumberFragment" />
+
 
     </fragment>
 
@@ -27,10 +36,18 @@
         android:label="WhatsappVerifyYourNumberFragment"
         tools:layout="@layout/fragment_whatsapp_verify_your_number" />
 
+
     <fragment
         android:id="@+id/confirmYourNumberFragment"
         android:name="com.shock.saturdaylifestyle.ui.loginRegister.fragment.ConfirmYourNumberFragment"
         android:label="ConfirmYourNumberFragment"
         tools:layout="@layout/fragment_confirm_your_number" />
+
+    <fragment
+        android:id="@+id/missedCallVerifyYourNumberFragment"
+        android:name="com.shock.saturdaylifestyle.ui.loginRegister.fragment.MissedCallVerifyYourNumberFragment"
+        android:label="MissedCallVerifyYourNumberFragment"
+        tools:layout="@layout/fragment_misscall_verify_your_number" />
+
 
 </navigation>

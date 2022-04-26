@@ -49,6 +49,7 @@
     <string name="privacy_policy_text_underlined"><u>privacy policy</u></string>
     <string name="wrong_number_please_input_the_correct_code">Wrong number, please input the correct code</string>
     <string name="log_in_with_google">Log in with google</string>
+    <string name="log_in_with_gmail">Log in with gmail</string>
 
     <string name="still_didn_t_get_the_otp">Still didn\'t get the OTP?</string>
     <string name="resend_otp_via_whatsapp">Resend OTP via WhatsApp</string>
@@ -61,5 +62,7 @@
     <string name="try_again">Try Again</string>
     <string name="_121_1345">121-1345-</string>
     <string name="other_method">other method</string>
+    <string name="yes_send_otp">Yes, send otp</string>
+    <string name="make_sure_this_is_your_correct_number">Make sure this is your correct number:</string>
 
 </resources>

@@ -203,7 +203,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_bottom_sheet_rounded"
-                android:visibility="@{viewState.loginOrCreateAccountVisibility ? View.GONE : View.VISIBLE}"
+                android:visibility="@{viewState.chooseVerificationMethodVisibility ? View.VISIBLE : View.GONE}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -339,6 +339,7 @@
                     android:layout_marginTop="@dimen/_15sdp"
                     android:background="@drawable/bg_button1"
                     android:paddingStart="@dimen/_25sdp"
+                    android:onClick="@{()->viewModel.onSendOTPViaMissedCallClicked()}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/rl_otp">
@@ -379,6 +380,370 @@
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clVerifyViaMissedCall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_bottom_sheet_rounded"
+                android:visibility="@{viewState.missedCallPopupVisibility ? View.VISIBLE : View.GONE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="gone">
+
+
+                <RelativeLayout
+                    android:id="@+id/rl_top3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_back3"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerInParent="true"
+                        android:padding="@dimen/_2sdp"
+                        android:src="@drawable/ic_arrow_back" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/ic_call_svg" />
+
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_other_method3" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_continue3"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_36sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:background="@drawable/bg_button2"
+                    android:fontFamily="@font/montserrat_semi_bold"
+                    android:gravity="center"
+                    android:text="@string/yes_send_otp"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:onClick="@{()->viewModel.onSendOTPViaMissedCallContinueClicked()}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_missed_call3" />
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_missed_call3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:src="@drawable/ic_miss_call_svg"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_message3" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_other_method3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:fontFamily="@font/montserrat_semi_bold"
+                    android:gravity="center_horizontal"
+                    android:text="other method"
+                    android:textAllCaps="true"
+                    android:textColor="@color/text_color_primary_black"
+                    android:textSize="14sp"
+                    android:visibility="visible"
+                    android:onClick="@{()->viewModel.onMissedCallPopupOtherMethodClicked()}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btn_continue3" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_message3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:gravity="center_horizontal"
+                    android:text="@string/the_last_4_digits_of_missed_call_number_is_nyour_otp_code"
+                    android:textColor="@color/text_color_primary_black"
+                    android:textSize="@dimen/_12ssp"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_title3" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_title3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:fontFamily="@font/oswald_semibold"
+                    android:gravity="center_horizontal"
+                    android:text="@string/you_will_get_missed_call"
+                    android:textAllCaps="true"
+                    android:textColor="@color/text_color_primary_black"
+                    android:textSize="20sp"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rl_top3" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clStillDidntGetOtp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_bottom_sheet_rounded"
+                android:visibility="@{viewState.stillDidntGetOtpPopupVisibility ? View.VISIBLE : View.GONE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="gone">
+
+
+
+
+                <RelativeLayout
+                    android:id="@+id/rl_top4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/iv_back4"
+                        android:visibility="gone"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerInParent="true"
+                        android:padding="@dimen/_2sdp"
+                        android:src="@drawable/ic_arrow_back" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:fontFamily="@font/oswald_semibold"
+                        android:gravity="center_horizontal"
+                        android:text="@string/still_didn_t_get_the_otp"
+                        android:textAllCaps="true"
+                        android:textColor="@color/text_color_primary_black"
+                        android:textSize="20sp"
+                        android:visibility="visible" />
+
+                </RelativeLayout>
+
+
+
+
+
+
+                <TextView
+                    android:id="@+id/tv_message4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:gravity="center_horizontal"
+                    android:text="@string/make_sure_this_is_your_correct_number"
+                    android:textColor="@color/text_color_primary_black"
+                    android:textSize="14sp"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rl_top4" />
+
+                <TextView
+                    android:id="@+id/tv_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/montserrat_semi_bold"
+                    android:gravity="center_horizontal"
+                    android:text="0811-123-4567"
+                    android:textColor="@color/text_color_primary_black"
+                    android:textSize="14sp"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_message4" />
+
+                <TextView
+                    android:id="@+id/tv_edit_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_semi_bold"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="EDIT NUMBER"
+                    android:visibility="visible"
+                    android:textColor="@color/indigo"
+                    android:textAllCaps="true"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_number" />
+
+
+
+                <RelativeLayout
+                    android:id="@+id/rl_whatsapp4"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_37sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:background="@drawable/bg_button1"
+                    android:paddingStart="@dimen/_25sdp"
+                    android:onClick="@{()->viewModel.onSendOTPViaWhatsappClicked()}"
+                    app:layout_constraintTop_toBottomOf="@id/tv_edit_number">
+
+                    <ImageView
+                        android:id="@+id/iv_wa4"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerInParent="true"
+                        android:padding="@dimen/_2sdp"
+                        android:src="@drawable/ic_wa" />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:fontFamily="@font/montserrat_semi_bold"
+                        android:gravity="center_horizontal"
+                        android:text="@string/resend_otp_via_whatsapp"
+                        android:textColor="@color/indigo"
+                        android:textSize="14sp"
+                        android:visibility="visible" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tv_or4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:gravity="center_horizontal"
+                    android:text="@string/or_try_another_method"
+                    android:textColor="@color/text_color_primary_black"
+                    android:textSize="14sp"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rl_whatsapp4" />
+
+
+                <LinearLayout
+                    android:id="@+id/rl_google4"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center"
+                    android:focusableInTouchMode="true"
+                    android:focusable="true"
+                    android:orientation="horizontal"
+                    android:onClick="@{()->viewModel.onGmailLoginClicked()}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:background="@drawable/bg_button1"
+                    app:layout_constraintTop_toBottomOf="@id/tv_or4">
+
+                    <ImageView
+                        android:id="@+id/iv_google4"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:padding="@dimen/_2sdp"
+                        android:src="@drawable/ic_gmail" />
+
+
+                    <TextView
+                        android:layout_toEndOf="@id/iv_google"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:fontFamily="@font/montserrat_semi_bold"
+                        android:gravity="center_horizontal"
+                        android:textAllCaps="true"
+                        android:text="@string/log_in_with_gmail"
+                        android:textColor="@color/indigo"
+                        android:textSize="14sp"
+                        android:visibility="visible" />
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/tv_skip_for_now"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_semi_bold"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:text="@string/skip_for_now"
+                    android:visibility="visible"
+                    android:textColor="@color/indigo"
+                    android:textAllCaps="true"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rl_google4" />
+
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_skip_for_now"/>
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

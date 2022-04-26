@@ -4,10 +4,13 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import com.shock.saturdaylifestyle.R
+import com.shock.saturdaylifestyle.constants.Constants
 import com.shock.saturdaylifestyle.databinding.FragmentLoginOrCreateAccountBinding
 import com.shock.saturdaylifestyle.ui.base.fragment.BottomSheetBaseFragment
+import com.shock.saturdaylifestyle.ui.base.others.observeInLifecycle
 import com.shock.saturdaylifestyle.ui.loginRegister.viewModel.LoginRegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class LoginOrCreateAccountFragment: BottomSheetBaseFragment<FragmentLoginOrCreateAccountBinding>(R.layout.fragment_login_or_create_account) {
@@ -27,6 +30,9 @@ class LoginOrCreateAccountFragment: BottomSheetBaseFragment<FragmentLoginOrCreat
     }
 
     override fun listenChannel() {
+
+
+
 
     }
 

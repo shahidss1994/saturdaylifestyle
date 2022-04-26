@@ -36,10 +36,33 @@ class LoginRegisterViewModel @Inject constructor(
 
     fun onContinueClicked() {
         viewState.loginOrCreateAccountVisibility = false
+        viewState.chooseVerificationMethodVisibility = true
+        viewState.missedCallPopupVisibility = false
+        viewState.stillDidntGetOtpPopupVisibility = false
     }
 
     fun onSendOTPViaWhatsappClicked() {
         onEvent(Event.NavigateTo(Constants.NavigateTo.WHATSAPP_VERIFY_YOUR_NUMBER))
+    }
+    fun onSendOTPViaMissedCallClicked() {
+        //onEvent(Event.NavigateTo(Constants.NavigateTo.MISSED_CALL_VERIFY_YOUR_NUMBER))
+        viewState.loginOrCreateAccountVisibility = false
+        viewState.chooseVerificationMethodVisibility = true
+        viewState.missedCallPopupVisibility = false
+        viewState.stillDidntGetOtpPopupVisibility = false
+
+    }
+
+    fun onSendOTPViaMissedCallContinueClicked() {
+        onEvent(Event.NavigateTo(Constants.NavigateTo.MISSED_CALL_VERIFY_YOUR_NUMBER))
+    }
+    fun onMissedCallPopupOtherMethodClicked() {
+      //  onEvent(Event.NavigateTo(Constants.NavigateTo.WHATSAPP_VERIFY_YOUR_NUMBER))
+        onEvent(Event.OnBackPressed)
+
+    }
+    fun onGmailLoginClicked() {
+      //  onEvent(Event.NavigateTo(Constants.NavigateTo.WHATSAPP_VERIFY_YOUR_NUMBER))
     }
 
     fun onSendOTPViaSMSClicked() {
