@@ -29,7 +29,7 @@ class LoginRegisterViewModel @Inject constructor(
 
     private val eventChannel = Channel<Event>(Channel.BUFFERED)
     val eventFlow = eventChannel.receiveAsFlow()
-    val textWatcher = LoginRegisterTextWatcher(Constants.TextWatcherType.PHONE_NO)
+    val phoneNoTextWatcher = LoginRegisterTextWatcher(Constants.TextWatcherType.PHONE_NO)
     val firstNameWatcher = LoginRegisterTextWatcher(Constants.TextWatcherType.FIRST_NAME)
     val lastNameWatcher = LoginRegisterTextWatcher(Constants.TextWatcherType.LAST_NAME)
     val emailWatcher = LoginRegisterTextWatcher(Constants.TextWatcherType.EMAIL)
@@ -37,7 +37,7 @@ class LoginRegisterViewModel @Inject constructor(
     val genderCheckChangeListener = RadioCheckChangeListener()
 
     val viewState = LoginRegisterViewState()
-    val registerFormViewState = RegisterFormViewState()
+    var registerFormViewState = RegisterFormViewState()
     val registerFormModel = RegisterFormModel()
 
     val mCountryCodeList = arrayListOf<CountryCodeNumberViewState>()
@@ -513,7 +513,10 @@ class LoginRegisterViewModel @Inject constructor(
                         viewState.countryCodeNumberViewStateList = mCountryCodeList
                     } else {
                         val arrayList = mCountryCodeList.filter { filter ->
-                            filter.id?.contains(it,true) == true || filter.code?.contains(it,true) == true || filter.name?.contains(it,true) == true
+                            filter.id?.contains(it, true) == true || filter.code?.contains(
+                                it,
+                                true
+                            ) == true || filter.name?.contains(it, true) == true
                         }
                         viewState.countryCodeNumberViewStateList = arrayList
                     }
@@ -562,6 +565,19 @@ class LoginRegisterViewModel @Inject constructor(
             noErrorInForm = false
         }
         return noErrorInForm
+    }
+
+    fun initRegisterViewState() {
+        registerFormViewState = RegisterFormViewState()
+        if(viewState.phoneNo.isNotEmpty()) {
+            registerFormViewState.phoneNumberViewState = viewState.countryCodeNumberViewState
+            registerFormViewState.phoneNumberViewState.number = viewState.phoneNo
+            //registerFormViewState.freezePhoneNo = true
+            //registerFormViewState.freezeEmail = false
+        } else {
+            //registerFormViewState.freezePhoneNo = false
+            //registerFormViewState.freezeEmail = true
+        }
     }
 
 }

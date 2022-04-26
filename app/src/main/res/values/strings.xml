@@ -23,6 +23,7 @@
     <string name="email">Email</string>
     <string name="birthday">Birthday</string>
     <string name="gender">Gender</string>
+    <string name="phone_number">Phone Number</string>
 
     <string name="please_enter_first_name"> Please Enter First Name</string>
     <string name="please_enter_last_name"> Please Enter Last Name</string>
