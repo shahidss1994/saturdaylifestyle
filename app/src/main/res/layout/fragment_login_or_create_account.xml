@@ -355,6 +355,7 @@
                     android:layout_marginTop="@dimen/_15sdp"
                     android:background="@drawable/bg_button1"
                     android:paddingStart="@dimen/_25sdp"
+                    android:onClick="@{()->viewModel.showRegisterForm()}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/rl_otp">

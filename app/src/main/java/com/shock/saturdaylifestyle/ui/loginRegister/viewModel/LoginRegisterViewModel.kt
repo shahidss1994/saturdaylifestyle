@@ -2,15 +2,19 @@ package com.shock.saturdaylifestyle.ui.loginRegister.viewModel
 
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.RadioGroup
+import androidx.core.util.PatternsCompat
 import androidx.lifecycle.viewModelScope
 import com.shock.saturdaylifestyle.R
 import com.shock.saturdaylifestyle.constants.Constants
 import com.shock.saturdaylifestyle.ui.base.viewModel.BaseViewModel
 import com.shock.saturdaylifestyle.ui.base.viewState.ColorViewState
 import com.shock.saturdaylifestyle.ui.base.viewState.DrawableViewState
+import com.shock.saturdaylifestyle.ui.loginRegister.model.RegisterFormModel
 import com.shock.saturdaylifestyle.ui.loginRegister.viewState.CountryCodeNumberViewState
 import com.shock.saturdaylifestyle.ui.loginRegister.viewState.IntroViewPagerItemViewState
 import com.shock.saturdaylifestyle.ui.loginRegister.viewState.LoginRegisterViewState
+import com.shock.saturdaylifestyle.ui.loginRegister.viewState.RegisterFormViewState
 import com.shock.saturdaylifestyle.ui.main.network.MainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -26,8 +30,14 @@ class LoginRegisterViewModel @Inject constructor(
     private val eventChannel = Channel<Event>(Channel.BUFFERED)
     val eventFlow = eventChannel.receiveAsFlow()
     val textWatcher = LoginRegisterTextWatcher(Constants.TextWatcherType.PHONE_NO)
+    val firstNameWatcher = LoginRegisterTextWatcher(Constants.TextWatcherType.FIRST_NAME)
+    val lastNameWatcher = LoginRegisterTextWatcher(Constants.TextWatcherType.LAST_NAME)
+    val emailWatcher = LoginRegisterTextWatcher(Constants.TextWatcherType.EMAIL)
+    val genderCheckChangeListener = RadioCheckChangeListener()
 
     val viewState = LoginRegisterViewState()
+    val registerFormViewState = RegisterFormViewState()
+    val registerFormModel = RegisterFormModel()
 
     init {
         setViewPagerListData()
@@ -58,6 +68,30 @@ class LoginRegisterViewModel @Inject constructor(
 
     fun showCountryCodePicker() {
         onEvent(Event.PickerDialog)
+    }
+
+    fun onWhatsAppTryAgainClicked() {
+
+    }
+
+    fun onPrivacyPolicyClicked() {
+
+    }
+
+    fun onRegisterFormSaveAndContinueClicked() {
+        registerFormViewState.continueBtnDrawableViewState = if (validateForm()) {
+            DrawableViewState(R.drawable.bg_button2)
+        } else {
+            DrawableViewState(R.drawable.bg_button3)
+        }
+    }
+
+    fun onSkipButtonClicked() {
+        onEvent(Event.NavigateTo(Constants.NavigateTo.REGISTER_FORM))
+    }
+
+    fun showRegisterForm() {
+        onEvent(Event.NavigateTo(Constants.NavigateTo.REGISTER_FORM))
     }
 
     fun onChooseVerificationBackClicked() {
@@ -162,11 +196,63 @@ class LoginRegisterViewModel @Inject constructor(
                         viewState.continueBtnDrawableViewState =
                             DrawableViewState(R.drawable.bg_button3)
                     }
+                } else if (textWatcherType == Constants.TextWatcherType.FIRST_NAME) {
+                    registerFormModel.firstName = it
+                    if (it.isNotEmpty()) {
+                        registerFormViewState.showFirstNameError = false
+                    }
+                } else if (textWatcherType == Constants.TextWatcherType.LAST_NAME) {
+                    registerFormModel.lastName = it
+                    if (it.isNotEmpty()) {
+                        registerFormViewState.showLastNameError = false
+                    }
+                } else if (textWatcherType == Constants.TextWatcherType.EMAIL) {
+                    registerFormModel.email = it
+                    if (it.isNotEmpty()) {
+                        registerFormViewState.showEmailError = false
+                    }
                 }
             }
         }
 
         override fun afterTextChanged(s: Editable?) {}
+    }
+
+    inner class RadioCheckChangeListener : RadioGroup.OnCheckedChangeListener {
+
+        override fun onCheckedChanged(group: RadioGroup?, checkedId: Int) {
+            registerFormModel.gender = if (checkedId == R.id.rbMale) {
+                Constants.Gender.MALE
+            } else {
+                Constants.Gender.FEMALE
+            }
+        }
+
+    }
+
+    private fun validateForm(): Boolean {
+        var noErrorInForm = true
+        registerFormViewState.showFirstNameError = false
+        registerFormViewState.showLastNameError = false
+        registerFormViewState.showEmailError = false
+        registerFormViewState.showBirthdayError = false
+        if (registerFormModel.firstName.isEmpty()) {
+            registerFormViewState.showFirstNameError = true
+            noErrorInForm = false
+        }
+        if (registerFormModel.lastName.isEmpty()) {
+            registerFormViewState.showLastNameError = true
+            noErrorInForm = false
+        }
+        if (registerFormModel.email.isEmpty() || !PatternsCompat.EMAIL_ADDRESS.matcher(registerFormModel.email).matches()) {
+            registerFormViewState.showEmailError = true
+            noErrorInForm = false
+        }
+        if (registerFormModel.dob.isEmpty()) {
+            registerFormViewState.showBirthdayError = true
+            noErrorInForm = false
+        }
+        return noErrorInForm
     }
 
 }

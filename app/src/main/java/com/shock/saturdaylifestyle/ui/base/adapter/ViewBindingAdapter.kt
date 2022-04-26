@@ -1,6 +1,7 @@
 package com.shock.saturdaylifestyle.ui.base.adapter
 
 import android.text.TextWatcher
+import android.widget.RadioGroup
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatImageView
@@ -59,5 +60,12 @@ fun AppCompatTextView.setColorViewState(colorViewState: ColorViewState?) {
 fun AppCompatEditText.setTextChangedListener(textWatcher: TextWatcher?) {
     textWatcher?.let {
         addTextChangedListener(it)
+    }
+}
+
+@BindingAdapter("checkChangedListener")
+fun RadioGroup.setCheckChangedListener(listener: RadioGroup.OnCheckedChangeListener?) {
+    listener?.let {
+        setOnCheckedChangeListener(listener)
     }
 }

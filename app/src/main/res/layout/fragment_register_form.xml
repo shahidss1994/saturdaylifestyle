@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.shock.saturdaylifestyle.ui.loginRegister.viewModel.LoginRegisterViewModel" />
+
+        <variable
+            name="viewState"
+            type="com.shock.saturdaylifestyle.ui.loginRegister.viewState.RegisterFormViewState" />
+
+        <import type="android.view.View" />
+
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nested_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/_16sdp"
+            app:layout_constraintBottom_toTopOf="@+id/btnContinue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/_15sdp"
+                android:paddingTop="@dimen/_15sdp"
+                android:paddingEnd="@dimen/_15sdp">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:fontFamily="@font/oswald_semibold"
+                    android:gravity="center"
+                    android:text="@string/create_account"
+                    android:textAllCaps="true"
+                    android:textColor="@color/text_color_primary_black"
+                    android:textSize="26sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintLeft_toLeftOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="26dp"
+                    android:fontFamily="@font/montserrat_light"
+                    android:gravity="start"
+                    android:text="@string/first_name"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10ssp" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_first_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:background="@drawable/bg_edittext">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/ed_first_name"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:gravity="center|start"
+                        android:hint="@string/first_name"
+                        android:imeOptions="actionNext"
+                        android:inputType="textCapWords"
+                        android:paddingStart="@dimen/_15sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/text_color_hint"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_weight="15"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:textChangedListener="@{viewModel.firstNameWatcher}" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_alert_first_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:gravity="start"
+                    android:text="Please fill your first name"
+                    android:textColor="@color/alert_red"
+                    android:textSize="10sp"
+                    android:visibility="@{viewState.showFirstNameError ? View.VISIBLE : View.INVISIBLE}" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/montserrat_light"
+                    android:gravity="start"
+                    android:text="@string/last_name"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10ssp" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_last_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:background="@drawable/bg_edittext">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/ed_last_name"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:gravity="center|start"
+                        android:hint="@string/last_name"
+                        android:imeOptions="actionNext"
+                        android:inputType="textCapWords"
+                        android:paddingStart="@dimen/_15sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/text_color_hint"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_weight="15"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:textChangedListener="@{viewModel.lastNameWatcher}" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_alert_last_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:gravity="start"
+                    android:text="Please fill your last name"
+                    android:textColor="@color/alert_red"
+                    android:textSize="10sp"
+                    android:visibility="@{viewState.showLastNameError ? View.VISIBLE : View.INVISIBLE}" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/montserrat_light"
+                    android:gravity="start"
+                    android:text="@string/email"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10ssp" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:background="@drawable/bg_edittext">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/ed_email"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:gravity="center|start"
+                        android:hint="@string/example_email"
+                        android:imeOptions="actionDone"
+                        android:inputType="textEmailAddress"
+                        android:paddingStart="@dimen/_15sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/text_color_hint"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_weight="15"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:textChangedListener="@{viewModel.emailWatcher}" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_alert_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:gravity="start"
+                    android:text="Please fill your valid email"
+                    android:textColor="@color/alert_red"
+                    android:textSize="10sp"
+                    android:visibility="@{viewState.showEmailError ? View.VISIBLE : View.INVISIBLE}" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/montserrat_light"
+                    android:gravity="start"
+                    android:text="@string/birthday"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10ssp" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_dob"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:background="@drawable/bg_edittext">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_dob"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:background="@null"
+                        android:drawablePadding="@dimen/_5sdp"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:gravity="center|start"
+                        android:hint="@string/dob_hint"
+                        android:imeOptions="actionNext"
+                        android:paddingStart="@dimen/_15sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/text_color_hint"
+                        android:textSize="14sp"
+                        app:drawableEndCompat="@drawable/ic_bottom_arrow"
+                        app:drawableTint="@color/black"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_weight="15"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_alert_dob"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:gravity="start"
+                    android:text="@string/please_select_your_birthday"
+                    android:textColor="@color/alert_red"
+                    android:textSize="10sp"
+                    android:visibility="@{viewState.showBirthdayError ? View.VISIBLE : View.INVISIBLE}" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/montserrat_light"
+                    android:gravity="start"
+                    android:text="@string/gender"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10ssp" />
+
+                <RadioGroup
+                    android:id="@+id/rg_gender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:layout_marginEnd="@dimen/_25sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:visibility="visible"
+                    android:weightSum="2"
+                    app:checkChangedListener="@{viewModel.genderCheckChangeListener}">
+
+                    <RadioButton
+                        android:id="@+id/rbMale"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="true"
+                        android:drawableTint="@color/dark_blue"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:gravity="start|center_vertical"
+                        android:text="@string/male"
+                        android:textColor="@color/black"
+                        app:buttonTint="@color/indigo" />
+
+                    <RadioButton
+                        android:id="@+id/rbFemale"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="false"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:gravity="start|center_vertical"
+                        android:text="@string/female"
+                        android:textColor="@color/black"
+                        app:buttonTint="@color/indigo" />
+
+                </RadioGroup>
+
+
+            </LinearLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnContinue"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_39sdp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:gravity="center"
+            android:onClick="@{()->viewModel.onRegisterFormSaveAndContinueClicked()}"
+            android:text="@string/save_and_continue"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:drawableViewState="@{viewState.continueBtnDrawableViewState}"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

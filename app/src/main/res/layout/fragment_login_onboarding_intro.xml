@@ -66,6 +66,7 @@
             android:background="@drawable/bg_button1"
             android:fontFamily="@font/montserrat_semi_bold"
             android:gravity="center"
+            android:onClick="@{()->viewModel.onSkipButtonClicked()}"
             android:text="@string/skip_text"
             android:textColor="@color/indigo"
             android:textSize="14sp"

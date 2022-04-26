@@ -68,12 +68,10 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv2"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_marginStart="@dimen/_32sdp"
             android:layout_marginTop="@dimen/_47sdp"
-            android:layout_marginEnd="@dimen/_32sdp"
             android:fontFamily="@font/montserrat_regular"
             android:gravity="center_horizontal"
             android:letterSpacing="0.01"
@@ -85,6 +83,54 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv1" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTryAgain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:onClick="@{()->viewModel.onWhatsAppTryAgainClicked()}"
+            android:text="Try Again"
+            android:textAllCaps="true"
+            android:textColor="@color/indigo"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv2" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvBySigningUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_85sdp"
+            android:fontFamily="@font/montserrat_regular"
+            android:gravity="center"
+            android:text="By signing up you agree to our"
+            android:textColor="@color/text_color_primary_black"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTryAgain" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_privacy_policy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:fontFamily="@font/montserrat_regular"
+            android:gravity="center"
+            android:onClick="@{()->viewModel.onPrivacyPolicyClicked()}"
+            android:text="@string/privacy_policy_text_underlined"
+            android:textColor="@color/indigo"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvBySigningUp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

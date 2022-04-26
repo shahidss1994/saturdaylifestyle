@@ -19,6 +19,10 @@
             android:id="@+id/action_login_onboarding_intro_confirm_your_number_fragment"
             app:destination="@+id/confirmYourNumberFragment" />
 
+        <action
+            android:id="@+id/action_login_onboarding_intro_register_form_fragment"
+            app:destination="@+id/registerFormFragment" />
+
     </fragment>
 
     <fragment
@@ -32,5 +36,11 @@
         android:name="com.shock.saturdaylifestyle.ui.loginRegister.fragment.ConfirmYourNumberFragment"
         android:label="ConfirmYourNumberFragment"
         tools:layout="@layout/fragment_confirm_your_number" />
+
+    <fragment
+        android:id="@+id/registerFormFragment"
+        android:name="com.shock.saturdaylifestyle.ui.loginRegister.fragment.RegisterFormFragment"
+        android:label="RegisterFormFragment"
+        tools:layout="@layout/fragment_register_form" />
 
 </navigation>
