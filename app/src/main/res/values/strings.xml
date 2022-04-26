@@ -41,7 +41,6 @@
     <string name="durationformatshort" translatable="false"><xliff:g id="format">%2$d:%3$02d</xliff:g></string>
     <string name="durationformatlong" translatable="false"><xliff:g id="format">%1$d:%2$02d:%3$02d</xliff:g></string>
 
-
     <string name="confirm_your_number">Confirm your number</string>
     <string name="insert_the_5_digit_code_text">Insert the-5-digit code SATURDAYS\njust sent to your Whatsapp</string>
     <string name="didn_t_get_the_5_digit_code">Didn\'t get the 5-digit code?</string>
@@ -49,6 +48,19 @@
     <string name="privacy_policy_text_underlined"><u>privacy policy</u></string>
     <string name="wrong_number_please_input_the_correct_code">Wrong number, please input the correct code</string>
     <string name="log_in_with_google">Log in with google</string>
+    <string name="the_last_4_digits_of_missed_call_number_is_nyour_otp_code">The last 4 digits of missed call number is\nyour OTP code</string>
 
+    <string name="still_didn_t_get_the_otp">Still didn\'t get the OTP?</string>
+    <string name="log_in_with_gmail">Log in with gmail</string>
+    <string name="didn_t_get_the_missed_call">Didn\'t get the missed call?</string>
+
+    <string name="you_will_get_missed_call">You will get missed call</string>
+    <string name="yes_send_otp">Yes, send OTP</string>
+    <string name="resend_otp_via_whatsapp">Resend OTP via Whatsapp</string>
+    <string name="or_try_another_method">or try another method</string>
+    <string name="make_sure_this_is_your_correct_number">Make sure this is your correct number</string>
+    <string name="try_again">Try again</string>
+    <string name="_121_1345">121-1345-</string>
+    <string name="by_signing_up_you_agree_to_our">By signing up you agree to our</string>
 
 </resources>

@@ -4,7 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.shock.saturdaylifestyle.R
 import com.shock.saturdaylifestyle.constants.Constants
 import com.shock.saturdaylifestyle.ui.base.viewModel.BaseViewModel
-import com.shock.saturdaylifestyle.ui.base.viewModel.DrawableViewModel
+//import com.shock.saturdaylifestyle.ui.base.viewModel.DrawableViewModel
 import com.shock.saturdaylifestyle.ui.loginRegister.viewState.CountryCodeNumberViewState
 import com.shock.saturdaylifestyle.ui.loginRegister.viewState.IntroViewPagerItemViewState
 import com.shock.saturdaylifestyle.ui.loginRegister.viewState.LoginRegisterViewState
@@ -34,8 +34,33 @@ class LoginRegisterViewModel @Inject constructor(
         onEvent(Event.NavigateTo(Constants.NavigateTo.LOGIN_OR_CREATE_ACCOUNT))
     }
 
+ /*   fun onContinueClicked() {
+        viewState.loginOrCreateAccountVisibility = false
+    }*/
+
+
     fun onContinueClicked() {
         viewState.loginOrCreateAccountVisibility = false
+        viewState.chooseVerificationMethodVisibility = true
+        viewState.missedCallPopupVisibility = false
+        viewState.stillDidntGetOtpPopupVisibility = false
+    }
+
+    fun onSendOTPViaMissedCallClicked() {
+        //onEvent(Event.NavigateTo(Constants.NavigateTo.MISSED_CALL_VERIFY_YOUR_NUMBER))
+        viewState.loginOrCreateAccountVisibility = false
+        viewState.chooseVerificationMethodVisibility = false
+        viewState.missedCallPopupVisibility = true
+        viewState.stillDidntGetOtpPopupVisibility = false
+
+    }
+
+    fun onSendOTPViaMissedCallContinueClicked() {
+        onEvent(Event.NavigateTo(Constants.NavigateTo.MISSED_CALL_VERIFY_YOUR_NUMBER))
+    }
+
+    fun onGmailLoginClicked() {
+        //  onEvent(Event.NavigateTo(Constants.NavigateTo.WHATSAPP_VERIFY_YOUR_NUMBER))
     }
 
     fun onSendOTPViaWhatsappClicked() {
@@ -44,6 +69,17 @@ class LoginRegisterViewModel @Inject constructor(
 
     fun onSendOTPViaSMSClicked() {
         onEvent(Event.NavigateTo(Constants.NavigateTo.CONFIRM_YOUR_NUMBER))
+    }
+    fun onSkipButtonClicked() {
+    }
+
+    fun onRegisterFormSaveAndContinueClicked() {
+    }
+
+    fun onWhatsAppTryAgainClicked() {
+    }
+
+    fun onPrivacyPolicyClicked() {
     }
 
     fun onBackPressed() {
@@ -55,7 +91,25 @@ class LoginRegisterViewModel @Inject constructor(
     }
 
     fun onChooseVerificationBackClicked() {
+       // viewState.loginOrCreateAccountVisibility = true
         viewState.loginOrCreateAccountVisibility = true
+        viewState.chooseVerificationMethodVisibility = false
+        viewState.missedCallPopupVisibility = false
+        viewState.stillDidntGetOtpPopupVisibility = false
+    }
+
+    fun onMissedCallPopupBackClicked() {
+        viewState.loginOrCreateAccountVisibility = false
+        viewState.chooseVerificationMethodVisibility = true
+        viewState.missedCallPopupVisibility = false
+        viewState.stillDidntGetOtpPopupVisibility = false
+    }
+
+    fun onMissedCallPopupOtherMethodClicked() {
+        viewState.loginOrCreateAccountVisibility = false
+        viewState.chooseVerificationMethodVisibility = true
+        viewState.missedCallPopupVisibility = false
+        viewState.stillDidntGetOtpPopupVisibility = false
     }
 
     fun checkSelectedCountry(countryCodeNumberViewState: CountryCodeNumberViewState) {
@@ -76,7 +130,7 @@ class LoginRegisterViewModel @Inject constructor(
 
     private fun setViewPagerListData() {
         val arrayList = arrayListOf<IntroViewPagerItemViewState>()
-        val introViewPagerItemViewState1 = IntroViewPagerItemViewState(
+/*        val introViewPagerItemViewState1 = IntroViewPagerItemViewState(
             1,
             "ANYWHERE IN THE WORLD!",
             "Enjoy free shipping all across the globe\nonly for you!",
@@ -113,8 +167,8 @@ class LoginRegisterViewModel @Inject constructor(
             "OFFLINE STORES",
             "Still not sure about how it looks on you?\nTry it on at our offline stores! We are\navailable all across Indonesia.",
             DrawableViewModel(R.mipmap.iv_onboarding5)
-        )
-        arrayList.add(introViewPagerItemViewState5)
+        )*/
+      //  arrayList.add(introViewPagerItemViewState5)
         viewState.introViewPagerItemViewStateList = arrayList
     }
 

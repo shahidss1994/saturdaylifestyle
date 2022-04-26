@@ -19,6 +19,11 @@
             android:id="@+id/action_login_onboarding_intro_confirm_your_number_fragment"
             app:destination="@+id/confirmYourNumberFragment" />
 
+
+        <action
+            android:id="@+id/action_login_onboarding_intro_missed_call_verify_your_number_fragment"
+            app:destination="@+id/missedCallVerifyYourNumberFragment" />
+
         <action
             android:id="@+id/action_login_onboarding_intro_register_form_fragment"
             app:destination="@+id/registerFormFragment" />
@@ -42,5 +47,11 @@
         android:name="com.shock.saturdaylifestyle.ui.loginRegister.fragment.RegisterFormFragment"
         android:label="RegisterFormFragment"
         tools:layout="@layout/fragment_register_form" />
+
+    <fragment
+        android:id="@+id/missedCallVerifyYourNumberFragment"
+        android:name="com.shock.saturdaylifestyle.ui.loginRegister.fragment.MissedCallVerifyYourNumberFragment"
+        android:label="MissedCallVerifyYourNumberFragment"
+        tools:layout="@layout/fragment_misscall_verify_your_number" />
 
 </navigation>

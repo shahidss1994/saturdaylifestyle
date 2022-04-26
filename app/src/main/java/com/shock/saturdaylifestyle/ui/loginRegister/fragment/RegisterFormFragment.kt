@@ -21,10 +21,10 @@ class RegisterFormFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding().apply {
+    /*    binding().apply {
             viewModel = mViewModel
             viewState = mViewModel.registerFormViewState
-        }
+        }*/
     }
 
     override fun listenChannel() {

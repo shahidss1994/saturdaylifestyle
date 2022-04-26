@@ -92,8 +92,10 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_weight="15"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+<!--
                         app:textChangedListener="@{viewModel.firstNameWatcher}" />
+-->
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -148,8 +150,10 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_weight="15"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+<!--
                         app:textChangedListener="@{viewModel.lastNameWatcher}" />
+-->
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -204,8 +208,10 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_weight="15"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>/
+<!--
                         app:textChangedListener="@{viewModel.emailWatcher}" />
+-->
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -301,8 +307,10 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:visibility="visible"
-                    android:weightSum="2"
+                    android:weightSum="2">
+<!--
                     app:checkChangedListener="@{viewModel.genderCheckChangeListener}">
+-->
 
                     <RadioButton
                         android:id="@+id/rbMale"
