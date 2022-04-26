@@ -1,4 +1,4 @@
-package com.shock.saturdaylifestyle.ui.base.viewModel
+package com.shock.saturdaylifestyle.ui.base.viewState
 
 import androidx.annotation.DrawableRes
 
@@ -6,6 +6,6 @@ import androidx.annotation.DrawableRes
  * This data class is for accessing context dependent drawable resources inside viewModel
  */
 
-data class DrawableViewModel(
+data class DrawableViewState(
     @DrawableRes val drawable: Int = 0
 )

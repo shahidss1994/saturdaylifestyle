@@ -67,7 +67,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ed_search"
                 tools:itemCount="25"
-                tools:listitem="@layout/item_country" />
+                tools:listitem="@layout/item_country_code_number" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

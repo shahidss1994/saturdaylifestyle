@@ -4,18 +4,17 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import com.shock.saturdaylifestyle.R
-import com.shock.saturdaylifestyle.databinding.FragmentDialogCountryPickerBinding
-import com.shock.saturdaylifestyle.ui.base.fragment.DialogBaseFragment
-import com.shock.saturdaylifestyle.ui.loginRegister.adapter.CountryCodeNumberAdapter
+import com.shock.saturdaylifestyle.databinding.FragmentRegisterFormBinding
+import com.shock.saturdaylifestyle.ui.base.fragment.BottomSheetBaseFragment
 import com.shock.saturdaylifestyle.ui.loginRegister.viewModel.LoginRegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CountryCodeNumberFragment :
-    DialogBaseFragment<FragmentDialogCountryPickerBinding>(R.layout.fragment_dialog_country_picker) {
+class RegisterFormFragment :
+    BottomSheetBaseFragment<FragmentRegisterFormBinding>(R.layout.fragment_register_form) {
 
     companion object {
-        const val TAG = "CountryCodeFragment"
+        const val TAG = "LoginOrCreateAccountFragment"
     }
 
     private val mViewModel: LoginRegisterViewModel by activityViewModels()
@@ -23,15 +22,18 @@ class CountryCodeNumberFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding().apply {
-            viewState = mViewModel.viewState
-            with(rvCountry) {
-                adapter = CountryCodeNumberAdapter(mViewModel, mViewModel.viewState)
-            }
+            viewModel = mViewModel
+            viewState = mViewModel.registerFormViewState
         }
     }
 
     override fun listenChannel() {
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mViewModel.viewState.loginOrCreateAccountVisibility = true
     }
 
 }

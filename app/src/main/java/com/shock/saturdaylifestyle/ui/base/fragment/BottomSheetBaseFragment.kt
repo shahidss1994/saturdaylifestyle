@@ -13,7 +13,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.shock.saturdaylifestyle.R
 
-abstract class BottomSheetBaseFragment<out T : ViewDataBinding>(@LayoutRes private val screenLayoutId: Int) : BottomSheetDialogFragment() {
+
+abstract class BottomSheetBaseFragment<out T : ViewDataBinding>(@LayoutRes private val screenLayoutId: Int) :
+    BottomSheetDialogFragment() {
 
     private lateinit var binding: T
     protected fun binding() = binding
@@ -28,6 +30,7 @@ abstract class BottomSheetBaseFragment<out T : ViewDataBinding>(@LayoutRes priva
         }
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(STYLE_NORMAL, R.style.CustomBottomSheetDialog)
@@ -38,7 +41,7 @@ abstract class BottomSheetBaseFragment<out T : ViewDataBinding>(@LayoutRes priva
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, screenLayoutId, container,false)
+        binding = DataBindingUtil.inflate(inflater, screenLayoutId, container, false)
         return binding.root
     }
 

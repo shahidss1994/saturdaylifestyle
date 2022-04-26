@@ -9,14 +9,7 @@ class LoginRegisterViewState(
     initIntroViewPagerItemViewStateList: List<IntroViewPagerItemViewState> = arrayListOf(),
     initCountryCodeNumberViewStateList: List<CountryCodeNumberViewState> = arrayListOf(),
     initLoginOrCreateAccountVisibility: Boolean = true,
-    initChooseVerificationMethodVisibility: Boolean = false,
-    initStillDidntGetOtpPopupVisibility: Boolean = false,
-    initMissedCallPopupVisibility: Boolean = false,
-    initCountryCodeNumberViewState: CountryCodeNumberViewState = CountryCodeNumberViewState(
-        6,
-        "+62",
-        "Indonesia"
-    )
+    initCountryCodeNumberViewState:CountryCodeNumberViewState = CountryCodeNumberViewState(6, "+62", "Indonesia")
 ) :
     BaseObservable() {
 
@@ -37,26 +30,6 @@ class LoginRegisterViewState(
         BR.loginOrCreateAccountVisibility,
         initLoginOrCreateAccountVisibility
     )
-
-
-    @get:Bindable
-    var chooseVerificationMethodVisibility by bind(
-        BR.chooseVerificationMethodVisibility,
-        initChooseVerificationMethodVisibility
-    )
-
-    @get:Bindable
-    var stillDidntGetOtpPopupVisibility by bind(
-        BR.stillDidntGetOtpPopupVisibility,
-        initStillDidntGetOtpPopupVisibility
-    )
-
-    @get:Bindable
-    var missedCallPopupVisibility by bind(
-        BR.missedCallPopupVisibility,
-        initMissedCallPopupVisibility
-    )
-
 
     @get:Bindable
     var countryCodeNumberViewState by bind(

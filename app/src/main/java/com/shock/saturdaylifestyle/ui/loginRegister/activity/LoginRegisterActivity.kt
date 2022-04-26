@@ -37,7 +37,9 @@ class LoginRegisterActivity :
                         }
 
                         Constants.NavigateTo.WHATSAPP_VERIFY_YOUR_NUMBER -> {
-                            loginOrCreateFragment.dismiss()
+                            if(loginOrCreateFragment.isVisible) {
+                                loginOrCreateFragment.dismiss()
+                            }
                             navController.navigate(LoginOnboardingIntroFragmentDirections.actionLoginOnboardingIntroWhatsappVerifyYourNumberFragment())
                         }
                         Constants.NavigateTo.MISSED_CALL_VERIFY_YOUR_NUMBER -> {
@@ -46,8 +48,16 @@ class LoginRegisterActivity :
 
                         }
                         Constants.NavigateTo.CONFIRM_YOUR_NUMBER -> {
-                            loginOrCreateFragment.dismiss()
+                            if(loginOrCreateFragment.isVisible) {
+                                loginOrCreateFragment.dismiss()
+                            }
                             navController.navigate(LoginOnboardingIntroFragmentDirections.actionLoginOnboardingIntroConfirmYourNumberFragment())
+                        }
+                        Constants.NavigateTo.REGISTER_FORM -> {
+                            if(loginOrCreateFragment.isVisible) {
+                                loginOrCreateFragment.dismiss()
+                            }
+                            navController.navigate(LoginOnboardingIntroFragmentDirections.actionLoginOnboardingIntroRegisterFormFragment())
                         }
                     }
                 }

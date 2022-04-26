@@ -4,9 +4,9 @@ import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
 import com.shock.saturdaylifestyle.BR
 import com.shock.saturdaylifestyle.ui.base.others.bind
-import com.shock.saturdaylifestyle.ui.base.viewModel.DrawableViewModel
+import com.shock.saturdaylifestyle.ui.base.viewState.DrawableViewState
 
-class IntroViewPagerItemViewState(initId:Int? = null, initTitle:String? = null, initDesc:String? = null, initImage: DrawableViewModel? = null): BaseObservable() {
+class IntroViewPagerItemViewState(initId:Int? = null, initTitle:String? = null, initDesc:String? = null, initImage: DrawableViewState? = null): BaseObservable() {
 
     @get:Bindable
     var id by bind(BR.id, initId)

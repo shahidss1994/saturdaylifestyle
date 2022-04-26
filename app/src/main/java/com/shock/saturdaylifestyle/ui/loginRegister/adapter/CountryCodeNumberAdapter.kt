@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
-import com.shock.saturdaylifestyle.databinding.ItemCountryBinding
+import com.shock.saturdaylifestyle.databinding.ItemCountryCodeNumberBinding
 import com.shock.saturdaylifestyle.ui.base.adapter.BindableAdapter
 import com.shock.saturdaylifestyle.ui.base.others.diffCallback
 import com.shock.saturdaylifestyle.ui.loginRegister.viewModel.LoginRegisterViewModel
@@ -44,12 +44,12 @@ class CountryCodeNumberAdapter(
 
         abstract fun bind(viewState: VIEW_STATE, viewModel: VIEW_MODEL)
 
-        class ContentItemViewHolder(private val binding: ItemCountryBinding) :
+        class ContentItemViewHolder(private val binding: ItemCountryCodeNumberBinding) :
             ViewHolder<CountryCodeNumberViewState, LoginRegisterViewModel>(binding.root) {
 
             companion object {
                 operator fun invoke(parent: ViewGroup) = ContentItemViewHolder(
-                    ItemCountryBinding.inflate(
+                    ItemCountryCodeNumberBinding.inflate(
                         LayoutInflater.from(parent.context),
                         parent,
                         false

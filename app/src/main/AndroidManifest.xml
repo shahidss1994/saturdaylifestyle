@@ -19,13 +19,12 @@
 
         <activity
             android:name=".ui.loginRegister.activity.LoginRegisterActivity"
-            android:windowSoftInputMode="adjustPan"
+            android:windowSoftInputMode="adjustPan|adjustResize"
             android:exported="false">
         </activity>
 
         <activity
             android:name=".ui.splash.activity.SplashActivity"
-            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
