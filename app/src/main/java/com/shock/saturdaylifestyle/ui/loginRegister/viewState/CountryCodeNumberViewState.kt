@@ -6,7 +6,7 @@ import com.shock.saturdaylifestyle.BR
 import com.shock.saturdaylifestyle.ui.base.others.bind
 
 class CountryCodeNumberViewState(
-    initId: Int? = null,
+    initId: String? = null,
     initCode: String? = "",
     initName: String? = ""
 ) : BaseObservable() {

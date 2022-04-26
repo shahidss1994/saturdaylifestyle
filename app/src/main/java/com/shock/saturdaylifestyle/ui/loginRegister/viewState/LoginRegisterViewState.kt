@@ -12,7 +12,7 @@ class LoginRegisterViewState(
     initIntroViewPagerItemViewStateList: List<IntroViewPagerItemViewState> = arrayListOf(),
     initCountryCodeNumberViewStateList: List<CountryCodeNumberViewState> = arrayListOf(),
     initLoginOrCreateAccountVisibility: Boolean = true,
-    initCountryCodeNumberViewState:CountryCodeNumberViewState = CountryCodeNumberViewState(6, "+62", "Indonesia"),
+    initCountryCodeNumberViewState:CountryCodeNumberViewState = CountryCodeNumberViewState("id", "+62", "Indonesia"),
     initPhoneNoMessageColorViewState: ColorViewState? = null,
     initShowPhoneNoMessage: Boolean = false,
     initContinueBtnDrawableViewState: DrawableViewState = DrawableViewState(R.drawable.bg_button3),
