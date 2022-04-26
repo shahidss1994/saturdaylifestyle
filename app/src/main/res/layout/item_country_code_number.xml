@@ -30,6 +30,19 @@
 
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvPlus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_11sdp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="+"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -39,9 +52,9 @@
             android:text="@{viewState.code}"
             android:textColor="@color/black"
             android:textSize="@dimen/_10ssp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvPlus"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="+91" />
+            tools:text="91" />
 
 
         <androidx.appcompat.widget.AppCompatTextView

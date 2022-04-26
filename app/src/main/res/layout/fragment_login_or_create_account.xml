@@ -38,7 +38,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:visibility="gone">
+                tools:visibility="visible">
 
                 <LinearLayout
                     android:id="@+id/rl_google"
@@ -139,6 +139,23 @@
                     app:layout_constraintRight_toRightOf="parent">
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvPlus"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:gravity="center"
+                        android:onClick="@{()->viewModel.showCountryCodePicker()}"
+                        android:textColor="@color/indigo"
+                        android:textSize="@dimen/_12ssp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintHorizontal_weight="1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="+" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_phone_code"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -154,9 +171,9 @@
                         android:textSize="@dimen/_12ssp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintHorizontal_weight="1"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tvPlus"
                         app:layout_constraintTop_toTopOf="parent"
-                        tools:text="+62" />
+                        tools:text="62" />
 
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/ed_phone_no"
@@ -222,7 +239,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:visibility="visible">
+                tools:visibility="gone">
 
                 <RelativeLayout
                     android:id="@+id/rl_top"
@@ -354,8 +371,8 @@
                     android:layout_height="@dimen/_37sdp"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:background="@drawable/bg_button1"
-                    android:paddingStart="@dimen/_25sdp"
                     android:onClick="@{()->viewModel.showRegisterForm()}"
+                    android:paddingStart="@dimen/_25sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/rl_otp">

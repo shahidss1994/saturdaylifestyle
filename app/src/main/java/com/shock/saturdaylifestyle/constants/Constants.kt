@@ -26,6 +26,7 @@ object Constants {
         const val FIRST_NAME = "first_name"
         const val LAST_NAME = "last_name"
         const val EMAIL = "email"
+        const val COUNTRY_CODE = "country_code"
     }
 
     object Gender{

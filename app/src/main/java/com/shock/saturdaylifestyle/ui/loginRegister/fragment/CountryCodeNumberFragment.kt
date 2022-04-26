@@ -23,6 +23,7 @@ class CountryCodeNumberFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding().apply {
+            viewModel = mViewModel
             viewState = mViewModel.viewState
             with(rvCountry) {
                 adapter = CountryCodeNumberAdapter(mViewModel, mViewModel.viewState)
