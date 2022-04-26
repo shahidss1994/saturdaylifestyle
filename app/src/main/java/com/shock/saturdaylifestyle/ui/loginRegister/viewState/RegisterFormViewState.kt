@@ -15,6 +15,7 @@ class RegisterFormViewState(
     initContinueBtnDrawableViewState: DrawableViewState = DrawableViewState(R.drawable.bg_button3),
 ) : BaseObservable() {
 
+
     @get:Bindable
     var showFirstNameError by bind(
         BR.showFirstNameError,

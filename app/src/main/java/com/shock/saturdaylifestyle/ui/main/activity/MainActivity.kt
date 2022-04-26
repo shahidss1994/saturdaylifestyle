@@ -23,7 +23,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             viewModel = mViewModel
             viewState = mViewModel.viewState
         }
-        mViewModel.getUsers(1)
+      //  mViewModel.getUsers(1)
     }
 
     override fun listenChannel() {

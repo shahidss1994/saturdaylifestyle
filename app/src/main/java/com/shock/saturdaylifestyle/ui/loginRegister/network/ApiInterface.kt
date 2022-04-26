@@ -1,13 +1,11 @@
-package com.shock.saturdaylifestyle.ui.main.network
+package com.shock.saturdaylifestyle.ui.loginRegister.network
 
 import com.shock.saturdaylifestyle.network.BaseApi
 import com.shock.saturdaylifestyle.ui.loginRegister.model.SendOtpModel
 import retrofit2.http.*
 
-interface MainApi : BaseApi {
-
-    @GET("api/users")
-    suspend fun getUsers(@Query("page") page: Int): Any
+/*
+interface LoginRegisterApi : BaseApi {
 
 
     @FormUrlEncoded
@@ -20,4 +18,4 @@ interface MainApi : BaseApi {
 
 
 
-}
+}*/

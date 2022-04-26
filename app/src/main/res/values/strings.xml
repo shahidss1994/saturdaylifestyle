@@ -48,7 +48,7 @@
     <string name="privacy_policy_text_underlined"><u>privacy policy</u></string>
     <string name="wrong_number_please_input_the_correct_code">Wrong number, please input the correct code</string>
     <string name="log_in_with_google">Log in with google</string>
-    <string name="the_last_4_digits_of_missed_call_number_is_nyour_otp_code">The last 4 digits of missed call number is\nyour OTP code</string>
+    <string name="the_last_4_digits_of_missed_call_number_is_nyour_otp_code">The last 4 digits of missed call number is your OTP code</string>
 
     <string name="still_didn_t_get_the_otp">Still didn\'t get the OTP?</string>
     <string name="log_in_with_gmail">Log in with gmail</string>

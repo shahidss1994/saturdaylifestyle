@@ -1,14 +1,16 @@
 package com.shock.saturdaylifestyle.ui.loginRegister.viewModel
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
-import com.shock.saturdaylifestyle.R
 import com.shock.saturdaylifestyle.constants.Constants
+import com.shock.saturdaylifestyle.network.Resource
+import com.shock.saturdaylifestyle.ui.base.others.bind
 import com.shock.saturdaylifestyle.ui.base.viewModel.BaseViewModel
 //import com.shock.saturdaylifestyle.ui.base.viewModel.DrawableViewModel
 import com.shock.saturdaylifestyle.ui.loginRegister.viewState.CountryCodeNumberViewState
 import com.shock.saturdaylifestyle.ui.loginRegister.viewState.IntroViewPagerItemViewState
 import com.shock.saturdaylifestyle.ui.loginRegister.viewState.LoginRegisterViewState
-import com.shock.saturdaylifestyle.ui.main.network.MainRepository
+import com.shock.saturdaylifestyle.ui.loginRegister.network.LoginRegisterRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -17,8 +19,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginRegisterViewModel @Inject constructor(
-    private val mainRepository: MainRepository
-) : BaseViewModel(mainRepository) {
+    private val repository: LoginRegisterRepository
+) : BaseViewModel(repository) {
 
     private val eventChannel = Channel<Event>(Channel.BUFFERED)
     val eventFlow = eventChannel.receiveAsFlow()
@@ -30,16 +32,37 @@ class LoginRegisterViewModel @Inject constructor(
         setCountryCodeNumberList()
     }
 
-    fun onLoginCreateAccountClicked() {
-        onEvent(Event.NavigateTo(Constants.NavigateTo.LOGIN_OR_CREATE_ACCOUNT))
+
+    fun sendOtpViaMissedCallApi(key: String, phoneNumber: String, countryCode: String) = viewModelScope.launch {
+           val rs = repository.sendOtpViaMissedCall(key, phoneNumber, countryCode)
+            if (rs is Resource.Success) {
+
+                if (rs.value.status == true) {
+
+                    onEvent(Event.NavigateTo(Constants.NavigateTo.MISSED_CALL_VERIFY_YOUR_NUMBER))
+                }else
+                {
+
+                }
+                // onEvent(Event.OnSendOtpViaMissedCAllDataRecieved)
+            }
     }
 
- /*   fun onContinueClicked() {
-        viewState.loginOrCreateAccountVisibility = false
-    }*/
 
+    fun onLoginCreateAccountClicked() {
+        onEvent(Event.NavigateTo(Constants.NavigateTo.LOGIN_OR_CREATE_ACCOUNT))
+
+
+    }
 
     fun onContinueClicked() {
+
+
+        Log.e("TAG", "onContinueClicked: "+viewState.phoneno )
+
+
+
+
         viewState.loginOrCreateAccountVisibility = false
         viewState.chooseVerificationMethodVisibility = true
         viewState.missedCallPopupVisibility = false
@@ -47,7 +70,6 @@ class LoginRegisterViewModel @Inject constructor(
     }
 
     fun onSendOTPViaMissedCallClicked() {
-        //onEvent(Event.NavigateTo(Constants.NavigateTo.MISSED_CALL_VERIFY_YOUR_NUMBER))
         viewState.loginOrCreateAccountVisibility = false
         viewState.chooseVerificationMethodVisibility = false
         viewState.missedCallPopupVisibility = true
@@ -56,7 +78,13 @@ class LoginRegisterViewModel @Inject constructor(
     }
 
     fun onSendOTPViaMissedCallContinueClicked() {
-        onEvent(Event.NavigateTo(Constants.NavigateTo.MISSED_CALL_VERIFY_YOUR_NUMBER))
+
+
+        onEvent(Event.onSendOTPViaMissedCallContinueClicked)
+
+
+
+           onEvent(Event.NavigateTo(Constants.NavigateTo.MISSED_CALL_VERIFY_YOUR_NUMBER))
     }
 
     fun onGmailLoginClicked() {
@@ -91,7 +119,6 @@ class LoginRegisterViewModel @Inject constructor(
     }
 
     fun onChooseVerificationBackClicked() {
-       // viewState.loginOrCreateAccountVisibility = true
         viewState.loginOrCreateAccountVisibility = true
         viewState.chooseVerificationMethodVisibility = false
         viewState.missedCallPopupVisibility = false
@@ -119,6 +146,7 @@ class LoginRegisterViewModel @Inject constructor(
 
     private fun onEvent(event: Event) {
         viewModelScope.launch { eventChannel.send(event) }
+
     }
 
     sealed class Event {
@@ -126,11 +154,15 @@ class LoginRegisterViewModel @Inject constructor(
         object PickerDialog : Event()
         object PickerDialogClose : Event()
         data class NavigateTo(val navigateTo: String) : Event()
+        object onSendOTPViaMissedCallContinueClicked : Event()
+
     }
+
+
 
     private fun setViewPagerListData() {
         val arrayList = arrayListOf<IntroViewPagerItemViewState>()
-/*        val introViewPagerItemViewState1 = IntroViewPagerItemViewState(
+      /*        val introViewPagerItemViewState1 = IntroViewPagerItemViewState(
             1,
             "ANYWHERE IN THE WORLD!",
             "Enjoy free shipping all across the globe\nonly for you!",

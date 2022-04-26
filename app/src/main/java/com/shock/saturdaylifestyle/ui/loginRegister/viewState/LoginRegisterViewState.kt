@@ -12,9 +12,22 @@ class LoginRegisterViewState(
     initChooseVerificationMethodVisibility: Boolean = false,
     initMissedCallPopupVisibility: Boolean = false,
     initStillDidntGetOtpPopupVisibility: Boolean = false,
+    initPhoneNo: String? = null,
     initCountryCodeNumberViewState:CountryCodeNumberViewState = CountryCodeNumberViewState(6, "+62", "Indonesia")
 ) :
     BaseObservable() {
+
+    @get:Bindable
+    var phoneno by bind(
+        BR.phoneno,
+        initPhoneNo
+    )
+
+    @get:Bindable
+    var phonenoForBottomSheet by bind(
+        BR.phonenoForBottomSheet,
+        initPhoneNo
+    )
 
     @get:Bindable
     var introViewPagerItemViewStateList by bind(
@@ -35,7 +48,6 @@ class LoginRegisterViewState(
     )
 
 
-
     @get:Bindable
     var chooseVerificationMethodVisibility by bind(
         BR.chooseVerificationMethodVisibility,
@@ -53,7 +65,6 @@ class LoginRegisterViewState(
         BR.missedCallPopupVisibility,
         initMissedCallPopupVisibility
     )
-
 
     @get:Bindable
     var countryCodeNumberViewState by bind(

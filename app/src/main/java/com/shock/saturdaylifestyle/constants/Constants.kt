@@ -12,6 +12,9 @@ object Constants {
     val NAME = "name"
     val EMAIL = "email"
     val OTP = "otp"
+    val CITCALL = "CITCALL"
+    val CONTENT_TYPE = "application/x-www-form-urlencoded"
+    val SMS = "SMS"
     val FROM_WHICH_SCREEN = "from_which_screen"
 
     object NavigateTo {
