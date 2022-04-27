@@ -36,7 +36,7 @@
             android:layout_marginTop="@dimen/_11sdp"
             android:ellipsize="end"
             android:maxLines="2"
-            android:text="+"
+            android:text="@string/plus"
             android:textColor="@color/black"
             android:textSize="@dimen/_10ssp"
             app:layout_constraintStart_toStartOf="parent"
@@ -54,7 +54,7 @@
             android:textSize="@dimen/_10ssp"
             app:layout_constraintStart_toEndOf="@+id/tvPlus"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="91" />
+            tools:text="@string/countrycode" />
 
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -71,7 +71,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/tv_code"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tv_code"
-            tools:text="India" />
+            tools:text="@string/india" />
 
 
         <androidx.appcompat.widget.AppCompatImageView

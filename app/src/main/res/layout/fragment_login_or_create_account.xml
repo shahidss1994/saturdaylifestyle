@@ -85,7 +85,7 @@
                     android:layout_marginBottom="@dimen/_17sdp"
                     android:fontFamily="@font/montserrat_medium"
                     android:gravity="center"
-                    android:text="OR"
+                    android:text="@string/OR"
                     android:textColor="@color/text_color_primary_black"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toTopOf="@+id/rl_google"
@@ -171,7 +171,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/tvPlus"
                         app:layout_constraintTop_toTopOf="parent"
-                        tools:text="62" />
+                        tools:text="@string/countrycode62" />
 
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/ed_phone_no"
@@ -182,7 +182,7 @@
                         android:background="@null"
                         android:fontFamily="@font/montserrat_regular"
                         android:gravity="center_vertical|start"
-                        android:hint="Input your phone number"
+                        android:hint="@string/input_your_phone_number"
                         android:inputType="number"
                         android:maxLength="12"
                         android:textColor="@color/black"
@@ -204,7 +204,7 @@
                     android:layout_marginBottom="@dimen/_17sdp"
                     android:fontFamily="@font/montserrat_regular"
                     android:gravity="center_horizontal"
-                    android:text="Citizens receive exclusive offers, first dibs on new collections, and other member benefits"
+                    android:text="@string/citizens_receive_exclusive_offers_decription"
                     android:textColor="@color/text_color_primary_black"
                     android:textSize="14sp"
                     android:visibility="visible"
@@ -219,7 +219,7 @@
                     android:layout_marginBottom="@dimen/_8sdp"
                     android:fontFamily="@font/oswald_semibold"
                     android:gravity="center_horizontal"
-                    android:text="log in or create your account"
+                    android:text="@string/log_in_create_account"
                     android:textAllCaps="true"
                     android:textColor="@color/text_color_primary_black"
                     android:textSize="20sp"

@@ -105,7 +105,7 @@
                     android:layout_marginTop="@dimen/_2sdp"
                     android:fontFamily="@font/montserrat_medium"
                     android:gravity="start"
-                    android:text="Please fill your first name"
+                    android:text="@string/please_fill_your_first_name"
                     android:textColor="@color/alert_red"
                     android:textSize="10sp"
                     android:visibility="@{viewState.showFirstNameError ? View.VISIBLE : View.INVISIBLE}" />
@@ -161,7 +161,7 @@
                     android:layout_marginTop="@dimen/_2sdp"
                     android:fontFamily="@font/montserrat_medium"
                     android:gravity="start"
-                    android:text="Please fill your last name"
+                    android:text="@string/please_fill_your_last_name"
                     android:textColor="@color/alert_red"
                     android:textSize="10sp"
                     android:visibility="@{viewState.showLastNameError ? View.VISIBLE : View.INVISIBLE}" />
@@ -217,7 +217,7 @@
                     android:layout_marginTop="@dimen/_2sdp"
                     android:fontFamily="@font/montserrat_medium"
                     android:gravity="start"
-                    android:text="Please fill your valid email"
+                    android:text="@string/please_fill_your_valid_email"
                     android:textColor="@color/alert_red"
                     android:textSize="10sp"
                     android:visibility="@{viewState.showEmailError ? View.VISIBLE : View.INVISIBLE}" />

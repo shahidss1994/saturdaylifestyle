@@ -43,7 +43,7 @@
                 android:drawableTint="@color/black"
                 android:fontFamily="@font/montserrat_regular"
                 android:gravity="center|start"
-                android:hint="Search Country"
+                android:hint="@string/search_country"
                 android:imeOptions="actionDone"
                 android:maxLines="1"
                 android:padding="@dimen/_8sdp"

@@ -33,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:src="@drawable/ic_wa"/>
+            android:src="@drawable/ic_wa" />
 
 
     </RelativeLayout>
@@ -65,7 +65,7 @@
         android:layout_marginEnd="@dimen/_20sdp"
         android:fontFamily="@font/montserrat_regular"
         android:gravity="center_horizontal"
-        android:text="You will receive OTP in 0811-1223-1345"
+        android:text="@string/you_will_receive_OTP_in_081112231345"
         android:textColor="@color/text_color_primary_black"
         android:textSize="@dimen/_12ssp"
         android:visibility="visible"
@@ -83,7 +83,7 @@
         android:background="@drawable/bg_button2"
         android:fontFamily="@font/montserrat_semi_bold"
         android:gravity="center"
-        android:text="Yes, send otp"
+        android:text="@string/Yes_send_otp"
         android:textAllCaps="true"
         android:textColor="@color/white"
         android:textSize="14sp"
@@ -102,7 +102,7 @@
         android:layout_marginEnd="@dimen/_20sdp"
         android:fontFamily="@font/montserrat_semi_bold"
         android:gravity="center_horizontal"
-        android:text="other method"
+        android:text="@string/other_method"
         android:textAllCaps="true"
         android:textColor="@color/text_color_primary_black"
         android:textSize="14sp"

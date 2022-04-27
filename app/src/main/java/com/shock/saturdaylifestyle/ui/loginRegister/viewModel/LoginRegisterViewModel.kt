@@ -117,6 +117,7 @@ class LoginRegisterViewModel @Inject constructor(
         data class NavigateTo(val navigateTo: String) : Event()
     }
 
+    //
     private fun setViewPagerListData() {
         val arrayList = arrayListOf<IntroViewPagerItemViewState>()
         val introViewPagerItemViewState1 = IntroViewPagerItemViewState(
@@ -139,7 +140,7 @@ class LoginRegisterViewModel @Inject constructor(
             3,
             "HOME TRY ON",
             "Try our entire collection (100+ frames) and\neye exam all for FREE in the comfort of\nyour home!",
-            DrawableViewState(R.mipmap.iv_onboarding2)
+            DrawableViewState(R.mipmap.iv_onboarding3)
         )
         arrayList.add(introViewPagerItemViewState3)
 
