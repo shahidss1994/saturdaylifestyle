@@ -173,7 +173,7 @@
             android:layout_marginTop="@dimen/_2sdp"
             android:fontFamily="@font/montserrat_semi_bold"
             android:gravity="center"
-            android:text="@{viewState.smstryAgainTimerText}"
+            android:text="@{@string/try_again_in_sec(viewState.smsTryAgainTimerText)}"
             android:textColor="@color/text_color_hint"
             android:textSize="14sp"
             android:visibility="@{viewState.sendOtpSmsTryAgainVisibility ? View.VISIBLE : View.GONE}"

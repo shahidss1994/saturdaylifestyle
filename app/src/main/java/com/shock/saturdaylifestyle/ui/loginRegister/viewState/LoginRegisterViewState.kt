@@ -26,7 +26,7 @@ class LoginRegisterViewState(
     initContinueBtnDrawableViewState: DrawableViewState = DrawableViewState(R.drawable.bg_button3),
     initPhoneNo: String = "",
     initPhoneNoStillNoOtp: String = "",
-    initSmstryAgainTimerText: String = "30",
+    initSmsTryAgainTimerText: String = "30",
     initSendOtpSmsTryAgainClickCount: Int = 0
 ) :
     BaseObservable() {
@@ -86,9 +86,9 @@ class LoginRegisterViewState(
     )
 
     @get:Bindable
-    var smstryAgainTimerText by bind(
-        BR.smstryAgainTimerText,
-        initSmstryAgainTimerText
+    var smsTryAgainTimerText by bind(
+        BR.smsTryAgainTimerText,
+        initSmsTryAgainTimerText
     )
 
     @get:Bindable

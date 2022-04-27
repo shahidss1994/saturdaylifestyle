@@ -45,6 +45,7 @@ class LoginRegisterViewModel @Inject constructor(
     val registerFormModel = RegisterFormModel()
 
     val mCountryCodeList = arrayListOf<CountryCodeNumberViewState>()
+    private val timer = TryAgainTimer()
 
     init {
         setViewPagerListData()
@@ -96,7 +97,7 @@ class LoginRegisterViewModel @Inject constructor(
         onEvent(Event.NavigateTo(Constants.NavigateTo.WHATSAPP_VERIFY_YOUR_NUMBER))
     }
 
-    fun onSendOTPViaSMSClicked() {
+    fun onSendOTPViaSMSClicked(fromTryAgain: Boolean = false) {
         onEvent(Event.ToggleLoader(true))
         viewModelScope.launch {
             val rs = repository.sendOtpViaSMS(
@@ -107,6 +108,11 @@ class LoginRegisterViewModel @Inject constructor(
             CommonUtilities.hideLoader()
             if (rs is Resource.Success) {
                 onEvent(Event.SendOtpViaSMSResponse(rs.value))
+                if (fromTryAgain) {
+                    startTryAgainTimer()
+                }
+            } else if (rs is Resource.Failure) {
+                onEvent(Event.SendOtpViaSMSResponse())
             }
         }
     }
@@ -172,8 +178,7 @@ class LoginRegisterViewModel @Inject constructor(
             viewState.sendOtpSmsTryAgainClickCount = viewState.sendOtpSmsTryAgainClickCount + 1
 
             viewState.sendOtpSmsTryAgainVisibility = false
-            onSendOTPViaSMSClicked()
-            startTryAgainTimer()
+            onSendOTPViaSMSClicked(true)
 
         } else {
 
@@ -204,7 +209,8 @@ class LoginRegisterViewModel @Inject constructor(
         object PickerDialogClose : Event()
         data class NavigateTo(val navigateTo: String) : Event()
         data class SendOtpViaMissedCallResponse(val response: SendOtpModel) : Event()
-        data class SendOtpViaSMSResponse(val response: SendOtpModel) : Event()
+        data class SendOtpViaSMSResponse(val response: SendOtpModel? = null) : Event()
+
         data class ToggleLoader(val isToShow: Boolean) : Event()
     }
 
@@ -671,23 +677,25 @@ class LoginRegisterViewModel @Inject constructor(
         }
     }
 
-    fun initConfirmYourNumberViewState(){
+    fun initConfirmYourNumberViewState() {
         startTryAgainTimer()
     }
 
     private fun startTryAgainTimer() {
         viewState.sendOtpSmsTryAgainVisibility = true
-        val timer = object : CountDownTimer(30000, 1000) {
-            override fun onTick(millisUntilFinished: Long) {
-                viewState.smstryAgainTimerText = "Try again in " + millisUntilFinished / 1000
-            }
-
-            override fun onFinish() {
-                viewState.sendOtpSmsTryAgainVisibility = false
-
-            }
-        }
+        timer.cancel()
         timer.start()
+    }
+
+    inner class TryAgainTimer : CountDownTimer(31000, 1000) {
+        override fun onTick(millisUntilFinished: Long) {
+            viewState.smsTryAgainTimerText = "${millisUntilFinished / 1000}"
+        }
+
+        override fun onFinish() {
+            viewState.sendOtpSmsTryAgainVisibility = false
+
+        }
     }
 
 }
