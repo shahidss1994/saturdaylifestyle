@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -190,6 +191,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:background="@null"
+                        android:enabled="@{viewState.freezeEmail == true ? false : true}"
                         android:fontFamily="@font/montserrat_regular"
                         android:gravity="center|start"
                         android:hint="@string/example_email"
@@ -198,6 +200,7 @@
                         android:paddingStart="@dimen/_15sdp"
                         android:paddingEnd="@dimen/_10sdp"
                         android:singleLine="true"
+                        android:text="@{viewState.email}"
                         android:textColor="@color/black"
                         android:textColorHint="@color/text_color_hint"
                         android:textSize="14sp"
@@ -286,6 +289,104 @@
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/montserrat_light"
                     android:gravity="start"
+                    android:text="@string/phone_number"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10ssp" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layoutPhoneNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:background="@drawable/bg_edittext"
+                    android:paddingStart="@dimen/_15sdp"
+                    android:paddingEnd="@dimen/_15sdp"
+                    app:layout_constraintBottom_toTopOf="@+id/btn_contibute"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvPlus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:enabled="@{viewState.freezePhoneNo == true ? false : true}"
+                        android:focusable="true"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:gravity="center"
+                        android:onClick="@{()->viewModel.showCountryCodePicker()}"
+                        android:text="+"
+                        android:textColor="@color/indigo"
+                        android:textSize="@dimen/_12ssp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_phone_code"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:drawableEnd="@drawable/ic_bottom_arrow"
+                        android:drawablePadding="@dimen/_5sdp"
+                        android:enabled="@{viewState.freezePhoneNo == true ? false : true}"
+                        android:focusable="true"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:gravity="center"
+                        android:onClick="@{()->viewModel.showCountryCodePicker()}"
+                        android:text="@{viewState.phoneNumberViewState.code}"
+                        android:textColor="@color/indigo"
+                        android:textSize="@dimen/_12ssp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tvPlus"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="62" />
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/ed_phone_no"
+                        textChangedListener="@{viewModel.phoneNoTextWatcher}"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:background="@null"
+                        android:enabled="@{viewState.freezeEmail == true ? false : true}"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:gravity="center_vertical|start"
+                        android:hint="Input your phone number"
+                        android:inputType="number"
+                        android:maxLength="12"
+                        android:text="@{viewState.phoneNumberViewState.number}"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/grey_light"
+                        android:textSize="@dimen/_12ssp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_weight="5"
+                        app:layout_constraintStart_toEndOf="@id/tv_phone_code"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvAlertMobileNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:gravity="start"
+                    android:text="Please fill your valid phone number"
+                    android:textColor="@color/alert_red"
+                    android:textSize="10sp"
+                    android:visibility="@{viewState.showMobileNoError ? View.VISIBLE : View.INVISIBLE}" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/montserrat_light"
+                    android:gravity="start"
                     android:text="@string/gender"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_10ssp" />
@@ -295,7 +396,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
-                    android:layout_marginTop="@dimen/_2sdp"
                     android:layout_marginEnd="@dimen/_25sdp"
                     android:layout_marginBottom="@dimen/_5sdp"
                     android:gravity="center_vertical"

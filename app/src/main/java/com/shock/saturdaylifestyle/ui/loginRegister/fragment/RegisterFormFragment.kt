@@ -22,6 +22,7 @@ class RegisterFormFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding().apply {
+            mViewModel.initRegisterViewState()
             viewModel = mViewModel
             viewState = mViewModel.registerFormViewState
         }

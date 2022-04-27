@@ -14,6 +14,9 @@
             name="viewState"
             type="com.shock.saturdaylifestyle.ui.loginRegister.viewState.LoginRegisterViewState" />
 
+        <import type="android.view.View" />
+
+
     </data>
 
 
@@ -170,10 +173,10 @@
             android:layout_marginTop="@dimen/_2sdp"
             android:fontFamily="@font/montserrat_semi_bold"
             android:gravity="center"
-            android:text="@string/try_again_in_30"
+            android:text="@{@string/try_again_in_sec(viewState.smsTryAgainTimerText)}"
             android:textColor="@color/text_color_hint"
             android:textSize="14sp"
-            android:visibility="visible"
+            android:visibility="@{viewState.sendOtpSmsTryAgainVisibility ? View.VISIBLE : View.GONE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -188,10 +191,11 @@
             android:fontFamily="@font/montserrat_semi_bold"
             android:gravity="center"
             android:text="@string/try_again"
+            android:visibility="@{viewState.sendOtpSmsTryAgainVisibility ? View.GONE : View.VISIBLE}"
+            android:onClick="@{()->viewModel.onSendOTPTryAgain()}"
             android:textAllCaps="true"
             android:textColor="@color/indigo"
             android:textSize="14sp"
-            android:visibility="gone"
             tools:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_chainStyle="packed"

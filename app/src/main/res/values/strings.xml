@@ -27,6 +27,7 @@
     <string name="email">Email</string>
     <string name="birthday">Birthday</string>
     <string name="gender">Gender</string>
+    <string name="phone_number">Phone Number</string>
     <string name="please_fill_your_first_name">Please fill your first name</string>
     <string name="please_fill_your_last_name">Please fill your last name</string>
     <string name="please_fill_your_valid_email">Please fill your valid email</string>
@@ -54,7 +55,7 @@
 
 
     <string name="confirm_your_number">Confirm your number</string>
-    <string name="insert_the_5_digit_code_text">Insert the-5-digit code SATURDAYS\njust sent to your Whatsapp</string>
+    <string name="insert_the_5_digit_code_text">Insert the-5-digit code SATURDAYS\njust sent to your number</string>
     <string name="didn_t_get_the_5_digit_code">Didn\'t get the 5-digit code?</string>
     <string name="try_again">Try Again</string>
     <string name="try_again_in_30">Try again in 30</string>
@@ -65,6 +66,23 @@
 
     <string name="phone_number_must_contain_min_8_digits">Phone number must contain min. 8 digits</string>
     <string name="choose_one_of_these_method_to_send_verification_code_to_number">Choose one of these method to send verification code (OTP) to %s</string>
+
+
+    <string name="the_last_4_digits_of_missed_call_number_is_nyour_otp_code">The last 4 digits of missed call number is your OTP code</string>
+
+    <string name="still_didn_t_get_the_otp">Still didn\'t get the OTP?</string>
+    <string name="log_in_with_gmail">Log in with gmail</string>
+    <string name="didn_t_get_the_missed_call">Didn\'t get the missed call?</string>
+    <string name="you_will_get_missed_call">You will get missed call</string>
+    <string name="yes_send_otp">Yes, send OTP</string>
+    <string name="resend_otp_via_whatsapp">Resend OTP via Whatsapp</string>
+    <string name="or_try_another_method">or try another method</string>
+    <string name="make_sure_this_is_your_correct_number">Make sure this is your correct number</string>
+    <string name="try_again">Try again</string>
+    <string name="_121_1345">121-1345-</string>
+    <string name="by_signing_up_you_agree_to_our">By signing up you agree to our</string>
+    <string name="otp_send_error_msg">Unable to send OTP</string>
+    <string name="try_again_in_sec">Try again in %s</string>
 
 
     <string name="anywhere_in_the_world">ANYWHERE IN THE WORLD!</string>

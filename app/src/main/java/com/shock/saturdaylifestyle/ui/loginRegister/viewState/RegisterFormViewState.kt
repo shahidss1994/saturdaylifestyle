@@ -12,6 +12,11 @@ class RegisterFormViewState(
     initShowLastNameError: Boolean = false,
     initShowEmailError: Boolean = false,
     initShowBirthdayError: Boolean = false,
+    initShowMobileNoError: Boolean = false,
+    initPhoneNumberViewState: CountryCodeNumberViewState = CountryCodeNumberViewState("id", "62", "Indonesia"),
+    initFreezePhoneNo: Boolean = false,
+    initEmail: String = "",
+    initFreezeEmail: Boolean = false,
     initContinueBtnDrawableViewState: DrawableViewState = DrawableViewState(R.drawable.bg_button3),
 ) : BaseObservable() {
 
@@ -40,9 +45,39 @@ class RegisterFormViewState(
     )
 
     @get:Bindable
+    var showMobileNoError by bind(
+        BR.showMobileNoError,
+        initShowMobileNoError
+    )
+
+    @get:Bindable
+    var phoneNumberViewState by bind(
+        BR.phoneNumberViewState,
+        initPhoneNumberViewState
+    )
+
+    @get:Bindable
+    var email by bind(
+        BR.email,
+        initEmail
+    )
+
+    @get:Bindable
     var continueBtnDrawableViewState by bind(
         BR.continueBtnDrawableViewState,
         initContinueBtnDrawableViewState
+    )
+
+    @get:Bindable
+    var freezePhoneNo by bind(
+        BR.freezePhoneNo,
+        initFreezePhoneNo
+    )
+
+    @get:Bindable
+    var freezeEmail by bind(
+        BR.freezeEmail,
+        initFreezeEmail
     )
 
 }

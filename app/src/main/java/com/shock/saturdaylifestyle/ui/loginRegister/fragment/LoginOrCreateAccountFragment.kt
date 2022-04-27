@@ -10,7 +10,8 @@ import com.shock.saturdaylifestyle.ui.loginRegister.viewModel.LoginRegisterViewM
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LoginOrCreateAccountFragment: BottomSheetBaseFragment<FragmentLoginOrCreateAccountBinding>(R.layout.fragment_login_or_create_account) {
+class LoginOrCreateAccountFragment :
+    BottomSheetBaseFragment<FragmentLoginOrCreateAccountBinding>(R.layout.fragment_login_or_create_account) {
 
     companion object {
         const val TAG = "LoginOrCreateAccountFragment"
