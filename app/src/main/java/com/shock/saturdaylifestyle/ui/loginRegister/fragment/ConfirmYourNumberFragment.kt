@@ -27,4 +27,9 @@ class ConfirmYourNumberFragment : BaseFragment<FragmentConfirmYourNumberBinding>
 
     }
 
+    override fun onDestroy() {
+        mViewModel.destroyConfirmYourNumberViewState()
+        super.onDestroy()
+    }
+
 }

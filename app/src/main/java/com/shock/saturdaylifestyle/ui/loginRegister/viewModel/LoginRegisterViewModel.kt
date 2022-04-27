@@ -681,6 +681,10 @@ class LoginRegisterViewModel @Inject constructor(
         startTryAgainTimer()
     }
 
+    fun destroyConfirmYourNumberViewState(){
+        timer.cancel()
+    }
+
     private fun startTryAgainTimer() {
         viewState.sendOtpSmsTryAgainVisibility = true
         timer.cancel()
@@ -689,12 +693,15 @@ class LoginRegisterViewModel @Inject constructor(
 
     inner class TryAgainTimer : CountDownTimer(31000, 1000) {
         override fun onTick(millisUntilFinished: Long) {
-            viewState.smsTryAgainTimerText = "${millisUntilFinished / 1000}"
+            if(millisUntilFinished > 0) {
+                viewState.smsTryAgainTimerText = "${millisUntilFinished / 1000}"
+            } else {
+                viewState.sendOtpSmsTryAgainVisibility = false
+            }
         }
 
         override fun onFinish() {
             viewState.sendOtpSmsTryAgainVisibility = false
-
         }
     }
 
