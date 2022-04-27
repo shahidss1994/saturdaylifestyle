@@ -10,11 +10,11 @@ class LoginRegisterRepository @Inject constructor(
 ) : BaseRepository(api) {
 
     suspend fun sendOtpViaMissedCall(key: String, phoneNumber: String, countryCode: String) =
-        safeApiCall { api.sendOTPMissCall(key,
+        safeApiCall { api.sendOtp(key,
             Constants.CONTENT_TYPE,countryCode,phoneNumber,Constants.CITCALL) }
 
     suspend fun sendOtpViaSMS(key: String, phoneNumber: String, countryCode: String) =
-        safeApiCall { api.sendOtpSms(key,
+        safeApiCall { api.sendOtp(key,
             Constants.CONTENT_TYPE,countryCode,phoneNumber,Constants.MSG) }
 
 }

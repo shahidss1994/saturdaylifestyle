@@ -11,7 +11,6 @@ import com.shock.saturdaylifestyle.ui.base.others.observeInLifecycle
 import com.shock.saturdaylifestyle.ui.loginRegister.fragment.CountryCodeNumberFragment
 import com.shock.saturdaylifestyle.ui.loginRegister.fragment.LoginOnboardingIntroFragmentDirections
 import com.shock.saturdaylifestyle.ui.loginRegister.fragment.LoginOrCreateAccountFragment
-import com.shock.saturdaylifestyle.ui.loginRegister.fragment.MissedCallVerifyYourNumberFragment
 import com.shock.saturdaylifestyle.ui.loginRegister.viewModel.LoginRegisterViewModel
 import com.shock.saturdaylifestyle.utility.CommonUtilities
 import dagger.hilt.android.AndroidEntryPoint
@@ -83,10 +82,10 @@ class LoginRegisterActivity :
                                 loginOrCreateFragment.dismiss()
                             }
                             navController.navigate(LoginOnboardingIntroFragmentDirections.actionLoginOnboardingIntroMissedCallVerifyYourNumberFragment())
-                            CommonUtilities.showToast(this,it.response.message?.en.toString())
+                            //CommonUtilities.showToast(this,it.response.message?.en.toString())
                         }
                         false ->{
-                            CommonUtilities.showToast(this,it.response.message?.en.toString())
+                            //CommonUtilities.showToast(this,it.response.message?.en.toString())
                         }
                     }
 
@@ -98,7 +97,7 @@ class LoginRegisterActivity :
                             if(loginOrCreateFragment.isVisible) {
                                 loginOrCreateFragment.dismiss()
                             }
-                            CommonUtilities.showToast(this,it.response.message?.en.toString())
+                            //CommonUtilities.showToast(this,it.response.message?.en.toString())
 
                             if(mViewModel.viewState.sendOtpSmsTryAgainClickCount==0) {
                                 navController.navigate(LoginOnboardingIntroFragmentDirections.actionLoginOnboardingIntroConfirmYourNumberFragment())
