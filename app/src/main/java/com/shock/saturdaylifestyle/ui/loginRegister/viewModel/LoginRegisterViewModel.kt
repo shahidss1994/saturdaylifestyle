@@ -1,21 +1,26 @@
 package com.shock.saturdaylifestyle.ui.loginRegister.viewModel
 
+import android.os.CountDownTimer
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import android.widget.RadioGroup
 import androidx.core.util.PatternsCompat
 import androidx.lifecycle.viewModelScope
 import com.shock.saturdaylifestyle.R
 import com.shock.saturdaylifestyle.constants.Constants
+import com.shock.saturdaylifestyle.network.Resource
 import com.shock.saturdaylifestyle.ui.base.viewModel.BaseViewModel
 import com.shock.saturdaylifestyle.ui.base.viewState.ColorViewState
 import com.shock.saturdaylifestyle.ui.base.viewState.DrawableViewState
 import com.shock.saturdaylifestyle.ui.loginRegister.model.RegisterFormModel
+import com.shock.saturdaylifestyle.ui.loginRegister.model.SendOtpModel
+import com.shock.saturdaylifestyle.ui.loginRegister.network.LoginRegisterRepository
 import com.shock.saturdaylifestyle.ui.loginRegister.viewState.CountryCodeNumberViewState
 import com.shock.saturdaylifestyle.ui.loginRegister.viewState.IntroViewPagerItemViewState
 import com.shock.saturdaylifestyle.ui.loginRegister.viewState.LoginRegisterViewState
 import com.shock.saturdaylifestyle.ui.loginRegister.viewState.RegisterFormViewState
-import com.shock.saturdaylifestyle.ui.main.network.MainRepository
+import com.shock.saturdaylifestyle.utility.CommonUtilities
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -24,8 +29,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginRegisterViewModel @Inject constructor(
-    private val mainRepository: MainRepository
-) : BaseViewModel(mainRepository) {
+    private val repository: LoginRegisterRepository
+) : BaseViewModel(repository) {
 
     private val eventChannel = Channel<Event>(Channel.BUFFERED)
     val eventFlow = eventChannel.receiveAsFlow()
@@ -47,22 +52,90 @@ class LoginRegisterViewModel @Inject constructor(
         setCountryCodeNumberList()
     }
 
+
+    fun sendOtpViaMissedCallApi(key: String, phoneNumber: String, countryCode: String) = viewModelScope.launch {
+        val rs = repository.sendOtpViaMissedCall(key, phoneNumber, countryCode)
+        CommonUtilities.hideLoader()
+        if (rs is Resource.Success) {
+                onEvent(Event.onSendOtpViaMissedCallResponse(rs.value))
+        }
+    }
+
+
+    fun sendOtpViaSMSApi(key: String, phoneNumber: String, countryCode: String) = viewModelScope.launch {
+        val rs = repository.sendOtpViaSMS(key, phoneNumber, countryCode)
+        CommonUtilities.hideLoader()
+        if (rs is Resource.Success) {
+            onEvent(Event.onSendOtpViaSMSResponse(rs.value))
+        }
+    }
+
+
+
     fun onLoginCreateAccountClicked() {
         onEvent(Event.NavigateTo(Constants.NavigateTo.LOGIN_OR_CREATE_ACCOUNT))
+
+        viewState.loginOrCreateAccountVisibility = true
+        viewState.chooseVerificationMethodVisibility = false
+        viewState.missedCallPopupVisibility = false
+        viewState.stillDidntGetOtpPopupVisibility = false
     }
+
+
+
 
     fun onContinueClicked() {
         if (viewState.phoneNo.length >= 8) {
             viewState.loginOrCreateAccountVisibility = false
+
         }
     }
+
+
+
+
+    fun onSendOTPViaMissedCallClicked() {
+        viewState.loginOrCreateAccountVisibility = false
+        viewState.chooseVerificationMethodVisibility = false
+        viewState.missedCallPopupVisibility = true
+        viewState.stillDidntGetOtpPopupVisibility = false
+
+    }
+
+    fun onSendOTPViaMissedCallContinueClicked() {
+
+
+        onEvent(Event.onSendOTPViaMissedCallContinueClicked)
+
+
+
+       // onEvent(Event.NavigateTo(Constants.NavigateTo.MISSED_CALL_VERIFY_YOUR_NUMBER))
+    }
+
+    fun onMissedCallPopupBackClicked() {
+        viewState.loginOrCreateAccountVisibility = false
+        viewState.chooseVerificationMethodVisibility = true
+        viewState.missedCallPopupVisibility = false
+        viewState.stillDidntGetOtpPopupVisibility = false
+    }
+
+    fun onMissedCallPopupOtherMethodClicked() {
+        viewState.loginOrCreateAccountVisibility = false
+        viewState.chooseVerificationMethodVisibility = true
+        viewState.missedCallPopupVisibility = false
+        viewState.stillDidntGetOtpPopupVisibility = false
+    }
+
+
+
 
     fun onSendOTPViaWhatsappClicked() {
         onEvent(Event.NavigateTo(Constants.NavigateTo.WHATSAPP_VERIFY_YOUR_NUMBER))
     }
 
     fun onSendOTPViaSMSClicked() {
-        onEvent(Event.NavigateTo(Constants.NavigateTo.CONFIRM_YOUR_NUMBER))
+       // onEvent(Event.NavigateTo(Constants.NavigateTo.CONFIRM_YOUR_NUMBER))
+        onEvent(Event.onSendOTPViaSMSClicked)
     }
 
     fun onBackPressed() {
@@ -74,6 +147,9 @@ class LoginRegisterViewModel @Inject constructor(
     }
 
     fun onWhatsAppTryAgainClicked() {
+
+    }
+    fun onGmailLoginClicked() {
 
     }
 
@@ -101,6 +177,33 @@ class LoginRegisterViewModel @Inject constructor(
         viewState.loginOrCreateAccountVisibility = true
     }
 
+
+    fun onSendOTPTryAgain() {
+
+        if (viewState.sendOtpSmsTryAgainClickCount<2) {
+            viewState.sendOtpSmsTryAgainClickCount = viewState.sendOtpSmsTryAgainClickCount+1
+
+            viewState.sendOtpSmsTryAgainVisibility = false
+            onEvent(Event.onSendOTPViaSMSTryAgainClicked)
+
+
+        }else
+        {
+
+
+            onEvent(Event.NavigateTo(Constants.NavigateTo.LOGIN_OR_CREATE_ACCOUNT))
+
+
+            viewState.loginOrCreateAccountVisibility = false
+            viewState.chooseVerificationMethodVisibility = false
+            viewState.missedCallPopupVisibility = false
+            viewState.stillDidntGetOtpPopupVisibility = true
+
+            viewState.phoneNoStillNoOtp = viewState.phoneNo
+
+        }
+    }
+
     fun checkSelectedCountry(countryCodeNumberViewState: CountryCodeNumberViewState) {
         viewState.countryCodeNumberViewState = countryCodeNumberViewState
         onEvent(Event.PickerDialogClose)
@@ -114,7 +217,12 @@ class LoginRegisterViewModel @Inject constructor(
         object OnBackPressed : Event()
         object PickerDialog : Event()
         object PickerDialogClose : Event()
+        object onSendOTPViaMissedCallContinueClicked : Event()
+        object onSendOTPViaSMSClicked : Event()
+        object onSendOTPViaSMSTryAgainClicked : Event()
         data class NavigateTo(val navigateTo: String) : Event()
+        data class onSendOtpViaMissedCallResponse(val response: SendOtpModel) : Event()
+        data class onSendOtpViaSMSResponse(val response: SendOtpModel) : Event()
     }
 
     private fun setViewPagerListData() {
@@ -158,7 +266,7 @@ class LoginRegisterViewModel @Inject constructor(
             DrawableViewState(R.mipmap.iv_onboarding5)
         )
         arrayList.add(introViewPagerItemViewState5)
-        viewState.introViewPagerItemViewStateList = arrayList
+       // viewState.introViewPagerItemViewStateList = arrayList
     }
 
     private fun setCountryCodeNumberList() {

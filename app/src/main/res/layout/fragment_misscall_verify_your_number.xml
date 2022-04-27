@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
+<layout>
 
     <data>
 
@@ -10,34 +7,35 @@
             name="viewModel"
             type="com.shock.saturdaylifestyle.ui.loginRegister.viewModel.LoginRegisterViewModel" />
 
-        <variable
-            name="viewState"
-            type="com.shock.saturdaylifestyle.ui.loginRegister.viewState.LoginRegisterViewState" />
-
-        <import type="android.view.View" />
-
-
     </data>
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        android:paddingStart="@dimen/_15sdp"
-        android:paddingTop="@dimen/_15sdp"
-        android:paddingEnd="@dimen/_15sdp">
-
+        android:paddingStart="@dimen/_12sdp"
+        android:paddingTop="@dimen/_16sdp"
+        android:paddingEnd="@dimen/_12sdp"
+        android:paddingBottom="@dimen/_16sdp">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_back"
             android:layout_width="@dimen/_20sdp"
             android:layout_height="@dimen/_20sdp"
+            android:layout_alignParentStart="true"
+            android:layout_centerInParent="true"
             android:onClick="@{()->viewModel.onBackPressed()}"
-            android:paddingBottom="@dimen/_2sdp"
+            android:padding="@dimen/_2sdp"
             android:src="@drawable/ic_arrow_back"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+
+
+
+
+
 
 
         <TextView
@@ -56,14 +54,16 @@
             app:layout_constraintTop_toBottomOf="@id/iv_back" />
 
 
+
+
         <TextView
-            android:id="@+id/tv_subtitle"
+            android:id="@+id/tv_subtitle3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
             android:fontFamily="@font/montserrat_regular"
             android:gravity="center"
-            android:text="@string/insert_the_5_digit_code_text"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="Please complete the last 4 digits\nof missed call phone number"
             android:textColor="@color/text_color_primary_black"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -72,7 +72,7 @@
             app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
         <TextView
-            android:id="@+id/tv_phoneno"
+            android:id="@+id/tv_phoneno3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_regular"
@@ -83,158 +83,176 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_subtitle" />
+            app:layout_constraintTop_toBottomOf="@id/tv_subtitle3" />
+
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layout_pin"
+            android:id="@+id/layout_pin3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_35sdp"
             android:orientation="horizontal"
             android:weightSum="5"
+            android:layout_marginTop="@dimen/_35sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_phoneno">
+            app:layout_constraintTop_toBottomOf="@id/tv_phoneno3" >
+
+
+
+            <TextView
+                android:id="@+id/tv_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_medium"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="@string/_121_1345"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:textColor="@color/text_color_primary_black"
+                android:textSize="24sp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/pv_pin3"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"/>
+
 
 
             <com.chaos.view.PinView
-                android:id="@+id/pv_pin"
+                android:id="@+id/pv_pin3"
                 android:layout_width="wrap_content"
+                app:lineColor="@color/text_color_primary_black"
                 android:layout_height="wrap_content"
-                android:background="@color/fui_transparent"
-                android:clickable="true"
                 android:cursorVisible="true"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
+                android:clickable="true"
                 android:fontFamily="@font/montserrat_regular"
                 android:gravity="center"
                 android:inputType="number"
                 android:itemBackground="@drawable/bg_pin_default"
-                android:maxLength="6"
                 android:textColor="@color/text_color_primary_black"
+                android:background="@color/fui_transparent"
+                android:maxLength="4"
+                app:itemWidth="@dimen/_28sdp"
+                app:lineWidth="1dp"
                 android:textSize="40sp"
                 app:cursorColor="@color/text_color_primary_black"
                 app:cursorWidth="@dimen/_1sdp"
                 app:hideLineWhenFilled="false"
-                app:itemCount="6"
+                app:itemCount="4"
                 app:itemRadius="@dimen/_7sdp"
                 app:itemSpacing="@dimen/_12sdp"
-                app:itemWidth="@dimen/_32sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:lineColor="@color/text_color_primary_black"
-                app:lineWidth="1dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_phone"
                 app:viewType="none" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+
         <TextView
-            android:id="@+id/tv_wrong_number"
+            android:id="@+id/tv_wrong_number3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_7sdp"
             android:fontFamily="@font/montserrat_medium"
             android:gravity="center"
+            android:visibility="invisible"
+            android:layout_marginTop="@dimen/_7sdp"
             android:text="@string/wrong_number_please_input_the_correct_code"
             android:textColor="@color/alert_red"
             android:textSize="11sp"
-            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/layout_pin" />
+            app:layout_constraintTop_toBottomOf="@id/layout_pin3" />
+
+
 
 
         <TextView
-            android:id="@+id/tv_didnt_get_the_code"
+            android:id="@+id/tv_didnt_get_the_code3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_25sdp"
             android:fontFamily="@font/montserrat_medium"
             android:gravity="center"
-            android:text="@string/didn_t_get_the_5_digit_code"
+            android:layout_marginTop="@dimen/_25sdp"
+            android:text="@string/didn_t_get_the_missed_call"
             android:textColor="@color/text_color_primary_black"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_wrong_number" />
+            app:layout_constraintTop_toBottomOf="@id/tv_wrong_number3" />
 
 
-        <TextView
-            android:id="@+id/tv_timer"
+
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_try_again3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_2sdp"
             android:fontFamily="@font/montserrat_semi_bold"
             android:gravity="center"
-            android:text="@{viewState.smstryAgainTimerText}"
-            android:textColor="@color/text_color_hint"
-            android:textSize="14sp"
-            android:visibility="@{viewState.sendOtpSmsTryAgainVisibility ? View.VISIBLE : View.GONE}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_didnt_get_the_code" />
-
-
-        <TextView
-            android:id="@+id/tv_try_again"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_2sdp"
-            android:fontFamily="@font/montserrat_semi_bold"
-            android:gravity="center"
-            android:text="Try Again"
-            android:visibility="@{viewState.sendOtpSmsTryAgainVisibility ? View.GONE : View.VISIBLE}"
-            android:onClick="@{()->viewModel.onSendOTPTryAgain()}"
-            android:textAllCaps="true"
+            android:text="@string/try_again"
+            android:visibility="visible"
             android:textColor="@color/indigo"
+            android:textAllCaps="true"
             android:textSize="14sp"
-            tools:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_didnt_get_the_code" />
+            app:layout_constraintTop_toBottomOf="@id/tv_didnt_get_the_code3" />
+
 
 
         <TextView
-            android:id="@+id/tv_by_signing_up"
+            android:id="@+id/tv_by_signing_up3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_5sdp"
             android:fontFamily="@font/montserrat_regular"
             android:gravity="center"
-            android:text="By signing up you agree to our"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="@string/by_signing_up_you_agree_to_our"
             android:textColor="@color/text_color_primary_black"
             android:textSize="12sp"
-            app:layout_constraintBottom_toTopOf="@+id/tv_privacy_policy"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintLeft_toLeftOf="parent" />
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/tv_privacy_policy3"/>
+
+
 
 
         <TextView
-            android:id="@+id/tv_privacy_policy"
+            android:id="@+id/tv_privacy_policy3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginBottom="@dimen/_15sdp"
             android:fontFamily="@font/montserrat_regular"
             android:gravity="center"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_15sdp"
             android:text="@string/privacy_policy_text_underlined"
             android:textColor="@color/indigo"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintLeft_toLeftOf="parent" />
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 </layout>

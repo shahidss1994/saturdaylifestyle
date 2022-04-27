@@ -12,11 +12,22 @@ class LoginRegisterViewState(
     initIntroViewPagerItemViewStateList: List<IntroViewPagerItemViewState> = arrayListOf(),
     initCountryCodeNumberViewStateList: List<CountryCodeNumberViewState> = arrayListOf(),
     initLoginOrCreateAccountVisibility: Boolean = true,
-    initCountryCodeNumberViewState:CountryCodeNumberViewState = CountryCodeNumberViewState("id", "62", "Indonesia"),
+    initSendOtpSmsTryAgainVisibility: Boolean = true,
+    initCountryCodeNumberViewState: CountryCodeNumberViewState = CountryCodeNumberViewState(
+        "id",
+        "62",
+        "Indonesia"
+    ),
     initPhoneNoMessageColorViewState: ColorViewState? = null,
     initShowPhoneNoMessage: Boolean = false,
+    initChooseVerificationMethodVisibility: Boolean = false,
+    initMissedCallPopupVisibility: Boolean = false,
+    initStillDidntGetOtpPopupVisibility: Boolean = false,
     initContinueBtnDrawableViewState: DrawableViewState = DrawableViewState(R.drawable.bg_button3),
     initPhoneNo: String = "",
+    initPhoneNoStillNoOtp: String = "",
+    initSmstryAgainTimerText: String = "30",
+    initSendOtpSmsTryAgainClickCount: Int = 0
 ) :
     BaseObservable() {
 
@@ -66,6 +77,50 @@ class LoginRegisterViewState(
     var phoneNo by bind(
         BR.phoneNo,
         initPhoneNo
+    )
+
+    @get:Bindable
+    var phoneNoStillNoOtp by bind(
+        BR.phoneNoStillNoOtp,
+        initPhoneNo
+    )
+
+    @get:Bindable
+    var smstryAgainTimerText by bind(
+        BR.smstryAgainTimerText,
+        initSmstryAgainTimerText
+    )
+
+    @get:Bindable
+    var sendOtpSmsTryAgainClickCount by bind(
+        BR.sendOtpSmsTryAgainClickCount,
+        initSendOtpSmsTryAgainClickCount
+    )
+
+
+    @get:Bindable
+    var sendOtpSmsTryAgainVisibility by bind(
+        BR.sendOtpSmsTryAgainVisibility,
+        initSendOtpSmsTryAgainVisibility
+    )
+
+
+    @get:Bindable
+    var chooseVerificationMethodVisibility by bind(
+        BR.chooseVerificationMethodVisibility,
+        initChooseVerificationMethodVisibility
+    )
+
+    @get:Bindable
+    var stillDidntGetOtpPopupVisibility by bind(
+        BR.stillDidntGetOtpPopupVisibility,
+        initStillDidntGetOtpPopupVisibility
+    )
+
+    @get:Bindable
+    var missedCallPopupVisibility by bind(
+        BR.missedCallPopupVisibility,
+        initMissedCallPopupVisibility
     )
 
 }
