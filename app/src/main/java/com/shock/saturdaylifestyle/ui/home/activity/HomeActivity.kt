@@ -1,4 +1,4 @@
-package com.shock.saturdaylifestyle.ui.home
+package com.shock.saturdaylifestyle.ui.home.activity
 
 import com.shock.saturdaylifestyle.R
 import com.shock.saturdaylifestyle.databinding.ActivityHomeBinding

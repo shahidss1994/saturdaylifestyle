@@ -1,4 +1,4 @@
-package com.shock.saturdaylifestyle.ui.home
+package com.shock.saturdaylifestyle.ui.home.viewModel
 
 import com.shock.saturdaylifestyle.ui.base.viewModel.BaseViewModel
 import com.shock.saturdaylifestyle.ui.loginRegister.network.LoginRegisterRepository

@@ -23,7 +23,6 @@
             android:id="@+id/action_login_onboarding_intro_register_form_fragment"
             app:destination="@+id/registerFormFragment" />
 
-
         <action
             android:id="@+id/action_login_onboarding_intro_missed_call_verify_your_number_fragment"
             app:destination="@+id/missedCallVerifyYourNumberFragment" />

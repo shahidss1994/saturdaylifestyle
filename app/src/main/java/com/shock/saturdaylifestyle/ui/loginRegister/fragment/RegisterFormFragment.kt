@@ -34,7 +34,7 @@ class RegisterFormFragment :
 
     override fun onDestroy() {
         super.onDestroy()
-        mViewModel.viewState.loginOrCreateAccountVisibility = true
+        mViewModel.destroyRegisterViewState()
     }
 
 }

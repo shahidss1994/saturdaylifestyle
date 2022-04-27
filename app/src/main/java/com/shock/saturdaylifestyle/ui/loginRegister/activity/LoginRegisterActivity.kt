@@ -6,12 +6,12 @@ import com.shock.saturdaylifestyle.R
 import com.shock.saturdaylifestyle.constants.Constants
 import com.shock.saturdaylifestyle.databinding.ActivityLoginRegisterBinding
 import com.shock.saturdaylifestyle.ui.base.activity.BaseActivity
+import com.shock.saturdaylifestyle.ui.base.fragment.DatePickerDialogFragment
 import com.shock.saturdaylifestyle.ui.base.others.observeInLifecycle
 import com.shock.saturdaylifestyle.ui.loginRegister.fragment.CountryCodeNumberFragment
 import com.shock.saturdaylifestyle.ui.loginRegister.fragment.LoginOnboardingIntroFragmentDirections
 import com.shock.saturdaylifestyle.ui.loginRegister.fragment.LoginOrCreateAccountFragment
 import com.shock.saturdaylifestyle.ui.loginRegister.viewModel.LoginRegisterViewModel
-import com.shock.saturdaylifestyle.utility.CommonUtilities
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.onEach
 
@@ -25,6 +25,7 @@ class LoginRegisterActivity :
 
         val loginOrCreateFragment = LoginOrCreateAccountFragment()
         val countryCodeFragment = CountryCodeNumberFragment()
+        val datePickerDialogFragment = DatePickerDialogFragment()
 
         val navController = findNavController(R.id.navHostFragment)
 
@@ -60,6 +61,7 @@ class LoginRegisterActivity :
                             if (loginOrCreateFragment.isVisible) {
                                 loginOrCreateFragment.dismiss()
                             }
+                            onBackPressed()
                             navController.navigate(LoginOnboardingIntroFragmentDirections.actionLoginOnboardingIntroRegisterFormFragment())
                         }
                     }
@@ -74,51 +76,55 @@ class LoginRegisterActivity :
                     onBackPressed()
                 }
                 is LoginRegisterViewModel.Event.SendOtpViaMissedCallResponse -> {
-                    when (it.response.status) {
-
-                        true -> {
-                            if (loginOrCreateFragment.isVisible) {
-                                loginOrCreateFragment.dismiss()
-                            }
-                            navController.navigate(LoginOnboardingIntroFragmentDirections.actionLoginOnboardingIntroMissedCallVerifyYourNumberFragment())
-                            //CommonUtilities.showToast(this,it.response.message?.en.toString())
+                    if (it.response.status == true) {
+                        if (loginOrCreateFragment.isVisible) {
+                            loginOrCreateFragment.dismiss()
                         }
-                        false -> {
-                            CommonUtilities.showToast(this, it.response.message?.en.toString())
-                        }
+                        navController.navigate(LoginOnboardingIntroFragmentDirections.actionLoginOnboardingIntroMissedCallVerifyYourNumberFragment())
+                    } else {
+                        showToast(it.response.message?.en ?: "Network error")
                     }
-
                 }
                 is LoginRegisterViewModel.Event.SendOtpViaSMSResponse -> {
                     if (it.response?.status == true) {
                         if (loginOrCreateFragment.isVisible) {
                             loginOrCreateFragment.dismiss()
                         }
-
                         if (mViewModel.viewState.sendOtpSmsTryAgainClickCount == 0) {
                             navController.navigate(LoginOnboardingIntroFragmentDirections.actionLoginOnboardingIntroConfirmYourNumberFragment())
                         }
                     } else {
                         if (it.response != null) {
-                            CommonUtilities.showToast(this, it.response?.message?.en.toString())
+                            showToast(it.response?.message?.en ?: "Network error")
                         } else {
-                            CommonUtilities.showToast(
-                                this,
-                                resources.getString(R.string.otp_send_error_msg)
-                            )
+                            showToast(resources.getString(R.string.otp_send_error_msg))
                         }
                     }
 
                 }
                 is LoginRegisterViewModel.Event.ToggleLoader -> {
-                    if (it.isToShow) {
-                        CommonUtilities.showLoader(this@LoginRegisterActivity)
+                    toggleLoader(it.isToShow)
+                }
+                is LoginRegisterViewModel.Event.DateDialogPicker -> {
+                    if (datePickerDialogFragment.isVisible) {
+                        datePickerDialogFragment.dismiss()
                     } else {
-                        CommonUtilities.hideLoader()
+                        datePickerDialogFragment.show(supportFragmentManager,
+                            object : DatePickerDialogFragment.DateSelectedListener {
+                                override fun onDateSelected(
+                                    year: Int,
+                                    monthOfYear: Int,
+                                    dayOfMonth: Int
+                                ) {
+                                    mViewModel.onDateSelected(year, monthOfYear, dayOfMonth)
+                                }
+
+                            })
                     }
                 }
             }
         }.observeInLifecycle(this@LoginRegisterActivity)
     }
+
 
 }

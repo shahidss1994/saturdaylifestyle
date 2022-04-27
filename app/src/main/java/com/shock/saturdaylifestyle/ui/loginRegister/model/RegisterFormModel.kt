@@ -8,4 +8,12 @@ data class RegisterFormModel(
     var email: String = "",
     var dob: String = "",
     var gender: String = Constants.Gender.MALE
-)
+){
+    fun clear(){
+        firstName = ""
+        lastName = ""
+        email = ""
+        dob = ""
+        gender = Constants.Gender.MALE
+    }
+}

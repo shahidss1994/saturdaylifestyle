@@ -29,10 +29,12 @@ object Constants {
 
     object TextWatcherType{
         const val PHONE_NO = "phone_no"
+        const val FORM_PHONE_NO = "form_phone_no"
         const val FIRST_NAME = "first_name"
         const val LAST_NAME = "last_name"
         const val EMAIL = "email"
         const val COUNTRY_CODE = "country_code"
+        const val OTP = "otp"
     }
 
     object Gender{

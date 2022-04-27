@@ -33,11 +33,17 @@ class LoginRegisterViewModel @Inject constructor(
 
     private val eventChannel = Channel<Event>(Channel.BUFFERED)
     val eventFlow = eventChannel.receiveAsFlow()
+
     val phoneNoTextWatcher = LoginRegisterTextWatcher(Constants.TextWatcherType.PHONE_NO)
     val firstNameWatcher = LoginRegisterTextWatcher(Constants.TextWatcherType.FIRST_NAME)
     val lastNameWatcher = LoginRegisterTextWatcher(Constants.TextWatcherType.LAST_NAME)
     val emailWatcher = LoginRegisterTextWatcher(Constants.TextWatcherType.EMAIL)
+    val formPhoneNoTextWatcher = LoginRegisterTextWatcher(Constants.TextWatcherType.EMAIL)
+
     val countryCodeWatcher = LoginRegisterTextWatcher(Constants.TextWatcherType.COUNTRY_CODE)
+
+    val optWatcher = LoginRegisterTextWatcher(Constants.TextWatcherType.OTP)
+
     val genderCheckChangeListener = RadioCheckChangeListener()
 
     val viewState = LoginRegisterViewState()
@@ -75,7 +81,6 @@ class LoginRegisterViewModel @Inject constructor(
         viewState.chooseVerificationMethodVisibility = false
         viewState.missedCallPopupVisibility = true
         viewState.stillDidntGetOtpPopupVisibility = false
-
     }
 
     fun onSendOTPViaMissedCallContinueClicked() {
@@ -152,19 +157,19 @@ class LoginRegisterViewModel @Inject constructor(
     }
 
     fun onRegisterFormSaveAndContinueClicked() {
-        registerFormViewState.continueBtnDrawableViewState = if (validateForm()) {
-            DrawableViewState(R.drawable.bg_button2)
-        } else {
-            DrawableViewState(R.drawable.bg_button3)
-        }
+        validateForm(true)
     }
 
     fun onSkipButtonClicked() {
-        onEvent(Event.NavigateTo(Constants.NavigateTo.REGISTER_FORM))
+
     }
 
     fun showRegisterForm() {
         onEvent(Event.NavigateTo(Constants.NavigateTo.REGISTER_FORM))
+    }
+
+    fun showDateDialog() {
+        onEvent(Event.DateDialogPicker)
     }
 
     fun onChooseVerificationBackClicked() {
@@ -210,8 +215,8 @@ class LoginRegisterViewModel @Inject constructor(
         data class NavigateTo(val navigateTo: String) : Event()
         data class SendOtpViaMissedCallResponse(val response: SendOtpModel) : Event()
         data class SendOtpViaSMSResponse(val response: SendOtpModel? = null) : Event()
-
         data class ToggleLoader(val isToShow: Boolean) : Event()
+        object DateDialogPicker : Event()
     }
 
     private fun setViewPagerListData() {
@@ -592,16 +597,19 @@ class LoginRegisterViewModel @Inject constructor(
                     }
                 } else if (textWatcherType == Constants.TextWatcherType.FIRST_NAME) {
                     registerFormModel.firstName = it
+                    validateForm(false)
                     if (it.isNotEmpty()) {
                         registerFormViewState.showFirstNameError = false
                     }
                 } else if (textWatcherType == Constants.TextWatcherType.LAST_NAME) {
                     registerFormModel.lastName = it
+                    validateForm(false)
                     if (it.isNotEmpty()) {
                         registerFormViewState.showLastNameError = false
                     }
                 } else if (textWatcherType == Constants.TextWatcherType.EMAIL) {
                     registerFormModel.email = it
+                    validateForm(false)
                     if (it.isNotEmpty()) {
                         registerFormViewState.showEmailError = false
                     }
@@ -617,6 +625,12 @@ class LoginRegisterViewModel @Inject constructor(
                         }
                         viewState.countryCodeNumberViewStateList = arrayList
                     }
+                } else if (textWatcherType == Constants.TextWatcherType.OTP) {
+                    if(it.length == 6){
+                        showRegisterForm()
+                    }
+                } else if (textWatcherType == Constants.TextWatcherType.FORM_PHONE_NO) {
+                    validateForm(false)
                 }
             }
         }
@@ -636,30 +650,45 @@ class LoginRegisterViewModel @Inject constructor(
 
     }
 
-    private fun validateForm(): Boolean {
+    private fun validateForm(fromContinueBtn:Boolean = false): Boolean {
         var noErrorInForm = true
-        registerFormViewState.showFirstNameError = false
-        registerFormViewState.showLastNameError = false
-        registerFormViewState.showEmailError = false
-        registerFormViewState.showBirthdayError = false
+        if(fromContinueBtn) {
+            registerFormViewState.showFirstNameError = false
+            registerFormViewState.showLastNameError = false
+            registerFormViewState.showEmailError = false
+            registerFormViewState.showBirthdayError = false
+        }
         if (registerFormModel.firstName.isEmpty()) {
-            registerFormViewState.showFirstNameError = true
+            if(fromContinueBtn) {
+                registerFormViewState.showFirstNameError = true
+            }
             noErrorInForm = false
         }
         if (registerFormModel.lastName.isEmpty()) {
-            registerFormViewState.showLastNameError = true
+            if(fromContinueBtn) {
+                registerFormViewState.showLastNameError = true
+            }
             noErrorInForm = false
         }
         if (registerFormModel.email.isEmpty() || !PatternsCompat.EMAIL_ADDRESS.matcher(
                 registerFormModel.email
             ).matches()
         ) {
-            registerFormViewState.showEmailError = true
+            if(fromContinueBtn) {
+                registerFormViewState.showEmailError = true
+            }
             noErrorInForm = false
         }
         if (registerFormModel.dob.isEmpty()) {
-            registerFormViewState.showBirthdayError = true
+            if(fromContinueBtn) {
+                registerFormViewState.showBirthdayError = true
+            }
             noErrorInForm = false
+        }
+        registerFormViewState.continueBtnDrawableViewState = if (noErrorInForm) {
+            DrawableViewState(R.drawable.bg_button2)
+        } else {
+            DrawableViewState(R.drawable.bg_button3)
         }
         return noErrorInForm
     }
@@ -677,11 +706,16 @@ class LoginRegisterViewModel @Inject constructor(
         }
     }
 
+    fun destroyRegisterViewState() {
+        viewState.loginOrCreateAccountVisibility = true
+        registerFormModel.clear()
+    }
+
     fun initConfirmYourNumberViewState() {
         startTryAgainTimer()
     }
 
-    fun destroyConfirmYourNumberViewState(){
+    fun destroyConfirmYourNumberViewState() {
         timer.cancel()
     }
 
@@ -693,7 +727,7 @@ class LoginRegisterViewModel @Inject constructor(
 
     inner class TryAgainTimer : CountDownTimer(31000, 1000) {
         override fun onTick(millisUntilFinished: Long) {
-            if(millisUntilFinished > 0) {
+            if (millisUntilFinished > 0) {
                 viewState.smsTryAgainTimerText = "${millisUntilFinished / 1000}"
             } else {
                 viewState.sendOtpSmsTryAgainVisibility = false
@@ -703,6 +737,13 @@ class LoginRegisterViewModel @Inject constructor(
         override fun onFinish() {
             viewState.sendOtpSmsTryAgainVisibility = false
         }
+    }
+
+    fun onDateSelected(year: Int, monthOfYear: Int, dayOfMonth: Int) {
+        onEvent(Event.DateDialogPicker)
+        registerFormModel.dob = "$dayOfMonth-$monthOfYear-$year"
+        registerFormViewState.date = "$dayOfMonth-$monthOfYear-$year"
+        validateForm(false)
     }
 
 }
