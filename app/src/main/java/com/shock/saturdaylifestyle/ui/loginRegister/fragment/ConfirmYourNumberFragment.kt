@@ -17,6 +17,7 @@ class ConfirmYourNumberFragment : BaseFragment<FragmentConfirmYourNumberBinding>
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding().apply {
+            mViewModel.initConfirmYourNumberViewState()
             viewModel = mViewModel
             viewState = mViewModel.viewState
         }

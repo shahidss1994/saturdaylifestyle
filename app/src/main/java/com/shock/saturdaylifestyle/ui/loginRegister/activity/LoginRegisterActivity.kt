@@ -1,6 +1,5 @@
 package com.shock.saturdaylifestyle.ui.loginRegister.activity
 
-import android.os.CountDownTimer
 import androidx.activity.viewModels
 import androidx.navigation.findNavController
 import com.shock.saturdaylifestyle.R
@@ -98,24 +97,9 @@ class LoginRegisterActivity :
                                 loginOrCreateFragment.dismiss()
                             }
 
-                            if(mViewModel.viewState.sendOtpSmsTryAgainClickCount==0) {
+                            if(mViewModel.viewState.sendOtpSmsTryAgainClickCount == 0) {
                                 navController.navigate(LoginOnboardingIntroFragmentDirections.actionLoginOnboardingIntroConfirmYourNumberFragment())
                             }
-
-
-                            mViewModel.viewState.sendOtpSmsTryAgainVisibility = true
-                            val timer = object : CountDownTimer(30000, 1000) {
-                                    override fun onTick(millisUntilFinished: Long) {
-                                        mViewModel.viewState.smstryAgainTimerText = "Try again in " + millisUntilFinished / 1000
-
-                                    }
-
-                                    override fun onFinish() {
-                                        mViewModel.viewState.sendOtpSmsTryAgainVisibility = false
-
-                                    }
-                                }
-                                timer.start()
 
                         }
                         false ->{

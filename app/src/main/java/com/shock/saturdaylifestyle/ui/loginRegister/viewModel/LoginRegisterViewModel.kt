@@ -1,5 +1,6 @@
 package com.shock.saturdaylifestyle.ui.loginRegister.viewModel
 
+import android.os.CountDownTimer
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.RadioGroup
@@ -172,12 +173,11 @@ class LoginRegisterViewModel @Inject constructor(
 
             viewState.sendOtpSmsTryAgainVisibility = false
             onSendOTPViaSMSClicked()
+            startTryAgainTimer()
 
         } else {
 
-
             onEvent(Event.NavigateTo(Constants.NavigateTo.LOGIN_OR_CREATE_ACCOUNT))
-
 
             viewState.loginOrCreateAccountVisibility = false
             viewState.chooseVerificationMethodVisibility = false
@@ -663,12 +663,31 @@ class LoginRegisterViewModel @Inject constructor(
         if (viewState.phoneNo.isNotEmpty()) {
             registerFormViewState.phoneNumberViewState = viewState.countryCodeNumberViewState
             registerFormViewState.phoneNumberViewState.number = viewState.phoneNo
-            //registerFormViewState.freezePhoneNo = true
-            //registerFormViewState.freezeEmail = false
+            registerFormViewState.freezePhoneNo = true
+            registerFormViewState.freezeEmail = false
         } else {
-            //registerFormViewState.freezePhoneNo = false
-            //registerFormViewState.freezeEmail = true
+            registerFormViewState.freezePhoneNo = false
+            registerFormViewState.freezeEmail = true
         }
+    }
+
+    fun initConfirmYourNumberViewState(){
+        startTryAgainTimer()
+    }
+
+    private fun startTryAgainTimer() {
+        viewState.sendOtpSmsTryAgainVisibility = true
+        val timer = object : CountDownTimer(30000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                viewState.smstryAgainTimerText = "Try again in " + millisUntilFinished / 1000
+            }
+
+            override fun onFinish() {
+                viewState.sendOtpSmsTryAgainVisibility = false
+
+            }
+        }
+        timer.start()
     }
 
 }
