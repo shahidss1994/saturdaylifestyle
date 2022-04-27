@@ -19,7 +19,7 @@
 
         <activity
             android:name=".ui.loginRegister.activity.LoginRegisterActivity"
-            android:windowSoftInputMode="adjustPan|adjustResize"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false">
         </activity>
 

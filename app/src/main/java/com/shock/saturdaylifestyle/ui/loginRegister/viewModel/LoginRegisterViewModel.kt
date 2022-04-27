@@ -1,5 +1,6 @@
 package com.shock.saturdaylifestyle.ui.loginRegister.viewModel
 
+import android.os.CountDownTimer
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.RadioGroup
@@ -7,15 +8,18 @@ import androidx.core.util.PatternsCompat
 import androidx.lifecycle.viewModelScope
 import com.shock.saturdaylifestyle.R
 import com.shock.saturdaylifestyle.constants.Constants
+import com.shock.saturdaylifestyle.network.Resource
 import com.shock.saturdaylifestyle.ui.base.viewModel.BaseViewModel
 import com.shock.saturdaylifestyle.ui.base.viewState.ColorViewState
 import com.shock.saturdaylifestyle.ui.base.viewState.DrawableViewState
 import com.shock.saturdaylifestyle.ui.loginRegister.model.RegisterFormModel
+import com.shock.saturdaylifestyle.ui.loginRegister.model.SendOtpModel
+import com.shock.saturdaylifestyle.ui.loginRegister.network.LoginRegisterRepository
 import com.shock.saturdaylifestyle.ui.loginRegister.viewState.CountryCodeNumberViewState
 import com.shock.saturdaylifestyle.ui.loginRegister.viewState.IntroViewPagerItemViewState
 import com.shock.saturdaylifestyle.ui.loginRegister.viewState.LoginRegisterViewState
 import com.shock.saturdaylifestyle.ui.loginRegister.viewState.RegisterFormViewState
-import com.shock.saturdaylifestyle.ui.main.network.MainRepository
+import com.shock.saturdaylifestyle.utility.CommonUtilities
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -24,8 +28,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginRegisterViewModel @Inject constructor(
-    private val mainRepository: MainRepository
-) : BaseViewModel(mainRepository) {
+    private val repository: LoginRegisterRepository
+) : BaseViewModel(repository) {
 
     private val eventChannel = Channel<Event>(Channel.BUFFERED)
     val eventFlow = eventChannel.receiveAsFlow()
@@ -41,6 +45,7 @@ class LoginRegisterViewModel @Inject constructor(
     val registerFormModel = RegisterFormModel()
 
     val mCountryCodeList = arrayListOf<CountryCodeNumberViewState>()
+    private val timer = TryAgainTimer()
 
     init {
         setViewPagerListData()
@@ -49,11 +54,42 @@ class LoginRegisterViewModel @Inject constructor(
 
     fun onLoginCreateAccountClicked() {
         onEvent(Event.NavigateTo(Constants.NavigateTo.LOGIN_OR_CREATE_ACCOUNT))
+
+        viewState.loginOrCreateAccountVisibility = true
+        viewState.chooseVerificationMethodVisibility = false
+        viewState.missedCallPopupVisibility = false
+        viewState.stillDidntGetOtpPopupVisibility = false
     }
+
 
     fun onContinueClicked() {
         if (viewState.phoneNo.length >= 8) {
             viewState.loginOrCreateAccountVisibility = false
+
+        }
+    }
+
+
+    fun onSendOTPViaMissedCallClicked() {
+        viewState.loginOrCreateAccountVisibility = false
+        viewState.chooseVerificationMethodVisibility = false
+        viewState.missedCallPopupVisibility = true
+        viewState.stillDidntGetOtpPopupVisibility = false
+
+    }
+
+    fun onSendOTPViaMissedCallContinueClicked() {
+        onEvent(Event.ToggleLoader(true))
+        viewModelScope.launch {
+            val rs = repository.sendOtpViaMissedCall(
+                Constants.API_KEY,
+                viewState.phoneNo,
+                viewState.countryCodeNumberViewState.code ?: ""
+            )
+            onEvent(Event.ToggleLoader(false))
+            if (rs is Resource.Success) {
+                onEvent(Event.SendOtpViaMissedCallResponse(rs.value))
+            }
         }
     }
 
@@ -61,8 +97,38 @@ class LoginRegisterViewModel @Inject constructor(
         onEvent(Event.NavigateTo(Constants.NavigateTo.WHATSAPP_VERIFY_YOUR_NUMBER))
     }
 
-    fun onSendOTPViaSMSClicked() {
-        onEvent(Event.NavigateTo(Constants.NavigateTo.CONFIRM_YOUR_NUMBER))
+    fun onSendOTPViaSMSClicked(fromTryAgain: Boolean = false) {
+        onEvent(Event.ToggleLoader(true))
+        viewModelScope.launch {
+            val rs = repository.sendOtpViaSMS(
+                Constants.API_KEY,
+                viewState.phoneNo,
+                viewState.countryCodeNumberViewState.code ?: ""
+            )
+            CommonUtilities.hideLoader()
+            if (rs is Resource.Success) {
+                onEvent(Event.SendOtpViaSMSResponse(rs.value))
+                if (fromTryAgain) {
+                    startTryAgainTimer()
+                }
+            } else if (rs is Resource.Failure) {
+                onEvent(Event.SendOtpViaSMSResponse())
+            }
+        }
+    }
+
+    fun onMissedCallPopupBackClicked() {
+        viewState.loginOrCreateAccountVisibility = false
+        viewState.chooseVerificationMethodVisibility = true
+        viewState.missedCallPopupVisibility = false
+        viewState.stillDidntGetOtpPopupVisibility = false
+    }
+
+    fun onMissedCallPopupOtherMethodClicked() {
+        viewState.loginOrCreateAccountVisibility = false
+        viewState.chooseVerificationMethodVisibility = true
+        viewState.missedCallPopupVisibility = false
+        viewState.stillDidntGetOtpPopupVisibility = false
     }
 
     fun onBackPressed() {
@@ -74,6 +140,10 @@ class LoginRegisterViewModel @Inject constructor(
     }
 
     fun onWhatsAppTryAgainClicked() {
+
+    }
+
+    fun onGmailLoginClicked() {
 
     }
 
@@ -101,6 +171,29 @@ class LoginRegisterViewModel @Inject constructor(
         viewState.loginOrCreateAccountVisibility = true
     }
 
+
+    fun onSendOTPTryAgain() {
+
+        if (viewState.sendOtpSmsTryAgainClickCount < 2) {
+            viewState.sendOtpSmsTryAgainClickCount = viewState.sendOtpSmsTryAgainClickCount + 1
+
+            viewState.sendOtpSmsTryAgainVisibility = false
+            onSendOTPViaSMSClicked(true)
+
+        } else {
+
+            onEvent(Event.NavigateTo(Constants.NavigateTo.LOGIN_OR_CREATE_ACCOUNT))
+
+            viewState.loginOrCreateAccountVisibility = false
+            viewState.chooseVerificationMethodVisibility = false
+            viewState.missedCallPopupVisibility = false
+            viewState.stillDidntGetOtpPopupVisibility = true
+
+            viewState.phoneNoStillNoOtp = viewState.phoneNo
+
+        }
+    }
+
     fun checkSelectedCountry(countryCodeNumberViewState: CountryCodeNumberViewState) {
         viewState.countryCodeNumberViewState = countryCodeNumberViewState
         onEvent(Event.PickerDialogClose)
@@ -115,6 +208,10 @@ class LoginRegisterViewModel @Inject constructor(
         object PickerDialog : Event()
         object PickerDialogClose : Event()
         data class NavigateTo(val navigateTo: String) : Event()
+        data class SendOtpViaMissedCallResponse(val response: SendOtpModel) : Event()
+        data class SendOtpViaSMSResponse(val response: SendOtpModel? = null) : Event()
+
+        data class ToggleLoader(val isToShow: Boolean) : Event()
     }
 
     private fun setViewPagerListData() {
@@ -158,7 +255,7 @@ class LoginRegisterViewModel @Inject constructor(
             DrawableViewState(R.mipmap.iv_onboarding5)
         )
         arrayList.add(introViewPagerItemViewState5)
-        viewState.introViewPagerItemViewStateList = arrayList
+        // viewState.introViewPagerItemViewStateList = arrayList
     }
 
     private fun setCountryCodeNumberList() {
@@ -569,14 +666,42 @@ class LoginRegisterViewModel @Inject constructor(
 
     fun initRegisterViewState() {
         registerFormViewState = RegisterFormViewState()
-        if(viewState.phoneNo.isNotEmpty()) {
+        if (viewState.phoneNo.isNotEmpty()) {
             registerFormViewState.phoneNumberViewState = viewState.countryCodeNumberViewState
             registerFormViewState.phoneNumberViewState.number = viewState.phoneNo
-            //registerFormViewState.freezePhoneNo = true
-            //registerFormViewState.freezeEmail = false
+            registerFormViewState.freezePhoneNo = true
+            registerFormViewState.freezeEmail = false
         } else {
-            //registerFormViewState.freezePhoneNo = false
-            //registerFormViewState.freezeEmail = true
+            registerFormViewState.freezePhoneNo = false
+            registerFormViewState.freezeEmail = true
+        }
+    }
+
+    fun initConfirmYourNumberViewState() {
+        startTryAgainTimer()
+    }
+
+    fun destroyConfirmYourNumberViewState(){
+        timer.cancel()
+    }
+
+    private fun startTryAgainTimer() {
+        viewState.sendOtpSmsTryAgainVisibility = true
+        timer.cancel()
+        timer.start()
+    }
+
+    inner class TryAgainTimer : CountDownTimer(31000, 1000) {
+        override fun onTick(millisUntilFinished: Long) {
+            if(millisUntilFinished > 0) {
+                viewState.smsTryAgainTimerText = "${millisUntilFinished / 1000}"
+            } else {
+                viewState.sendOtpSmsTryAgainVisibility = false
+            }
+        }
+
+        override fun onFinish() {
+            viewState.sendOtpSmsTryAgainVisibility = false
         }
     }
 

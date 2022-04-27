@@ -13,12 +13,18 @@ object Constants {
     val EMAIL = "email"
     val OTP = "otp"
     val FROM_WHICH_SCREEN = "from_which_screen"
+    val CITCALL = "CITCALL"
+    val MSG = "MSG"
+    val CONTENT_TYPE = "application/x-www-form-urlencoded"
 
     object NavigateTo {
         const val LOGIN_OR_CREATE_ACCOUNT = "login_or_create_account"
         const val WHATSAPP_VERIFY_YOUR_NUMBER = "whatsapp_verify_your_number"
         const val CONFIRM_YOUR_NUMBER = "confirm_your_number"
         const val REGISTER_FORM = "register_form"
+        const val MISSED_CALL_VERIFY_YOUR_NUMBER = "missed_call_verify_your_number"
+
+
     }
 
     object TextWatcherType{
