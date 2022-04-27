@@ -83,7 +83,7 @@
             android:layout_marginStart="@dimen/_8sdp"
             android:layout_marginEnd="@dimen/_8sdp"
             android:src="@drawable/ic_check"
-            android:visibility="@{viewState.code == viewModel.viewState.countryCodeNumberViewState.code ? View.VISIBLE : View.GONE}"
+            android:visibility="@{viewState.id == viewModel.viewState.countryCodeNumberViewState.id ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="@+id/tv_code"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tv_code"

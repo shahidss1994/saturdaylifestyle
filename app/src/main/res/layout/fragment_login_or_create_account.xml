@@ -175,7 +175,7 @@
 
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/ed_phone_no"
-                        textChangedListener="@{viewModel.textWatcher}"
+                        textChangedListener="@{viewModel.phoneNoTextWatcher}"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginStart="@dimen/_10sdp"

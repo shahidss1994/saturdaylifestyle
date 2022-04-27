@@ -8,7 +8,8 @@ import com.shock.saturdaylifestyle.ui.base.others.bind
 class CountryCodeNumberViewState(
     initId: String? = null,
     initCode: String? = "",
-    initName: String? = ""
+    initName: String? = "",
+    initNumber: String? = ""
 ) : BaseObservable() {
 
     @get:Bindable
@@ -19,6 +20,9 @@ class CountryCodeNumberViewState(
 
     @get:Bindable
     var name by bind(BR.name, initName)
+
+    @get:Bindable
+    var number by bind(BR.number, initNumber)
 
 }
 
