@@ -1,9 +1,7 @@
 package com.shock.saturdaylifestyle.ui.loginRegister.viewModel
 
-import android.os.CountDownTimer
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.View
 import android.widget.RadioGroup
 import androidx.core.util.PatternsCompat
 import androidx.lifecycle.viewModelScope
@@ -52,26 +50,6 @@ class LoginRegisterViewModel @Inject constructor(
         setCountryCodeNumberList()
     }
 
-
-    fun sendOtpViaMissedCallApi(key: String, phoneNumber: String, countryCode: String) = viewModelScope.launch {
-        val rs = repository.sendOtpViaMissedCall(key, phoneNumber, countryCode)
-        CommonUtilities.hideLoader()
-        if (rs is Resource.Success) {
-                onEvent(Event.onSendOtpViaMissedCallResponse(rs.value))
-        }
-    }
-
-
-    fun sendOtpViaSMSApi(key: String, phoneNumber: String, countryCode: String) = viewModelScope.launch {
-        val rs = repository.sendOtpViaSMS(key, phoneNumber, countryCode)
-        CommonUtilities.hideLoader()
-        if (rs is Resource.Success) {
-            onEvent(Event.onSendOtpViaSMSResponse(rs.value))
-        }
-    }
-
-
-
     fun onLoginCreateAccountClicked() {
         onEvent(Event.NavigateTo(Constants.NavigateTo.LOGIN_OR_CREATE_ACCOUNT))
 
@@ -82,16 +60,12 @@ class LoginRegisterViewModel @Inject constructor(
     }
 
 
-
-
     fun onContinueClicked() {
         if (viewState.phoneNo.length >= 8) {
             viewState.loginOrCreateAccountVisibility = false
 
         }
     }
-
-
 
 
     fun onSendOTPViaMissedCallClicked() {
@@ -103,13 +77,37 @@ class LoginRegisterViewModel @Inject constructor(
     }
 
     fun onSendOTPViaMissedCallContinueClicked() {
+        onEvent(Event.ToggleLoader(true))
+        viewModelScope.launch {
+            val rs = repository.sendOtpViaMissedCall(
+                Constants.API_KEY,
+                viewState.phoneNo,
+                viewState.countryCodeNumberViewState.code ?: ""
+            )
+            onEvent(Event.ToggleLoader(false))
+            if (rs is Resource.Success) {
+                onEvent(Event.SendOtpViaMissedCallResponse(rs.value))
+            }
+        }
+    }
 
+    fun onSendOTPViaWhatsappClicked() {
+        onEvent(Event.NavigateTo(Constants.NavigateTo.WHATSAPP_VERIFY_YOUR_NUMBER))
+    }
 
-        onEvent(Event.onSendOTPViaMissedCallContinueClicked)
-
-
-
-       // onEvent(Event.NavigateTo(Constants.NavigateTo.MISSED_CALL_VERIFY_YOUR_NUMBER))
+    fun onSendOTPViaSMSClicked() {
+        onEvent(Event.ToggleLoader(true))
+        viewModelScope.launch {
+            val rs = repository.sendOtpViaSMS(
+                Constants.API_KEY,
+                viewState.phoneNo,
+                viewState.countryCodeNumberViewState.code ?: ""
+            )
+            CommonUtilities.hideLoader()
+            if (rs is Resource.Success) {
+                onEvent(Event.SendOtpViaSMSResponse(rs.value))
+            }
+        }
     }
 
     fun onMissedCallPopupBackClicked() {
@@ -126,18 +124,6 @@ class LoginRegisterViewModel @Inject constructor(
         viewState.stillDidntGetOtpPopupVisibility = false
     }
 
-
-
-
-    fun onSendOTPViaWhatsappClicked() {
-        onEvent(Event.NavigateTo(Constants.NavigateTo.WHATSAPP_VERIFY_YOUR_NUMBER))
-    }
-
-    fun onSendOTPViaSMSClicked() {
-       // onEvent(Event.NavigateTo(Constants.NavigateTo.CONFIRM_YOUR_NUMBER))
-        onEvent(Event.onSendOTPViaSMSClicked)
-    }
-
     fun onBackPressed() {
         onEvent(Event.OnBackPressed)
     }
@@ -149,6 +135,7 @@ class LoginRegisterViewModel @Inject constructor(
     fun onWhatsAppTryAgainClicked() {
 
     }
+
     fun onGmailLoginClicked() {
 
     }
@@ -180,15 +167,13 @@ class LoginRegisterViewModel @Inject constructor(
 
     fun onSendOTPTryAgain() {
 
-        if (viewState.sendOtpSmsTryAgainClickCount<2) {
-            viewState.sendOtpSmsTryAgainClickCount = viewState.sendOtpSmsTryAgainClickCount+1
+        if (viewState.sendOtpSmsTryAgainClickCount < 2) {
+            viewState.sendOtpSmsTryAgainClickCount = viewState.sendOtpSmsTryAgainClickCount + 1
 
             viewState.sendOtpSmsTryAgainVisibility = false
-            onEvent(Event.onSendOTPViaSMSTryAgainClicked)
+            onSendOTPViaSMSClicked()
 
-
-        }else
-        {
+        } else {
 
 
             onEvent(Event.NavigateTo(Constants.NavigateTo.LOGIN_OR_CREATE_ACCOUNT))
@@ -217,12 +202,10 @@ class LoginRegisterViewModel @Inject constructor(
         object OnBackPressed : Event()
         object PickerDialog : Event()
         object PickerDialogClose : Event()
-        object onSendOTPViaMissedCallContinueClicked : Event()
-        object onSendOTPViaSMSClicked : Event()
-        object onSendOTPViaSMSTryAgainClicked : Event()
         data class NavigateTo(val navigateTo: String) : Event()
-        data class onSendOtpViaMissedCallResponse(val response: SendOtpModel) : Event()
-        data class onSendOtpViaSMSResponse(val response: SendOtpModel) : Event()
+        data class SendOtpViaMissedCallResponse(val response: SendOtpModel) : Event()
+        data class SendOtpViaSMSResponse(val response: SendOtpModel) : Event()
+        data class ToggleLoader(val isToShow: Boolean) : Event()
     }
 
     private fun setViewPagerListData() {
@@ -266,7 +249,7 @@ class LoginRegisterViewModel @Inject constructor(
             DrawableViewState(R.mipmap.iv_onboarding5)
         )
         arrayList.add(introViewPagerItemViewState5)
-       // viewState.introViewPagerItemViewStateList = arrayList
+        // viewState.introViewPagerItemViewStateList = arrayList
     }
 
     private fun setCountryCodeNumberList() {
@@ -677,7 +660,7 @@ class LoginRegisterViewModel @Inject constructor(
 
     fun initRegisterViewState() {
         registerFormViewState = RegisterFormViewState()
-        if(viewState.phoneNo.isNotEmpty()) {
+        if (viewState.phoneNo.isNotEmpty()) {
             registerFormViewState.phoneNumberViewState = viewState.countryCodeNumberViewState
             registerFormViewState.phoneNumberViewState.number = viewState.phoneNo
             //registerFormViewState.freezePhoneNo = true

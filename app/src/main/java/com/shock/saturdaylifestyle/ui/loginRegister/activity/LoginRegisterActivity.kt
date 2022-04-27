@@ -74,7 +74,7 @@ class LoginRegisterActivity :
                 is LoginRegisterViewModel.Event.OnBackPressed -> {
                     onBackPressed()
                 }
-                is LoginRegisterViewModel.Event.onSendOtpViaMissedCallResponse -> {
+                is LoginRegisterViewModel.Event.SendOtpViaMissedCallResponse -> {
                     when (it.response.status) {
 
                         true ->{
@@ -85,19 +85,18 @@ class LoginRegisterActivity :
                             //CommonUtilities.showToast(this,it.response.message?.en.toString())
                         }
                         false ->{
-                            //CommonUtilities.showToast(this,it.response.message?.en.toString())
+                            CommonUtilities.showToast(this,it.response.message?.en.toString())
                         }
                     }
 
                 }
-                is LoginRegisterViewModel.Event.onSendOtpViaSMSResponse -> {
+                is LoginRegisterViewModel.Event.SendOtpViaSMSResponse -> {
                     when (it.response.status) {
 
                         true ->{
                             if(loginOrCreateFragment.isVisible) {
                                 loginOrCreateFragment.dismiss()
                             }
-                            //CommonUtilities.showToast(this,it.response.message?.en.toString())
 
                             if(mViewModel.viewState.sendOtpSmsTryAgainClickCount==0) {
                                 navController.navigate(LoginOnboardingIntroFragmentDirections.actionLoginOnboardingIntroConfirmYourNumberFragment())
@@ -118,14 +117,19 @@ class LoginRegisterActivity :
                                 }
                                 timer.start()
 
-
-
                         }
                         false ->{
                             CommonUtilities.showToast(this,it.response.message?.en.toString())
                         }
                     }
 
+                }
+                is LoginRegisterViewModel.Event.ToggleLoader -> {
+                    if(it.isToShow) {
+                        CommonUtilities.showLoader(this@LoginRegisterActivity)
+                    } else {
+                        CommonUtilities.hideLoader()
+                    }
                 }
             }
         }.observeInLifecycle(this@LoginRegisterActivity)
