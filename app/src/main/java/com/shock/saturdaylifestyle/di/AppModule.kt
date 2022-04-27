@@ -2,7 +2,7 @@ package com.shock.saturdaylifestyle.di
 
 import android.content.Context
 import com.shock.saturdaylifestyle.network.RemoteDataSource
-import com.shock.saturdaylifestyle.ui.main.network.MainApi
+import com.shock.saturdaylifestyle.ui.loginRegister.network.LoginRegisterApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,8 +19,8 @@ object AppModule {
     fun provideApi(
         @ApplicationContext context: Context,
         remoteDataSource: RemoteDataSource
-    ) : MainApi {
-        return remoteDataSource.buildApi(MainApi::class.java, context)
+    ) : LoginRegisterApi {
+        return remoteDataSource.buildApi(LoginRegisterApi::class.java, context)
     }
 
 }
