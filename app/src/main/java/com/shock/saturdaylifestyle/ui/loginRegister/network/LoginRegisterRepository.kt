@@ -12,8 +12,23 @@ class LoginRegisterRepository @Inject constructor(
         safeApiCall { api.sendOtp(key,
             Constants.CONTENT_TYPE,countryCode,phoneNumber,Constants.CITCALL) }
 
+
+    suspend fun register(
+        name: String,
+        phoneNo: String,
+        code: String,
+        gender: Int,
+        email: String
+    ) =
+        safeApiCall { api.register(
+            Constants.CONTENT_TYPE,name,phoneNo,code,gender,email) }
+
+
     suspend fun sendOtpViaSMS(key: String, phoneNumber: String, countryCode: String) =
         safeApiCall { api.sendOtp(key,
             Constants.CONTENT_TYPE,countryCode,phoneNumber,Constants.MSG) }
+
+    suspend fun verifyOTP(key: String,otp: String) =
+        safeApiCall { api.verifyOTP(key,Constants.CONTENT_TYPE,otp) }
 
 }

@@ -256,6 +256,8 @@
                         android:imeOptions="actionNext"
                         android:paddingStart="@dimen/_15sdp"
                         android:paddingEnd="@dimen/_10sdp"
+                        android:text="@{viewState.dob}"
+                        android:onClick="@{()->viewModel.onDatePickerClicked()}"
                         android:singleLine="true"
                         android:textColor="@color/black"
                         android:textColorHint="@color/text_color_hint"

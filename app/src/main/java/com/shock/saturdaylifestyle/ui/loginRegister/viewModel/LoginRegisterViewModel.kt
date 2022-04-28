@@ -12,8 +12,10 @@ import com.shock.saturdaylifestyle.network.Resource
 import com.shock.saturdaylifestyle.ui.base.viewModel.BaseViewModel
 import com.shock.saturdaylifestyle.ui.base.viewState.ColorViewState
 import com.shock.saturdaylifestyle.ui.base.viewState.DrawableViewState
+import com.shock.saturdaylifestyle.ui.loginRegister.model.LoginRegisterResponseModel
 import com.shock.saturdaylifestyle.ui.loginRegister.model.RegisterFormModel
 import com.shock.saturdaylifestyle.ui.loginRegister.model.SendOtpModel
+import com.shock.saturdaylifestyle.ui.loginRegister.model.VerifyOtpModel
 import com.shock.saturdaylifestyle.ui.loginRegister.network.LoginRegisterRepository
 import com.shock.saturdaylifestyle.ui.loginRegister.viewState.CountryCodeNumberViewState
 import com.shock.saturdaylifestyle.ui.loginRegister.viewState.IntroViewPagerItemViewState
@@ -40,12 +42,15 @@ class LoginRegisterViewModel @Inject constructor(
     val countryCodeWatcher = LoginRegisterTextWatcher(Constants.TextWatcherType.COUNTRY_CODE)
     val genderCheckChangeListener = RadioCheckChangeListener()
 
+    val smsOtpTextWatcher = OtpTextWatcher(Constants.TextWatcherType.SMS_OTP)
+
     val viewState = LoginRegisterViewState()
     var registerFormViewState = RegisterFormViewState()
     val registerFormModel = RegisterFormModel()
 
     val mCountryCodeList = arrayListOf<CountryCodeNumberViewState>()
     private val timer = TryAgainTimer()
+
 
     init {
         setViewPagerListData()
@@ -107,6 +112,9 @@ class LoginRegisterViewModel @Inject constructor(
             )
             CommonUtilities.hideLoader()
             if (rs is Resource.Success) {
+
+
+
                 onEvent(Event.SendOtpViaSMSResponse(rs.value))
                 if (fromTryAgain) {
                     startTryAgainTimer()
@@ -151,12 +159,45 @@ class LoginRegisterViewModel @Inject constructor(
 
     }
 
+
+
+
     fun onRegisterFormSaveAndContinueClicked() {
         registerFormViewState.continueBtnDrawableViewState = if (validateForm()) {
+
+      //      (contentType,name,mobile,country_code, genderType, email
+
+            onEvent(Event.ToggleLoader(true))
+            viewModelScope.launch {
+                val rs = repository.register(
+                    registerFormModel.firstName+" "+registerFormModel.lastName,
+                    viewState.phoneNo,
+                    viewState.countryCodeNumberViewState.code.toString(),
+                    registerFormModel.gender,
+                    registerFormModel.email
+                )
+                onEvent(Event.ToggleLoader(false))
+                if (rs is Resource.Success) {
+                    onEvent(Event.RegisterResponse(rs.value))
+                }else
+                {
+                    onEvent(Event.RegisterResponse())
+
+                }
+            }
+
+
+
+
             DrawableViewState(R.drawable.bg_button2)
         } else {
             DrawableViewState(R.drawable.bg_button3)
         }
+    }
+
+
+    fun onDatePickerClicked() {
+        onEvent(Event.DatePickerClicked)
     }
 
     fun onSkipButtonClicked() {
@@ -207,9 +248,12 @@ class LoginRegisterViewModel @Inject constructor(
         object OnBackPressed : Event()
         object PickerDialog : Event()
         object PickerDialogClose : Event()
+        object DatePickerClicked : Event()
         data class NavigateTo(val navigateTo: String) : Event()
         data class SendOtpViaMissedCallResponse(val response: SendOtpModel) : Event()
         data class SendOtpViaSMSResponse(val response: SendOtpModel? = null) : Event()
+        data class VerifyOtpResponse(val response: VerifyOtpModel? = null) : Event()
+        data class RegisterResponse(val response: LoginRegisterResponseModel? = null) : Event()
 
         data class ToggleLoader(val isToShow: Boolean) : Event()
     }
@@ -617,12 +661,75 @@ class LoginRegisterViewModel @Inject constructor(
                         }
                         viewState.countryCodeNumberViewStateList = arrayList
                     }
+                }else {
+
+
+                    registerFormViewState.continueBtnDrawableViewState = if (validateForm()) {
+
+                        DrawableViewState(R.drawable.bg_button2)
+                    } else {
+                        DrawableViewState(R.drawable.bg_button3)
+                    }
+                }
+
+            }
+        }
+
+        override fun afterTextChanged(s: Editable?) {}
+    }
+
+
+    inner class OtpTextWatcher(private val textWatcherType: String) : TextWatcher {
+
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            s?.toString()?.let {
+               if (textWatcherType == Constants.TextWatcherType.SMS_OTP) {
+                    if (it.isNotEmpty()) {
+                        if (it.length == 6) {
+
+                            if (viewState.registerFlow == 1) {
+
+                                viewModelScope.launch {
+                                    val rs = repository.verifyOTP(
+                                        Constants.API_KEY,
+                                        it.toString()
+                                    )
+                                    if (rs is Resource.Success) {
+
+                                        viewState.showSmsOtpError = rs.value.status != true
+
+
+                                        onEvent(Event.VerifyOtpResponse(rs.value))
+
+                                    } else if (rs is Resource.Failure) {
+
+                                        viewState.showSmsOtpError = true
+
+                                        onEvent(Event.VerifyOtpResponse())
+                                    }
+                                }
+
+                            }else
+                            {
+                               //hit login api here
+                            }
+
+
+                        }else
+                        {
+                            viewState.showSmsOtpError = false
+
+                        }
+                    }
                 }
             }
         }
 
         override fun afterTextChanged(s: Editable?) {}
     }
+
 
     inner class RadioCheckChangeListener : RadioGroup.OnCheckedChangeListener {
 

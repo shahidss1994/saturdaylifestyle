@@ -16,6 +16,7 @@ class RegisterFormViewState(
     initPhoneNumberViewState: CountryCodeNumberViewState = CountryCodeNumberViewState("id", "62", "Indonesia"),
     initFreezePhoneNo: Boolean = false,
     initEmail: String = "",
+    initDob: String = "",
     initFreezeEmail: Boolean = false,
     initContinueBtnDrawableViewState: DrawableViewState = DrawableViewState(R.drawable.bg_button3),
 ) : BaseObservable() {
@@ -42,6 +43,12 @@ class RegisterFormViewState(
     var showBirthdayError by bind(
         BR.showBirthdayError,
         initShowBirthdayError
+    )
+
+    @get:Bindable
+    var dob by bind(
+        BR.dob,
+        initDob
     )
 
     @get:Bindable

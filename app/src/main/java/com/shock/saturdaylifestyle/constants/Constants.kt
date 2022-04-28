@@ -33,11 +33,15 @@ object Constants {
         const val LAST_NAME = "last_name"
         const val EMAIL = "email"
         const val COUNTRY_CODE = "country_code"
+        const val SMS_OTP = "sms_otp"
+
     }
 
     object Gender{
-        const val MALE = "male"
-        const val FEMALE = "female"
+       /* const val MALE = "male"
+        const val FEMALE = "female"*/
+        const val MALE = 1
+        const val FEMALE = 0
     }
 
 }
