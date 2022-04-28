@@ -73,7 +73,7 @@
                         android:text="@string/log_in_with_google"
                         android:textAllCaps="true"
                         android:textColor="@color/indigo"
-                        android:textSize="14sp"
+                        android:textSize="@dimen/_14ssp"
                         android:visibility="visible" />
 
                 </LinearLayout>
@@ -87,7 +87,7 @@
                     android:gravity="center"
                     android:text="@string/OR"
                     android:textColor="@color/text_color_primary_black"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_14ssp"
                     app:layout_constraintBottom_toTopOf="@+id/rl_google"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_chainStyle="packed"
@@ -96,7 +96,7 @@
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_contibute"
                     android:layout_width="match_parent"
-                    android:layout_height="51dp"
+                    android:layout_height="@dimen/_51sdp"
                     android:layout_marginBottom="@dimen/_17sdp"
                     android:background="@drawable/bg_button2"
                     android:fontFamily="@font/montserrat_semi_bold"
@@ -105,7 +105,7 @@
                     android:text="@string/text_continue"
                     android:textAllCaps="true"
                     android:textColor="@color/white"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_14ssp"
                     android:textStyle="bold"
                     app:drawableViewState="@{viewState.continueBtnDrawableViewState}"
                     app:layout_constraintBottom_toTopOf="@+id/tv_or"
@@ -129,7 +129,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layoutPhoneNumber"
                     android:layout_width="match_parent"
-                    android:layout_height="46dp"
+                    android:layout_height="@dimen/_46sdp"
                     android:layout_marginBottom="@dimen/_27sdp"
                     android:background="@drawable/bg_edittext"
                     android:paddingStart="@dimen/_15sdp"
@@ -149,7 +149,7 @@
                         android:onClick="@{()->viewModel.showCountryCodePicker()}"
                         android:textColor="@color/indigo"
                         android:textSize="@dimen/_12ssp"
-                        android:text="+"
+                        android:text="@string/plus"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -206,7 +206,7 @@
                     android:gravity="center_horizontal"
                     android:text="@string/citizens_receive_exclusive_offers_decription"
                     android:textColor="@color/text_color_primary_black"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_14ssp"
                     android:visibility="visible"
                     app:layout_constraintBottom_toTopOf="@+id/layoutPhoneNumber"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -222,7 +222,7 @@
                     android:text="@string/log_in_create_account"
                     android:textAllCaps="true"
                     android:textColor="@color/text_color_primary_black"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/_20ssp"
                     android:visibility="visible"
                     app:layout_constraintBottom_toTopOf="@+id/tv_message" />
 
@@ -263,10 +263,10 @@
                         android:layout_centerInParent="true"
                         android:fontFamily="@font/oswald_semibold"
                         android:gravity="center_horizontal"
-                        android:text="Choose verification method"
+                        android:text="@string/choose_verification_method"
                         android:textAllCaps="true"
                         android:textColor="@color/text_color_primary_black"
-                        android:textSize="20sp"
+                        android:textSize="@dimen/_20ssp"
                         android:visibility="visible" />
 
                 </RelativeLayout>
@@ -282,7 +282,7 @@
                     android:gravity="center_horizontal"
                     android:text="@{@string/choose_one_of_these_method_to_send_verification_code_to_number(viewState.phoneNo)}"
                     android:textColor="@color/text_color_primary_black"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_14ssp"
                     android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -320,9 +320,9 @@
                         android:layout_marginEnd="@dimen/_20sdp"
                         android:fontFamily="@font/montserrat_semi_bold"
                         android:gravity="center_horizontal"
-                        android:text="Send OTP via Whatsapp"
+                        android:text="@string/Send_OTP_via_Whatsapp"
                         android:textColor="@color/indigo"
-                        android:textSize="14sp"
+                        android:textSize="@dimen/_14ssp"
                         android:visibility="visible" />
 
                 </RelativeLayout>
@@ -357,9 +357,9 @@
                         android:layout_marginEnd="@dimen/_20sdp"
                         android:fontFamily="@font/montserrat_semi_bold"
                         android:gravity="center_horizontal"
-                        android:text="Send OTP via SMS"
+                        android:text="@string/Send_OTP_via_SMS"
                         android:textColor="@color/indigo"
-                        android:textSize="14sp"
+                        android:textSize="@dimen/_14ssp"
                         android:visibility="visible" />
                 </RelativeLayout>
 
@@ -393,9 +393,9 @@
                         android:layout_marginEnd="@dimen/_20sdp"
                         android:fontFamily="@font/montserrat_semi_bold"
                         android:gravity="center_horizontal"
-                        android:text="Verify via Missed Call"
+                        android:text="@string/Verify_via_Missed_Call"
                         android:textColor="@color/indigo"
-                        android:textSize="14sp"
+                        android:textSize="@dimen/_14ssp"
                         android:visibility="visible" />
                 </RelativeLayout>
 
@@ -473,7 +473,7 @@
                     android:text="@string/yes_send_otp"
                     android:textAllCaps="true"
                     android:textColor="@color/white"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_14ssp"
                     android:textStyle="bold"
                     android:onClick="@{()->viewModel.onSendOTPViaMissedCallContinueClicked()}"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -501,7 +501,7 @@
                     android:layout_marginEnd="@dimen/_20sdp"
                     android:fontFamily="@font/montserrat_semi_bold"
                     android:gravity="center_horizontal"
-                    android:text="other method"
+                    android:text="@string/other_method"
                     android:textAllCaps="true"
                     android:textColor="@color/text_color_primary_black"
                     android:textSize="14sp"
@@ -591,7 +591,7 @@
                         android:text="@string/still_didn_t_get_the_otp"
                         android:textAllCaps="true"
                         android:textColor="@color/text_color_primary_black"
-                        android:textSize="20sp"
+                        android:textSize="@dimen/_20ssp"
                         android:visibility="visible" />
 
                 </RelativeLayout>
@@ -611,7 +611,7 @@
                     android:gravity="center_horizontal"
                     android:text="@string/make_sure_this_is_your_correct_number"
                     android:textColor="@color/text_color_primary_black"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_14ssp"
                     android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -626,7 +626,7 @@
                     android:gravity="center_horizontal"
                     android:text="@{viewState.phoneNoStillNoOtp}"
                     android:textColor="@color/text_color_primary_black"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_14ssp"
                     android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -639,11 +639,11 @@
                     android:fontFamily="@font/montserrat_semi_bold"
                     android:gravity="center"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:text="EDIT NUMBER"
+                    android:text="@string/edit_number"
                     android:visibility="visible"
                     android:textColor="@color/indigo"
                     android:textAllCaps="true"
-                    android:textSize="12sp"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -684,7 +684,7 @@
                         android:gravity="center_horizontal"
                         android:text="@string/resend_otp_via_whatsapp"
                         android:textColor="@color/indigo"
-                        android:textSize="14sp"
+                        android:textSize="@dimen/_14ssp"
                         android:visibility="visible" />
                 </RelativeLayout>
 
@@ -698,7 +698,7 @@
                     android:gravity="center_horizontal"
                     android:text="@string/or_try_another_method"
                     android:textColor="@color/text_color_primary_black"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_14ssp"
                     android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -739,7 +739,7 @@
                         android:textAllCaps="true"
                         android:text="@string/log_in_with_gmail"
                         android:textColor="@color/indigo"
-                        android:textSize="14sp"
+                        android:textSize="@dimen/_14ssp"
                         android:visibility="visible" />
                 </LinearLayout>
 
@@ -751,11 +751,11 @@
                     android:fontFamily="@font/montserrat_semi_bold"
                     android:gravity="center"
                     android:layout_marginTop="@dimen/_20sdp"
-                    android:text="SKIP FOR NOW"
+                    android:text="@string/skip_for_now"
                     android:visibility="visible"
                     android:textColor="@color/indigo"
                     android:textAllCaps="true"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_14ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintLeft_toLeftOf="parent"

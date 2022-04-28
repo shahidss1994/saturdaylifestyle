@@ -48,6 +48,7 @@
     <string name="please_select_your_birthday">Please select your birthday</string>
     <string name="login_create_your_account">login/create your account</string>
     <string name="skip_text">SKIP</string>
+    <string name="skip_for_now">SKIP FOR NOW</string>
 
     <string name="duration_format" translatable="false"><xliff:g id="hours">%1$s</xliff:g> <xliff:g id="minutes">%2$s</xliff:g></string>
     <string name="durationformatshort" translatable="false"><xliff:g id="format">%2$d:%3$02d</xliff:g></string>
@@ -55,6 +56,7 @@
 
 
     <string name="confirm_your_number">Confirm your number</string>
+    <string name="please_complete_the_last_4_digits">Please complete the last 4 digits\nof missed call phone number</string>
     <string name="insert_the_5_digit_code_text">Insert the-5-digit code SATURDAYS\njust sent to your number</string>
     <string name="didn_t_get_the_5_digit_code">Didn\'t get the 5-digit code?</string>
     <string name="try_again">Try Again</string>
@@ -76,6 +78,7 @@
     <string name="you_will_get_missed_call">You will get missed call</string>
     <string name="yes_send_otp">Yes, send OTP</string>
     <string name="resend_otp_via_whatsapp">Resend OTP via Whatsapp</string>
+    <string name="edit_number">EDIT NUMBER</string>
     <string name="or_try_another_method">or try another method</string>
     <string name="make_sure_this_is_your_correct_number">Make sure this is your correct number</string>
     <string name="_121_1345">121-1345-</string>
