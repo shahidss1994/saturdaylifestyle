@@ -18,6 +18,7 @@ class RegisterFormViewState(
     initEmail: String = "",
     initDob: String = "",
     initFreezeEmail: Boolean = false,
+    initDate: String = "",
     initContinueBtnDrawableViewState: DrawableViewState = DrawableViewState(R.drawable.bg_button3),
 ) : BaseObservable() {
 
@@ -85,6 +86,12 @@ class RegisterFormViewState(
     var freezeEmail by bind(
         BR.freezeEmail,
         initFreezeEmail
+    )
+
+    @get:Bindable
+    var date by bind(
+        BR.date,
+        initDate
     )
 
 }

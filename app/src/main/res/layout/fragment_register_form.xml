@@ -22,7 +22,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <androidx.core.widget.NestedScrollView
             android:id="@+id/nested_scroll_view"
             android:layout_width="match_parent"
@@ -241,7 +240,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="46dp"
                     android:layout_marginTop="@dimen/_3sdp"
-                    android:background="@drawable/bg_edittext">
+                    android:background="@drawable/bg_edittext"
+                    android:onClick="@{()->viewModel.showDateDialog()}">
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_dob"
@@ -259,6 +259,7 @@
                         android:text="@{viewState.dob}"
                         android:onClick="@{()->viewModel.onDatePickerClicked()}"
                         android:singleLine="true"
+                        android:text="@{viewState.date}"
                         android:textColor="@color/black"
                         android:textColorHint="@color/text_color_hint"
                         android:textSize="14sp"
@@ -346,7 +347,7 @@
 
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/ed_phone_no"
-                        textChangedListener="@{viewModel.phoneNoTextWatcher}"
+                        textChangedListener="@{viewModel.formPhoneNoTextWatcher}"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginStart="@dimen/_10sdp"

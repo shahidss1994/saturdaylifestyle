@@ -20,35 +20,26 @@
             app:destination="@+id/confirmYourNumberFragment" />
 
         <action
+            android:id="@+id/action_login_onboarding_intro_register_form_fragment"
+            app:destination="@+id/registerFormFragment" />
+
+        <action
             android:id="@+id/action_login_onboarding_intro_missed_call_verify_your_number_fragment"
             app:destination="@+id/missedCallVerifyYourNumberFragment" />
 
-
-        <action
-            android:id="@+id/action_login_onboarding_intro_register_form_fragment"
-            app:destination="@+id/registerFormFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/whatsappVerifyYourNumberFragment"
         android:name="com.shock.saturdaylifestyle.ui.loginRegister.fragment.WhatsappVerifyYourNumberFragment"
         android:label="WhatsappVerifyYourNumberFragment"
-        tools:layout="@layout/fragment_whatsapp_verify_your_number" >
-
-
-    </fragment>
+        tools:layout="@layout/fragment_whatsapp_verify_your_number" />
 
     <fragment
         android:id="@+id/confirmYourNumberFragment"
         android:name="com.shock.saturdaylifestyle.ui.loginRegister.fragment.ConfirmYourNumberFragment"
         android:label="ConfirmYourNumberFragment"
-        tools:layout="@layout/fragment_confirm_your_number" >
-
-        <action
-            android:id="@+id/action_login_onboarding_intro_register_form_fragment"
-            app:destination="@+id/registerFormFragment" />
-
-    </fragment>
+        tools:layout="@layout/fragment_confirm_your_number" />
 
     <fragment
         android:id="@+id/registerFormFragment"

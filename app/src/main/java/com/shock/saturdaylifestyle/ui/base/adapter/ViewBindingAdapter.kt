@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import com.chaos.view.PinView
 import com.shock.saturdaylifestyle.ui.base.viewState.ColorViewState
 import com.shock.saturdaylifestyle.ui.base.viewState.DrawableViewState
 
@@ -67,5 +68,12 @@ fun AppCompatEditText.setTextChangedListener(textWatcher: TextWatcher?) {
 fun RadioGroup.setCheckChangedListener(listener: RadioGroup.OnCheckedChangeListener?) {
     listener?.let {
         setOnCheckedChangeListener(listener)
+    }
+}
+
+@BindingAdapter("textChangedListener")
+fun PinView.setTextChangedListener(textWatcher: TextWatcher?) {
+    textWatcher?.let {
+        addTextChangedListener(it)
     }
 }

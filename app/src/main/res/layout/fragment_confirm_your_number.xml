@@ -40,7 +40,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -56,7 +56,7 @@
             app:layout_constraintTop_toBottomOf="@id/iv_back" />
 
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_subtitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_phoneno"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -98,7 +98,6 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_phoneno">
 
-
             <com.chaos.view.PinView
                 android:id="@+id/pv_pin"
                 android:layout_width="wrap_content"
@@ -112,6 +111,7 @@
                 android:fontFamily="@font/montserrat_regular"
                 android:gravity="center"
                 android:inputType="number"
+                app:textChangedListener="@{viewModel.optWatcher}"
                 android:itemBackground="@drawable/bg_pin_default"
                 android:maxLength="6"
                 android:textColor="@color/text_color_primary_black"
@@ -134,7 +134,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_wrong_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -152,7 +152,7 @@
             app:layout_constraintTop_toBottomOf="@id/layout_pin" />
 
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_didnt_get_the_code"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -168,7 +168,7 @@
             app:layout_constraintTop_toBottomOf="@id/tv_wrong_number" />
 
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_timer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -185,7 +185,7 @@
             app:layout_constraintTop_toBottomOf="@id/tv_didnt_get_the_code" />
 
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_try_again"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -205,7 +205,7 @@
             app:layout_constraintTop_toBottomOf="@id/tv_didnt_get_the_code" />
 
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_by_signing_up"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -221,7 +221,7 @@
             app:layout_constraintLeft_toLeftOf="parent" />
 
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_privacy_policy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
