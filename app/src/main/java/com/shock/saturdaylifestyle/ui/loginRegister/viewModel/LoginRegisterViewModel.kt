@@ -12,8 +12,10 @@ import com.shock.saturdaylifestyle.network.Resource
 import com.shock.saturdaylifestyle.ui.base.viewModel.BaseViewModel
 import com.shock.saturdaylifestyle.ui.base.viewState.ColorViewState
 import com.shock.saturdaylifestyle.ui.base.viewState.DrawableViewState
+import com.shock.saturdaylifestyle.ui.loginRegister.model.LoginRegisterResponseModel
 import com.shock.saturdaylifestyle.ui.loginRegister.model.RegisterFormModel
 import com.shock.saturdaylifestyle.ui.loginRegister.model.SendOtpModel
+import com.shock.saturdaylifestyle.ui.loginRegister.model.VerifyOtpModel
 import com.shock.saturdaylifestyle.ui.loginRegister.network.LoginRegisterRepository
 import com.shock.saturdaylifestyle.ui.loginRegister.viewState.CountryCodeNumberViewState
 import com.shock.saturdaylifestyle.ui.loginRegister.viewState.IntroViewPagerItemViewState
@@ -52,6 +54,8 @@ class LoginRegisterViewModel @Inject constructor(
 
     val mCountryCodeList = arrayListOf<CountryCodeNumberViewState>()
     private val timer = TryAgainTimer()
+
+    var isUserExist = false
 
     init {
         setViewPagerListData()
@@ -113,6 +117,7 @@ class LoginRegisterViewModel @Inject constructor(
             CommonUtilities.hideLoader()
             if (rs is Resource.Success) {
                 onEvent(Event.SendOtpViaSMSResponse(rs.value))
+                isUserExist = rs.value?.data?.isUserExist ?: false
                 if (fromTryAgain) {
                     startTryAgainTimer()
                 }
@@ -141,6 +146,7 @@ class LoginRegisterViewModel @Inject constructor(
     }
 
     fun showCountryCodePicker() {
+        viewState.countryCodeNumberViewStateList = mCountryCodeList
         onEvent(Event.PickerDialog)
     }
 
@@ -156,8 +162,42 @@ class LoginRegisterViewModel @Inject constructor(
 
     }
 
+    fun onVerifyOtp(otp: String) {
+        onEvent(Event.ToggleLoader(true))
+        viewModelScope.launch {
+            val rs = repository.verifyOTP(
+                Constants.API_KEY,
+                otp
+            )
+            onEvent(Event.ToggleLoader(false))
+            if (rs is Resource.Success) {
+                onEvent(Event.VerifyOtpResponse(isUserExist, rs.value))
+            } else {
+                onEvent(Event.VerifyOtpResponse())
+            }
+        }
+    }
+
     fun onRegisterFormSaveAndContinueClicked() {
-        validateForm(true)
+        if (validateForm(true)) {
+            onEvent(Event.ToggleLoader(true))
+            viewModelScope.launch {
+                val rs = repository.register(
+                    registerFormModel.firstName + " " + registerFormModel.lastName,
+                    viewState.phoneNo,
+                    viewState.countryCodeNumberViewState.code.toString(),
+                    registerFormModel.gender,
+                    registerFormModel.email
+                )
+                onEvent(Event.ToggleLoader(false))
+                if (rs is Resource.Success) {
+                    onEvent(Event.RegisterResponse(rs.value))
+                } else {
+                    onEvent(Event.RegisterResponse())
+
+                }
+            }
+        }
     }
 
     fun onSkipButtonClicked() {
@@ -215,6 +255,13 @@ class LoginRegisterViewModel @Inject constructor(
         data class NavigateTo(val navigateTo: String) : Event()
         data class SendOtpViaMissedCallResponse(val response: SendOtpModel) : Event()
         data class SendOtpViaSMSResponse(val response: SendOtpModel? = null) : Event()
+        data class VerifyOtpResponse(
+            val isUserExist: Boolean? = null,
+            val response: VerifyOtpModel? = null
+        ) : Event()
+
+        data class RegisterResponse(val response: LoginRegisterResponseModel? = null) : Event()
+
         data class ToggleLoader(val isToShow: Boolean) : Event()
         object DateDialogPicker : Event()
     }
@@ -626,8 +673,8 @@ class LoginRegisterViewModel @Inject constructor(
                         viewState.countryCodeNumberViewStateList = arrayList
                     }
                 } else if (textWatcherType == Constants.TextWatcherType.OTP) {
-                    if(it.length == 6){
-                        showRegisterForm()
+                    if (it.length == 6) {
+                        onVerifyOtp(it)
                     }
                 } else if (textWatcherType == Constants.TextWatcherType.FORM_PHONE_NO) {
                     validateForm(false)
@@ -650,22 +697,22 @@ class LoginRegisterViewModel @Inject constructor(
 
     }
 
-    private fun validateForm(fromContinueBtn:Boolean = false): Boolean {
+    private fun validateForm(fromContinueBtn: Boolean = false): Boolean {
         var noErrorInForm = true
-        if(fromContinueBtn) {
+        if (fromContinueBtn) {
             registerFormViewState.showFirstNameError = false
             registerFormViewState.showLastNameError = false
             registerFormViewState.showEmailError = false
             registerFormViewState.showBirthdayError = false
         }
         if (registerFormModel.firstName.isEmpty()) {
-            if(fromContinueBtn) {
+            if (fromContinueBtn) {
                 registerFormViewState.showFirstNameError = true
             }
             noErrorInForm = false
         }
         if (registerFormModel.lastName.isEmpty()) {
-            if(fromContinueBtn) {
+            if (fromContinueBtn) {
                 registerFormViewState.showLastNameError = true
             }
             noErrorInForm = false
@@ -674,13 +721,13 @@ class LoginRegisterViewModel @Inject constructor(
                 registerFormModel.email
             ).matches()
         ) {
-            if(fromContinueBtn) {
+            if (fromContinueBtn) {
                 registerFormViewState.showEmailError = true
             }
             noErrorInForm = false
         }
         if (registerFormModel.dob.isEmpty()) {
-            if(fromContinueBtn) {
+            if (fromContinueBtn) {
                 registerFormViewState.showBirthdayError = true
             }
             noErrorInForm = false
@@ -716,6 +763,7 @@ class LoginRegisterViewModel @Inject constructor(
     }
 
     fun destroyConfirmYourNumberViewState() {
+        isUserExist = false
         timer.cancel()
     }
 

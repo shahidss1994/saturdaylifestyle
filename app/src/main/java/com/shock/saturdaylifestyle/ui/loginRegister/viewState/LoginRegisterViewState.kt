@@ -19,7 +19,9 @@ class LoginRegisterViewState(
         "Indonesia"
     ),
     initPhoneNoMessageColorViewState: ColorViewState? = null,
+    initSmsOtpColorViewState: ColorViewState? = null,
     initShowPhoneNoMessage: Boolean = false,
+    initShowSmsOtpError: Boolean = false,
     initChooseVerificationMethodVisibility: Boolean = false,
     initMissedCallPopupVisibility: Boolean = false,
     initStillDidntGetOtpPopupVisibility: Boolean = false,
@@ -27,7 +29,9 @@ class LoginRegisterViewState(
     initPhoneNo: String = "",
     initPhoneNoStillNoOtp: String = "",
     initSmsTryAgainTimerText: String = "30",
-    initSendOtpSmsTryAgainClickCount: Int = 0
+    initSendOtpSmsTryAgainClickCount: Int = 0,
+    initRegisterFlow: Int = 0
+
 ) :
     BaseObservable() {
 
@@ -68,6 +72,33 @@ class LoginRegisterViewState(
     )
 
     @get:Bindable
+    var showSmsOtpError by bind(
+        BR.showSmsOtpError,
+        initShowSmsOtpError
+    )
+
+/*    @get:Bindable
+    var smsOtpColorViewState by bind(
+        BR.smsOtpColorViewState,
+        initSmsOtpColorViewState
+    )*/
+
+
+ /*   @get:Bindable
+    var smsOtp by bind(
+        BR.smsOtp,
+        initSmsOtp
+    )*/
+
+
+    @get:Bindable
+    var registerFlow by bind(
+        BR.registerFlow,
+        initRegisterFlow
+    )
+
+
+    @get:Bindable
     var continueBtnDrawableViewState by bind(
         BR.continueBtnDrawableViewState,
         initContinueBtnDrawableViewState
@@ -78,6 +109,7 @@ class LoginRegisterViewState(
         BR.phoneNo,
         initPhoneNo
     )
+
 
     @get:Bindable
     var phoneNoStillNoOtp by bind(
