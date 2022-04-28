@@ -34,8 +34,6 @@ object Constants {
         const val LAST_NAME = "last_name"
         const val EMAIL = "email"
         const val COUNTRY_CODE = "country_code"
-        const val SMS_OTP = "sms_otp"
-
         const val OTP = "otp"
     }
 
