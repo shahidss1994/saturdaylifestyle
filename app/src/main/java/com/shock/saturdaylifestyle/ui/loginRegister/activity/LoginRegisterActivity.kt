@@ -127,7 +127,7 @@ class LoginRegisterActivity :
                 }
                 is LoginRegisterViewModel.Event.VerifyOtpResponse -> {
                     if (it.response?.status == true) {
-                        if (it.response?.data?.isUserExist == true) {
+                        if (it.isUserExist == true) {
                             startActivity(
                                 Intent(
                                     this@LoginRegisterActivity,
