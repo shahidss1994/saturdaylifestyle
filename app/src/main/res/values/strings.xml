@@ -71,5 +71,11 @@
     <string name="otp_send_error_msg">Unable to send OTP</string>
     <string name="try_again_in_sec">Try again in %s</string>
 
+    <string name="home">Home</string>
+    <string name="shop">Shop</string>
+    <string name="home_try_on">Home Try-On</string>
+    <string name="cart">Cart</string>
+    <string name="profile">Profile</string>
+
 
 </resources>

@@ -14,7 +14,15 @@
         android:theme="@style/Theme.SaturdayLifestyle">
         <activity
             android:name=".ui.main.activity.MainActivity"
-            android:exported="false">
+            android:exported="true">
+            <!--android:exported="false">-->
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
         </activity>
 
         <activity
@@ -27,11 +35,11 @@
             android:name=".ui.splash.activity.SplashActivity"
             android:screenOrientation="portrait"
             android:exported="true">
-            <intent-filter>
+            <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>-->
 
         </activity>
 

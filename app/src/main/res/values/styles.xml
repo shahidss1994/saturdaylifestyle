@@ -57,4 +57,11 @@
         <item name="colorAccent">@color/indigo</item>
     </style>
 
+    <style name="BottomNavigation">
+        <item name="android:background">@color/white</item>
+        <item name="itemTextColor">@color/bottom_nav_color</item>
+        <item name="itemIconTint">@color/bottom_nav_color</item>
+        <item name="elevation">@dimen/_6sdp</item>
+    </style>
+
 </resources>

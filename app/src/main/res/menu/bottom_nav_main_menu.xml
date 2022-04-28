@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/ic_compass"
+        android:title="@string/home" />
+
+    <item
+        android:id="@+id/shopFragment"
+        android:icon="@drawable/ic_compass"
+        android:title="@string/shop" />
+
+    <item
+        android:id="@+id/homeTryOnFragment"
+        android:icon="@drawable/ic_compass"
+        android:title="@string/home_try_on" />
+
+    <item
+        android:id="@+id/cartFragment"
+        android:icon="@drawable/ic_compass"
+        android:title="@string/shop" />
+
+    <item
+        android:id="@+id/profileFragment"
+        android:icon="@drawable/ic_compass"
+        android:title="@string/profile" />
+
+</menu>
