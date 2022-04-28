@@ -7,8 +7,10 @@ data class RegisterFormModel(
     var lastName: String = "",
     var email: String = "",
     var dob: String = "",
-    var gender: String = Constants.Gender.MALE
-){
+    var gender: Int = Constants.Gender.MALE,
+    var otp: String = "",
+
+) {
     fun clear(){
         firstName = ""
         lastName = ""
