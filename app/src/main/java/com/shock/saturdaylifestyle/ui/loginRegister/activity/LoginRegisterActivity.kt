@@ -67,7 +67,6 @@ class LoginRegisterActivity :
                             onBackPressed()
                             navController.navigate(LoginOnboardingIntroFragmentDirections.actionLoginOnboardingIntroRegisterFormFragment())
                         }
-
                     }
                 }
                 is LoginRegisterViewModel.Event.PickerDialog -> {
