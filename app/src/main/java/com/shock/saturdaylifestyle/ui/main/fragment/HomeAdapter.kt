@@ -211,15 +211,7 @@ class HomeAdapter(val viewModel: MainViewModel) :
         holder: ViewHolder<HomeViewState, MainViewModel>,
         position: Int
     ) {
-        when(holder.itemViewType){
-            HEADER_VIEW_TYPE -> holder.bind(items[position], viewModel)
-            DETAILS_MAKE_US_DIFFERENT_VIEW_TYPE -> holder.bind(items[position], viewModel)
-            TOP_PICKS_VIEW_TYPE -> holder.bind(items[position], viewModel)
-            NEW_ARRIVALS_VIEW_TYPE -> holder.bind(items[position], viewModel)
-            HOME_TRY_ON_VIEW_TYPE -> holder.bind(items[position], viewModel)
-            WHAT_THEY_SAY_VIEW_TYPE -> holder.bind(items[position], viewModel)
-            else -> holder.bind(items[position], viewModel)
-        }
+        holder.bind(items[position], viewModel)
     }
 
     override fun getItemCount() = items.size
