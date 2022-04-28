@@ -23,8 +23,6 @@ object Constants {
         const val CONFIRM_YOUR_NUMBER = "confirm_your_number"
         const val REGISTER_FORM = "register_form"
         const val MISSED_CALL_VERIFY_YOUR_NUMBER = "missed_call_verify_your_number"
-
-
     }
 
     object TextWatcherType{
@@ -42,6 +40,21 @@ object Constants {
         const val FEMALE = "female"*/
         const val MALE = 1
         const val FEMALE = 0
+    }
+
+    object SectionName{
+
+        const val EMPTY = "empty"
+        const val PROGRESS = "progress"
+
+        object Home {
+            const val HEADER = "header"
+            const val DETAILS_MAKE_US_DIFFERENT = "details_make_us_different"
+            const val TOP_PICKS = "top_picks"
+            const val NEW_ARRIVALS = "new_arrivals"
+            const val HOME_TRY_ON = "home_try_on"
+            const val WHAT_THEY_SAY = "what_they_say"
+        }
     }
 
 }

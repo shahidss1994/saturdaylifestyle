@@ -4,25 +4,29 @@
     <data>
 
         <variable
-            name="mainViewState"
-            type="com.shock.saturdaylifestyle.ui.main.viewState.MainViewState" />
+            name="viewState"
+            type="com.shock.saturdaylifestyle.ui.main.viewState.HeaderViewState" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcv"
-            items="@{mainViewState.homeItemList}"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Header"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <!--
+        Top Header design lies here
+        set all required data with viewstate
+        -->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

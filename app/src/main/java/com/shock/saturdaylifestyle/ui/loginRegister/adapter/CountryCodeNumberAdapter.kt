@@ -27,7 +27,7 @@ class CountryCodeNumberAdapter(
         parent: ViewGroup,
         viewType: Int
     ): ViewHolder<CountryCodeNumberViewState, LoginRegisterViewModel> {
-        return ViewHolder.ContentItemViewHolder(parent)
+        return ViewHolder.ItemViewHolder(parent)
     }
 
     override fun onBindViewHolder(
@@ -44,11 +44,11 @@ class CountryCodeNumberAdapter(
 
         abstract fun bind(viewState: VIEW_STATE, viewModel: VIEW_MODEL)
 
-        class ContentItemViewHolder(private val binding: ItemCountryCodeNumberBinding) :
+        class ItemViewHolder(private val binding: ItemCountryCodeNumberBinding) :
             ViewHolder<CountryCodeNumberViewState, LoginRegisterViewModel>(binding.root) {
 
             companion object {
-                operator fun invoke(parent: ViewGroup) = ContentItemViewHolder(
+                operator fun invoke(parent: ViewGroup) = ItemViewHolder(
                     ItemCountryCodeNumberBinding.inflate(
                         LayoutInflater.from(parent.context),
                         parent,
