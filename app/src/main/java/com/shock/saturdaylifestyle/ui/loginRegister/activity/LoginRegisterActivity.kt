@@ -17,7 +17,6 @@ import com.shock.saturdaylifestyle.ui.loginRegister.viewModel.LoginRegisterViewM
 import com.shock.saturdaylifestyle.utility.CommonUtilities
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.onEach
-import java.util.*
 
 @AndroidEntryPoint
 class LoginRegisterActivity :
@@ -115,16 +114,8 @@ class LoginRegisterActivity :
                         if (loginOrCreateFragment.isVisible) {
                             loginOrCreateFragment.dismiss()
                         }
-
-
-                        if (it.response.data?.isUserExist == true) {
-                            startActivity(Intent(this,HomeActivity::class.java))
-                        } else {
-
-                            if (mViewModel.viewState.sendOtpSmsTryAgainClickCount == 0) {
-                                navController.navigate(LoginOnboardingIntroFragmentDirections.actionLoginOnboardingIntroConfirmYourNumberFragment())
-                            }
-
+                        if (mViewModel.viewState.sendOtpSmsTryAgainClickCount == 0) {
+                            navController.navigate(LoginOnboardingIntroFragmentDirections.actionLoginOnboardingIntroConfirmYourNumberFragment())
                         }
                     } else {
                         if (it.response != null) {
@@ -133,26 +124,30 @@ class LoginRegisterActivity :
                             showToast(resources.getString(R.string.otp_send_error_msg))
                         }
                     }
-
                 }
-
-
                 is LoginRegisterViewModel.Event.VerifyOtpResponse -> {
                     if (it.response?.status == true) {
-
-                        CommonUtilities.showToast(this, it.response?.message?.en.toString())
-
-                        navController.navigate(LoginOnboardingIntroFragmentDirections.actionLoginOnboardingIntroRegisterFormFragment())
-
-
+                        if (it.response?.data?.isUserExist == true) {
+                            startActivity(
+                                Intent(
+                                    this@LoginRegisterActivity,
+                                    HomeActivity::class.java
+                                )
+                            )
+                            finish()
+                        } else {
+                            onBackPressed()
+                            navController.navigate(LoginOnboardingIntroFragmentDirections.actionLoginOnboardingIntroRegisterFormFragment())
+                        }
                     } else {
                         if (it.response != null) {
-                            CommonUtilities.showToast(this, it.response?.message?.en.toString())
+                            showToast(it.response?.message?.en ?: "Network error")
+                        } else {
+                            showToast(resources.getString(R.string.unable_to_login))
                         }
                     }
 
                 }
-
                 is LoginRegisterViewModel.Event.RegisterResponse -> {
                     if (it.response?.status == true) {
 

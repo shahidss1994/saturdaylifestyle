@@ -158,6 +158,22 @@ class LoginRegisterViewModel @Inject constructor(
 
     }
 
+    fun onVerifyOtp(otp:String){
+        onEvent(Event.ToggleLoader(true))
+        viewModelScope.launch {
+            val rs = repository.verifyOTP(
+                Constants.API_KEY,
+                otp
+            )
+            onEvent(Event.ToggleLoader(false))
+            if (rs is Resource.Success) {
+                onEvent(Event.VerifyOtpResponse(rs.value))
+            } else {
+                onEvent(Event.VerifyOtpResponse())
+            }
+        }
+    }
+
     fun onRegisterFormSaveAndContinueClicked() {
         if(validateForm(true)){
             onEvent(Event.ToggleLoader(true))
@@ -651,7 +667,7 @@ class LoginRegisterViewModel @Inject constructor(
                     }
                 } else if (textWatcherType == Constants.TextWatcherType.OTP) {
                     if(it.length == 6){
-                        showRegisterForm()
+                        onVerifyOtp(it)
                     }
                 } else if (textWatcherType == Constants.TextWatcherType.FORM_PHONE_NO) {
                     validateForm(false)
