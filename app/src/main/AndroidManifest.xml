@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SaturdayLifestyle">
         <activity
-            android:name=".ui.home.activity.HomeActivity"
+            android:name=".ui.main.activity.MainActivity"
             android:exported="false">
         </activity>
 
