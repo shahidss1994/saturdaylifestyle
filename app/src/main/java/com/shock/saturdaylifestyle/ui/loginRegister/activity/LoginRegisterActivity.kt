@@ -9,9 +9,7 @@ import com.shock.saturdaylifestyle.databinding.ActivityLoginRegisterBinding
 import com.shock.saturdaylifestyle.ui.base.activity.BaseActivity
 import com.shock.saturdaylifestyle.ui.base.fragment.DatePickerDialogFragment
 import com.shock.saturdaylifestyle.ui.base.others.observeInLifecycle
-import com.shock.saturdaylifestyle.ui.loginRegister.fragment.CountryCodeNumberFragment
-import com.shock.saturdaylifestyle.ui.loginRegister.fragment.LoginOnboardingIntroFragmentDirections
-import com.shock.saturdaylifestyle.ui.loginRegister.fragment.LoginOrCreateAccountFragment
+import com.shock.saturdaylifestyle.ui.loginRegister.fragment.*
 import com.shock.saturdaylifestyle.ui.loginRegister.viewModel.LoginRegisterViewModel
 import com.shock.saturdaylifestyle.ui.main.activity.MainActivity
 import com.shock.saturdaylifestyle.utility.CommonUtilities
@@ -67,6 +65,7 @@ class LoginRegisterActivity :
                             onBackPressed()
                             navController.navigate(LoginOnboardingIntroFragmentDirections.actionLoginOnboardingIntroRegisterFormFragment())
                         }
+
                     }
                 }
                 is LoginRegisterViewModel.Event.PickerDialog -> {
@@ -90,6 +89,15 @@ class LoginRegisterActivity :
                 }
                 is LoginRegisterViewModel.Event.ToggleLoader -> {
                     toggleLoader(it.isToShow)
+                }
+                is LoginRegisterViewModel.Event.OnboardingSkipClicked -> {
+                    startActivity(
+                        Intent(
+                            this@LoginRegisterActivity,
+                            MainActivity::class.java
+                        )
+                    )
+                    finish()
                 }
                 is LoginRegisterViewModel.Event.DateDialogPicker -> {
                     if (datePickerDialogFragment.isVisible) {
@@ -126,6 +134,9 @@ class LoginRegisterActivity :
                 }
                 is LoginRegisterViewModel.Event.VerifyOtpResponse -> {
                     if (it.response?.status == true) {
+
+                        mViewModel.viewState.otpErrorVisibility=false
+
                         if (it.isUserExist == true) {
                             startActivity(
                                 Intent(
@@ -147,18 +158,38 @@ class LoginRegisterActivity :
                     }
 
                 }
+                is LoginRegisterViewModel.Event.OtpErrorMessage -> {
+
+                    it.message?.let { it1 -> showToast(it1) }
+                    mViewModel.viewState.otpErrorVisibility=true
+
+                }
+                is LoginRegisterViewModel.Event.ErrorResponse -> {
+
+                    it.message?.let { it1 -> showToast(it1) }
+
+                }
                 is LoginRegisterViewModel.Event.RegisterResponse -> {
                     if (it.response?.status == true) {
 
                         CommonUtilities.showToast(this, it.response.message.toString())
 
-/*
                         var data = it.response.data
                         CommonUtilities.putString(this, Constants.TOKEN, data?.token.toString())
                         CommonUtilities.putString(this, Constants.NAME, data?.name.toString())
                         CommonUtilities.putBoolean(this, Constants.IS_LOGIN, true)
 
-                        */
+
+                        startActivity(
+                            Intent(
+                                this@LoginRegisterActivity,
+                                MainActivity::class.java
+                            )
+                        )
+                        finish()
+
+                        // navController.navigate(RegisterFormFragmentDirections.actionLoginOnboardingIntroHomeFragment())
+
                         // CommonUtilities.putBoolean(this, Constants.IS_GUEST,false)
 
 

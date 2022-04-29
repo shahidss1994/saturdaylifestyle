@@ -13,6 +13,7 @@ class LoginRegisterViewState(
     initCountryCodeNumberViewStateList: List<CountryCodeNumberViewState> = arrayListOf(),
     initLoginOrCreateAccountVisibility: Boolean = true,
     initSendOtpSmsTryAgainVisibility: Boolean = true,
+    initOtpErrorVisibility: Boolean = false,
     initCountryCodeNumberViewState: CountryCodeNumberViewState = CountryCodeNumberViewState(
         "id",
         "62",
@@ -25,6 +26,7 @@ class LoginRegisterViewState(
     initStillDidntGetOtpPopupVisibility: Boolean = false,
     initContinueBtnDrawableViewState: DrawableViewState = DrawableViewState(R.drawable.bg_button3),
     initPhoneNo: String = "",
+    initOtpError: String = "",
     initPhoneNoStillNoOtp: String = "",
     initSmsTryAgainTimerText: String = "30",
     initSendOtpSmsTryAgainClickCount: Int = 0
@@ -103,6 +105,19 @@ class LoginRegisterViewState(
         BR.sendOtpSmsTryAgainVisibility,
         initSendOtpSmsTryAgainVisibility
     )
+
+    @get:Bindable
+    var otpError by bind(
+        BR.otpError,
+        initOtpError
+    )
+
+    @get:Bindable
+    var otpErrorVisibility by bind(
+        BR.otpErrorVisibility,
+        initOtpErrorVisibility
+    )
+
 
 
     @get:Bindable

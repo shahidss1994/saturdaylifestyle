@@ -22,6 +22,7 @@ object Constants {
         const val WHATSAPP_VERIFY_YOUR_NUMBER = "whatsapp_verify_your_number"
         const val CONFIRM_YOUR_NUMBER = "confirm_your_number"
         const val REGISTER_FORM = "register_form"
+        const val HOME = "home"
         const val MISSED_CALL_VERIFY_YOUR_NUMBER = "missed_call_verify_your_number"
     }
 

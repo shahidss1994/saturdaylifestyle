@@ -26,7 +26,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import org.json.JSONObject
 import javax.inject.Inject
+
 
 @HiltViewModel
 class LoginRegisterViewModel @Inject constructor(
@@ -171,9 +173,14 @@ class LoginRegisterViewModel @Inject constructor(
             )
             onEvent(Event.ToggleLoader(false))
             if (rs is Resource.Success) {
-                onEvent(Event.VerifyOtpResponse(isUserExist, rs.value))
-            } else {
-                onEvent(Event.VerifyOtpResponse())
+
+                    onEvent(Event.VerifyOtpResponse(isUserExist, rs.value))
+
+            } else if (rs is Resource.Failure){
+
+                val jObjError = JSONObject(rs.errorBody!!.string())
+                onEvent(Event.OtpErrorMessage(jObjError.getJSONObject("message").getString("en").toString()))
+
             }
         }
     }
@@ -192,8 +199,11 @@ class LoginRegisterViewModel @Inject constructor(
                 onEvent(Event.ToggleLoader(false))
                 if (rs is Resource.Success) {
                     onEvent(Event.RegisterResponse(rs.value))
-                } else {
-                    onEvent(Event.RegisterResponse())
+                } else if (rs is Resource.Failure){
+
+                    val jObjError = JSONObject(rs.errorBody!!.string())
+                    onEvent(Event.ErrorResponse(jObjError.getJSONObject("message").getString("en").toString()))
+
 
                 }
             }
@@ -201,6 +211,7 @@ class LoginRegisterViewModel @Inject constructor(
     }
 
     fun onSkipButtonClicked() {
+        onEvent(Event.OnboardingSkipClicked)
 
     }
 
@@ -250,6 +261,7 @@ class LoginRegisterViewModel @Inject constructor(
 
     sealed class Event {
         object OnBackPressed : Event()
+        object OnboardingSkipClicked : Event()
         object PickerDialog : Event()
         object PickerDialogClose : Event()
         data class NavigateTo(val navigateTo: String) : Event()
@@ -260,6 +272,8 @@ class LoginRegisterViewModel @Inject constructor(
             val response: VerifyOtpModel? = null
         ) : Event()
         data class RegisterResponse(val response: LoginRegisterResponseModel? = null) : Event()
+        data class ErrorResponse(val message: String? = null) : Event()
+        data class OtpErrorMessage(val message: String? = null) : Event()
         data class ToggleLoader(val isToShow: Boolean) : Event()
         object DateDialogPicker : Event()
     }
