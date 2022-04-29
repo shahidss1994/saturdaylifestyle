@@ -21,6 +21,7 @@ import com.shock.saturdaylifestyle.ui.loginRegister.viewState.CountryCodeNumberV
 import com.shock.saturdaylifestyle.ui.loginRegister.viewState.IntroViewPagerItemViewState
 import com.shock.saturdaylifestyle.ui.loginRegister.viewState.LoginRegisterViewState
 import com.shock.saturdaylifestyle.ui.loginRegister.viewState.RegisterFormViewState
+import com.shock.saturdaylifestyle.util.DataParser
 import com.shock.saturdaylifestyle.utility.CommonUtilities
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -172,6 +173,10 @@ class LoginRegisterViewModel @Inject constructor(
             onEvent(Event.ToggleLoader(false))
             if (rs is Resource.Success) {
                 onEvent(Event.VerifyOtpResponse(isUserExist, rs.value))
+            } else if (rs is Resource.Failure) {
+                val errorBody = rs.errorBody
+                val body = DataParser.fromJson<VerifyOtpModel>(errorBody?.charStream()?.readText()?:"")
+                onEvent(Event.VerifyOtpResponse(isUserExist, body))
             } else {
                 onEvent(Event.VerifyOtpResponse())
             }
