@@ -21,6 +21,7 @@ import com.shock.saturdaylifestyle.ui.loginRegister.viewState.CountryCodeNumberV
 import com.shock.saturdaylifestyle.ui.loginRegister.viewState.IntroViewPagerItemViewState
 import com.shock.saturdaylifestyle.ui.loginRegister.viewState.LoginRegisterViewState
 import com.shock.saturdaylifestyle.ui.loginRegister.viewState.RegisterFormViewState
+import com.shock.saturdaylifestyle.util.DataParser
 import com.shock.saturdaylifestyle.utility.CommonUtilities
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -28,7 +29,6 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 import javax.inject.Inject
-
 
 @HiltViewModel
 class LoginRegisterViewModel @Inject constructor(
@@ -173,14 +173,13 @@ class LoginRegisterViewModel @Inject constructor(
             )
             onEvent(Event.ToggleLoader(false))
             if (rs is Resource.Success) {
-
-                    onEvent(Event.VerifyOtpResponse(isUserExist, rs.value))
-
-            } else if (rs is Resource.Failure){
-
-                val jObjError = JSONObject(rs.errorBody!!.string())
-                onEvent(Event.OtpErrorMessage(jObjError.getJSONObject("message").getString("en").toString()))
-
+                onEvent(Event.VerifyOtpResponse(isUserExist, rs.value))
+            } else if (rs is Resource.Failure) {
+                val body =
+                    DataParser.fromJson<VerifyOtpModel>(rs.errorBody?.charStream()?.readText() ?: "")
+                onEvent(Event.VerifyOtpResponse(isUserExist, body))
+            } else {
+                onEvent(Event.VerifyOtpResponse())
             }
         }
     }
@@ -199,11 +198,13 @@ class LoginRegisterViewModel @Inject constructor(
                 onEvent(Event.ToggleLoader(false))
                 if (rs is Resource.Success) {
                     onEvent(Event.RegisterResponse(rs.value))
-                } else if (rs is Resource.Failure){
-
-                    val jObjError = JSONObject(rs.errorBody!!.string())
-                    onEvent(Event.ErrorResponse(jObjError.getJSONObject("message").getString("en").toString()))
-
+                } else {
+                    if (rs is Resource.Failure) {
+                        val body = rs.errorBody
+                        onEvent(Event.RegisterResponse())
+                    } else {
+                        onEvent(Event.RegisterResponse())
+                    }
 
                 }
             }
@@ -319,7 +320,7 @@ class LoginRegisterViewModel @Inject constructor(
             DrawableViewState(R.mipmap.iv_onboarding5)
         )
         arrayList.add(introViewPagerItemViewState5)
-        // viewState.introViewPagerItemViewStateList = arrayList
+        viewState.introViewPagerItemViewStateList = arrayList
     }
 
     private fun setCountryCodeNumberList() {
