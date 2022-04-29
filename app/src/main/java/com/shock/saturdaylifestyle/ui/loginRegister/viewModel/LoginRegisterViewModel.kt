@@ -6,6 +6,7 @@ import android.text.TextWatcher
 import android.widget.RadioGroup
 import androidx.core.util.PatternsCompat
 import androidx.lifecycle.viewModelScope
+import com.google.gson.Gson
 import com.shock.saturdaylifestyle.R
 import com.shock.saturdaylifestyle.constants.Constants
 import com.shock.saturdaylifestyle.network.Resource
@@ -27,6 +28,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
@@ -178,7 +180,18 @@ class LoginRegisterViewModel @Inject constructor(
                 val body = DataParser.fromJson<VerifyOtpModel>(errorBody?.charStream()?.readText()?:"")
                 onEvent(Event.VerifyOtpResponse(isUserExist, body))
             } else {
-                onEvent(Event.VerifyOtpResponse())
+                if(rs is Resource.Failure){
+                    try{
+                        val json = Gson()
+                        val body = json.fromJson(json.toJson(rs.errorBody),VerifyOtpModel::class.java)
+                        onEvent(Event.VerifyOtpResponse(isUserExist,body))
+                    }catch(e : Exception){
+                        onEvent(Event.VerifyOtpResponse())
+                    }
+
+                }else {
+                    onEvent(Event.VerifyOtpResponse())
+                }
             }
         }
     }
@@ -198,7 +211,13 @@ class LoginRegisterViewModel @Inject constructor(
                 if (rs is Resource.Success) {
                     onEvent(Event.RegisterResponse(rs.value))
                 } else {
-                    onEvent(Event.RegisterResponse())
+                    if(rs is Resource.Failure){
+                        val body = rs.errorBody
+                        onEvent(Event.RegisterResponse())
+                    }
+                    else{
+                        onEvent(Event.RegisterResponse())
+                    }
 
                 }
             }
@@ -312,7 +331,7 @@ class LoginRegisterViewModel @Inject constructor(
             DrawableViewState(R.mipmap.iv_onboarding5)
         )
         arrayList.add(introViewPagerItemViewState5)
-        // viewState.introViewPagerItemViewStateList = arrayList
+         viewState.introViewPagerItemViewStateList = arrayList
     }
 
     private fun setCountryCodeNumberList() {
