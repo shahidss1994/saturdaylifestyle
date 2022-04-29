@@ -114,8 +114,10 @@ class LoginRegisterActivity :
                         if (loginOrCreateFragment.isVisible) {
                             loginOrCreateFragment.dismiss()
                         }
-                        if (mViewModel.viewState.sendOtpSmsTryAgainClickCount == 0) {
+                        if (mViewModel.viewState.sendOtpSmsTryAgainClickCount < 3) {
                             navController.navigate(LoginOnboardingIntroFragmentDirections.actionLoginOnboardingIntroConfirmYourNumberFragment())
+                        }else{
+
                         }
                     } else {
                         if (it.response != null) {
