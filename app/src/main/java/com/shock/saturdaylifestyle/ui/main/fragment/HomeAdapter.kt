@@ -37,7 +37,7 @@ import com.shock.saturdaylifestyle.ui.main.viewState.NewArrivalViewState
 import com.shock.saturdaylifestyle.ui.main.viewState.WhatTheySayViewState
 import com.shock.saturdaylifestyle.util.SpacesItemDecoration
 
-class HomeAdapter(val viewModel: MainViewModel, val context: Context?) :
+class HomeAdapter(val viewModel: MainViewModel) :
     RecyclerView.Adapter<HomeAdapter.ViewHolder<HomeViewState, MainViewModel>>(),
     BindableAdapter<HomeViewState> {
 
