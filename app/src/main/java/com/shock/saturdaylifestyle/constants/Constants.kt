@@ -20,6 +20,7 @@ object Constants {
     object NavigateTo {
         const val LOGIN_OR_CREATE_ACCOUNT = "login_or_create_account"
         const val WHATSAPP_VERIFY_YOUR_NUMBER = "whatsapp_verify_your_number"
+        const val WHATSAPP_VERIFY_YOUR_NUMBER_FROM_STILL_NO_OTP_SCREEN = "whatsapp_verify_your_number_from_still no_otp_screen"
         const val CONFIRM_YOUR_NUMBER = "confirm_your_number"
         const val REGISTER_FORM = "register_form"
         const val HOME = "home"
@@ -34,6 +35,7 @@ object Constants {
         const val EMAIL = "email"
         const val COUNTRY_CODE = "country_code"
         const val OTP = "otp"
+        const val MiSSED_CALL_OTP = "missed_call_otp"
     }
 
     object Gender{

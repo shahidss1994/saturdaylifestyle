@@ -14,11 +14,7 @@ class LoginRegisterViewState(
     initLoginOrCreateAccountVisibility: Boolean = true,
     initSendOtpSmsTryAgainVisibility: Boolean = true,
     initOtpErrorVisibility: Boolean = false,
-    initCountryCodeNumberViewState: CountryCodeNumberViewState = CountryCodeNumberViewState(
-        "id",
-        "62",
-        "Indonesia"
-    ),
+    initCountryCodeNumberViewState: CountryCodeNumberViewState = CountryCodeNumberViewState("id", "62", "Indonesia"),
     initPhoneNoMessageColorViewState: ColorViewState? = null,
     initShowPhoneNoMessage: Boolean = false,
     initChooseVerificationMethodVisibility: Boolean = false,
@@ -29,8 +25,10 @@ class LoginRegisterViewState(
     initOtpError: String = "",
     initPhoneNoStillNoOtp: String = "",
     initSmsTryAgainTimerText: String = "30",
-    initSendOtpSmsTryAgainClickCount: Int = 0
-) :
+    initSendOtpSmsTryAgainClickCount: Int = 0,
+    initLastPopupState: Int = 1   // 1 for login popup,2 for whatsapp popup ,3 for misssed call popup
+
+    ) :
     BaseObservable() {
 
     @get:Bindable
@@ -97,6 +95,12 @@ class LoginRegisterViewState(
     var sendOtpSmsTryAgainClickCount by bind(
         BR.sendOtpSmsTryAgainClickCount,
         initSendOtpSmsTryAgainClickCount
+    )
+
+    @get:Bindable
+    var lastPopupState by bind(
+        BR.lastPopupState,
+        initLastPopupState
     )
 
 

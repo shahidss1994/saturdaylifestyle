@@ -3,6 +3,7 @@ package com.shock.saturdaylifestyle.ui.loginRegister.viewModel
 import android.os.CountDownTimer
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.widget.RadioGroup
 import androidx.core.util.PatternsCompat
 import androidx.lifecycle.viewModelScope
@@ -47,6 +48,7 @@ class LoginRegisterViewModel @Inject constructor(
     val countryCodeWatcher = LoginRegisterTextWatcher(Constants.TextWatcherType.COUNTRY_CODE)
 
     val optWatcher = LoginRegisterTextWatcher(Constants.TextWatcherType.OTP)
+    val missedCallOtpWatcher = LoginRegisterTextWatcher(Constants.TextWatcherType.MiSSED_CALL_OTP)
 
     val genderCheckChangeListener = RadioCheckChangeListener()
 
@@ -65,12 +67,34 @@ class LoginRegisterViewModel @Inject constructor(
     }
 
     fun onLoginCreateAccountClicked() {
+
+        Log.e("TAG", "onLoginCreateAccountClicked lastPopupState : "+viewState.lastPopupState )
         onEvent(Event.NavigateTo(Constants.NavigateTo.LOGIN_OR_CREATE_ACCOUNT))
 
-        viewState.loginOrCreateAccountVisibility = true
-        viewState.chooseVerificationMethodVisibility = false
-        viewState.missedCallPopupVisibility = false
-        viewState.stillDidntGetOtpPopupVisibility = false
+
+        if (viewState.lastPopupState == 2) {
+            viewState.loginOrCreateAccountVisibility = false
+            viewState.chooseVerificationMethodVisibility = true
+            viewState.missedCallPopupVisibility = false
+            viewState.stillDidntGetOtpPopupVisibility = false
+        }
+        else if (viewState.lastPopupState == 3) {
+            viewState.loginOrCreateAccountVisibility = false
+            viewState.chooseVerificationMethodVisibility = false
+            viewState.missedCallPopupVisibility = true
+            viewState.stillDidntGetOtpPopupVisibility = false
+        }else {
+
+
+            viewState.lastPopupState = 1
+
+
+            viewState.loginOrCreateAccountVisibility = true
+            viewState.chooseVerificationMethodVisibility = false
+            viewState.missedCallPopupVisibility = false
+            viewState.stillDidntGetOtpPopupVisibility = false
+
+        }
     }
 
 
@@ -78,18 +102,26 @@ class LoginRegisterViewModel @Inject constructor(
         if (viewState.phoneNo.length >= 8) {
             viewState.loginOrCreateAccountVisibility = false
 
+            viewState.lastPopupState = 2
+            Log.e("TAG", "lastPopupState update : "+viewState.lastPopupState )
+
         }
     }
 
 
     fun onSendOTPViaMissedCallClicked() {
+
+        viewState.lastPopupState = 3
+        Log.e("TAG", "lastPopupState update : "+viewState.lastPopupState )
+
+
         viewState.loginOrCreateAccountVisibility = false
         viewState.chooseVerificationMethodVisibility = false
         viewState.missedCallPopupVisibility = true
         viewState.stillDidntGetOtpPopupVisibility = false
     }
 
-    fun onSendOTPViaMissedCallContinueClicked() {
+    fun onSendOTPViaMissedCallContinueClicked(fromTryAgain: Boolean = false) {
         onEvent(Event.ToggleLoader(true))
         viewModelScope.launch {
             val rs = repository.sendOtpViaMissedCall(
@@ -99,13 +131,84 @@ class LoginRegisterViewModel @Inject constructor(
             )
             onEvent(Event.ToggleLoader(false))
             if (rs is Resource.Success) {
-                onEvent(Event.SendOtpViaMissedCallResponse(rs.value))
+                onEvent(Event.SendOtpViaMissedCallResponse(fromTryAgain, rs.value))
+            } else if (rs is Resource.Failure) {
+                val jObjError = JSONObject(rs.errorBody!!.string())
+                onEvent(
+                    Event.SendOtpViaMissedCallResponse(
+                        fromTryAgain, null,
+                        jObjError.getJSONObject("message").getString("en").toString()
+                    )
+                )
+            } else {
+                onEvent(Event.SendOtpViaMissedCallResponse())
             }
         }
     }
 
-    fun onSendOTPViaWhatsappClicked() {
-        onEvent(Event.NavigateTo(Constants.NavigateTo.WHATSAPP_VERIFY_YOUR_NUMBER))
+    fun onSendOTPViaWhatsappClicked(fromTryAgain: Boolean = false) {
+
+        onEvent(Event.ToggleLoader(true))
+        viewModelScope.launch {
+            val rs = repository.sendOtpViaWhatsapp(
+                Constants.API_KEY,
+                viewState.phoneNo,
+                viewState.countryCodeNumberViewState.code ?: ""
+            )
+            CommonUtilities.hideLoader()
+            if (rs is Resource.Success) {
+                onEvent(Event.SendOtpViaWhatsappResponse(fromTryAgain,rs.value))
+                isUserExist = rs.value?.data?.isUserExist ?: false
+
+            } else if (rs is Resource.Failure) {
+                val jObjError = JSONObject(rs.errorBody!!.string())
+                onEvent(
+                    Event.SendOtpViaWhatsappResponse(
+                        fromTryAgain,null,
+                        jObjError.getJSONObject("message").getString("en").toString()
+                    )
+                )
+            } else {
+                onEvent(Event.SendOtpViaWhatsappResponse())
+            }
+
+        }
+
+
+
+     //   onEvent(Event.NavigateTo(Constants.NavigateTo.WHATSAPP_VERIFY_YOUR_NUMBER))
+    }
+
+    fun onSendOTPViaWhatsappFromStillNoOtpPopupClicked() {
+
+
+        onEvent(Event.ToggleLoader(true))
+        viewModelScope.launch {
+            val rs = repository.sendOtpViaWhatsapp(
+                Constants.API_KEY,
+                viewState.phoneNo,
+                viewState.countryCodeNumberViewState.code ?: ""
+            )
+            CommonUtilities.hideLoader()
+            if (rs is Resource.Success) {
+                onEvent(Event.SendOtpViaWhatsappStillNoOtpResponse(rs.value))
+                isUserExist = rs.value?.data?.isUserExist ?: false
+
+            } else if (rs is Resource.Failure) {
+                val jObjError = JSONObject(rs.errorBody!!.string())
+                onEvent(
+                    Event.SendOtpViaWhatsappStillNoOtpResponse(
+                        null,
+                        jObjError.getJSONObject("message").getString("en").toString()
+                    )
+                )
+            } else {
+                onEvent(Event.SendOtpViaWhatsappStillNoOtpResponse())
+            }
+
+        }
+
+      //  onEvent(Event.NavigateTo(Constants.NavigateTo.WHATSAPP_VERIFY_YOUR_NUMBER_FROM_STILL_NO_OTP_SCREEN))
     }
 
     fun onSendOTPViaSMSClicked(fromTryAgain: Boolean = false) {
@@ -124,12 +227,26 @@ class LoginRegisterViewModel @Inject constructor(
                     startTryAgainTimer()
                 }
             } else if (rs is Resource.Failure) {
+                val jObjError = JSONObject(rs.errorBody!!.string())
+                onEvent(
+                    Event.SendOtpViaSMSResponse(
+                        null,
+                        jObjError.getJSONObject("message").getString("en").toString()
+                    )
+                )
+            } else {
                 onEvent(Event.SendOtpViaSMSResponse())
             }
+
         }
     }
 
     fun onMissedCallPopupBackClicked() {
+
+        viewState.lastPopupState = 2
+        Log.e("TAG", "lastPopupState update : "+viewState.lastPopupState )
+
+
         viewState.loginOrCreateAccountVisibility = false
         viewState.chooseVerificationMethodVisibility = true
         viewState.missedCallPopupVisibility = false
@@ -137,6 +254,11 @@ class LoginRegisterViewModel @Inject constructor(
     }
 
     fun onMissedCallPopupOtherMethodClicked() {
+
+        viewState.lastPopupState = 2
+        Log.e("TAG", "lastPopupState update : "+viewState.lastPopupState )
+
+
         viewState.loginOrCreateAccountVisibility = false
         viewState.chooseVerificationMethodVisibility = true
         viewState.missedCallPopupVisibility = false
@@ -144,7 +266,35 @@ class LoginRegisterViewModel @Inject constructor(
     }
 
     fun onBackPressed() {
+
+
         onEvent(Event.OnBackPressed)
+
+
+    /*    if (viewState.lastPopupState == 2) {
+            onEvent(Event.NavigateTo(Constants.NavigateTo.LOGIN_OR_CREATE_ACCOUNT))
+
+
+            viewState.loginOrCreateAccountVisibility = false
+            viewState.chooseVerificationMethodVisibility = false
+            viewState.missedCallPopupVisibility = true
+            viewState.stillDidntGetOtpPopupVisibility = false
+
+        } else if (viewState.lastPopupState == 3) {
+
+            onEvent(Event.NavigateTo(Constants.NavigateTo.LOGIN_OR_CREATE_ACCOUNT))
+
+            onSendOTPViaMissedCallClicked()
+        } else {
+
+            onEvent(Event.NavigateTo(Constants.NavigateTo.LOGIN_OR_CREATE_ACCOUNT))
+
+            onLoginCreateAccountClicked()
+        }*/
+
+
+
+
     }
 
     fun showCountryCodePicker() {
@@ -176,7 +326,9 @@ class LoginRegisterViewModel @Inject constructor(
                 onEvent(Event.VerifyOtpResponse(isUserExist, rs.value))
             } else if (rs is Resource.Failure) {
                 val body =
-                    DataParser.fromJson<VerifyOtpModel>(rs.errorBody?.charStream()?.readText() ?: "")
+                    DataParser.fromJson<VerifyOtpModel>(
+                        rs.errorBody?.charStream()?.readText() ?: ""
+                    )
                 onEvent(Event.VerifyOtpResponse(isUserExist, body))
             } else {
                 onEvent(Event.VerifyOtpResponse())
@@ -200,10 +352,14 @@ class LoginRegisterViewModel @Inject constructor(
                     onEvent(Event.RegisterResponse(rs.value))
                 } else {
                     if (rs is Resource.Failure) {
-                        val body = rs.errorBody
-                        onEvent(Event.RegisterResponse())
+                        val jObjError = JSONObject(rs.errorBody!!.string())
+                        onEvent(
+                            Event.RegisterErrorResponse(
+                                jObjError.getJSONObject("message").getString("en").toString()
+                            )
+                        )
                     } else {
-                        onEvent(Event.RegisterResponse())
+                        onEvent(Event.RegisterErrorResponse())
                     }
 
                 }
@@ -225,6 +381,9 @@ class LoginRegisterViewModel @Inject constructor(
     }
 
     fun onChooseVerificationBackClicked() {
+        viewState.lastPopupState = 1
+        Log.e("TAG", "lastPopupState update : "+viewState.lastPopupState )
+
         viewState.loginOrCreateAccountVisibility = true
     }
 
@@ -251,6 +410,7 @@ class LoginRegisterViewModel @Inject constructor(
         }
     }
 
+
     fun checkSelectedCountry(countryCodeNumberViewState: CountryCodeNumberViewState) {
         viewState.countryCodeNumberViewState = countryCodeNumberViewState
         onEvent(Event.PickerDialogClose)
@@ -266,15 +426,33 @@ class LoginRegisterViewModel @Inject constructor(
         object PickerDialog : Event()
         object PickerDialogClose : Event()
         data class NavigateTo(val navigateTo: String) : Event()
-        data class SendOtpViaMissedCallResponse(val response: SendOtpModel) : Event()
-        data class SendOtpViaSMSResponse(val response: SendOtpModel? = null) : Event()
+        data class SendOtpViaMissedCallResponse(
+            val fromTryAgain: Boolean? = false,
+            val response: SendOtpModel? = null,
+            val errorMessage: String? = null
+        ) : Event()
+
+        data class SendOtpViaSMSResponse(
+            val response: SendOtpModel? = null,
+            val errorMessage: String? = null
+        ) : Event()
+        data class SendOtpViaWhatsappResponse(
+            val fromTryAgain: Boolean? = false,
+            val response: SendOtpModel? = null,
+            val errorMessage: String? = null
+        ) : Event()
+        data class SendOtpViaWhatsappStillNoOtpResponse(
+            val response: SendOtpModel? = null,
+            val errorMessage: String? = null
+        ) : Event()
+
         data class VerifyOtpResponse(
             val isUserExist: Boolean? = null,
             val response: VerifyOtpModel? = null
         ) : Event()
+
         data class RegisterResponse(val response: LoginRegisterResponseModel? = null) : Event()
-        data class ErrorResponse(val message: String? = null) : Event()
-        data class OtpErrorMessage(val message: String? = null) : Event()
+        data class RegisterErrorResponse(val message: String? = null) : Event()
         data class ToggleLoader(val isToShow: Boolean) : Event()
         object DateDialogPicker : Event()
     }
@@ -687,6 +865,10 @@ class LoginRegisterViewModel @Inject constructor(
                     }
                 } else if (textWatcherType == Constants.TextWatcherType.OTP) {
                     if (it.length == 6) {
+                        onVerifyOtp(it)
+                    }
+                } else if (textWatcherType == Constants.TextWatcherType.MiSSED_CALL_OTP) {
+                    if (it.length == 4) {
                         onVerifyOtp(it)
                     }
                 } else if (textWatcherType == Constants.TextWatcherType.FORM_PHONE_NO) {

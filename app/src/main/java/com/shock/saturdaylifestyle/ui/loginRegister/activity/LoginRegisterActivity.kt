@@ -25,6 +25,9 @@ class LoginRegisterActivity :
     override fun listenChannel() {
 
         val loginOrCreateFragment = LoginOrCreateAccountFragment()
+        val confirmYourNumberFragment = ConfirmYourNumberFragment()
+        val missedCallVerifyYourNumberFragment = MissedCallVerifyYourNumberFragment()
+        val whatsappVerifyYourNumberFragment = WhatsappVerifyYourNumberFragment()
         val countryCodeFragment = CountryCodeNumberFragment()
         val datePickerDialogFragment = DatePickerDialogFragment()
 
@@ -45,6 +48,17 @@ class LoginRegisterActivity :
                                 loginOrCreateFragment.dismiss()
                             }
                             navController.navigate(LoginOnboardingIntroFragmentDirections.actionLoginOnboardingIntroWhatsappVerifyYourNumberFragment())
+
+                        }
+                        Constants.NavigateTo.WHATSAPP_VERIFY_YOUR_NUMBER_FROM_STILL_NO_OTP_SCREEN -> {
+                            if (loginOrCreateFragment.isVisible) {
+                                loginOrCreateFragment.dismiss()
+                            }
+
+                            onBackPressed()
+                            navController.navigate(LoginOnboardingIntroFragmentDirections.actionLoginOnboardingIntroWhatsappVerifyYourNumberFragment())
+
+
                         }
                         Constants.NavigateTo.CONFIRM_YOUR_NUMBER -> {
                             if (loginOrCreateFragment.isVisible) {
@@ -78,13 +92,52 @@ class LoginRegisterActivity :
                     onBackPressed()
                 }
                 is LoginRegisterViewModel.Event.SendOtpViaMissedCallResponse -> {
-                    if (it.response.status == true) {
+                    if (it.response?.status == true) {
                         if (loginOrCreateFragment.isVisible) {
                             loginOrCreateFragment.dismiss()
                         }
-                        navController.navigate(LoginOnboardingIntroFragmentDirections.actionLoginOnboardingIntroMissedCallVerifyYourNumberFragment())
+                        if (it.fromTryAgain == false) {
+                            navController.navigate(LoginOnboardingIntroFragmentDirections.actionLoginOnboardingIntroMissedCallVerifyYourNumberFragment())
+                        }
                     } else {
-                        showToast(it.response.message?.en ?: "Network error")
+                        if (it.errorMessage != null) {
+                            showToast(it.response?.message?.en ?: "Network error")
+                        } else {
+                            showToast(resources.getString(R.string.otp_send_error_msg))
+                        }
+                    }
+                }
+                is LoginRegisterViewModel.Event.SendOtpViaWhatsappResponse -> {
+                    if (it.response?.status == true) {
+                        if (loginOrCreateFragment.isVisible) {
+                            loginOrCreateFragment.dismiss()
+                        }
+                        if (it.fromTryAgain == false) {
+                            navController.navigate(LoginOnboardingIntroFragmentDirections.actionLoginOnboardingIntroConfirmYourNumberFragment())
+                           // navController.navigate(LoginOnboardingIntroFragmentDirections.actionLoginOnboardingIntroWhatsappVerifyYourNumberFragment())
+                        }
+                    } else {
+                        if (it.errorMessage != null) {
+                            showToast(it.response?.message?.en ?: "Network error")
+                        } else {
+                            showToast(resources.getString(R.string.otp_send_error_msg))
+                        }
+                    }
+                }
+                is LoginRegisterViewModel.Event.SendOtpViaWhatsappStillNoOtpResponse -> {
+                    if (it.response?.status == true) {
+                        if (loginOrCreateFragment.isVisible) {
+                            loginOrCreateFragment.dismiss()
+                        }
+                            onBackPressed()
+                            navController.navigate(LoginOnboardingIntroFragmentDirections.actionLoginOnboardingIntroConfirmYourNumberFragment())
+                          //  navController.navigate(LoginOnboardingIntroFragmentDirections.actionLoginOnboardingIntroWhatsappVerifyYourNumberFragment())
+                    } else {
+                        if (it.errorMessage != null) {
+                            showToast(it.response?.message?.en ?: "Network error")
+                        } else {
+                            showToast(resources.getString(R.string.otp_send_error_msg))
+                        }
                     }
                 }
                 is LoginRegisterViewModel.Event.ToggleLoader -> {
@@ -121,11 +174,10 @@ class LoginRegisterActivity :
                         if (loginOrCreateFragment.isVisible) {
                             loginOrCreateFragment.dismiss()
                         }
-                        if (mViewModel.viewState.sendOtpSmsTryAgainClickCount < 3) {
+                        if (mViewModel.viewState.sendOtpSmsTryAgainClickCount == 0) {
                             navController.navigate(LoginOnboardingIntroFragmentDirections.actionLoginOnboardingIntroConfirmYourNumberFragment())
-                        }else{
-
                         }
+
                     } else {
                         if (it.response != null) {
                             showToast(it.response?.message?.en ?: "Network error")
@@ -137,7 +189,8 @@ class LoginRegisterActivity :
                 is LoginRegisterViewModel.Event.VerifyOtpResponse -> {
                     if (it.response?.status == true) {
 
-                        mViewModel.viewState.otpErrorVisibility=false
+                        if(confirmYourNumberFragment.isVisible)
+                        {mViewModel.viewState.otpErrorVisibility = false}
 
                         if (it.isUserExist == true) {
                             startActivity(
@@ -153,6 +206,8 @@ class LoginRegisterActivity :
                         }
                     } else {
                         if (it.response != null) {
+                            if(confirmYourNumberFragment.isVisible)
+                            {mViewModel.viewState.otpErrorVisibility = true}
                             showToast(it.response?.message?.en ?: "Network error")
                         } else {
                             showToast(resources.getString(R.string.unable_to_login))
@@ -160,16 +215,14 @@ class LoginRegisterActivity :
                     }
 
                 }
-                is LoginRegisterViewModel.Event.OtpErrorMessage -> {
 
-                    it.message?.let { it1 -> showToast(it1) }
-                    mViewModel.viewState.otpErrorVisibility=true
+                is LoginRegisterViewModel.Event.RegisterErrorResponse -> {
 
-                }
-                is LoginRegisterViewModel.Event.ErrorResponse -> {
-
-                    it.message?.let { it1 -> showToast(it1) }
-
+                    if (it.message != null) {
+                        showToast(it.message ?: "Network error")
+                    } else {
+                        showToast(resources.getString(R.string.unable_to_register))
+                    }
                 }
                 is LoginRegisterViewModel.Event.RegisterResponse -> {
                     if (it.response?.status == true) {
@@ -197,7 +250,6 @@ class LoginRegisterActivity :
 
                     } else {
 
-
                         //  CommonUtilities.showToast(this, it.response?.message.toString())
 
 
@@ -207,6 +259,8 @@ class LoginRegisterActivity :
 
         }.observeInLifecycle(this@LoginRegisterActivity)
     }
+
+
 
 
 }

@@ -90,7 +90,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_7sdp"
             android:fontFamily="@font/montserrat_semi_bold"
-            android:onClick="@{()->viewModel.onWhatsAppTryAgainClicked()}"
+            android:onClick="@{()->viewModel.onSendOTPViaWhatsappClicked(true)}"
             android:text="Try Again"
             android:textAllCaps="true"
             android:textColor="@color/indigo"
