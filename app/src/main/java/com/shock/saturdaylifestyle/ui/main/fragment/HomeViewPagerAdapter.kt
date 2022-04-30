@@ -3,7 +3,6 @@ package com.shock.saturdaylifestyle.ui.main.fragment
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.shock.saturdaylifestyle.databinding.ItemHomeViewpagerBinding
 import com.shock.saturdaylifestyle.ui.main.models.HomeViewPagerDM
 
 class HomeViewPagerAdapter(private val dataList: List<HomeViewPagerDM>) : RecyclerView.Adapter<HomeViewPagerAdapter.ViewHolder>() {

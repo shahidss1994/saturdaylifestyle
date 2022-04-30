@@ -17,6 +17,7 @@ import com.shock.saturdaylifestyle.databinding.ItemLayoutNewArrivalsBinding
 import com.shock.saturdaylifestyle.databinding.ItemLayoutWhatTheySayBinding
 import com.shock.saturdaylifestyle.ui.base.adapter.BindableAdapter
 import com.shock.saturdaylifestyle.ui.base.others.diffCallback
+import com.shock.saturdaylifestyle.ui.main.models.HomeViewPagerDM
 import com.shock.saturdaylifestyle.ui.main.viewModel.MainViewModel
 import com.shock.saturdaylifestyle.ui.main.viewState.DetailsMakeUsDifferentViewState
 import com.shock.saturdaylifestyle.ui.main.viewState.ExploreOurTopPicksViewState
@@ -79,7 +80,7 @@ class HomeAdapter(val viewModel: MainViewModel) :
                             super.onPageSelected(position)
                             val newPosition = (position + 1) % viewpagerDataList.size
                             val runnable = Runnable { binding.viewPager.currentItem = newPosition }
-                            handler.postDelayed(runnable, 3000L)
+//                            handler.postDelayed(runnable, 3000L)
                         }
                     })
                 }
