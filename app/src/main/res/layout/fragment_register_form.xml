@@ -256,7 +256,6 @@
                         android:imeOptions="actionNext"
                         android:paddingStart="@dimen/_15sdp"
                         android:paddingEnd="@dimen/_10sdp"
-                        android:onClick="@{()->viewModel.showDateDialog()}"
                         android:singleLine="true"
                         android:text="@{viewState.date}"
                         android:textColor="@color/black"

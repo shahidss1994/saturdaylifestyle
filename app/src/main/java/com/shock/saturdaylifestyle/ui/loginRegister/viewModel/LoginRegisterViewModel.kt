@@ -269,9 +269,7 @@ class LoginRegisterViewModel @Inject constructor(
             val isUserExist: Boolean? = null,
             val response: VerifyOtpModel? = null
         ) : Event()
-
         data class RegisterResponse(val response: LoginRegisterResponseModel? = null) : Event()
-
         data class ToggleLoader(val isToShow: Boolean) : Event()
         object DateDialogPicker : Event()
     }

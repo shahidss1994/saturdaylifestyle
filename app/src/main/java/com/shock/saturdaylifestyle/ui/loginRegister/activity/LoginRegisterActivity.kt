@@ -9,11 +9,11 @@ import com.shock.saturdaylifestyle.databinding.ActivityLoginRegisterBinding
 import com.shock.saturdaylifestyle.ui.base.activity.BaseActivity
 import com.shock.saturdaylifestyle.ui.base.fragment.DatePickerDialogFragment
 import com.shock.saturdaylifestyle.ui.base.others.observeInLifecycle
-import com.shock.saturdaylifestyle.ui.home.activity.HomeActivity
 import com.shock.saturdaylifestyle.ui.loginRegister.fragment.CountryCodeNumberFragment
 import com.shock.saturdaylifestyle.ui.loginRegister.fragment.LoginOnboardingIntroFragmentDirections
 import com.shock.saturdaylifestyle.ui.loginRegister.fragment.LoginOrCreateAccountFragment
 import com.shock.saturdaylifestyle.ui.loginRegister.viewModel.LoginRegisterViewModel
+import com.shock.saturdaylifestyle.ui.main.activity.MainActivity
 import com.shock.saturdaylifestyle.utility.CommonUtilities
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.onEach
@@ -67,7 +67,6 @@ class LoginRegisterActivity :
                             onBackPressed()
                             navController.navigate(LoginOnboardingIntroFragmentDirections.actionLoginOnboardingIntroRegisterFormFragment())
                         }
-
                     }
                 }
                 is LoginRegisterViewModel.Event.PickerDialog -> {
@@ -133,7 +132,7 @@ class LoginRegisterActivity :
                             startActivity(
                                 Intent(
                                     this@LoginRegisterActivity,
-                                    HomeActivity::class.java
+                                    MainActivity::class.java
                                 )
                             )
                             finish()

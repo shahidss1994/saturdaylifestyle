@@ -18,6 +18,7 @@ abstract class BaseActivity<out T : ViewDataBinding>(@LayoutRes private val scre
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, screenLayoutId)
+        setContentView(binding.root)
         binding.executePendingBindings()
         listenChannel()
     }

@@ -72,5 +72,11 @@
     <string name="unable_to_login">Unable to login. Try again!</string>
     <string name="try_again_in_sec">Try again in %s</string>
 
+    <string name="home">Home</string>
+    <string name="shop">Shop</string>
+    <string name="home_try_on">Home Try-On</string>
+    <string name="cart">Cart</string>
+    <string name="profile">Profile</string>
+
 
 </resources>
