@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_500sdp"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_saturdays_banner"
+            android:src="@drawable/home_try_on_big_image"
             android:background="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
