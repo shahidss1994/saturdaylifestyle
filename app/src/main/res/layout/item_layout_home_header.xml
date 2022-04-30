@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -10,25 +10,16 @@
 
     </data>
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/cl_view_pager"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_270sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/clSunglasses"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_marquee_text">
-
-
+        android:layout_height="wrap_content">
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-
+            android:layout_height="wrap_content"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
             android:id="@+id/dots_indicator"
@@ -44,10 +35,37 @@
             app:dotsStrokeColor="@color/indicator_grey"
             app:dotsStrokeWidth="5dp"
             app:dotsWidthFactor="2.5"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_pager"
             app:selectedDotColor="@color/white" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="#F5F5F5"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:gravity="center"
+            android:paddingStart="@dimen/_12sdp"
+            android:paddingTop="@dimen/_20sdp"
+            android:paddingEnd="@dimen/_12sdp"
+            android:paddingBottom="@dimen/_20sdp"
+            android:text="Starting at Rs. 50000 including prescription"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dots_indicator" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clEyeglasses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@+id/clSunglasses"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title">
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cvEyeglasses"
@@ -60,8 +78,7 @@
                 app:cardElevation="@dimen/_15sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/dots_indicator"
-
+                app:layout_constraintTop_toTopOf="parent"
                 app:strokeColor="@color/teal_700"
                 app:strokeWidth="@dimen/_2sdp">
 
@@ -72,7 +89,6 @@
                     android:src="@drawable/eyeglasses" />
 
             </com.google.android.material.card.MaterialCardView>
-
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/civEyeglasses"
@@ -121,7 +137,6 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/ivSunglasses"
                 android:layout_width="0dp"
@@ -169,7 +184,6 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/ivHomeTryOn"
                 android:layout_width="0dp"
@@ -186,4 +200,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/cvHomeTryOn" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>
