@@ -2,16 +2,15 @@ package com.shock.saturdaylifestyle.ui.main.fragment
 
 import android.os.Handler
 import android.os.Looper
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.SimpleItemAnimator
 import androidx.viewpager2.widget.ViewPager2
 import com.shock.saturdaylifestyle.R
-import androidx.recyclerview.widget.SimpleItemAnimator
 import com.shock.saturdaylifestyle.constants.Constants
 import com.shock.saturdaylifestyle.databinding.ItemEmptyBinding
 import com.shock.saturdaylifestyle.databinding.ItemLayoutDetailsMakeUsDifferentBinding
@@ -22,11 +21,11 @@ import com.shock.saturdaylifestyle.databinding.ItemLayoutNewArrivalsBinding
 import com.shock.saturdaylifestyle.databinding.ItemLayoutWhatTheySayBinding
 import com.shock.saturdaylifestyle.ui.base.adapter.BindableAdapter
 import com.shock.saturdaylifestyle.ui.base.others.diffCallback
-import com.shock.saturdaylifestyle.ui.main.models.HomeViewPagerDM
 import com.shock.saturdaylifestyle.ui.main.adapter.DetailsMakeUsDifferentSubAdapter
 import com.shock.saturdaylifestyle.ui.main.adapter.ExploreTopPicksSubAdapter
 import com.shock.saturdaylifestyle.ui.main.adapter.NewArrivalSubAdapter
 import com.shock.saturdaylifestyle.ui.main.adapter.WhatTheySaySubAdapter
+import com.shock.saturdaylifestyle.ui.main.models.HomeViewPagerDM
 import com.shock.saturdaylifestyle.ui.main.viewModel.MainViewModel
 import com.shock.saturdaylifestyle.ui.main.viewState.DetailsMakeUsDifferentViewState
 import com.shock.saturdaylifestyle.ui.main.viewState.ExploreOurTopPicksViewState
@@ -56,11 +55,13 @@ class HomeAdapter(val viewModel: MainViewModel) :
     sealed class ViewHolder<VIEW_STATE, in VIEW_MODEL : ViewModel>(view: View) :
         RecyclerView.ViewHolder(view) {
 
-        abstract fun bind(viewState: VIEW_STATE, viewModel: VIEW_MODEL)
+        abstract fun bind(
+            viewState: VIEW_STATE,
+            viewModel: VIEW_MODEL
+        )
 
         class HeaderViewHolder(private val binding: ItemLayoutHomeHeaderBinding) :
             ViewHolder<HomeViewState, MainViewModel>(binding.root) {
-            private val handler = Handler(Looper.getMainLooper())
 
             companion object {
                 operator fun invoke(parent: ViewGroup) = HeaderViewHolder(
@@ -72,29 +73,49 @@ class HomeAdapter(val viewModel: MainViewModel) :
                 )
             }
 
-            override fun bind(viewState: HomeViewState, viewModel: MainViewModel) {
-                binding.viewState = viewState.viewState as HeaderViewState
-                    val viewpagerDataList = ArrayList<HomeViewPagerDM>()
-                    viewpagerDataList.add(HomeViewPagerDM(R.mipmap.iv_home_viewpager_item))
-                    viewpagerDataList.add(HomeViewPagerDM(R.mipmap.iv_home_viewpager_item))
-                    viewpagerDataList.add(HomeViewPagerDM(R.mipmap.iv_home_viewpager_item))
-                    viewpagerDataList.add(HomeViewPagerDM(R.mipmap.iv_home_viewpager_item))
-                    viewpagerDataList.add(HomeViewPagerDM(R.mipmap.iv_home_viewpager_item))
-                    viewpagerDataList.add(HomeViewPagerDM(R.mipmap.iv_home_viewpager_item))
-                    viewpagerDataList.add(HomeViewPagerDM(R.mipmap.iv_home_viewpager_item))
+            override fun bind(
+                viewState: HomeViewState, viewModel: MainViewModel
+            ) {
+                val homeViewState = viewState.viewState as HeaderViewState
+                binding.viewState = homeViewState
+                val viewpagerDataList = ArrayList<HomeViewPagerDM>()
+                viewpagerDataList.add(HomeViewPagerDM(R.mipmap.iv_home_viewpager_item))
+                viewpagerDataList.add(HomeViewPagerDM(R.mipmap.iv_home_viewpager_item))
+                viewpagerDataList.add(HomeViewPagerDM(R.mipmap.iv_home_viewpager_item))
+                viewpagerDataList.add(HomeViewPagerDM(R.mipmap.iv_home_viewpager_item))
+                viewpagerDataList.add(HomeViewPagerDM(R.mipmap.iv_home_viewpager_item))
+                viewpagerDataList.add(HomeViewPagerDM(R.mipmap.iv_home_viewpager_item))
+                viewpagerDataList.add(HomeViewPagerDM(R.mipmap.iv_home_viewpager_item))
 
-                    val adapter = HomeViewPagerAdapter(viewpagerDataList)
-                    binding.viewPager.adapter = adapter
-                    binding.dotsIndicator.setViewPager2(binding.viewPager)
-                    binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-                        override fun onPageSelected(position: Int) {
-                            super.onPageSelected(position)
-                            val newPosition = (position + 1) % viewpagerDataList.size
-                            val runnable = Runnable { binding.viewPager.currentItem = newPosition }
-                            handler.postDelayed(runnable, 2000L)
-                        }
-                    })
+                val adapter = HomeViewPagerAdapter(viewpagerDataList)
+                binding.viewPager.adapter = adapter
+                binding.dotsIndicator.setViewPager2(binding.viewPager)
+                binding.viewPager.currentItem = homeViewState.previousPosition
+                homeViewState.runnable?.let { runnable ->
+                    homeViewState.handler?.let { handler ->
+                        handler.removeCallbacks(runnable)
+                    }
                 }
+                homeViewState.runnable = null
+                if (homeViewState.handler == null) {
+                    homeViewState.handler = Handler(Looper.getMainLooper())
+                }
+                homeViewState.runnable = Runnable {
+                    homeViewState.previousPosition =
+                        (homeViewState.previousPosition + 1) % viewpagerDataList.size
+                    binding.viewPager.currentItem = homeViewState.previousPosition
+                }
+                binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                    override fun onPageSelected(position: Int) {
+                        super.onPageSelected(position)
+                        homeViewState.runnable?.let { runnable ->
+                            homeViewState.handler?.let { handler ->
+                                handler.postDelayed(runnable,2000L)
+                            }
+                        }
+                    }
+                })
+            }
 
         }
 
@@ -111,7 +132,9 @@ class HomeAdapter(val viewModel: MainViewModel) :
                 )
             }
 
-            override fun bind(viewState: HomeViewState, viewModel: MainViewModel) {
+            override fun bind(
+                viewState: HomeViewState, viewModel: MainViewModel
+            ) {
                 binding.viewState = viewState.viewState as DetailsMakeUsDifferentViewState
 
                 val llmanager = LinearLayoutManager(
@@ -120,7 +143,10 @@ class HomeAdapter(val viewModel: MainViewModel) :
                     false
                 )
 
-                val mainSubAdapter = DetailsMakeUsDifferentSubAdapter(viewModel, viewState.viewState as DetailsMakeUsDifferentViewState)
+                val mainSubAdapter = DetailsMakeUsDifferentSubAdapter(
+                    viewModel,
+                    viewState.viewState as DetailsMakeUsDifferentViewState
+                )
 
                 binding.rvDetailsMakeUsDifferentSublist.apply {
                     layoutManager = llmanager
@@ -147,7 +173,9 @@ class HomeAdapter(val viewModel: MainViewModel) :
             )
         }
 
-        override fun bind(viewState: HomeViewState, viewModel: MainViewModel) {
+        override fun bind(
+            viewState: HomeViewState, viewModel: MainViewModel
+        ) {
             binding.viewState = viewState.viewState as NewArrivalViewState
 
             val llmanager = LinearLayoutManager(
@@ -157,7 +185,8 @@ class HomeAdapter(val viewModel: MainViewModel) :
             )
 
             //set sublist adapter
-            val mainSubAdapter = NewArrivalSubAdapter(viewModel, viewState.viewState as NewArrivalViewState)
+            val mainSubAdapter =
+                NewArrivalSubAdapter(viewModel, viewState.viewState as NewArrivalViewState)
 
             binding.rvNewArrivalSublist.apply {
                 layoutManager = llmanager
@@ -184,7 +213,9 @@ class HomeAdapter(val viewModel: MainViewModel) :
             )
         }
 
-        override fun bind(viewState: HomeViewState, viewModel: MainViewModel) {
+        override fun bind(
+            viewState: HomeViewState, viewModel: MainViewModel
+        ) {
             binding.viewState = viewState.viewState as ExploreOurTopPicksViewState
 
             val llmanager = LinearLayoutManager(
@@ -194,7 +225,10 @@ class HomeAdapter(val viewModel: MainViewModel) :
             )
 
             //set sublist adapter
-            val mainSubAdapter = ExploreTopPicksSubAdapter(viewModel, viewState.viewState as ExploreOurTopPicksViewState)
+            val mainSubAdapter = ExploreTopPicksSubAdapter(
+                viewModel,
+                viewState.viewState as ExploreOurTopPicksViewState
+            )
 
             binding.rvExploreTopPickSublist.apply {
                 layoutManager = llmanager
@@ -221,7 +255,9 @@ class HomeAdapter(val viewModel: MainViewModel) :
             )
         }
 
-        override fun bind(viewState: HomeViewState, viewModel: MainViewModel) {
+        override fun bind(
+            viewState: HomeViewState, viewModel: MainViewModel
+        ) {
             binding.viewState = viewState.viewState as HomeTryOnViewState
         }
 
@@ -240,7 +276,9 @@ class HomeAdapter(val viewModel: MainViewModel) :
             )
         }
 
-        override fun bind(viewState: HomeViewState, viewModel: MainViewModel) {
+        override fun bind(
+            viewState: HomeViewState, viewModel: MainViewModel
+        ) {
             binding.viewState = viewState.viewState as WhatTheySayViewState
 
             val llmanager = LinearLayoutManager(
@@ -250,7 +288,8 @@ class HomeAdapter(val viewModel: MainViewModel) :
             )
 
             //set sublist adapter
-            val mainSubAdapter = WhatTheySaySubAdapter(viewModel, viewState.viewState as WhatTheySayViewState)
+            val mainSubAdapter =
+                WhatTheySaySubAdapter(viewModel, viewState.viewState as WhatTheySayViewState)
 
             binding.rvWhatTheySaySublist.apply {
                 layoutManager = llmanager
@@ -277,7 +316,9 @@ class HomeAdapter(val viewModel: MainViewModel) :
             )
         }
 
-        override fun bind(viewState: HomeViewState, viewModel: MainViewModel) {
+        override fun bind(
+            viewState: HomeViewState, viewModel: MainViewModel
+        ) {
 
         }
 
