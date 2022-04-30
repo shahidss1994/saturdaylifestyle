@@ -47,4 +47,6 @@ class MainViewModel @Inject constructor(
         mainViewState.homeItemList = homeViewStateList
     }
 
+    
+
 }
