@@ -45,7 +45,11 @@
         android:id="@+id/registerFormFragment"
         android:name="com.shock.saturdaylifestyle.ui.loginRegister.fragment.RegisterFormFragment"
         android:label="RegisterFormFragment"
-        tools:layout="@layout/fragment_register_form" />
+        tools:layout="@layout/fragment_register_form" >
+
+
+
+    </fragment>
 
     <fragment
         android:id="@+id/missedCallVerifyYourNumberFragment"
