@@ -13,6 +13,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.chaos.view.PinView
 import com.shock.saturdaylifestyle.ui.base.viewState.ColorViewState
 import com.shock.saturdaylifestyle.ui.base.viewState.DrawableViewState
+import com.shock.saturdaylifestyle.ui.base.viewState.StringViewState
 
 @BindingAdapter("items")
 fun <T> ViewPager2.setItems(items: List<T>) {
@@ -75,5 +76,12 @@ fun RadioGroup.setCheckChangedListener(listener: RadioGroup.OnCheckedChangeListe
 fun PinView.setTextChangedListener(textWatcher: TextWatcher?) {
     textWatcher?.let {
         addTextChangedListener(it)
+    }
+}
+
+@BindingAdapter("text")
+fun AppCompatTextView.setText(stringViewState: StringViewState?) {
+    stringViewState?.let {
+        text = resources.getString(it.stringId)
     }
 }

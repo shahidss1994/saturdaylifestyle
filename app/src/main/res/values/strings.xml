@@ -122,4 +122,10 @@
     <string name="input_your_phone_number">Input your phone number</string>
     <string name="OR">OR</string>
 
+    <string name="originality">Originality</string>
+    <string name="originality_desc">Our designers create custom pattern variations for that SATURDAYS style. We do it all in-house – from sketch to prototype testing to final design.</string>
+
+    <string name="only_the_good_stuff">Only the Good Stuff</string>
+    <string name="only_the_good_stuff_desc">We use only the best materials for our frames, which include customized single-sheet cellulose acetate, five-barrel hinges and aculon-coated screws for durability.</string>
+
 </resources>

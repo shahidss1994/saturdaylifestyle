@@ -20,7 +20,6 @@ import com.shock.saturdaylifestyle.ui.base.adapter.BindableAdapter
 import com.shock.saturdaylifestyle.ui.base.others.diffCallback
 import com.shock.saturdaylifestyle.ui.main.adapter.DetailsMakeUsDifferentSubAdapter
 import com.shock.saturdaylifestyle.ui.main.adapter.ExploreTopPicksSubAdapter
-import com.shock.saturdaylifestyle.ui.main.adapter.HeaderSubAdapter
 import com.shock.saturdaylifestyle.ui.main.adapter.NewArrivalSubAdapter
 import com.shock.saturdaylifestyle.ui.main.adapter.WhatTheySaySubAdapter
 import com.shock.saturdaylifestyle.ui.main.viewModel.MainViewModel
@@ -69,24 +68,6 @@ class HomeAdapter(val viewModel: MainViewModel, val context: Context?) :
 
             override fun bind(viewState: HomeViewState, viewModel: MainViewModel) {
                 binding.viewState = viewState.viewState as HeaderViewState
-
-                val llmanager = LinearLayoutManager(
-                    binding.root.context,
-                    LinearLayoutManager.HORIZONTAL,
-                    false
-                )
-
-                //set sublist adapter
-                val mainSubAdapter = HeaderSubAdapter(viewModel, viewState.viewState as HeaderViewState)
-
-                binding.rvHeaderSublist.apply {
-                    layoutManager = llmanager
-                    addItemDecoration(SpacesItemDecoration(10))
-                    (itemAnimator as SimpleItemAnimator).supportsChangeAnimations =
-                        false
-                    adapter = mainSubAdapter
-                    setHasFixedSize(true)
-                }
             }
         }
 
@@ -112,7 +93,6 @@ class HomeAdapter(val viewModel: MainViewModel, val context: Context?) :
                     false
                 )
 
-                //set sublist adapter
                 val mainSubAdapter = DetailsMakeUsDifferentSubAdapter(viewModel, viewState.viewState as DetailsMakeUsDifferentViewState)
 
                 binding.rvDetailsMakeUsDifferentSublist.apply {

@@ -19,6 +19,7 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_Food"
+            drawableViewState="@{viewState.imageViewState}"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_150sdp"
             android:scaleType="centerCrop"
@@ -28,30 +29,30 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_title"
-            android:text="Originality"
-            android:textSize="@dimen/_16ssp"
-            android:paddingTop="@dimen/_5sdp"
-            android:textColor="@color/teal_200"
-            android:fontFamily="@font/montserrat_semi_bold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/iv_Food"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:paddingTop="@dimen/_5sdp"
+            android:textColor="@color/teal_200"
+            android:textSize="@dimen/_16ssp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@id/iv_Food"
+            app:text="@{viewState.title}" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_content"
-            android:text="Our designers create custom pattern variations for the Saturdays style. We do it all in-house-from-sketch to prototype testingto final design."
-            android:textSize="@dimen/_12ssp"
-            android:paddingTop="@dimen/_5sdp"
-            android:textColor="@color/teal_200"
-            android:fontFamily="@font/montserrat_light"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            android:fontFamily="@font/montserrat_light"
+            android:paddingTop="@dimen/_5sdp"
+            android:textColor="@color/teal_200"
+            android:textSize="@dimen/_12ssp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            app:text="@{viewState.description}" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
