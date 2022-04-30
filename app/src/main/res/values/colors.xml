@@ -28,5 +28,6 @@
     <color name="warning_orange">#E58B00</color>
     <color name="alert_red">#B5564C</color>
     <color name="baby_pink">#EBDBE3</color>
+    <color name="indicator_grey">#000000</color>
 
 </resources>

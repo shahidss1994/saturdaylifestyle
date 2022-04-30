@@ -5,6 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
+import com.shock.saturdaylifestyle.R
 import com.shock.saturdaylifestyle.constants.Constants
 import com.shock.saturdaylifestyle.databinding.ItemEmptyBinding
 import com.shock.saturdaylifestyle.databinding.ItemLayoutDetailsMakeUsDifferentBinding
@@ -60,7 +62,27 @@ class HomeAdapter(val viewModel: MainViewModel) :
 
             override fun bind(viewState: HomeViewState, viewModel: MainViewModel) {
                 binding.viewState = viewState.viewState as HeaderViewState
-            }
+                    val viewpagerDataList = ArrayList<HomeViewPagerDM>()
+                    viewpagerDataList.add(HomeViewPagerDM(R.mipmap.iv_home_viewpager_item))
+                    viewpagerDataList.add(HomeViewPagerDM(R.mipmap.iv_home_viewpager_item))
+                    viewpagerDataList.add(HomeViewPagerDM(R.mipmap.iv_home_viewpager_item))
+                    viewpagerDataList.add(HomeViewPagerDM(R.mipmap.iv_home_viewpager_item))
+                    viewpagerDataList.add(HomeViewPagerDM(R.mipmap.iv_home_viewpager_item))
+                    viewpagerDataList.add(HomeViewPagerDM(R.mipmap.iv_home_viewpager_item))
+                    viewpagerDataList.add(HomeViewPagerDM(R.mipmap.iv_home_viewpager_item))
+
+                    val adapter = HomeViewPagerAdapter(viewpagerDataList)
+                    binding.viewPager.adapter = adapter
+                    binding.dotsIndicator.setViewPager2(binding.viewPager)
+                    binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                        override fun onPageSelected(position: Int) {
+                            super.onPageSelected(position)
+                            val newPosition = (position + 1) % viewpagerDataList.size
+                            val runnable = Runnable { binding.viewPager.currentItem = newPosition }
+                            handler.postDelayed(runnable, 3000L)
+                        }
+                    })
+                }
 
         }
 

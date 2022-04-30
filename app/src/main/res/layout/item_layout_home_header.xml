@@ -9,25 +9,66 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.AppCompatTextView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/cl_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_270sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_marquee_text">
+
+
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/view_pager"
             android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+
+        <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+            android:id="@+id/dots_indicator"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Header"
-            android:textColor="@color/black"
+            android:layout_marginBottom="@dimen/_33sdp"
+            android:elevation="1dp"
+            app:dotsColor="@color/indicator_grey"
+            app:dotsCornerRadius="8dp"
+            app:dotsElevation="1dp"
+            app:dotsSize="5dp"
+            app:dotsSpacing="2dp"
+            app:dotsStrokeColor="@color/indicator_grey"
+            app:dotsStrokeWidth="5dp"
+            app:dotsWidthFactor="2.5"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <!--
-        Top Header design lies here
-        set all required data with viewstate
-        -->
-
+            app:selectedDotColor="@color/white" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--
+        <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Header"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            &lt;!&ndash;
+            Top Header design lies here
+            set all required data with viewstate
+            &ndash;&gt;
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    -->
 
 </layout>
