@@ -14,8 +14,8 @@ class NewArrivalViewState(
     var id by bind(BR.id, initId)
 
     @get:Bindable
-    var initNewArrivalItemViewStateList by bind(
-        BR.rvNewArrivalSublist,
+    var newArrivalItemViewStateList by bind(
+        BR.newArrivalItemViewStateList,
         initNewArrivalItemViewStateList
     )
 

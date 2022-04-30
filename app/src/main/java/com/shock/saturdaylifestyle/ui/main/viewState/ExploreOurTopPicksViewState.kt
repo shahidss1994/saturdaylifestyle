@@ -14,8 +14,8 @@ class ExploreOurTopPicksViewState(
     var id by bind(BR.id, initId)
 
     @get:Bindable
-    var initExploreTopPicksItemViewStateList by bind(
-        BR.rvExploreTopPickSublist,
+    var exploreTopPicksItemViewStateList by bind(
+        BR.exploreTopPicksItemViewStateList,
         initExploreTopPicksItemViewStateList
     )
 

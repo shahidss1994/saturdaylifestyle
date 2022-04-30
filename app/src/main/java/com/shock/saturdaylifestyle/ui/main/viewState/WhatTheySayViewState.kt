@@ -13,8 +13,8 @@ class WhatTheySayViewState(initId: String? = null,
     var id by bind(BR.id, initId)
 
     @get:Bindable
-    var initWhatTheySayItemViewStateList by bind(
-        BR.rvWhatTheySaySublist,
+    var whatTheySayItemViewStateList by bind(
+        BR.whatTheySayItemViewStateList,
         initWhatTheySayItemViewStateList
     )
 

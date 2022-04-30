@@ -38,7 +38,7 @@ class HeaderSubAdapter(
         holder.bind(items[position], viewModel)
     }
 
-    override fun getItemCount() = viewState.initHeaderItemViewStateList.size
+    override fun getItemCount() = viewState.headerItemViewStateList.size
 
     sealed class ViewHolder<VIEW_STATE, in VIEW_MODEL : ViewModel>(view: View) :
         RecyclerView.ViewHolder(view) {

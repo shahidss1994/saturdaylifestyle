@@ -14,19 +14,9 @@
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Details Make Us Different"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_title"
             android:text="Details Make Us DIfferent"
-            android:textSize="@dimen/_28sdp"
+            android:textSize="@dimen/_21sdp"
             android:textColor="@color/off_grey"
             android:fontFamily="@font/oswald_semibold"
             android:layout_width="0dp"
@@ -40,7 +30,7 @@
             android:id="@+id/rvDetailsMakeUsDifferentSublist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            items="@{viewState.initDetailmakeUsDifferentItemViewStateList}"
+            items="@{viewState.detailsMakesUsDifferentItemViewStateList}"
             android:layout_marginTop="@dimen/_14sdp"
             app:layout_constraintTop_toBottomOf="@id/tv_title"
             app:layout_constraintStart_toStartOf="parent"

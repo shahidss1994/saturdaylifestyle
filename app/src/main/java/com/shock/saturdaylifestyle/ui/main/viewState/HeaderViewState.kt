@@ -14,8 +14,8 @@ class HeaderViewState(
     var id by bind(BR.id, initId)
 
     @get:Bindable
-    var initHeaderItemViewStateList by bind(
-        BR.rvHeaderSublist,
+    var headerItemViewStateList by bind(
+        BR.headerItemViewStateList,
         initHeaderItemViewStateList
     )
 }

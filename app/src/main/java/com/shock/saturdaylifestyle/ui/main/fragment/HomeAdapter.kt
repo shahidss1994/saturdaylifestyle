@@ -23,7 +23,6 @@ import com.shock.saturdaylifestyle.ui.main.adapter.ExploreTopPicksSubAdapter
 import com.shock.saturdaylifestyle.ui.main.adapter.HeaderSubAdapter
 import com.shock.saturdaylifestyle.ui.main.adapter.NewArrivalSubAdapter
 import com.shock.saturdaylifestyle.ui.main.adapter.WhatTheySaySubAdapter
-import com.shock.saturdaylifestyle.ui.main.fragment.HomeAdapter.ViewHolder.DetailsMakeUsDifferentViewHolder.Companion
 import com.shock.saturdaylifestyle.ui.main.viewModel.MainViewModel
 import com.shock.saturdaylifestyle.ui.main.viewState.DetailsMakeUsDifferentViewState
 import com.shock.saturdaylifestyle.ui.main.viewState.ExploreOurTopPicksViewState
@@ -33,7 +32,6 @@ import com.shock.saturdaylifestyle.ui.main.viewState.HomeViewState
 import com.shock.saturdaylifestyle.ui.main.viewState.NewArrivalViewState
 import com.shock.saturdaylifestyle.ui.main.viewState.WhatTheySayViewState
 import com.shock.saturdaylifestyle.util.SpacesItemDecoration
-import kotlin.contracts.contract
 
 class HomeAdapter(val viewModel: MainViewModel, val context: Context?) :
     RecyclerView.Adapter<HomeAdapter.ViewHolder<HomeViewState, MainViewModel>>(),
@@ -79,7 +77,7 @@ class HomeAdapter(val viewModel: MainViewModel, val context: Context?) :
                 )
 
                 //set sublist adapter
-                val mainSubAdapter = HeaderSubAdapter(viewModel, binding.viewState)
+                val mainSubAdapter = HeaderSubAdapter(viewModel, viewState.viewState as HeaderViewState)
 
                 binding.rvHeaderSublist.apply {
                     layoutManager = llmanager
@@ -115,7 +113,7 @@ class HomeAdapter(val viewModel: MainViewModel, val context: Context?) :
                 )
 
                 //set sublist adapter
-                val mainSubAdapter = DetailsMakeUsDifferentSubAdapter(viewModel, binding.viewState)
+                val mainSubAdapter = DetailsMakeUsDifferentSubAdapter(viewModel, viewState.viewState as DetailsMakeUsDifferentViewState)
 
                 binding.rvDetailsMakeUsDifferentSublist.apply {
                     layoutManager = llmanager
@@ -152,7 +150,7 @@ class HomeAdapter(val viewModel: MainViewModel, val context: Context?) :
             )
 
             //set sublist adapter
-            val mainSubAdapter = NewArrivalSubAdapter(viewModel, binding.viewState)
+            val mainSubAdapter = NewArrivalSubAdapter(viewModel, viewState.viewState as NewArrivalViewState)
 
             binding.rvNewArrivalSublist.apply {
                 layoutManager = llmanager
@@ -189,7 +187,7 @@ class HomeAdapter(val viewModel: MainViewModel, val context: Context?) :
             )
 
             //set sublist adapter
-            val mainSubAdapter = ExploreTopPicksSubAdapter(viewModel, binding.viewState)
+            val mainSubAdapter = ExploreTopPicksSubAdapter(viewModel, viewState.viewState as ExploreOurTopPicksViewState)
 
             binding.rvExploreTopPickSublist.apply {
                 layoutManager = llmanager
@@ -245,7 +243,7 @@ class HomeAdapter(val viewModel: MainViewModel, val context: Context?) :
             )
 
             //set sublist adapter
-            val mainSubAdapter = WhatTheySaySubAdapter(viewModel, binding.viewState)
+            val mainSubAdapter = WhatTheySaySubAdapter(viewModel, viewState.viewState as WhatTheySayViewState)
 
             binding.rvWhatTheySaySublist.apply {
                 layoutManager = llmanager

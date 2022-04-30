@@ -37,7 +37,7 @@ class WhatTheySaySubAdapter(
         holder.bind(items[position], viewModel)
     }
 
-    override fun getItemCount() = viewState.initWhatTheySayItemViewStateList.size
+    override fun getItemCount() = viewState.whatTheySayItemViewStateList.size
 
     sealed class ViewHolder<VIEW_STATE, in VIEW_MODEL : ViewModel>(view: View) :
         RecyclerView.ViewHolder(view) {

@@ -21,4 +21,3 @@ class WhatTheySayItemViewState (initId: Int = -1,
     var title by bind(BR.sectionName, initTitle)
 
 }
-}

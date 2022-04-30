@@ -14,8 +14,8 @@ class DetailsMakeUsDifferentViewState(
     var id by bind(BR.id, initId)
 
     @get:Bindable
-    var initDetailmakeUsDifferentItemViewStateList by bind(
-        BR.rvDetailsMakeUsDifferentSublist,
+    var detailsMakesUsDifferentItemViewStateList by bind(
+        BR.detailsMakesUsDifferentItemViewStateList,
         initDetailsMakesUsDifferentItemViewStateList
     )
 

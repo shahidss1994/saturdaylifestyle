@@ -24,7 +24,6 @@ import com.shock.saturdaylifestyle.ui.loginRegister.viewState.LoginRegisterViewS
 import com.shock.saturdaylifestyle.ui.loginRegister.viewState.RegisterFormViewState
 import com.shock.saturdaylifestyle.utility.CommonUtilities
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ActivityContext
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -288,7 +287,7 @@ class LoginRegisterViewModel @Inject constructor(
 
         val introViewPagerItemViewState3 = IntroViewPagerItemViewState(
             3,
-            context.getString(R.string.home_try_on),
+            context.getString(R.string.home_try_on_all_caps),
             context.getString(R.string.try_our_entire_collection_description),
             DrawableViewState(R.mipmap.iv_onboarding3)
         )

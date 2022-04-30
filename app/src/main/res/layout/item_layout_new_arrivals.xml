@@ -43,7 +43,7 @@
             android:id="@+id/rvNewArrivalSublist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            items="@{viewState.initNewArrivalItemViewStateList}"
+            items="@{viewState.newArrivalItemViewStateList}"
             android:layout_margin="@dimen/_10sdp"
             app:layout_constraintTop_toBottomOf="@id/tv_sub_title"
             app:layout_constraintStart_toStartOf="parent"

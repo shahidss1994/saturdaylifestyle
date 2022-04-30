@@ -38,7 +38,7 @@ class ExploreTopPicksSubAdapter(
         holder.bind(items[position], viewModel)
     }
 
-    override fun getItemCount() = viewState.initExploreTopPicksItemViewStateList.size
+    override fun getItemCount() = viewState.exploreTopPicksItemViewStateList.size
 
     sealed class ViewHolder<VIEW_STATE, in VIEW_MODEL : ViewModel>(view: View) :
         RecyclerView.ViewHolder(view) {

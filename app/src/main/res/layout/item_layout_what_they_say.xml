@@ -88,6 +88,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_14sdp"
+            items="@{viewState.whatTheySayItemViewStateList}"
             app:layout_constraintTop_toBottomOf="@id/tv_sub_title"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -34,7 +34,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvHeaderSublist"
-            items="@{viewState.initHeaderItemViewStateList}"
+            items="@{viewState.headerItemViewStateList}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_15sdp"

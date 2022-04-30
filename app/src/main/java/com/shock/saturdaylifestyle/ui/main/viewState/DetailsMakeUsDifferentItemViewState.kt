@@ -21,4 +21,3 @@ initTitle: String = Constants.SectionName.EMPTY
     var title by bind(BR.sectionName, initTitle)
 
 }
-}
