@@ -16,6 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_270sdp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/clSunglasses"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_marquee_text">
 
@@ -46,29 +47,142 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:selectedDotColor="@color/white" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!--
-        <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="match_parent"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvEyeglasses"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Header"
-                android:textColor="@color/black"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_22sdp"
+                app:cardBackgroundColor="@color/black"
+                app:cardCornerRadius="@dimen/_100sdp"
+                app:cardElevation="@dimen/_15sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/dots_indicator"
 
-            &lt;!&ndash;
-            Top Header design lies here
-            set all required data with viewstate
-            &ndash;&gt;
+                app:strokeColor="@color/teal_700"
+                app:strokeWidth="@dimen/_2sdp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/_84sdp"
+                    android:layout_height="@dimen/_84sdp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/eyeglasses" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/civEyeglasses"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:gravity="center"
+                android:text="EYEGLASSES"
+                android:textColor="@color/dark_grey"
+                android:textSize="@dimen/_11ssp"
+                app:layout_constraintEnd_toEndOf="@+id/cvEyeglasses"
+                app:layout_constraintStart_toStartOf="@+id/cvEyeglasses"
+                app:layout_constraintTop_toBottomOf="@+id/cvEyeglasses" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    -->
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clSunglasses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvSunglasses"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_22sdp"
+                app:cardBackgroundColor="@color/black"
+                app:cardCornerRadius="@dimen/_100sdp"
+                app:cardElevation="@dimen/_15sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:strokeColor="@color/teal_700"
+                app:strokeWidth="@dimen/_2sdp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/_84sdp"
+                    android:layout_height="@dimen/_84sdp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/sunglasses" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/ivSunglasses"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:gravity="center"
+                android:text="SUNGLASSES"
+                android:textColor="@color/dark_grey"
+                android:textSize="@dimen/_11ssp"
+                app:layout_constraintEnd_toEndOf="@+id/cvSunglasses"
+                app:layout_constraintStart_toStartOf="@+id/cvSunglasses"
+                app:layout_constraintTop_toBottomOf="@+id/cvSunglasses" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clHomeTryOn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/clSunglasses"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvHomeTryOn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_22sdp"
+                app:cardBackgroundColor="@color/black"
+                app:cardCornerRadius="@dimen/_100sdp"
+                app:cardElevation="@dimen/_15sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:strokeColor="@color/teal_700"
+                app:strokeWidth="@dimen/_2sdp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/_84sdp"
+                    android:layout_height="@dimen/_84sdp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/home_try_on" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/ivHomeTryOn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:gravity="center"
+                android:text="Home Try-On"
+                android:textAllCaps="true"
+                android:textColor="@color/dark_grey"
+                android:textSize="@dimen/_11ssp"
+                app:layout_constraintEnd_toEndOf="@+id/cvHomeTryOn"
+                app:layout_constraintStart_toStartOf="@+id/cvHomeTryOn"
+                app:layout_constraintTop_toBottomOf="@+id/cvHomeTryOn" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

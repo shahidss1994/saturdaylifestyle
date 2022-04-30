@@ -14,19 +14,44 @@
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_title"
+            android:text="New Arrivals"
+            android:textSize="@dimen/_22ssp"
+            android:textColor="@color/teal_200"
+            android:fontFamily="@font/oswaldmedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="New Arrivals"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"/>
 
-        <!--
-        Top Header design lies here
-        set all required data with viewstate
-        -->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_sub_title"
+            android:text="Freshly made frames for everyday you"
+            android:textSize="@dimen/_14ssp"
+            android:textColor="@color/off_grey"
+            android:fontFamily="@font/montserrat_light"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvNewArrivalSublist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            items="@{viewState.newArrivalItemViewStateList}"
+            android:layout_margin="@dimen/_10sdp"
+            app:layout_constraintTop_toBottomOf="@id/tv_sub_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
