@@ -18,7 +18,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
         binding().apply {
             mainViewState = mViewModel.mainViewState
-            rcv.adapter = HomeAdapter(mViewModel, activity)
+            rcv.adapter = HomeAdapter(mViewModel)
         }
     }
 
