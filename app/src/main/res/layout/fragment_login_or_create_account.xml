@@ -295,7 +295,7 @@
                     android:layout_height="@dimen/_37sdp"
                     android:layout_marginTop="@dimen/_20sdp"
                     android:background="@drawable/bg_button1"
-                    android:onClick="@{()->viewModel.onSendOTPViaWhatsappClicked()}"
+                    android:onClick="@{()->viewModel.onSendOTPViaWhatsappClicked(false)}"
                     android:paddingStart="@dimen/_25sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -475,7 +475,7 @@
                     android:textColor="@color/white"
                     android:textSize="@dimen/_14ssp"
                     android:textStyle="bold"
-                    android:onClick="@{()->viewModel.onSendOTPViaMissedCallContinueClicked()}"
+                    android:onClick="@{()->viewModel.onSendOTPViaMissedCallContinueClicked(false)}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/iv_missed_call3" />
@@ -660,7 +660,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     android:background="@drawable/bg_button1"
                     android:paddingStart="@dimen/_25sdp"
-                    android:onClick="@{()->viewModel.onSendOTPViaWhatsappClicked()}"
+                    android:onClick="@{()->viewModel.onSendOTPViaWhatsappFromStillNoOtpPopupClicked()}"
                     app:layout_constraintTop_toBottomOf="@id/tv_edit_number">
 
                     <ImageView

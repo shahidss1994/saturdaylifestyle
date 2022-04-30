@@ -13,11 +13,8 @@ class LoginRegisterViewState(
     initCountryCodeNumberViewStateList: List<CountryCodeNumberViewState> = arrayListOf(),
     initLoginOrCreateAccountVisibility: Boolean = true,
     initSendOtpSmsTryAgainVisibility: Boolean = true,
-    initCountryCodeNumberViewState: CountryCodeNumberViewState = CountryCodeNumberViewState(
-        "id",
-        "62",
-        "Indonesia"
-    ),
+    initOtpErrorVisibility: Boolean = false,
+    initCountryCodeNumberViewState: CountryCodeNumberViewState = CountryCodeNumberViewState("id", "62", "Indonesia"),
     initPhoneNoMessageColorViewState: ColorViewState? = null,
     initShowPhoneNoMessage: Boolean = false,
     initChooseVerificationMethodVisibility: Boolean = false,
@@ -25,10 +22,13 @@ class LoginRegisterViewState(
     initStillDidntGetOtpPopupVisibility: Boolean = false,
     initContinueBtnDrawableViewState: DrawableViewState = DrawableViewState(R.drawable.bg_button3),
     initPhoneNo: String = "",
+    initOtpError: String = "",
     initPhoneNoStillNoOtp: String = "",
     initSmsTryAgainTimerText: String = "30",
-    initSendOtpSmsTryAgainClickCount: Int = 0
-) :
+    initSendOtpSmsTryAgainClickCount: Int = 0,
+    initLastPopupState: Int = 1   // 1 for login popup,2 for whatsapp popup ,3 for misssed call popup
+
+    ) :
     BaseObservable() {
 
     @get:Bindable
@@ -97,12 +97,31 @@ class LoginRegisterViewState(
         initSendOtpSmsTryAgainClickCount
     )
 
+    @get:Bindable
+    var lastPopupState by bind(
+        BR.lastPopupState,
+        initLastPopupState
+    )
+
 
     @get:Bindable
     var sendOtpSmsTryAgainVisibility by bind(
         BR.sendOtpSmsTryAgainVisibility,
         initSendOtpSmsTryAgainVisibility
     )
+
+    @get:Bindable
+    var otpError by bind(
+        BR.otpError,
+        initOtpError
+    )
+
+    @get:Bindable
+    var otpErrorVisibility by bind(
+        BR.otpErrorVisibility,
+        initOtpErrorVisibility
+    )
+
 
 
     @get:Bindable

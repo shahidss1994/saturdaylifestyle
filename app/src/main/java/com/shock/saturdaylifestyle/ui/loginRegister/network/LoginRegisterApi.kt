@@ -22,6 +22,18 @@ interface LoginRegisterApi : BaseApi {
     ): SendOtpModel
 
 
+
+    @FormUrlEncoded
+    @POST("user/otp/send")
+    suspend fun sendOtpWhatsapp(
+        @Header("x-api-key") key: String,
+        @Header("Content-Type") contentType: String,
+        @Field("country_code") countryCode: String,
+        @Field("number") number: String
+    ): SendOtpModel
+
+
+
     @FormUrlEncoded
     @POST("user/otp/verify")
     suspend fun verifyOTP(@Header("x-api-key") key: String,
