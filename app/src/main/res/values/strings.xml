@@ -13,6 +13,10 @@
 
     <string name="combine_two_strings" translatable="false">%1$s | %2$s</string>
     <string name="we_will_send_otp_to_your_whatsapp">We will send OTP to your whatsapp</string>
+    <string name="you_will_receive_OTP_in_081112231345">You will receive OTP in 0811-1223-1345</string>
+    <string name="Yes_send_otp">Yes, send otp</string>
+    <string name="other_method">other method</string>
+
     <string name="create_account">Create account</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
@@ -24,6 +28,13 @@
     <string name="birthday">Birthday</string>
     <string name="gender">Gender</string>
     <string name="phone_number">Phone Number</string>
+    <string name="please_fill_your_first_name">Please fill your first name</string>
+    <string name="please_fill_your_last_name">Please fill your last name</string>
+    <string name="please_fill_your_valid_email">Please fill your valid email</string>
+
+    <string name="verify_your_number">Verify your number</string>
+    <string name="please_check_your_WhatApp_description">Please check your WhatApp message and click the link that we sent to confirm your number</string>
+    <string name="didnt_get_the_verification_link">Didn\'t get the verification link?</string>
 
     <string name="please_enter_first_name"> Please Enter First Name</string>
     <string name="please_enter_last_name"> Please Enter Last Name</string>
@@ -37,6 +48,7 @@
     <string name="please_select_your_birthday">Please select your birthday</string>
     <string name="login_create_your_account">login/create your account</string>
     <string name="skip_text">SKIP</string>
+    <string name="skip_for_now">SKIP FOR NOW</string>
 
     <string name="duration_format" translatable="false"><xliff:g id="hours">%1$s</xliff:g> <xliff:g id="minutes">%2$s</xliff:g></string>
     <string name="durationformatshort" translatable="false"><xliff:g id="format">%2$d:%3$02d</xliff:g></string>
@@ -44,9 +56,12 @@
 
 
     <string name="confirm_your_number">Confirm your number</string>
+    <string name="please_complete_the_last_4_digits">Please complete the last 4 digits\nof missed call phone number</string>
     <string name="insert_the_5_digit_code_text">Insert the-5-digit code SATURDAYS\njust sent to your number</string>
     <string name="didn_t_get_the_5_digit_code">Didn\'t get the 5-digit code?</string>
+    <string name="try_again">Try Again</string>
     <string name="try_again_in_30">Try again in 30</string>
+    <string name="by_signing_up_you_agree_to_our">By signing up you agree to our</string>
     <string name="privacy_policy_text_underlined"><u>privacy policy</u></string>
     <string name="wrong_number_please_input_the_correct_code">Wrong number, please input the correct code</string>
     <string name="log_in_with_google">Log in with google</string>
@@ -63,11 +78,10 @@
     <string name="you_will_get_missed_call">You will get missed call</string>
     <string name="yes_send_otp">Yes, send OTP</string>
     <string name="resend_otp_via_whatsapp">Resend OTP via Whatsapp</string>
+    <string name="edit_number">EDIT NUMBER</string>
     <string name="or_try_another_method">or try another method</string>
     <string name="make_sure_this_is_your_correct_number">Make sure this is your correct number</string>
-    <string name="try_again">Try again</string>
     <string name="_121_1345">121-1345-</string>
-    <string name="by_signing_up_you_agree_to_our">By signing up you agree to our</string>
     <string name="otp_send_error_msg">Unable to send OTP</string>
     <string name="unable_to_login">Unable to login. Try again!</string>
     <string name="unable_to_register">Unable to register. Try again!</string>
@@ -79,5 +93,33 @@
     <string name="cart">Cart</string>
     <string name="profile">Profile</string>
 
+
+    <string name="anywhere_in_the_world">ANYWHERE IN THE WORLD!</string>
+    <string name="enjoy_free_shipping_description">Enjoy free shipping all across the globe\nonly for you!</string>
+    <string name="price_includes_prescription_lenses">PRICE INCLUDES\nPRESCRIPTION LENSES</string>
+    <string name="starting_from_Rp1_295k_description">Starting from Rp1.295k, we promise there\nwon’t be any hidden cost! Unless you want\nto upgrade your lenses!</string>
+    <string name="home_try_on">HOME TRY ON</string>
+    <string name="try_our_entire_collection_description">Try our entire collection (100+ frames) and\neye exam all for FREE in the comfort of\nyour home!</string>
+    <string name="save_more_bucks">SAVE MORE BUCKS!</string>
+    <string name="enjoy_our_exclusive_promos_description">Enjoy our exclusive promos as well as our\nloyalty program to save some more!</string>
+    <string name="offline_store">OFFLINE STORE</string>
+    <string name="still_not_sure_about_description">Still not sure about how it looks on you?\nTry it on at our offline stores! We are\navailable all across Indonesia.</string>
+
+    <string name="choose_verification_method">Choose verification method</string>
+    <string name="choose_verification_description">Choose one of these method to send verification code (OTP) to 0811-123-4567</string>
+    <string name="Send_OTP_via_Whatsapp">Send OTP via Whatsapp</string>
+    <string name="Send_OTP_via_SMS">Send OTP via SMS</string>
+    <string name="Verify_via_Missed_Call">Verify via Missed Call</string>
+
+    <string name="search_country">Search Country</string>
+    <string name="countrycode">91</string>
+    <string name="india">India</string>
+    <string name="plus">+</string>
+
+    <string name="log_in_create_account">log in or create your account</string>
+    <string name="citizens_receive_exclusive_offers_decription">Citizens receive exclusive offers, first dibs on new collections, and other member benefits</string>
+    <string name="countrycode62">62</string>
+    <string name="input_your_phone_number">Input your phone number</string>
+    <string name="OR">OR</string>
 
 </resources>
