@@ -38,7 +38,7 @@ class NewArrivalSubAdapter(
         holder.bind(items[position], viewModel)
     }
 
-    override fun getItemCount() = viewState.newArrivalItemViewStateList.size
+    override fun getItemCount() = items.size
 
     sealed class ViewHolder<VIEW_STATE, in VIEW_MODEL : ViewModel>(view: View) :
         RecyclerView.ViewHolder(view) {

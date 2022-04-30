@@ -17,6 +17,7 @@ import com.shock.saturdaylifestyle.ui.main.viewState.HeaderViewState
 import com.shock.saturdaylifestyle.ui.main.viewState.HomeTryOnViewState
 import com.shock.saturdaylifestyle.ui.main.viewState.HomeViewState
 import com.shock.saturdaylifestyle.ui.main.viewState.MainViewState
+import com.shock.saturdaylifestyle.ui.main.viewState.NewArrivalItemViewState
 import com.shock.saturdaylifestyle.ui.main.viewState.NewArrivalViewState
 import com.shock.saturdaylifestyle.ui.main.viewState.WhatTheySayViewState
 import com.shock.saturdaylifestyle.util.DataParser
@@ -107,8 +108,18 @@ class MainViewModel @Inject constructor(
             delay(2000)
             getCatalogueJsonString()?.let {
                 val catalogueResponse = DataParser.fromJson<CatalogueResponse>(it)
-                catalogueResponse?.let{
-                    val products = it.data?.products
+                catalogueResponse?.let { ct ->
+                    val newArrivalViewState =
+                        mainViewState.homeItemList[3].viewState as NewArrivalViewState
+                    ct.data?.products?.let { products ->
+                        val viewStates = arrayListOf<NewArrivalItemViewState>()
+                        for (p in products) {
+                            p?.let { prd ->
+                                viewStates.add(prd.toNewArrivalItemViewState())
+                            }
+                        }
+                        newArrivalViewState.newArrivalItemViewStateList = viewStates
+                    }
                 }
             }
             /*val rs = repository.getCatalogue(

@@ -1,6 +1,7 @@
 package com.shock.saturdaylifestyle.ui.main.models
 
 import com.google.gson.annotations.SerializedName
+import com.shock.saturdaylifestyle.ui.main.viewState.NewArrivalItemViewState
 
 data class CatalogueResponse(
 
@@ -297,4 +298,14 @@ data class ProductsItem(
 
 	@field:SerializedName("frame_id")
 	val frameId: String? = null
-)
+){
+
+	fun toNewArrivalItemViewState(): NewArrivalItemViewState {
+		val newArrivalItemViewState = NewArrivalItemViewState()
+		newArrivalItemViewState.id = this.frameId
+		newArrivalItemViewState.title = this.frameId ?: ""
+		newArrivalItemViewState.title = this.frameId ?: ""
+		return newArrivalItemViewState
+	}
+
+}

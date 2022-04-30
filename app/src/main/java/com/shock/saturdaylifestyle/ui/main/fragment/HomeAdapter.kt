@@ -184,9 +184,7 @@ class HomeAdapter(val viewModel: MainViewModel) :
                 false
             )
 
-            //set sublist adapter
-            val mainSubAdapter =
-                NewArrivalSubAdapter(viewModel, viewState.viewState as NewArrivalViewState)
+            val mainSubAdapter = NewArrivalSubAdapter(viewModel, viewState.viewState as NewArrivalViewState)
 
             binding.rvNewArrivalSublist.apply {
                 layoutManager = llmanager
