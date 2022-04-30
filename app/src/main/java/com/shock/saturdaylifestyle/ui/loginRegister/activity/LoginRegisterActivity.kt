@@ -47,6 +47,9 @@ class LoginRegisterActivity :
                             if (loginOrCreateFragment.isVisible) {
                                 loginOrCreateFragment.dismiss()
                             }
+                            mViewModel.viewState.sendOtpSmsTryAgainClickCount = 0
+                            mViewModel.otpTryAgainType = 2
+
                             navController.navigate(LoginOnboardingIntroFragmentDirections.actionLoginOnboardingIntroWhatsappVerifyYourNumberFragment())
 
                         }
@@ -54,6 +57,8 @@ class LoginRegisterActivity :
                             if (loginOrCreateFragment.isVisible) {
                                 loginOrCreateFragment.dismiss()
                             }
+                            mViewModel.viewState.sendOtpSmsTryAgainClickCount = 0
+                            mViewModel.otpTryAgainType = 2
 
                             onBackPressed()
                             navController.navigate(LoginOnboardingIntroFragmentDirections.actionLoginOnboardingIntroWhatsappVerifyYourNumberFragment())
@@ -64,6 +69,9 @@ class LoginRegisterActivity :
                             if (loginOrCreateFragment.isVisible) {
                                 loginOrCreateFragment.dismiss()
                             }
+                            mViewModel.viewState.sendOtpSmsTryAgainClickCount = 0
+                            mViewModel.otpTryAgainType = 1
+
                             navController.navigate(LoginOnboardingIntroFragmentDirections.actionLoginOnboardingIntroConfirmYourNumberFragment())
                         }
                         Constants.NavigateTo.MISSED_CALL_VERIFY_YOUR_NUMBER -> {
@@ -97,6 +105,7 @@ class LoginRegisterActivity :
                             loginOrCreateFragment.dismiss()
                         }
                         if (it.fromTryAgain == false) {
+
                             navController.navigate(LoginOnboardingIntroFragmentDirections.actionLoginOnboardingIntroMissedCallVerifyYourNumberFragment())
                         }
                     } else {
@@ -113,6 +122,9 @@ class LoginRegisterActivity :
                             loginOrCreateFragment.dismiss()
                         }
                         if (it.fromTryAgain == false) {
+                            mViewModel.viewState.sendOtpSmsTryAgainClickCount = 0
+                            mViewModel.otpTryAgainType = 2
+
                             navController.navigate(LoginOnboardingIntroFragmentDirections.actionLoginOnboardingIntroConfirmYourNumberFragment())
                            // navController.navigate(LoginOnboardingIntroFragmentDirections.actionLoginOnboardingIntroWhatsappVerifyYourNumberFragment())
                         }
@@ -129,9 +141,15 @@ class LoginRegisterActivity :
                         if (loginOrCreateFragment.isVisible) {
                             loginOrCreateFragment.dismiss()
                         }
+                        mViewModel.viewState.sendOtpSmsTryAgainClickCount = 0
+                        mViewModel.otpTryAgainType = 2
+
                             onBackPressed()
                             navController.navigate(LoginOnboardingIntroFragmentDirections.actionLoginOnboardingIntroConfirmYourNumberFragment())
                           //  navController.navigate(LoginOnboardingIntroFragmentDirections.actionLoginOnboardingIntroWhatsappVerifyYourNumberFragment())
+
+
+
                     } else {
                         if (it.errorMessage != null) {
                             showToast(it.response?.message?.en ?: "Network error")
@@ -175,6 +193,8 @@ class LoginRegisterActivity :
                             loginOrCreateFragment.dismiss()
                         }
                         if (mViewModel.viewState.sendOtpSmsTryAgainClickCount == 0) {
+
+                            mViewModel.otpTryAgainType = 1
                             navController.navigate(LoginOnboardingIntroFragmentDirections.actionLoginOnboardingIntroConfirmYourNumberFragment())
                         }
 
@@ -210,7 +230,7 @@ class LoginRegisterActivity :
                             {mViewModel.viewState.otpErrorVisibility = true}
                             showToast(it.response?.message?.en ?: "Network error")
                         } else {
-                            showToast(resources.getString(R.string.unable_to_login))
+                            showToast(resources.getString(R.string.unable_to__verify_msg))
                         }
                     }
 
@@ -222,6 +242,16 @@ class LoginRegisterActivity :
                         showToast(it.message ?: "Network error")
                     } else {
                         showToast(resources.getString(R.string.unable_to_register))
+                    }
+                }
+                is LoginRegisterViewModel.Event.LoginErrorResponse -> {
+
+                    mViewModel.viewState.otpErrorVisibility = true
+
+                    if (it.message != null) {
+                        showToast(it.message ?: "Network error")
+                    } else {
+                        showToast(resources.getString(R.string.unable_to_login))
                     }
                 }
                 is LoginRegisterViewModel.Event.RegisterResponse -> {
@@ -254,6 +284,31 @@ class LoginRegisterActivity :
 
 
                     }
+                }
+                is LoginRegisterViewModel.Event.LoginResponse -> {
+                    if (it.response?.status == true) {
+
+                        if(confirmYourNumberFragment.isVisible)
+                        {mViewModel.viewState.otpErrorVisibility = false}
+
+
+                        var data = it.response.data
+                        CommonUtilities.putString(this, Constants.TOKEN, data?.token.toString())
+                        CommonUtilities.putString(this, Constants.NAME, data?.name.toString())
+                        CommonUtilities.putBoolean(this, Constants.IS_LOGIN, true)
+
+
+                        startActivity(
+                            Intent(
+                                this@LoginRegisterActivity,
+                                MainActivity::class.java
+                            )
+                        )
+                        finish()
+
+
+
+                    } else { }
                 }
             }
 

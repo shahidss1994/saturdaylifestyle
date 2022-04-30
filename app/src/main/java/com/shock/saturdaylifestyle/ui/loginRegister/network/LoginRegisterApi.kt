@@ -53,6 +53,17 @@ interface LoginRegisterApi : BaseApi {
         //   @Field("referral_code") referral: String
     ): LoginRegisterResponseModel
 
+    @FormUrlEncoded
+    @POST("user/login")
+    suspend fun login(
+        @Header("Content-Type") type: String,
+        @Field("mobile") mobile: String,
+        @Field("otp") otp: String,
+        @Field("country_code") country_code: String,
+        @Field("device_token") device_token: String,
+        @Field("device_type") device_type: String
+    ): LoginRegisterResponseModel
+
 
 
 }

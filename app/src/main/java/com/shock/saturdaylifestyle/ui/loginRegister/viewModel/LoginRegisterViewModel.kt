@@ -60,6 +60,8 @@ class LoginRegisterViewModel @Inject constructor(
     private val timer = TryAgainTimer()
 
     var isUserExist = false
+    var deviceToken = ""
+    var otpTryAgainType = 1   //1 for sms,2 for whatsapp
 
     init {
         setViewPagerListData()
@@ -194,6 +196,8 @@ class LoginRegisterViewModel @Inject constructor(
                 onEvent(Event.SendOtpViaWhatsappStillNoOtpResponse(rs.value))
                 isUserExist = rs.value?.data?.isUserExist ?: false
 
+
+
             } else if (rs is Resource.Failure) {
                 val jObjError = JSONObject(rs.errorBody!!.string())
                 onEvent(
@@ -212,33 +216,45 @@ class LoginRegisterViewModel @Inject constructor(
     }
 
     fun onSendOTPViaSMSClicked(fromTryAgain: Boolean = false) {
-        onEvent(Event.ToggleLoader(true))
-        viewModelScope.launch {
-            val rs = repository.sendOtpViaSMS(
-                Constants.API_KEY,
-                viewState.phoneNo,
-                viewState.countryCodeNumberViewState.code ?: ""
-            )
-            CommonUtilities.hideLoader()
-            if (rs is Resource.Success) {
-                onEvent(Event.SendOtpViaSMSResponse(rs.value))
-                isUserExist = rs.value?.data?.isUserExist ?: false
-                if (fromTryAgain) {
-                    startTryAgainTimer()
-                }
-            } else if (rs is Resource.Failure) {
-                val jObjError = JSONObject(rs.errorBody!!.string())
-                onEvent(
-                    Event.SendOtpViaSMSResponse(
-                        null,
-                        jObjError.getJSONObject("message").getString("en").toString()
-                    )
+
+        if(fromTryAgain== true && otpTryAgainType==2) {
+
+            onSendOTPViaWhatsappClicked(true)
+
+        }else {
+            otpTryAgainType=1
+
+            onEvent(Event.ToggleLoader(true))
+            viewModelScope.launch {
+                val rs = repository.sendOtpViaSMS(
+                    Constants.API_KEY,
+                    viewState.phoneNo,
+                    viewState.countryCodeNumberViewState.code ?: ""
                 )
-            } else {
-                onEvent(Event.SendOtpViaSMSResponse())
+                CommonUtilities.hideLoader()
+                if (rs is Resource.Success) {
+                    onEvent(Event.SendOtpViaSMSResponse(rs.value))
+                    isUserExist = rs.value?.data?.isUserExist ?: false
+                    if (fromTryAgain) {
+                        startTryAgainTimer()
+                    }
+                } else if (rs is Resource.Failure) {
+                    val jObjError = JSONObject(rs.errorBody!!.string())
+                    onEvent(
+                        Event.SendOtpViaSMSResponse(
+                            null,
+                            jObjError.getJSONObject("message").getString("en").toString()
+                        )
+                    )
+                } else {
+                    onEvent(Event.SendOtpViaSMSResponse())
+                }
+
             }
 
         }
+
+
     }
 
     fun onMissedCallPopupBackClicked() {
@@ -452,7 +468,9 @@ class LoginRegisterViewModel @Inject constructor(
         ) : Event()
 
         data class RegisterResponse(val response: LoginRegisterResponseModel? = null) : Event()
+        data class LoginResponse(val response: LoginRegisterResponseModel? = null) : Event()
         data class RegisterErrorResponse(val message: String? = null) : Event()
+        data class LoginErrorResponse(val message: String? = null) : Event()
         data class ToggleLoader(val isToShow: Boolean) : Event()
         object DateDialogPicker : Event()
     }
@@ -865,11 +883,78 @@ class LoginRegisterViewModel @Inject constructor(
                     }
                 } else if (textWatcherType == Constants.TextWatcherType.OTP) {
                     if (it.length == 6) {
-                        onVerifyOtp(it)
+
+                        if(isUserExist)
+                        {
+
+                            onEvent(Event.ToggleLoader(true))
+                            viewModelScope.launch {
+                                val rs = repository.login(
+                                    viewState.phoneNo,
+                                    it,
+                                    viewState.countryCodeNumberViewState.code.toString(),
+                                    deviceToken
+                                )
+                                onEvent(Event.ToggleLoader(false))
+                                if (rs is Resource.Success) {
+                                    onEvent(Event.LoginResponse(rs.value))
+                                } else {
+                                    if (rs is Resource.Failure) {
+                                        val jObjError = JSONObject(rs.errorBody!!.string())
+                                        onEvent(
+                                            Event.LoginErrorResponse(
+                                                jObjError.getJSONObject("message").getString("en").toString()
+                                            )
+                                        )
+                                    } else {
+                                        onEvent(Event.LoginErrorResponse())
+                                    }
+
+                                }
+                            }
+
+                        }
+                        else {
+                            onVerifyOtp(it)
+                        }
                     }
                 } else if (textWatcherType == Constants.TextWatcherType.MiSSED_CALL_OTP) {
                     if (it.length == 4) {
-                        onVerifyOtp(it)
+
+                        if(isUserExist)
+                        {
+
+                            onEvent(Event.ToggleLoader(true))
+                            viewModelScope.launch {
+                                val rs = repository.login(
+                                    viewState.phoneNo,
+                                    it,
+                                    viewState.countryCodeNumberViewState.code.toString(),
+                                    deviceToken
+                                )
+                                onEvent(Event.ToggleLoader(false))
+                                if (rs is Resource.Success) {
+                                    onEvent(Event.LoginResponse(rs.value))
+                                } else {
+                                    if (rs is Resource.Failure) {
+                                        val jObjError = JSONObject(rs.errorBody!!.string())
+                                        onEvent(
+                                            Event.LoginErrorResponse(
+                                                jObjError.getJSONObject("message").getString("en").toString()
+                                            )
+                                        )
+                                    } else {
+                                        onEvent(Event.LoginErrorResponse())
+                                    }
+
+                                }
+                            }
+
+                        }
+                        else {
+
+                            onVerifyOtp(it)
+                        }
                     }
                 } else if (textWatcherType == Constants.TextWatcherType.FORM_PHONE_NO) {
                     validateForm(false)
@@ -962,7 +1047,7 @@ class LoginRegisterViewModel @Inject constructor(
         timer.cancel()
     }
 
-    private fun startTryAgainTimer() {
+    fun startTryAgainTimer() {
         viewState.sendOtpSmsTryAgainVisibility = true
         timer.cancel()
         timer.start()

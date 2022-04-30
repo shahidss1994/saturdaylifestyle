@@ -8,6 +8,7 @@ import com.shock.saturdaylifestyle.databinding.FragmentLoginOnboardingIntroBindi
 import com.shock.saturdaylifestyle.ui.base.fragment.BaseFragment
 import com.shock.saturdaylifestyle.ui.loginRegister.adapter.LoginOnboardingIntroAdapter
 import com.shock.saturdaylifestyle.ui.loginRegister.viewModel.LoginRegisterViewModel
+import com.shock.saturdaylifestyle.utility.CommonUtilities
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,6 +26,10 @@ class LoginOnboardingIntroFragment: BaseFragment<FragmentLoginOnboardingIntroBin
             }
             dotsIndicator.setViewPager2(viewpager)
         }
+
+        mViewModel.deviceToken = CommonUtilities.getDeviceToken(requireActivity()).toString()
+
+
     }
 
     override fun listenChannel() {

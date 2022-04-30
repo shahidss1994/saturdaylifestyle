@@ -69,6 +69,7 @@
     <string name="_121_1345">121-1345-</string>
     <string name="by_signing_up_you_agree_to_our">By signing up you agree to our</string>
     <string name="otp_send_error_msg">Unable to send OTP</string>
+    <string name="unable_to__verify_msg">Unable to verify OTP</string>
     <string name="unable_to_login">Unable to login. Try again!</string>
     <string name="unable_to_register">Unable to register. Try again!</string>
     <string name="try_again_in_sec">Try again in %s</string>
