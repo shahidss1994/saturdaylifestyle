@@ -7,26 +7,95 @@
             name="viewState"
             type="com.shock.saturdaylifestyle.ui.main.viewState.HomeTryOnViewState" />
 
+        <variable
+            name="viewModel"
+            type="com.shock.saturdaylifestyle.ui.main.viewModel.MainViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_Food"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Home Try On"
-            android:textColor="@color/black"
+            android:layout_height="@dimen/_500sdp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_saturdays_banner"
+            android:background="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!--
-        Top Header design lies here
-        set all required data with viewstate
-        -->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title"
+            android:text="HOME TRY-ON"
+            android:textSize="@dimen/_22ssp"
+            android:paddingTop="@dimen/_22sdp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/oswaldmedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_margin="@dimen/_22sdp"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+
+        <LinearLayout
+            android:id="@+id/ll_home_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/bg_square_background"
+            android:layout_marginStart="@dimen/_22sdp"
+            android:layout_marginEnd="@dimen/_22sdp"
+            android:layout_marginBottom="@dimen/_22sdp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="BOOK A HOME TRY ON FOR FREE"
+                android:padding="@dimen/_10sdp"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:textSize="@dimen/_14ssp"/>
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_sub_text"
+            android:text="Try our entire collection (100+ frames!) &amp; get an eye exam for free in the comfort of your home"
+            android:textSize="@dimen/_14ssp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:paddingStart="@dimen/_22sdp"
+            android:paddingEnd="@dimen/_22sdp"
+            app:layout_constraintBottom_toTopOf="@id/ll_home_btn"/>
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_title_text"
+            android:text="SATURDAYS AT HOME!"
+            android:textSize="@dimen/_30ssp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/oswaldmedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:paddingStart="@dimen/_22sdp"
+            android:paddingEnd="@dimen/_22sdp"
+            app:layout_constraintBottom_toTopOf="@id/tv_sub_text"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

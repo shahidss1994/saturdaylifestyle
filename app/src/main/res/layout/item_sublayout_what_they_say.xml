@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.shock.saturdaylifestyle.ui.main.viewModel.MainViewModel" />
+
+        <variable
+            name="viewState"
+            type="com.shock.saturdaylifestyle.ui.main.viewState.WhatTheySayItemViewState" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivImage"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_320sdp"
+            android:layout_margin="@dimen/_16sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tvTitle"
+            android:src="@drawable/bg_splash"
+            android:scaleType="fitXY"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTitle"
+            android:textColor="@color/black"
+            android:layout_width="0dp"
+            android:text="Try our collection (100+ frames!) &amp; get an eye examfor free in the comfort of your home! Our staff are 100% vaccinated, regularly tested and follow strict health protocol. Because your safety is our priority"
+            android:textSize="14sp"
+            android:fontFamily="@font/montserrat_light"
+            android:layout_margin="@dimen/_20sdp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivImage"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

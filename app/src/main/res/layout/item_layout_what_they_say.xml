@@ -14,19 +14,85 @@
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_title"
+            android:text="WHAT THEY SAY"
+            android:textSize="@dimen/_22ssp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/oswaldmedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_margin="@dimen/_22sdp"/>
+
+        <TextView
+            android:id="@+id/tv_sub_title"
+            android:text="ABOUT OUR FRAMES"
+            android:textSize="@dimen/_14ssp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/oswald_regular"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            app:layout_constraintStart_toStartOf="@id/tv_title"
+            app:layout_constraintEnd_toEndOf="@id/tv_title"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_left_arr"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            app:cardCornerRadius="@dimen/_25sdp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_sub_title"
+            app:layout_constraintEnd_toStartOf="@id/cv_right_arr"
+            app:layout_constraintTop_toTopOf="@id/tv_title"
+            android:layout_marginStart="@dimen/_22sdp"
+            android:layout_marginEnd="@dimen/_22sdp"
+            android:layout_marginBottom="@dimen/_22sdp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_10sdp"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:src="@drawable/ic_left_arr"
+                android:textSize="@dimen/_14ssp"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_right_arr"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            app:cardCornerRadius="@dimen/_25sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_title"
+            app:layout_constraintBottom_toBottomOf="@id/tv_sub_title"
+            android:layout_marginStart="@dimen/_22sdp"
+            android:layout_marginEnd="@dimen/_22sdp"
+            android:layout_marginBottom="@dimen/_22sdp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_10sdp"
+                android:textColor="@color/white"
+                app:srcCompat="@drawable/ic_right_arr"
+                android:gravity="center"
+                android:textSize="@dimen/_14ssp"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvWhatTheySaySublist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="What they say"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/_14sdp"
+            app:layout_constraintTop_toBottomOf="@id/tv_sub_title"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <!--
-        Top Header design lies here
-        set all required data with viewstate
-        -->
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

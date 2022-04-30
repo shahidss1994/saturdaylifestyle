@@ -1,10 +1,13 @@
 package com.shock.saturdaylifestyle.ui.main.fragment
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModel
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.SimpleItemAnimator
 import com.shock.saturdaylifestyle.constants.Constants
 import com.shock.saturdaylifestyle.databinding.ItemEmptyBinding
 import com.shock.saturdaylifestyle.databinding.ItemLayoutDetailsMakeUsDifferentBinding
@@ -15,6 +18,12 @@ import com.shock.saturdaylifestyle.databinding.ItemLayoutNewArrivalsBinding
 import com.shock.saturdaylifestyle.databinding.ItemLayoutWhatTheySayBinding
 import com.shock.saturdaylifestyle.ui.base.adapter.BindableAdapter
 import com.shock.saturdaylifestyle.ui.base.others.diffCallback
+import com.shock.saturdaylifestyle.ui.main.adapter.DetailsMakeUsDifferentSubAdapter
+import com.shock.saturdaylifestyle.ui.main.adapter.ExploreTopPicksSubAdapter
+import com.shock.saturdaylifestyle.ui.main.adapter.HeaderSubAdapter
+import com.shock.saturdaylifestyle.ui.main.adapter.NewArrivalSubAdapter
+import com.shock.saturdaylifestyle.ui.main.adapter.WhatTheySaySubAdapter
+import com.shock.saturdaylifestyle.ui.main.fragment.HomeAdapter.ViewHolder.DetailsMakeUsDifferentViewHolder.Companion
 import com.shock.saturdaylifestyle.ui.main.viewModel.MainViewModel
 import com.shock.saturdaylifestyle.ui.main.viewState.DetailsMakeUsDifferentViewState
 import com.shock.saturdaylifestyle.ui.main.viewState.ExploreOurTopPicksViewState
@@ -23,8 +32,10 @@ import com.shock.saturdaylifestyle.ui.main.viewState.HomeTryOnViewState
 import com.shock.saturdaylifestyle.ui.main.viewState.HomeViewState
 import com.shock.saturdaylifestyle.ui.main.viewState.NewArrivalViewState
 import com.shock.saturdaylifestyle.ui.main.viewState.WhatTheySayViewState
+import com.shock.saturdaylifestyle.util.SpacesItemDecoration
+import kotlin.contracts.contract
 
-class HomeAdapter(val viewModel: MainViewModel) :
+class HomeAdapter(val viewModel: MainViewModel, val context: Context?) :
     RecyclerView.Adapter<HomeAdapter.ViewHolder<HomeViewState, MainViewModel>>(),
     BindableAdapter<HomeViewState> {
 
@@ -60,8 +71,25 @@ class HomeAdapter(val viewModel: MainViewModel) :
 
             override fun bind(viewState: HomeViewState, viewModel: MainViewModel) {
                 binding.viewState = viewState.viewState as HeaderViewState
-            }
 
+                val llmanager = LinearLayoutManager(
+                    binding.root.context,
+                    LinearLayoutManager.HORIZONTAL,
+                    false
+                )
+
+                //set sublist adapter
+                val mainSubAdapter = HeaderSubAdapter(viewModel, binding.viewState)
+
+                binding.rvHeaderSublist.apply {
+                    layoutManager = llmanager
+                    addItemDecoration(SpacesItemDecoration(10))
+                    (itemAnimator as SimpleItemAnimator).supportsChangeAnimations =
+                        false
+                    adapter = mainSubAdapter
+                    setHasFixedSize(true)
+                }
+            }
         }
 
         class DetailsMakeUsDifferentViewHolder(private val binding: ItemLayoutDetailsMakeUsDifferentBinding) :
@@ -79,106 +107,177 @@ class HomeAdapter(val viewModel: MainViewModel) :
 
             override fun bind(viewState: HomeViewState, viewModel: MainViewModel) {
                 binding.viewState = viewState.viewState as DetailsMakeUsDifferentViewState
-            }
 
+                val llmanager = LinearLayoutManager(
+                    binding.root.context,
+                    LinearLayoutManager.HORIZONTAL,
+                    false
+                )
+
+                //set sublist adapter
+                val mainSubAdapter = DetailsMakeUsDifferentSubAdapter(viewModel, binding.viewState)
+
+                binding.rvDetailsMakeUsDifferentSublist.apply {
+                    layoutManager = llmanager
+                    addItemDecoration(SpacesItemDecoration(10))
+                    (itemAnimator as SimpleItemAnimator).supportsChangeAnimations =
+                        false
+                    adapter = mainSubAdapter
+                    setHasFixedSize(true)
+                }
+            }
+        }
+    }
+
+    class NewArrivalsViewHolder(private val binding: ItemLayoutNewArrivalsBinding) :
+        ViewHolder<HomeViewState, MainViewModel>(binding.root) {
+
+        companion object {
+            operator fun invoke(parent: ViewGroup) = NewArrivalsViewHolder(
+                ItemLayoutNewArrivalsBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
         }
 
-        class NewArrivalsViewHolder(private val binding: ItemLayoutNewArrivalsBinding) :
-            ViewHolder<HomeViewState, MainViewModel>(binding.root) {
+        override fun bind(viewState: HomeViewState, viewModel: MainViewModel) {
+            binding.viewState = viewState.viewState as NewArrivalViewState
 
-            companion object {
-                operator fun invoke(parent: ViewGroup) = NewArrivalsViewHolder(
-                    ItemLayoutNewArrivalsBinding.inflate(
-                        LayoutInflater.from(parent.context),
-                        parent,
-                        false
-                    )
-                )
+            val llmanager = LinearLayoutManager(
+                binding.root.context,
+                LinearLayoutManager.HORIZONTAL,
+                false
+            )
+
+            //set sublist adapter
+            val mainSubAdapter = NewArrivalSubAdapter(viewModel, binding.viewState)
+
+            binding.rvNewArrivalSublist.apply {
+                layoutManager = llmanager
+                addItemDecoration(SpacesItemDecoration(10))
+                (itemAnimator as SimpleItemAnimator).supportsChangeAnimations =
+                    false
+                adapter = mainSubAdapter
+                setHasFixedSize(true)
             }
-
-            override fun bind(viewState: HomeViewState, viewModel: MainViewModel) {
-                binding.viewState = viewState.viewState as NewArrivalViewState
-            }
-
         }
 
-        class ExploreOurTopPicksViewHolder(private val binding: ItemLayoutExploreOurTopPicksBinding) :
-            ViewHolder<HomeViewState, MainViewModel>(binding.root) {
+    }
 
-            companion object {
-                operator fun invoke(parent: ViewGroup) = ExploreOurTopPicksViewHolder(
-                    ItemLayoutExploreOurTopPicksBinding.inflate(
-                        LayoutInflater.from(parent.context),
-                        parent,
-                        false
-                    )
+    class ExploreOurTopPicksViewHolder(private val binding: ItemLayoutExploreOurTopPicksBinding) :
+        ViewHolder<HomeViewState, MainViewModel>(binding.root) {
+
+        companion object {
+            operator fun invoke(parent: ViewGroup) = ExploreOurTopPicksViewHolder(
+                ItemLayoutExploreOurTopPicksBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
                 )
-            }
-
-            override fun bind(viewState: HomeViewState, viewModel: MainViewModel) {
-                binding.viewState = viewState.viewState as ExploreOurTopPicksViewState
-            }
-
+            )
         }
 
-        class HomeTryOnViewHolder(private val binding: ItemLayoutHomeTryOnBinding) :
-            ViewHolder<HomeViewState, MainViewModel>(binding.root) {
+        override fun bind(viewState: HomeViewState, viewModel: MainViewModel) {
+            binding.viewState = viewState.viewState as ExploreOurTopPicksViewState
 
-            companion object {
-                operator fun invoke(parent: ViewGroup) = HomeTryOnViewHolder(
-                    ItemLayoutHomeTryOnBinding.inflate(
-                        LayoutInflater.from(parent.context),
-                        parent,
-                        false
-                    )
-                )
+            val llmanager = LinearLayoutManager(
+                binding.root.context,
+                LinearLayoutManager.HORIZONTAL,
+                false
+            )
+
+            //set sublist adapter
+            val mainSubAdapter = ExploreTopPicksSubAdapter(viewModel, binding.viewState)
+
+            binding.rvExploreTopPickSublist.apply {
+                layoutManager = llmanager
+                addItemDecoration(SpacesItemDecoration(10))
+                (itemAnimator as SimpleItemAnimator).supportsChangeAnimations =
+                    false
+                adapter = mainSubAdapter
+                setHasFixedSize(true)
             }
-
-            override fun bind(viewState: HomeViewState, viewModel: MainViewModel) {
-                binding.viewState = viewState.viewState as HomeTryOnViewState
-            }
-
         }
 
-        class WhatTheySayViewHolder(private val binding: ItemLayoutWhatTheySayBinding) :
-            ViewHolder<HomeViewState, MainViewModel>(binding.root) {
+    }
 
-            companion object {
-                operator fun invoke(parent: ViewGroup) = WhatTheySayViewHolder(
-                    ItemLayoutWhatTheySayBinding.inflate(
-                        LayoutInflater.from(parent.context),
-                        parent,
-                        false
-                    )
+    class HomeTryOnViewHolder(private val binding: ItemLayoutHomeTryOnBinding) :
+        ViewHolder<HomeViewState, MainViewModel>(binding.root) {
+
+        companion object {
+            operator fun invoke(parent: ViewGroup) = HomeTryOnViewHolder(
+                ItemLayoutHomeTryOnBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
                 )
-            }
-
-            override fun bind(viewState: HomeViewState, viewModel: MainViewModel) {
-                binding.viewState = viewState.viewState as WhatTheySayViewState
-            }
-
+            )
         }
 
-        class EmptyViewHolder(private val binding: ItemEmptyBinding) :
-            ViewHolder<HomeViewState, MainViewModel>(binding.root) {
+        override fun bind(viewState: HomeViewState, viewModel: MainViewModel) {
+            binding.viewState = viewState.viewState as HomeTryOnViewState
+        }
 
-            companion object {
-                operator fun invoke(parent: ViewGroup) = EmptyViewHolder(
-                    ItemEmptyBinding.inflate(
-                        LayoutInflater.from(parent.context),
-                        parent,
-                        false
-                    )
+    }
+
+    class WhatTheySayViewHolder(private val binding: ItemLayoutWhatTheySayBinding) :
+        ViewHolder<HomeViewState, MainViewModel>(binding.root) {
+
+        companion object {
+            operator fun invoke(parent: ViewGroup) = WhatTheySayViewHolder(
+                ItemLayoutWhatTheySayBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
                 )
-            }
+            )
+        }
 
-            override fun bind(viewState: HomeViewState, viewModel: MainViewModel) {
+        override fun bind(viewState: HomeViewState, viewModel: MainViewModel) {
+            binding.viewState = viewState.viewState as WhatTheySayViewState
 
+            val llmanager = LinearLayoutManager(
+                binding.root.context,
+                LinearLayoutManager.HORIZONTAL,
+                false
+            )
+
+            //set sublist adapter
+            val mainSubAdapter = WhatTheySaySubAdapter(viewModel, binding.viewState)
+
+            binding.rvWhatTheySaySublist.apply {
+                layoutManager = llmanager
+                addItemDecoration(SpacesItemDecoration(10))
+                (itemAnimator as SimpleItemAnimator).supportsChangeAnimations =
+                    false
+                adapter = mainSubAdapter
+                setHasFixedSize(true)
             }
+        }
+    }
+
+
+    class EmptyViewHolder(private val binding: ItemEmptyBinding) :
+        ViewHolder<HomeViewState, MainViewModel>(binding.root) {
+
+        companion object {
+            operator fun invoke(parent: ViewGroup) = EmptyViewHolder(
+                ItemEmptyBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+        }
+
+        override fun bind(viewState: HomeViewState, viewModel: MainViewModel) {
 
         }
 
     }
+
 
     override fun getItemViewType(position: Int): Int = when (items[position].sectionName) {
         Constants.SectionName.Home.HEADER -> HEADER_VIEW_TYPE
@@ -192,24 +291,24 @@ class HomeAdapter(val viewModel: MainViewModel) :
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
-        viewType: Int
+        viewType: Int,
     ): ViewHolder<HomeViewState, MainViewModel> {
         return when (viewType) {
             HEADER_VIEW_TYPE -> ViewHolder.HeaderViewHolder(parent)
             DETAILS_MAKE_US_DIFFERENT_VIEW_TYPE -> ViewHolder.DetailsMakeUsDifferentViewHolder(
                 parent
             )
-            TOP_PICKS_VIEW_TYPE -> ViewHolder.ExploreOurTopPicksViewHolder(parent)
-            NEW_ARRIVALS_VIEW_TYPE -> ViewHolder.NewArrivalsViewHolder(parent)
-            HOME_TRY_ON_VIEW_TYPE -> ViewHolder.HomeTryOnViewHolder(parent)
-            WHAT_THEY_SAY_VIEW_TYPE -> ViewHolder.WhatTheySayViewHolder(parent)
-            else -> ViewHolder.EmptyViewHolder(parent)
+            TOP_PICKS_VIEW_TYPE -> ExploreOurTopPicksViewHolder(parent)
+            NEW_ARRIVALS_VIEW_TYPE -> NewArrivalsViewHolder(parent)
+            HOME_TRY_ON_VIEW_TYPE -> HomeTryOnViewHolder(parent)
+            WHAT_THEY_SAY_VIEW_TYPE -> WhatTheySayViewHolder(parent)
+            else -> EmptyViewHolder(parent)
         }
     }
 
     override fun onBindViewHolder(
         holder: ViewHolder<HomeViewState, MainViewModel>,
-        position: Int
+        position: Int,
     ) {
         holder.bind(items[position], viewModel)
     }
