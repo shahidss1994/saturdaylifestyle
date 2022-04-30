@@ -1,5 +1,6 @@
 package com.shock.saturdaylifestyle.ui.loginRegister.viewModel
 
+import android.content.Context
 import android.os.CountDownTimer
 import android.text.Editable
 import android.text.TextWatcher
@@ -25,6 +26,7 @@ import com.shock.saturdaylifestyle.ui.loginRegister.viewState.RegisterFormViewSt
 import com.shock.saturdaylifestyle.util.DataParser
 import com.shock.saturdaylifestyle.utility.CommonUtilities
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
@@ -33,7 +35,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginRegisterViewModel @Inject constructor(
-    private val repository: LoginRegisterRepository
+    private val repository: LoginRegisterRepository,
+    @ApplicationContext var context: Context
 ) : BaseViewModel(repository) {
 
     private val eventChannel = Channel<Event>(Channel.BUFFERED)
@@ -479,40 +482,40 @@ class LoginRegisterViewModel @Inject constructor(
         val arrayList = arrayListOf<IntroViewPagerItemViewState>()
         val introViewPagerItemViewState1 = IntroViewPagerItemViewState(
             1,
-            "ANYWHERE IN THE WORLD!",
-            "Enjoy free shipping all across the globe\nonly for you!",
+            context.getString(R.string.anywhere_in_the_world),
+            context.getString(R.string.enjoy_free_shipping_description),
             DrawableViewState(R.mipmap.iv_onboarding1)
         )
         arrayList.add(introViewPagerItemViewState1)
 
         val introViewPagerItemViewState2 = IntroViewPagerItemViewState(
             2,
-            "PRICE INCLUDES\nPRESCRIPTION LENSES",
-            "Starting from Rp1.295k, we promise there\nwon’t be any hidden cost! Unless you want\nto upgrade your lenses!",
+            context.getString(R.string.price_includes_prescription_lenses),
+            context.getString(R.string.starting_from_Rp1_295k_description),
             DrawableViewState(R.mipmap.iv_onboarding2)
         )
         arrayList.add(introViewPagerItemViewState2)
 
         val introViewPagerItemViewState3 = IntroViewPagerItemViewState(
             3,
-            "HOME TRY ON",
-            "Try our entire collection (100+ frames) and\neye exam all for FREE in the comfort of\nyour home!",
-            DrawableViewState(R.mipmap.iv_onboarding2)
+            context.getString(R.string.home_try_on_all_caps),
+            context.getString(R.string.try_our_entire_collection_description),
+            DrawableViewState(R.mipmap.iv_onboarding3)
         )
         arrayList.add(introViewPagerItemViewState3)
 
         val introViewPagerItemViewState4 = IntroViewPagerItemViewState(
             4,
-            "SAVE MORE BUCKS!",
-            "Enjoy our exclusive promos as well as our\nloyalty program to save some more!",
-            DrawableViewState(R.mipmap.iv_onboarding2)
+            context.getString(R.string.save_more_bucks),
+            context.getString(R.string.enjoy_our_exclusive_promos_description),
+            DrawableViewState(R.mipmap.iv_onboarding4)
         )
         arrayList.add(introViewPagerItemViewState4)
 
         val introViewPagerItemViewState5 = IntroViewPagerItemViewState(
             5,
-            "OFFLINE STORES",
-            "Still not sure about how it looks on you?\nTry it on at our offline stores! We are\navailable all across Indonesia.",
+            context.getString(R.string.offline_store),
+            context.getString(R.string.still_not_sure_about_description),
             DrawableViewState(R.mipmap.iv_onboarding5)
         )
         arrayList.add(introViewPagerItemViewState5)
