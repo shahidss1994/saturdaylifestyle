@@ -16,7 +16,7 @@
         <TextView
             android:id="@+id/tv_title"
             android:text="Starting at Rs. 50000 including prescription"
-            android:textSize="@dimen/_14ssp"
+            android:textSize="@dimen/_11ssp"
             android:textColor="@color/black"
             android:fontFamily="@font/montserrat_semi_bold"
             android:layout_width="0dp"

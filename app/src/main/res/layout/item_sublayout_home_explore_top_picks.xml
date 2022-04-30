@@ -45,13 +45,13 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/userName"
+                        android:id="@+id/tv_title"
                         android:text="The Bake One (GhostForth)"
                         android:textSize="@dimen/_14sdp"
                         android:padding="@dimen/_5sdp"
                         android:textColor="@color/black"
                         android:maxLines="1"
-                        android:paddingStart="@dimen/_18sdp"
+                        android:paddingStart="@dimen/_14sdp"
                         android:fontFamily="@font/montserrat_semi_bold"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -65,11 +65,11 @@
                         android:layout_height="wrap_content"
                         android:scaleType="centerCrop"
                         android:src="@drawable/ic_shape"
-                        android:padding="@dimen/_10sdp"
-                        app:layout_constraintTop_toTopOf="@id/userName"
-                        app:layout_constraintBottom_toBottomOf="@id/userName"
+                        android:padding="@dimen/_8sdp"
+                        app:layout_constraintTop_toTopOf="@id/tv_title"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_title"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/userName"/>
+                        app:layout_constraintStart_toEndOf="@id/tv_title"/>
 
 
                     <androidx.appcompat.widget.AppCompatImageView
@@ -93,7 +93,7 @@
                         android:fontFamily="@font/montserrat_light"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@id/userName"
+                        app:layout_constraintTop_toBottomOf="@id/tv_title"
                         app:layout_constraintStart_toEndOf="@id/iv_type_img"
                         app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -114,7 +114,7 @@
                     <TextView
                         android:id="@+id/tv_quantity"
                         android:text="Acetate (Plant-based material)"
-                        android:textSize="@dimen/_10ssp"
+                        android:textSize="@dimen/_8ssp"
                         android:paddingStart="@dimen/_10sdp"
                         android:paddingTop="@dimen/_10sdp"
                         android:textColor="@color/teal_200"

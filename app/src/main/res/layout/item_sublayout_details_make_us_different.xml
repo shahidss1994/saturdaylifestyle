@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -20,16 +21,18 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_Food"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_150sdp"
+            android:layout_height="@dimen/_116sdp"
             android:scaleType="centerCrop"
+            app:srcCompat="@{viewState.viewImage}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_title"
-            android:text="Originality"
-            android:textSize="@dimen/_16ssp"
+            android:text="@{viewState.title}"
+            tools:text="Originality"
+            android:textSize="@dimen/_9ssp"
             android:paddingTop="@dimen/_5sdp"
             android:textColor="@color/teal_200"
             android:fontFamily="@font/montserrat_semi_bold"
@@ -41,9 +44,10 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_content"
-            android:text="Our designers create custom pattern variations for the Saturdays style. We do it all in-house-from-sketch to prototype testingto final design."
-            android:textSize="@dimen/_12ssp"
-            android:paddingTop="@dimen/_5sdp"
+            android:text="@{viewState.content}"
+            tools:text="Our designers create custom pattern variations for the Saturdays style. We do it all in-house-from-sketch to prototype testingto final design."
+            android:textSize="@dimen/_9ssp"
+            android:paddingTop="@dimen/_4sdp"
             android:textColor="@color/teal_200"
             android:fontFamily="@font/montserrat_light"
             android:layout_width="0dp"

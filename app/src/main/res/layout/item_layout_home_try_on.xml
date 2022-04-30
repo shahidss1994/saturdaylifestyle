@@ -20,7 +20,7 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_Food"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_500sdp"
+            android:layout_height="@dimen/_424sdp"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_saturdays_banner"
             android:background="@color/black"
@@ -31,14 +31,14 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/title"
             android:text="HOME TRY-ON"
-            android:textSize="@dimen/_22ssp"
-            android:paddingTop="@dimen/_22sdp"
+            android:textSize="@dimen/_14ssp"
+            android:paddingTop="@dimen/_17sdp"
             android:textColor="@color/white"
             android:fontFamily="@font/oswaldmedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_margin="@dimen/_22sdp"
+            android:layout_margin="@dimen/_17sdp"
             app:layout_constraintTop_toTopOf="parent"/>
 
 
@@ -50,50 +50,50 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:background="@drawable/bg_square_background"
-            android:layout_marginStart="@dimen/_22sdp"
-            android:layout_marginEnd="@dimen/_22sdp"
-            android:layout_marginBottom="@dimen/_22sdp">
+            android:layout_marginStart="@dimen/_17sdp"
+            android:layout_marginEnd="@dimen/_17sdp"
+            android:layout_marginBottom="@dimen/_17sdp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="BOOK A HOME TRY ON FOR FREE"
-                android:padding="@dimen/_10sdp"
+                android:padding="@dimen/_8sdp"
                 android:textColor="@color/white"
                 android:gravity="center"
-                android:textSize="@dimen/_14ssp"/>
+                android:textSize="@dimen/_11ssp"/>
 
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_sub_text"
             android:text="Try our entire collection (100+ frames!) &amp; get an eye exam for free in the comfort of your home"
-            android:textSize="@dimen/_14ssp"
+            android:textSize="@dimen/_11ssp"
             android:textColor="@color/white"
             android:fontFamily="@font/montserrat_semi_bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            android:paddingTop="@dimen/_10sdp"
-            android:paddingBottom="@dimen/_10sdp"
-            android:paddingStart="@dimen/_22sdp"
-            android:paddingEnd="@dimen/_22sdp"
+            android:paddingTop="@dimen/_8sdp"
+            android:paddingBottom="@dimen/_8sdp"
+            android:paddingStart="@dimen/_17sdp"
+            android:paddingEnd="@dimen/_17sdp"
             app:layout_constraintBottom_toTopOf="@id/ll_home_btn"/>
 
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_title_text"
             android:text="SATURDAYS AT HOME!"
-            android:textSize="@dimen/_30ssp"
+            android:textSize="@dimen/_19ssp"
             android:textColor="@color/white"
             android:fontFamily="@font/oswaldmedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            android:paddingTop="@dimen/_10sdp"
-            android:paddingBottom="@dimen/_10sdp"
-            android:paddingStart="@dimen/_22sdp"
-            android:paddingEnd="@dimen/_22sdp"
+            android:paddingTop="@dimen/_8sdp"
+            android:paddingBottom="@dimen/_8sdp"
+            android:paddingStart="@dimen/_17sdp"
+            android:paddingEnd="@dimen/_17sdp"
             app:layout_constraintBottom_toTopOf="@id/tv_sub_text"/>
 
 

@@ -45,7 +45,7 @@
             <TextView
                 android:id="@+id/tv_item_title"
                 android:text="SUNGLASSES"
-                android:textSize="@dimen/_14ssp"
+                android:textSize="@dimen/_11ssp"
                 android:paddingStart="@dimen/_10sdp"
                 android:paddingTop="@dimen/_14sdp"
                 android:textColor="@color/dark_grey"

@@ -16,7 +16,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_title"
             android:text="New Arrivals"
-            android:textSize="@dimen/_22ssp"
+            android:textSize="@dimen/_17ssp"
             android:textColor="@color/teal_200"
             android:fontFamily="@font/oswaldmedium"
             android:layout_width="match_parent"
@@ -29,7 +29,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_sub_title"
             android:text="Freshly made frames for everyday you"
-            android:textSize="@dimen/_14ssp"
+            android:textSize="@dimen/_11ssp"
             android:textColor="@color/off_grey"
             android:fontFamily="@font/montserrat_light"
             android:layout_width="match_parent"
