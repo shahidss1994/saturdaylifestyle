@@ -1,13 +1,14 @@
 package com.shock.saturdaylifestyle.ui.main.viewModel
 
+import android.content.Context
 import androidx.lifecycle.viewModelScope
 import com.shock.saturdaylifestyle.R
 import com.shock.saturdaylifestyle.constants.Constants
-import com.shock.saturdaylifestyle.network.Resource
 import com.shock.saturdaylifestyle.ui.base.viewModel.BaseViewModel
 import com.shock.saturdaylifestyle.ui.base.viewState.DrawableViewState
 import com.shock.saturdaylifestyle.ui.base.viewState.StringViewState
 import com.shock.saturdaylifestyle.ui.main.models.CatalogueFilterRequest
+import com.shock.saturdaylifestyle.ui.main.models.CatalogueResponse
 import com.shock.saturdaylifestyle.ui.main.network.MainRepository
 import com.shock.saturdaylifestyle.ui.main.viewState.DetailsMakeUsDifferentItemViewState
 import com.shock.saturdaylifestyle.ui.main.viewState.DetailsMakeUsDifferentViewState
@@ -18,13 +19,18 @@ import com.shock.saturdaylifestyle.ui.main.viewState.HomeViewState
 import com.shock.saturdaylifestyle.ui.main.viewState.MainViewState
 import com.shock.saturdaylifestyle.ui.main.viewState.NewArrivalViewState
 import com.shock.saturdaylifestyle.ui.main.viewState.WhatTheySayViewState
+import com.shock.saturdaylifestyle.util.DataParser
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.io.BufferedReader
+import java.io.InputStreamReader
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
+    @ApplicationContext val context: Context,
     private val repository: MainRepository
 ) : BaseViewModel(repository) {
 
@@ -99,16 +105,38 @@ class MainViewModel @Inject constructor(
     private fun getNewArrivalCatalogue(filter: CatalogueFilterRequest? = null) {
         viewModelScope.launch {
             delay(2000)
-            val rs = repository.getCatalogue(
+            getCatalogueJsonString()?.let {
+                val catalogueResponse = DataParser.fromJson<CatalogueResponse>(it)
+                catalogueResponse?.let{
+                    val products = it.data?.products
+                }
+            }
+            /*val rs = repository.getCatalogue(
                 Constants.API_KEY, filter
             )
             if (rs is Resource.Success) {
                 rs
             } else {
                 rs
-            }
+            }*/
         }
     }
 
-
+    fun getCatalogueJsonString(): String? {
+        return try {
+            val inputStream = context.assets.open("Catalogue.json")
+            val bufferedReader = BufferedReader(InputStreamReader(inputStream))
+            val stringBuilder = StringBuilder()
+            var line = bufferedReader.readLine()
+            while (line != null) {
+                stringBuilder.append(line)
+                line = bufferedReader.readLine()
+            }
+            inputStream.close()
+            stringBuilder.toString()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            ""
+        }
+    }
 }
