@@ -50,7 +50,7 @@
                     android:text="@string/create_account"
                     android:textAllCaps="true"
                     android:textColor="@color/text_color_primary_black"
-                    android:textSize="26sp"
+                    android:textSize="@dimen/_26ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintLeft_toLeftOf="parent" />
@@ -59,7 +59,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_15sdp"
-                    android:layout_marginTop="26dp"
+                    android:layout_marginTop="@dimen/_26sdp"
                     android:fontFamily="@font/montserrat_light"
                     android:gravity="start"
                     android:text="@string/first_name"
@@ -69,7 +69,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_first_name"
                     android:layout_width="match_parent"
-                    android:layout_height="46dp"
+                    android:layout_height="@dimen/_46sdp"
                     android:layout_marginTop="@dimen/_3sdp"
                     android:background="@drawable/bg_edittext">
 
@@ -88,7 +88,7 @@
                         android:singleLine="true"
                         android:textColor="@color/black"
                         android:textColorHint="@color/text_color_hint"
-                        android:textSize="14sp"
+                        android:textSize="@dimen/_14ssp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_weight="15"
                         app:layout_constraintStart_toStartOf="parent"
@@ -105,9 +105,9 @@
                     android:layout_marginTop="@dimen/_2sdp"
                     android:fontFamily="@font/montserrat_medium"
                     android:gravity="start"
-                    android:text="Please fill your first name"
+                    android:text="@string/please_fill_your_first_name"
                     android:textColor="@color/alert_red"
-                    android:textSize="10sp"
+                    android:textSize="@dimen/_10ssp"
                     android:visibility="@{viewState.showFirstNameError ? View.VISIBLE : View.INVISIBLE}" />
 
 
@@ -115,7 +115,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_15sdp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="@font/montserrat_light"
                     android:gravity="start"
                     android:text="@string/last_name"
@@ -125,7 +125,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_last_name"
                     android:layout_width="match_parent"
-                    android:layout_height="46dp"
+                    android:layout_height="@dimen/_46sdp"
                     android:layout_marginTop="@dimen/_3sdp"
                     android:background="@drawable/bg_edittext">
 
@@ -144,7 +144,7 @@
                         android:singleLine="true"
                         android:textColor="@color/black"
                         android:textColorHint="@color/text_color_hint"
-                        android:textSize="14sp"
+                        android:textSize="@dimen/_14ssp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_weight="15"
                         app:layout_constraintStart_toStartOf="parent"
@@ -161,9 +161,9 @@
                     android:layout_marginTop="@dimen/_2sdp"
                     android:fontFamily="@font/montserrat_medium"
                     android:gravity="start"
-                    android:text="Please fill your last name"
+                    android:text="@string/please_fill_your_last_name"
                     android:textColor="@color/alert_red"
-                    android:textSize="10sp"
+                    android:textSize="@dimen/_10ssp"
                     android:visibility="@{viewState.showLastNameError ? View.VISIBLE : View.INVISIBLE}" />
 
 
@@ -171,7 +171,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_15sdp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="@font/montserrat_light"
                     android:gravity="start"
                     android:text="@string/email"
@@ -181,7 +181,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_email"
                     android:layout_width="match_parent"
-                    android:layout_height="46dp"
+                    android:layout_height="@dimen/_46sdp"
                     android:layout_marginTop="@dimen/_3sdp"
                     android:background="@drawable/bg_edittext">
 
@@ -202,7 +202,7 @@
                         android:text="@{viewState.email}"
                         android:textColor="@color/black"
                         android:textColorHint="@color/text_color_hint"
-                        android:textSize="14sp"
+                        android:textSize="@dimen/_14ssp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_weight="15"
                         app:layout_constraintStart_toStartOf="parent"
@@ -219,16 +219,16 @@
                     android:layout_marginTop="@dimen/_2sdp"
                     android:fontFamily="@font/montserrat_medium"
                     android:gravity="start"
-                    android:text="Please fill your valid email"
+                    android:text="@string/please_fill_your_valid_email"
                     android:textColor="@color/alert_red"
-                    android:textSize="10sp"
+                    android:textSize="@dimen/_10ssp"
                     android:visibility="@{viewState.showEmailError ? View.VISIBLE : View.INVISIBLE}" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_15sdp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="@font/montserrat_light"
                     android:gravity="start"
                     android:text="@string/birthday"
@@ -238,7 +238,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_dob"
                     android:layout_width="match_parent"
-                    android:layout_height="46dp"
+                    android:layout_height="@dimen/_46sdp"
                     android:layout_marginTop="@dimen/_3sdp"
                     android:background="@drawable/bg_edittext"
                     android:onClick="@{()->viewModel.showDateDialog()}">
@@ -260,7 +260,7 @@
                         android:text="@{viewState.date}"
                         android:textColor="@color/black"
                         android:textColorHint="@color/text_color_hint"
-                        android:textSize="14sp"
+                        android:textSize="@dimen/_14ssp"
                         app:drawableEndCompat="@drawable/ic_bottom_arrow"
                         app:drawableTint="@color/black"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -297,7 +297,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layoutPhoneNumber"
                     android:layout_width="match_parent"
-                    android:layout_height="46dp"
+                    android:layout_height="@dimen/_46sdp"
                     android:layout_marginTop="@dimen/_3sdp"
                     android:background="@drawable/bg_edittext"
                     android:paddingStart="@dimen/_15sdp"
@@ -378,14 +378,14 @@
                     android:gravity="start"
                     android:text="Please fill your valid phone number"
                     android:textColor="@color/alert_red"
-                    android:textSize="10sp"
+                    android:textSize="@dimen/_10ssp"
                     android:visibility="@{viewState.showMobileNoError ? View.VISIBLE : View.INVISIBLE}" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_15sdp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="@font/montserrat_light"
                     android:gravity="start"
                     android:text="@string/gender"
