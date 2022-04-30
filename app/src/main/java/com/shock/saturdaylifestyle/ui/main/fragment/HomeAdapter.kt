@@ -1,5 +1,7 @@
 package com.shock.saturdaylifestyle.ui.main.fragment
 
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -50,6 +52,7 @@ class HomeAdapter(val viewModel: MainViewModel) :
 
         class HeaderViewHolder(private val binding: ItemLayoutHomeHeaderBinding) :
             ViewHolder<HomeViewState, MainViewModel>(binding.root) {
+            private val handler = Handler(Looper.getMainLooper())
 
             companion object {
                 operator fun invoke(parent: ViewGroup) = HeaderViewHolder(
@@ -80,7 +83,7 @@ class HomeAdapter(val viewModel: MainViewModel) :
                             super.onPageSelected(position)
                             val newPosition = (position + 1) % viewpagerDataList.size
                             val runnable = Runnable { binding.viewPager.currentItem = newPosition }
-//                            handler.postDelayed(runnable, 3000L)
+                            handler.postDelayed(runnable, 2000L)
                         }
                     })
                 }
