@@ -17,11 +17,14 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_marginBottom="@dimen/_12sdp">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cv_Food"
-                android:layout_width="@dimen/_160sdp"
+                android:layout_width="@dimen/_124sdp"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -32,26 +35,25 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toTopOf="parent"
                     android:visibility="visible"
-                    android:background="#F3F3F3">
+                    android:background="@color/f3_grey">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/iv_Food"
-                        android:layout_width="@dimen/_160sdp"
-                        android:layout_height="@dimen/_226sdp"
+                        android:layout_width="@dimen/_124sdp"
+                        android:layout_height="@dimen/_174sdp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/ic_glass"
+                        android:src="@drawable/explore"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/userName"
-                        android:text="The Bake One (GhostForth)"
-                        android:textSize="@dimen/_14sdp"
+                        android:text="@{viewState.title}"
+                        android:textSize="@dimen/_11sdp"
                         android:padding="@dimen/_5sdp"
                         android:textColor="@color/black"
                         android:maxLines="1"
-                        android:paddingStart="@dimen/_18sdp"
                         android:fontFamily="@font/montserrat_semi_bold"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -88,7 +90,7 @@
                     <TextView
                         android:id="@+id/tv_type"
                         android:text="Lebanese"
-                        android:textSize="@dimen/_12ssp"
+                        android:textSize="@dimen/_9ssp"
                         android:textColor="@color/black"
                         android:fontFamily="@font/montserrat_light"
                         android:layout_width="0dp"
@@ -101,8 +103,8 @@
                     <TextView
                         android:id="@+id/tv_price"
                         android:text="Lebanese"
-                        android:textSize="@dimen/_12ssp"
-                        android:paddingStart="@dimen/_10sdp"
+                        android:textSize="@dimen/_9ssp"
+                        android:paddingStart="@dimen/_8sdp"
                         android:textColor="@color/teal_200"
                         android:fontFamily="@font/montserrat_light"
                         android:layout_width="0dp"
@@ -114,12 +116,12 @@
                     <TextView
                         android:id="@+id/tv_quantity"
                         android:text="Acetate (Plant-based material)"
-                        android:textSize="@dimen/_10ssp"
-                        android:paddingStart="@dimen/_10sdp"
-                        android:paddingTop="@dimen/_10sdp"
+                        android:textSize="@dimen/_8ssp"
+                        android:paddingStart="@dimen/_8sdp"
+                        android:paddingTop="@dimen/_8sdp"
                         android:textColor="@color/teal_200"
                         android:fontFamily="@font/montserrat_light"
-                        android:paddingBottom="@dimen/_10sdp"
+                        android:paddingBottom="@dimen/_8sdp"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         app:layout_constraintTop_toBottomOf="@id/tv_price"

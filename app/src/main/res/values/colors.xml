@@ -11,6 +11,8 @@
     <color name="extreme_light_grey">#E5E5E5</color>
     <color name="off_grey">#2B2F32</color>
     <color name="light_grey">#9D9D9D</color>
+    <color name="whitish_grey">#F5F5F5</color>
+    <color name="f3_grey">#F3F3F3</color>
 
     <color name="indigo">#133B64</color>
     <color name="fui_transparent">#00000000</color>

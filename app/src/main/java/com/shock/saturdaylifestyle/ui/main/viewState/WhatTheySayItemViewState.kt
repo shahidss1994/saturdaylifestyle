@@ -6,7 +6,7 @@ import com.shock.saturdaylifestyle.BR
 import com.shock.saturdaylifestyle.constants.Constants
 import com.shock.saturdaylifestyle.ui.base.others.bind
 
-class WhatTheySayItemViewState (initId: Int = -1,
+class WhatTheySayItemViewState (initId: String? = "",
                                 initViewImage: String? = null,
                                 initTitle: String = Constants.SectionName.EMPTY
 ) : BaseObservable() {

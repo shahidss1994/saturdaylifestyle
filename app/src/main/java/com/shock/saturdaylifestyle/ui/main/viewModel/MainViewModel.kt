@@ -13,12 +13,14 @@ import com.shock.saturdaylifestyle.ui.main.network.MainRepository
 import com.shock.saturdaylifestyle.ui.main.viewState.DetailsMakeUsDifferentItemViewState
 import com.shock.saturdaylifestyle.ui.main.viewState.DetailsMakeUsDifferentViewState
 import com.shock.saturdaylifestyle.ui.main.viewState.ExploreOurTopPicksViewState
+import com.shock.saturdaylifestyle.ui.main.viewState.ExploreTopPicksItemViewState
 import com.shock.saturdaylifestyle.ui.main.viewState.HeaderViewState
 import com.shock.saturdaylifestyle.ui.main.viewState.HomeTryOnViewState
 import com.shock.saturdaylifestyle.ui.main.viewState.HomeViewState
 import com.shock.saturdaylifestyle.ui.main.viewState.MainViewState
 import com.shock.saturdaylifestyle.ui.main.viewState.NewArrivalItemViewState
 import com.shock.saturdaylifestyle.ui.main.viewState.NewArrivalViewState
+import com.shock.saturdaylifestyle.ui.main.viewState.WhatTheySayItemViewState
 import com.shock.saturdaylifestyle.ui.main.viewState.WhatTheySayViewState
 import com.shock.saturdaylifestyle.util.DataParser
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -100,7 +102,53 @@ class MainViewModel @Inject constructor(
             )
         )
         mainViewState.homeItemList = homeViewStateList
+        getExploreTopPicksEyeGlassesCatalogue()
         getNewArrivalCatalogue()
+        getWhatTheySayCatalogue()
+    }
+
+    fun getExploreTopPicksEyeGlassesCatalogue(filter: CatalogueFilterRequest? = null) {
+        viewModelScope.launch {
+            delay(2000)
+            getCatalogueJsonString()?.let {
+                val catalogueResponse = DataParser.fromJson<CatalogueResponse>(it)
+                catalogueResponse?.let { ct ->
+                    val newArrivalViewState =
+                        mainViewState.homeItemList[2].viewState as ExploreOurTopPicksViewState
+                    ct.data?.products?.let { products ->
+                        val viewStates = arrayListOf<ExploreTopPicksItemViewState>()
+                        for (p in products) {
+                            p?.let { prd ->
+                                viewStates.add(prd.toExploreTopPicksItemViewState())
+                            }
+                        }
+                        newArrivalViewState.exploreTopPicksItemViewStateList = viewStates
+                    }
+                }
+            }
+        }
+    }
+
+    fun getWhatTheySayCatalogue(filter: CatalogueFilterRequest? = null) {
+        viewModelScope.launch {
+            delay(2000)
+            getCatalogueJsonString()?.let {
+                val catalogueResponse = DataParser.fromJson<CatalogueResponse>(it)
+                catalogueResponse?.let { ct ->
+                    val newArrivalViewState =
+                        mainViewState.homeItemList[5].viewState as WhatTheySayViewState
+                    ct.data?.products?.let { products ->
+                        val viewStates = arrayListOf<WhatTheySayItemViewState>()
+                        for (p in products) {
+                            p?.let { prd ->
+                                viewStates.add(prd.toWhatTheySayItemViewState())
+                            }
+                        }
+                        newArrivalViewState.whatTheySayItemViewStateList = viewStates
+                    }
+                }
+            }
+        }
     }
 
     private fun getNewArrivalCatalogue(filter: CatalogueFilterRequest? = null) {

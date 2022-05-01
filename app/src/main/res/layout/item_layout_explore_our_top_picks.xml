@@ -7,22 +7,32 @@
             name="viewState"
             type="com.shock.saturdaylifestyle.ui.main.viewState.ExploreOurTopPicksViewState" />
 
+
+        <variable
+            name="viewModel"
+            type="com.shock.saturdaylifestyle.ui.main.viewModel.MainViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/_31sdp"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:background="@color/f3_grey">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_title"
             android:text="Explore our Top Picks"
-            android:textSize="@dimen/_22ssp"
+            android:textSize="@dimen/_17ssp"
             android:textColor="@color/teal_200"
             android:fontFamily="@font/oswaldmedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAllCaps="true"
             android:gravity="center"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
@@ -30,13 +40,14 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_option_one"
             android:text="EYEGLASSES"
-            android:textSize="@dimen/_22ssp"
+            android:textSize="@dimen/_11ssp"
             android:textColor="@color/teal_200"
-            android:fontFamily="@font/oswaldmedium"
+            android:fontFamily="@font/montserrat_semi_bold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_23sdp"
             android:gravity="center"
+            android:layout_marginStart="@dimen/_12sdp"
             app:layout_constraintTop_toBottomOf="@id/tv_title"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/tv_option_two"/>
@@ -49,21 +60,22 @@
             app:layout_constraintStart_toStartOf="@id/tv_option_one"
             app:layout_constraintEnd_toEndOf="@id/tv_option_one"
             app:layout_constraintTop_toBottomOf="@id/tv_option_one"
-            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_12sdp"
             android:background="@color/black"
-            android:layout_marginLeft="@dimen/_30sdp"
-            android:layout_marginRight="@dimen/_30sdp"/>
+            android:layout_marginLeft="@dimen/_34sdp"
+            android:layout_marginRight="@dimen/_34sdp"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_option_two"
             android:text="SUNGLASSES"
-            android:textSize="@dimen/_22ssp"
+            android:textSize="@dimen/_11ssp"
             android:textColor="@color/off_grey"
-            android:fontFamily="@font/oswaldmedium"
+            android:fontFamily="@font/montserrat_semi_bold"
             android:layout_marginTop="@dimen/_23sdp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:layout_marginEnd="@dimen/_12sdp"
             app:layout_constraintTop_toBottomOf="@id/tv_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/tv_option_one"/>
@@ -77,22 +89,24 @@
             app:layout_constraintTop_toBottomOf="@id/tv_option_two"
             android:padding="@dimen/_10sdp"
             android:background="@color/black"
-            android:layout_marginTop="@dimen/_16sdp"
-            android:layout_marginLeft="@dimen/_30sdp"
-            android:layout_marginRight="@dimen/_30sdp"/>
+            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_marginLeft="@dimen/_34sdp"
+            android:layout_marginRight="@dimen/_34sdp"/>
 
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvExploreTopPickSublist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_14sdp"
-            android:layout_marginLeft="@dimen/_16sdp"
-            android:layout_marginRight="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            items="@{viewState.exploreTopPicksItemViewStateList}"
             app:layout_constraintTop_toBottomOf="@id/v_one"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            android:paddingBottom="@dimen/_6sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 

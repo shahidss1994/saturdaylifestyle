@@ -18,6 +18,6 @@ class NewArrivalItemViewState (initId: String? = null,
     var viewState by bind(BR.viewState, initViewImage)
 
     @get:Bindable
-    var title by bind(BR.sectionName, initTitle)
+    var title by bind(BR.title, initTitle)
 
 }

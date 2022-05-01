@@ -12,14 +12,50 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_13sdp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_toolbar_caption"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/whitish_grey"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:paddingStart="@dimen/_12sdp"
+            android:paddingTop="@dimen/_6sdp"
+            android:paddingBottom="@dimen/_6sdp"
+            android:text="Try Risk Free for 30 Days"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_9ssp"
+            android:gravity="left"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_toolbar_caption2"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_toolbar_caption2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/whitish_grey"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:paddingStart="@dimen/_13sdp"
+            android:paddingEnd="@dimen/_12sdp"
+            android:paddingTop="@dimen/_6sdp"
+            android:paddingBottom="@dimen/_6sdp"
+            android:text="Free Shipping and Return"
+            android:textColor="@color/black"
+            android:gravity="right"
+            android:textSize="@dimen/_9ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_toolbar_caption"/>
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/tv_toolbar_caption" />
 
         <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
             android:id="@+id/dots_indicator"
@@ -44,17 +80,17 @@
             android:id="@+id/tv_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="#F5F5F5"
+            android:background="@color/whitish_grey"
             android:fontFamily="@font/montserrat_semi_bold"
             android:gravity="center"
             android:paddingStart="@dimen/_12sdp"
-            android:paddingTop="@dimen/_20sdp"
+            android:paddingTop="@dimen/_16sdp"
             android:paddingEnd="@dimen/_12sdp"
-            android:paddingBottom="@dimen/_20sdp"
+            android:paddingBottom="@dimen/_16sdp"
             android:text="Starting at Rs. 50000 including prescription"
             android:textAllCaps="true"
             android:textColor="@color/black"
-            android:textSize="@dimen/_14ssp"
+            android:textSize="@dimen/_10ssp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dots_indicator" />
@@ -71,11 +107,9 @@
                 android:id="@+id/cvEyeglasses"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_23sdp"
                 android:layout_marginBottom="@dimen/_22sdp"
-                app:cardBackgroundColor="@color/black"
                 app:cardCornerRadius="@dimen/_100sdp"
-                app:cardElevation="@dimen/_15sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -83,8 +117,8 @@
                 app:strokeWidth="@dimen/_2sdp">
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="@dimen/_84sdp"
-                    android:layout_height="@dimen/_84sdp"
+                    android:layout_width="@dimen/_65sdp"
+                    android:layout_height="@dimen/_65sdp"
                     android:layout_gravity="center"
                     android:src="@drawable/eyeglasses" />
 
@@ -95,9 +129,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:fontFamily="@font/montserrat_semi_bold"
+                android:fontFamily="@font/oswaldmedium"
                 android:gravity="center"
                 android:text="EYEGLASSES"
+                android:paddingBottom="@dimen/_4sdp"
                 android:textColor="@color/dark_grey"
                 android:textSize="@dimen/_11ssp"
                 app:layout_constraintEnd_toEndOf="@+id/cvEyeglasses"
@@ -118,11 +153,9 @@
                 android:id="@+id/cvSunglasses"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:layout_marginBottom="@dimen/_22sdp"
-                app:cardBackgroundColor="@color/black"
+                android:layout_marginTop="@dimen/_23sdp"
+                android:layout_marginBottom="@dimen/_17sdp"
                 app:cardCornerRadius="@dimen/_100sdp"
-                app:cardElevation="@dimen/_15sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -130,8 +163,8 @@
                 app:strokeWidth="@dimen/_2sdp">
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="@dimen/_84sdp"
-                    android:layout_height="@dimen/_84sdp"
+                    android:layout_width="@dimen/_65sdp"
+                    android:layout_height="@dimen/_65sdp"
                     android:layout_gravity="center"
                     android:src="@drawable/sunglasses" />
 
@@ -141,11 +174,12 @@
                 android:id="@+id/ivSunglasses"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:fontFamily="@font/montserrat_semi_bold"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:fontFamily="@font/oswaldmedium"
                 android:gravity="center"
                 android:text="SUNGLASSES"
                 android:textColor="@color/dark_grey"
+                android:paddingBottom="@dimen/_4sdp"
                 android:textSize="@dimen/_11ssp"
                 app:layout_constraintEnd_toEndOf="@+id/cvSunglasses"
                 app:layout_constraintStart_toStartOf="@+id/cvSunglasses"
@@ -165,11 +199,9 @@
                 android:id="@+id/cvHomeTryOn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_23sdp"
                 android:layout_marginBottom="@dimen/_22sdp"
-                app:cardBackgroundColor="@color/black"
                 app:cardCornerRadius="@dimen/_100sdp"
-                app:cardElevation="@dimen/_15sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -177,8 +209,8 @@
                 app:strokeWidth="@dimen/_2sdp">
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="@dimen/_84sdp"
-                    android:layout_height="@dimen/_84sdp"
+                    android:layout_width="@dimen/_65sdp"
+                    android:layout_height="@dimen/_65sdp"
                     android:layout_gravity="center"
                     android:src="@drawable/home_try_on" />
 
@@ -188,13 +220,14 @@
                 android:id="@+id/ivHomeTryOn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:fontFamily="@font/montserrat_semi_bold"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:fontFamily="@font/oswaldmedium"
                 android:gravity="center"
                 android:text="Home Try-On"
                 android:textAllCaps="true"
                 android:textColor="@color/dark_grey"
                 android:textSize="@dimen/_11ssp"
+                android:paddingBottom="@dimen/_4sdp"
                 app:layout_constraintEnd_toEndOf="@+id/cvHomeTryOn"
                 app:layout_constraintStart_toStartOf="@+id/cvHomeTryOn"
                 app:layout_constraintTop_toBottomOf="@+id/cvHomeTryOn" />

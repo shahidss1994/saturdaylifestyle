@@ -215,6 +215,7 @@ class HomeAdapter(val viewModel: MainViewModel) :
             viewState: HomeViewState, viewModel: MainViewModel
         ) {
             binding.viewState = viewState.viewState as ExploreOurTopPicksViewState
+            binding.viewModel = viewModel
 
             val llmanager = LinearLayoutManager(
                 binding.root.context,

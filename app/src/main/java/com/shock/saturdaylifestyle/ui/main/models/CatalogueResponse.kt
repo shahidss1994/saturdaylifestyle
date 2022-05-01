@@ -1,7 +1,10 @@
 package com.shock.saturdaylifestyle.ui.main.models
 
 import com.google.gson.annotations.SerializedName
+import com.shock.saturdaylifestyle.ui.main.viewState.ExploreOurTopPicksViewState
+import com.shock.saturdaylifestyle.ui.main.viewState.ExploreTopPicksItemViewState
 import com.shock.saturdaylifestyle.ui.main.viewState.NewArrivalItemViewState
+import com.shock.saturdaylifestyle.ui.main.viewState.WhatTheySayItemViewState
 
 data class CatalogueResponse(
 
@@ -303,9 +306,23 @@ data class ProductsItem(
 	fun toNewArrivalItemViewState(): NewArrivalItemViewState {
 		val newArrivalItemViewState = NewArrivalItemViewState()
 		newArrivalItemViewState.id = this.frameId
-		newArrivalItemViewState.title = this.frameId ?: ""
-		newArrivalItemViewState.title = this.frameId ?: ""
+		newArrivalItemViewState.title = this.frameName ?: ""
 		return newArrivalItemViewState
+	}
+
+
+	fun toExploreTopPicksItemViewState(): ExploreTopPicksItemViewState {
+		val newExploreTopPicksItemViewState = ExploreTopPicksItemViewState()
+		newExploreTopPicksItemViewState.id = this.frameId
+		newExploreTopPicksItemViewState.title = this.frameName ?: ""
+		return newExploreTopPicksItemViewState
+	}
+
+	fun toWhatTheySayItemViewState(): WhatTheySayItemViewState {
+		val newExploreTopPicksItemViewState = WhatTheySayItemViewState()
+		newExploreTopPicksItemViewState.id = this.frameId
+		newExploreTopPicksItemViewState.title = this.frameName ?: ""
+		return newExploreTopPicksItemViewState
 	}
 
 }

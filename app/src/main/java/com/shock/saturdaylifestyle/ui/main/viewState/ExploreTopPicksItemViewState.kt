@@ -6,7 +6,7 @@ import com.shock.saturdaylifestyle.BR
 import com.shock.saturdaylifestyle.constants.Constants
 import com.shock.saturdaylifestyle.ui.base.others.bind
 
-class ExploreTopPicksItemViewState (initId: Int = -1,
+class ExploreTopPicksItemViewState (initId: String? = "",
                                     initViewImage: String? = null,
                                     initTitle: String = Constants.SectionName.EMPTY
 ) : BaseObservable() {
@@ -18,6 +18,6 @@ class ExploreTopPicksItemViewState (initId: Int = -1,
     var viewState by bind(BR.viewState, initViewImage)
 
     @get:Bindable
-    var title by bind(BR.sectionName, initTitle)
+    var title by bind(BR.title, initTitle)
 
 }
