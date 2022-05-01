@@ -12,7 +12,7 @@ import retrofit2.http.POST
 interface LoginRegisterApi : BaseApi {
 
     @FormUrlEncoded
-    @POST("user/otp/send")
+    @POST("api/v1/user/otp/send")
     suspend fun sendOtp(
         @Header("x-api-key") key: String,
         @Header("Content-Type") contentType: String,
@@ -24,7 +24,7 @@ interface LoginRegisterApi : BaseApi {
 
 
     @FormUrlEncoded
-    @POST("user/otp/send")
+    @POST("api/v1/user/otp/send")
     suspend fun sendOtpWhatsapp(
         @Header("x-api-key") key: String,
         @Header("Content-Type") contentType: String,
@@ -35,14 +35,14 @@ interface LoginRegisterApi : BaseApi {
 
 
     @FormUrlEncoded
-    @POST("user/otp/verify")
+    @POST("api/v1/user/otp/verify")
     suspend fun verifyOTP(@Header("x-api-key") key: String,
                           @Header("Content-Type") type: String,
                           @Field("otp") countryCode: String): VerifyOtpModel
 
 
     @FormUrlEncoded
-    @POST("user/register")
+    @POST("api/v1/user/register")
     suspend fun register(
         @Header("Content-Type") type: String,
         @Field("name") name: String,
